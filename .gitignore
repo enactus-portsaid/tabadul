@@ -1,0 +1,73 @@
+# ============================================
+# Tabadul — .gitignore
+# Monorepo: React Native + Expo / Next.js / Supabase
+# ============================================
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+.expo/
+web-build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+
+# Expo / React Native
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+android/
+ios/
+
+# Next.js
+.vercel
+
+# Supabase
+supabase/.branches
+supabase/.temp
+
+# Misc
+.turbo/
+*.tgz
+.cache/
