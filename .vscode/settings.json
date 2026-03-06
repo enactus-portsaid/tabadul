@@ -1,0 +1,32 @@
+{
+  "cSpell.words": [
+    "ehthumbs",
+    "Insta",
+    "Ismailia",
+    "mobileprovision",
+    "MRKOON",
+    "Tabadul",
+    "vercel",
+    "تبادل"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#096071",
+    "activityBar.background": "#096071",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#ef30cf",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#096071",
+    "statusBar.background": "#053842",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#096071",
+    "statusBarItem.remoteBackground": "#053842",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#053842",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#05384299",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#053842"
+}
