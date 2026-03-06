@@ -1,8 +1,8 @@
 # Project Initialization Checklist
 
-> **Project Name:** _____________________  
-> **Start Date:** _____________________  
-> **Lead Developer:** _____________________  
+> **Project Name:** Tabadul (تبادل)  
+> **Start Date:** 2026-03-05  
+> **Lead Developer:** Tech Committee  
 > **Target Completion:** _____________________
 
 ---
@@ -10,25 +10,25 @@
 ## Phase 0: Initialization
 
 ### Requirements & Planning
-- [ ] Stakeholder requirements documented (SOP-000)
-- [ ] User stories written with acceptance criteria
-- [ ] MVP scope defined and approved
+- [x] Stakeholder requirements documented (SOP-000)
+- [x] User stories written with acceptance criteria
+- [x] MVP scope defined and approved
 - [ ] Timeline and milestones established
 
 ### Tech Stack Selection (SOP-001)
-- [ ] Programming language(s) selected: _____________________
-- [ ] Framework(s) selected: _____________________
-- [ ] Database type selected: _____________________
-- [ ] Hosting/deployment platform selected: _____________________
-- [ ] Decision rationale documented
+- [x] Programming language(s) selected: TypeScript 5.x
+- [x] Framework(s) selected: React Native + Expo SDK 52 (mobile), Next.js 15 (web)
+- [x] Database type selected: PostgreSQL (via Supabase)
+- [x] Hosting/deployment platform selected: Supabase Cloud + EAS (mobile) + Vercel (web)
+- [x] Decision rationale documented
 
 ### Repository Setup (SOP-002)
-- [ ] Repository created
-- [ ] Branch protection rules configured
-- [ ] `.gitignore` configured for tech stack
-- [ ] `README.md` with project overview
-- [ ] `CONTRIBUTING.md` with guidelines
-- [ ] Commit message format documented
+- [x] Repository created
+- [x] Branch protection rules configured
+- [x] `.gitignore` configured for tech stack
+- [x] `README.md` with project overview
+- [x] `CONTRIBUTING.md` with guidelines
+- [x] Commit message format documented
 
 ### Project Structure (SOP-003)
 - [ ] Folder structure created per SOP-003
