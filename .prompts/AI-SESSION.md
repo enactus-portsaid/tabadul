@@ -66,7 +66,7 @@
 | 000 | Requirements Gathering | ✅      | `/docs/requirements.md`                 | 12 sections, 30+ user stories, MoSCoW prioritized |
 | 001 | Tech Stack Selection   | ✅      | `/docs/tech-stack.md`                   | RN + Expo (mobile), Next.js 15 (web), Supabase, monorepo |
 | 002 | Repository Setup       | ✅      | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md` | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul |
-| 003 | Project Structure      | ⬚      | Folder structure                        |       |
+| 003 | Project Structure      | ✅      | `apps/`, `packages/`, `supabase/`, `/docs/architecture/project-structure.md`, `tsconfig.base.json` | Monorepo: apps/mobile + apps/web + packages/shared + supabase, path aliases, barrel files |
 | 004 | Environment Setup      | ⬚      | `.env.example`, `/docs/setup.md`        |       |
 | 005 | Design Patterns        | ⬚      | `/docs/architecture/design-patterns.md` |       |
 | 006 | Code Style Standards   | ⬚      | Linter/formatter configs                |       |
@@ -251,6 +251,7 @@ These are human-approved and must never be contradicted:
 | Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web) | `/docs/tech-stack.md`                   | SOP-001 |
 | Entities        | {e.g., User, List, Item, ...}                | `/docs/requirements.md`                 | SOP-000 |
 | Branching       | GitHub Flow (main + feature/fix/chore branches) | `CONTRIBUTING.md`                       | SOP-002 |
+| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase | `/docs/architecture/project-structure.md` | SOP-003 |
 | Design Patterns | {e.g., Service + Repository, function-based} | `/docs/architecture/design-patterns.md` | SOP-005 |
 
 ### Cached File Locations
@@ -263,6 +264,9 @@ These are human-approved and must never be contradicted:
 | README          | `/README.md`                              | SOP-002         |
 | CONTRIBUTING    | `/CONTRIBUTING.md`                        | SOP-002         |
 | PR Template     | `/.github/PULL_REQUEST_TEMPLATE.md`       | SOP-002         |
+| Structure Doc   | `/docs/architecture/project-structure.md` | SOP-003         |
+| TS Base Config  | `/tsconfig.base.json`                     | SOP-003         |
+| Shared Package  | `/packages/shared/`                       | SOP-003         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
@@ -275,24 +279,24 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-003  
-**Title:** Project Structure  
+**SOP:** SOP-004  
+**Title:** Environment Setup  
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```
 .prompts/AI-SESSION.md                                            # This file (context)
-/docs/requirements.md                                             # Platform requirements
-/docs/tech-stack.md                                               # Tech decisions (monorepo structure in §8)
-.sops/phase-0-initialization/SOP-003-project-structure.md          # The procedure
+/docs/tech-stack.md                                               # Tech decisions
+/docs/architecture/project-structure.md                            # Folder structure (SOP-003 output)
+.sops/phase-0-initialization/SOP-004-environment-setup.md          # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] Folder structure created per SOP-003
-- [ ] Naming conventions documented
-- [ ] Module boundaries defined
+- [ ] `.env.example` template created
+- [ ] Local development instructions documented
+- [ ] Required tools/versions listed
 
 ### Iterative SOP Progress
 
@@ -331,13 +335,14 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-003 (Project Structure).
+Execute SOP-004 (Environment Setup).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/tech-stack.md` for tech decisions (monorepo structure in §8)
-- `.sops/phase-0-initialization/SOP-003-project-structure.md` for the procedure
+- `/docs/tech-stack.md` for tech decisions
+- `/docs/architecture/project-structure.md` for folder structure
+- `.sops/phase-0-initialization/SOP-004-environment-setup.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -381,3 +386,29 @@ Update `.sops/templates/project-checklist.md` when complete.
 - Commit convention: Conventional Commits with scopes for app/module (`mobile`, `web`, `shared`, `supabase`).
 - Repository pushed to `https://github.com/enactus-portsaid/tabadul.git`.
 - Two commits: (1) SOP-002 output files, (2) existing docs/SOPs/prompts.
+
+### Session 3 — 2026-03-07
+
+**SOPs Completed:** SOP-003  
+**Files Created:**
+
+- `apps/mobile/` — Expo Router structure (`src/app/(tabs)`, `src/app/(auth)`, `src/components/{ui,forms,layout,features}`, `src/hooks`, `src/services`, `src/lib`, `src/config`, `src/types`, `src/stores`)
+- `apps/web/` — Next.js App Router structure (`src/app/[locale]/(auth)`, `src/app/[locale]/(main)`, `src/app/[locale]/admin`, same component/service layout as mobile + `src/middleware`)
+- `packages/shared/` — Shared package with `src/{types,schemas,constants,locales,utils}`, `package.json`, barrel `index.ts`, and translation stubs (`ar.json`, `en.json`)
+- `supabase/` — `functions/`, `migrations/`, `seed/`, `config.toml`
+- `tests/unit/`, `tests/integration/` — Cross-app test directories
+- `tsconfig.base.json` — Root TypeScript config (strict, ES2022, bundler resolution)
+- `apps/mobile/tsconfig.json` — Extends Expo base, `@/*` and `@tabadul/shared/*` aliases
+- `apps/web/tsconfig.json` — Extends base, Next.js plugin, `@/*` and `@tabadul/shared/*` aliases
+- `packages/shared/tsconfig.json` — Extends base, outputs to `dist/`
+- `docs/architecture/project-structure.md` — Directory map, naming conventions, module boundaries, path aliases, barrel file strategy
+- Barrel files in `components/{ui,forms,layout}/index.ts` for both apps and `packages/shared/src/{types,schemas,constants}/index.ts`
+
+**Notes:**
+
+- Monorepo structure follows `/docs/tech-stack.md` §8 exactly: `apps/mobile`, `apps/web`, `packages/shared`, `supabase`.
+- Path alias `@/*` maps to `./src/*` in both apps; `@tabadul/shared/*` maps to `../../packages/shared/src/*`.
+- Web app uses `[locale]` dynamic segment for i18n routing (`/ar/...`, `/en/...`) with route groups `(auth)`, `(main)`, and `admin`.
+- Mobile app uses Expo Router route groups `(tabs)` and `(auth)`.
+- Naming conventions: PascalCase (components), camelCase (hooks/utils), kebab-case (routes/configs), SCREAMING_SNAKE (constants).
+- `.gitkeep` files placed in empty directories to ensure Git tracks them.
