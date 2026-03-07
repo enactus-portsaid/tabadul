@@ -42,14 +42,14 @@
 - [x] Dev container configured (if applicable)
 
 ### Design Patterns (SOP-005)
-- [ ] Architectural pattern selected: _____________________
-  - [ ] MVC / MVVM / Clean Architecture / Other
-- [ ] Code-level patterns identified:
-  - [ ] Repository Pattern (data access)
-  - [ ] Service Pattern (business logic)
-  - [ ] Factory Pattern (object creation)
-  - [ ] Other: _____________________
-- [ ] Pattern usage documented in `/docs/architecture/`
+- [x] Architectural pattern selected: BaaS-Driven Layered Architecture
+  - [x] Serverless/BaaS (Supabase) with Layered Frontend
+- [x] Code-level patterns identified:
+  - [x] Service Functions (data access — function-based, wrapping Supabase client)
+  - [x] Domain Service Functions (business logic)
+  - [x] Factory Functions (query keys, form defaults)
+  - [x] Custom Hooks + Composition (React components)
+- [x] Pattern usage documented in `/docs/architecture/design-patterns.md`
 
 ### Code Style Standards (SOP-006)
 - [ ] Linter configured: _____________________
