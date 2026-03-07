@@ -36,10 +36,10 @@
 - [x] Module boundaries defined
 
 ### Environment Setup (SOP-004)
-- [ ] `.env.example` template created
-- [ ] Local development instructions documented
-- [ ] Required tools/versions listed
-- [ ] Dev container configured (if applicable)
+- [x] `.env.example` template created
+- [x] Local development instructions documented
+- [x] Required tools/versions listed
+- [x] Dev container configured (if applicable)
 
 ### Design Patterns (SOP-005)
 - [ ] Architectural pattern selected: _____________________

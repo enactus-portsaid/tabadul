@@ -1,14 +1,70 @@
 {
+  // ── Editor ────────────────────────────────────────────────
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "editor.tabSize": 2,
+  "editor.rulers": [100],
+  "editor.bracketPairColorization.enabled": true,
+
+  // ── TypeScript ────────────────────────────────────────────
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  // ── File Associations ─────────────────────────────────────
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // ── Tailwind CSS IntelliSense ─────────────────────────────
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+
+  // ── File Exclusions ───────────────────────────────────────
+  "files.exclude": {
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/.expo": true
+  },
+
+  // ── Search Exclusions ─────────────────────────────────────
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.expo": true,
+    "**/coverage": true,
+    "**/dist": true
+  },
+
+  // ── Spell Checker ─────────────────────────────────────────
   "cSpell.words": [
     "ehthumbs",
+    "healthcheck",
+    "hookform",
+    "Inbucket",
     "Insta",
     "Ismailia",
+    "isready",
     "mobileprovision",
     "MRKOON",
+    "nativewind",
+    "supabase",
     "Tabadul",
+    "tanstack",
     "vercel",
+    "zustand",
     "تبادل"
   ],
+
+  // ── Peacock (Workspace Color) ─────────────────────────────
+  "peacock.color": "#053842",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#096071",
     "activityBar.background": "#096071",
@@ -27,6 +83,5 @@
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#05384299",
     "titleBar.inactiveForeground": "#e7e7e799"
-  },
-  "peacock.color": "#053842"
+  }
 }
