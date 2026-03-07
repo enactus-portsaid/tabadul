@@ -39,6 +39,14 @@
 2. **Large SOPs may have multiple commits** — use `wip:` for intermediate, `feat:` for final
 3. **Always commit before switching SOPs** — never carry uncommitted changes across SOPs
 4. **Commit before ending a session** — ensure no work is lost
+5. **Use branches for all changes** — never push directly to `main`; create a `feature/`, `fix/`, or `chore/` branch, open a PR, and merge
+6. **Clean up after merge** — after a PR is merged, switch back to `main`, pull, and delete the local branch:
+
+```bash
+git checkout main && git pull && git branch -d <branch-name>
+```
+
+> Remote branches are automatically deleted after merge (GitHub repo setting).
 
 Format: [Conventional Commits](https://www.conventionalcommits.org/) — `<type>(scope): <description>`
 Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `wip`

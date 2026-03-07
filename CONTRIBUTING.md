@@ -77,6 +77,13 @@ refactor(supabase): simplify matching edge function
 4. Ensure lint passes (`pnpm lint`)
 5. Request review from at least one team member
 6. Squash and merge after approval
+7. After merge, clean up your local branch:
+
+```bash
+git checkout main && git pull && git branch -d <branch-name>
+```
+
+> **Note:** Remote branches are automatically deleted after merge (configured in GitHub repo settings).
 
 ## Reporting Issues
 
