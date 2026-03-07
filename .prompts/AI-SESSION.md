@@ -38,12 +38,12 @@
 
 ## 📋 Project Overview
 
-| Field            | Value                                          |
-| ---------------- | ---------------------------------------------- |
-| **Project Name** | Tabadul (تبادل)                                                  |
+| Field            | Value                                                                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Project Name** | Tabadul (تبادل)                                                                                                                                     |
 | **Description**  | B2B AI-powered Industrial Symbiosis Platform — digital marketplace connecting factories generating waste with factories needing cheap raw materials |
-| **Project Root** | `C:\Tabadul`                                                      |
-| **Started**      | 2026-03-05                                                         |
+| **Project Root** | `C:\Tabadul`                                                                                                                                        |
+| **Started**      | 2026-03-05                                                                                                                                          |
 
 ---
 
@@ -61,15 +61,15 @@
 
 ### Phase 0: Initialization
 
-| SOP | Title                  | Status | Output Location                         | Notes |
-| --- | ---------------------- | ------ | --------------------------------------- | ----- |
-| 000 | Requirements Gathering | ✅      | `/docs/requirements.md`                 | 12 sections, 30+ user stories, MoSCoW prioritized |
-| 001 | Tech Stack Selection   | ✅      | `/docs/tech-stack.md`                   | RN + Expo (mobile), Next.js 15 (web), Supabase, monorepo |
-| 002 | Repository Setup       | ✅      | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md` | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul |
-| 003 | Project Structure      | ✅      | `apps/`, `packages/`, `supabase/`, `/docs/architecture/project-structure.md`, `tsconfig.base.json` | Monorepo: apps/mobile + apps/web + packages/shared + supabase, path aliases, barrel files |
-| 004 | Environment Setup      | ⬚      | `.env.example`, `/docs/setup.md`        |       |
-| 005 | Design Patterns        | ⬚      | `/docs/architecture/design-patterns.md` |       |
-| 006 | Code Style Standards   | ⬚      | Linter/formatter configs                |       |
+| SOP | Title                  | Status | Output Location                                                                                                                                                                                 | Notes                                                                                      |
+| --- | ---------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| 000 | Requirements Gathering | ✅     | `/docs/requirements.md`                                                                                                                                                                         | 12 sections, 30+ user stories, MoSCoW prioritized                                          |
+| 001 | Tech Stack Selection   | ✅     | `/docs/tech-stack.md`                                                                                                                                                                           | RN + Expo (mobile), Next.js 15 (web), Supabase, monorepo                                   |
+| 002 | Repository Setup       | ✅     | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`                                                                                                                | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul |
+| 003 | Project Structure      | ✅     | `apps/`, `packages/`, `supabase/`, `/docs/architecture/project-structure.md`, `tsconfig.base.json`                                                                                              | Monorepo: apps/mobile + apps/web + packages/shared + supabase, path aliases, barrel files  |
+| 004 | Environment Setup      | ✅     | `.env.example`, `/docs/environment-variables.md`, `/docs/development-setup.md`, `docker-compose.yml`, `.vscode/settings.json`, `.vscode/extensions.json`, `package.json`, `pnpm-workspace.yaml` | Supabase-based local dev (supabase start), root pnpm workspace scripts                     |
+| 005 | Design Patterns        | ⬚      | `/docs/architecture/design-patterns.md`                                                                                                                                                         |                                                                                            |
+| 006 | Code Style Standards   | ⬚      | Linter/formatter configs                                                                                                                                                                        |                                                                                            |
 
 ### Phase 1: Database
 
@@ -150,11 +150,11 @@
 
 These are human-approved and must never be contradicted:
 
-| Document        | Location                   | Last Updated | Key Decisions                                            |
-| --------------- | -------------------------- | ------------ | -------------------------------------------------------- |
-| Requirements    | `/docs/requirements.md`    | 2026-02-24    | 30+ user stories, MVP scope defined, MoSCoW prioritized   |
-| Tech Stack      | `/docs/tech-stack.md`      | 2026-03-05    | React Native + Expo (mobile), Next.js 15 (web), Supabase, PostgreSQL, TypeScript, monorepo |
-| Execution Brief | `/docs/execution-brief.md` | ⬚            | {e.g., "5 entities, 3 tech adaptations, 2 SOPs skipped"} |
+| Document        | Location                   | Last Updated | Key Decisions                                                                              |
+| --------------- | -------------------------- | ------------ | ------------------------------------------------------------------------------------------ |
+| Requirements    | `/docs/requirements.md`    | 2026-02-24   | 30+ user stories, MVP scope defined, MoSCoW prioritized                                    |
+| Tech Stack      | `/docs/tech-stack.md`      | 2026-03-05   | React Native + Expo (mobile), Next.js 15 (web), Supabase, PostgreSQL, TypeScript, monorepo |
+| Execution Brief | `/docs/execution-brief.md` | ⬚            | {e.g., "5 entities, 3 tech adaptations, 2 SOPs skipped"}                                   |
 
 ### Phase 1 Checkpoint — Database Design
 
@@ -240,19 +240,20 @@ These are human-approved and must never be contradicted:
 
 ### Cached Decisions
 
-| Decision        | Value                                        | Source                                  | Set By  |
-| --------------- | -------------------------------------------- | --------------------------------------- | ------- |
-| Framework       | React Native + Expo SDK 52 (mobile) + Next.js 15 (web) | `/docs/tech-stack.md`                   | SOP-001 |
-| Database        | PostgreSQL (via Supabase)                    | `/docs/tech-stack.md`                   | SOP-001 |
-| ORM             | Supabase JS Client + @supabase/ssr (web)     | `/docs/tech-stack.md`                   | SOP-001 |
-| Auth            | Supabase Auth (email/password, JWT)          | `/docs/tech-stack.md`                   | SOP-001 |
-| Styling         | NativeWind (Tailwind CSS for React Native)   | `/docs/tech-stack.md`                   | SOP-001 |
-| State Mgmt      | TanStack Query + Zustand                     | `/docs/tech-stack.md`                   | SOP-001 |
-| Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web) | `/docs/tech-stack.md`                   | SOP-001 |
-| Entities        | {e.g., User, List, Item, ...}                | `/docs/requirements.md`                 | SOP-000 |
-| Branching       | GitHub Flow (main + feature/fix/chore branches) | `CONTRIBUTING.md`                       | SOP-002 |
-| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase | `/docs/architecture/project-structure.md` | SOP-003 |
-| Design Patterns | {e.g., Service + Repository, function-based} | `/docs/architecture/design-patterns.md` | SOP-005 |
+| Decision        | Value                                                                 | Source                                    | Set By  |
+| --------------- | --------------------------------------------------------------------- | ----------------------------------------- | ------- |
+| Framework       | React Native + Expo SDK 52 (mobile) + Next.js 15 (web)                | `/docs/tech-stack.md`                     | SOP-001 |
+| Database        | PostgreSQL (via Supabase)                                             | `/docs/tech-stack.md`                     | SOP-001 |
+| ORM             | Supabase JS Client + @supabase/ssr (web)                              | `/docs/tech-stack.md`                     | SOP-001 |
+| Auth            | Supabase Auth (email/password, JWT)                                   | `/docs/tech-stack.md`                     | SOP-001 |
+| Styling         | NativeWind (Tailwind CSS for React Native)                            | `/docs/tech-stack.md`                     | SOP-001 |
+| State Mgmt      | TanStack Query + Zustand                                              | `/docs/tech-stack.md`                     | SOP-001 |
+| Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                          | `/docs/tech-stack.md`                     | SOP-001 |
+| Entities        | {e.g., User, List, Item, ...}                                         | `/docs/requirements.md`                   | SOP-000 |
+| Branching       | GitHub Flow (main + feature/fix/chore branches)                       | `CONTRIBUTING.md`                         | SOP-002 |
+| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                   | `/docs/architecture/project-structure.md` | SOP-003 |
+| Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces | `/docs/development-setup.md`              | SOP-004 |
+| Design Patterns | {e.g., Service + Repository, function-based}                          | `/docs/architecture/design-patterns.md`   | SOP-005 |
 
 ### Cached File Locations
 
@@ -267,6 +268,8 @@ These are human-approved and must never be contradicted:
 | Structure Doc   | `/docs/architecture/project-structure.md` | SOP-003         |
 | TS Base Config  | `/tsconfig.base.json`                     | SOP-003         |
 | Shared Package  | `/packages/shared/`                       | SOP-003         |
+| Env Docs        | `/docs/environment-variables.md`          | SOP-004         |
+| Dev Setup Guide | `/docs/development-setup.md`              | SOP-004         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
@@ -279,8 +282,8 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-004  
-**Title:** Environment Setup  
+**SOP:** SOP-005  
+**Title:** Design Patterns  
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
@@ -289,14 +292,14 @@ These are human-approved and must never be contradicted:
 .prompts/AI-SESSION.md                                            # This file (context)
 /docs/tech-stack.md                                               # Tech decisions
 /docs/architecture/project-structure.md                            # Folder structure (SOP-003 output)
-.sops/phase-0-initialization/SOP-004-environment-setup.md          # The procedure
+.sops/phase-0-initialization/SOP-005-design-patterns.md            # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] `.env.example` template created
-- [ ] Local development instructions documented
-- [ ] Required tools/versions listed
+- [ ] `/docs/architecture/design-patterns.md` created
+- [ ] Architectural pattern documented
+- [ ] Code-level patterns documented
 
 ### Iterative SOP Progress
 
@@ -335,14 +338,14 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-004 (Environment Setup).
+Execute SOP-005 (Design Patterns).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
 - `/docs/tech-stack.md` for tech decisions
 - `/docs/architecture/project-structure.md` for folder structure
-- `.sops/phase-0-initialization/SOP-004-environment-setup.md` for the procedure
+- `.sops/phase-0-initialization/SOP-005-design-patterns.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -385,11 +388,10 @@ Update `.sops/templates/project-checklist.md` when complete.
 - Branching strategy: GitHub Flow (`main` + short-lived `feature/xxx`, `fix/xxx`, `chore/xxx` branches).
 - Commit convention: Conventional Commits with scopes for app/module (`mobile`, `web`, `shared`, `supabase`).
 - Repository pushed to `https://github.com/enactus-portsaid/tabadul.git`.
-- Two commits: (1) SOP-002 output files, (2) existing docs/SOPs/prompts.
 
 ### Session 3 — 2026-03-07
 
-**SOPs Completed:** SOP-003  
+**SOPs Completed:** SOP-003, SOP-004  
 **Files Created:**
 
 - `apps/mobile/` — Expo Router structure (`src/app/(tabs)`, `src/app/(auth)`, `src/components/{ui,forms,layout,features}`, `src/hooks`, `src/services`, `src/lib`, `src/config`, `src/types`, `src/stores`)
@@ -403,12 +405,24 @@ Update `.sops/templates/project-checklist.md` when complete.
 - `packages/shared/tsconfig.json` — Extends base, outputs to `dist/`
 - `docs/architecture/project-structure.md` — Directory map, naming conventions, module boundaries, path aliases, barrel file strategy
 - Barrel files in `components/{ui,forms,layout}/index.ts` for both apps and `packages/shared/src/{types,schemas,constants}/index.ts`
+- `.env.example` — Environment variable template (Supabase, app config, feature flags)
+- `/docs/environment-variables.md` — Full variable reference (required/optional, how to obtain, security rules)
+- `/docs/development-setup.md` — Prerequisites, quick start, step-by-step, scripts reference, troubleshooting
+- `docker-compose.yml` — Standalone PostgreSQL fallback for local dev
+- `package.json` — Root workspace config with 20+ scripts (dev, build, db:_, docker:_, etc.)
+- `pnpm-workspace.yaml` — pnpm workspace definition (`apps/*`, `packages/*`)
+- `.vscode/settings.json` — Updated with editor, TypeScript, Tailwind CSS, and search exclusions
+- `.vscode/extensions.json` — Recommended VS Code extensions (Prettier, ESLint, Tailwind CSS, etc.)
 
 **Notes:**
 
-- Monorepo structure follows `/docs/tech-stack.md` §8 exactly: `apps/mobile`, `apps/web`, `packages/shared`, `supabase`.
-- Path alias `@/*` maps to `./src/*` in both apps; `@tabadul/shared/*` maps to `../../packages/shared/src/*`.
-- Web app uses `[locale]` dynamic segment for i18n routing (`/ar/...`, `/en/...`) with route groups `(auth)`, `(main)`, and `admin`.
-- Mobile app uses Expo Router route groups `(tabs)` and `(auth)`.
-- Naming conventions: PascalCase (components), camelCase (hooks/utils), kebab-case (routes/configs), SCREAMING_SNAKE (constants).
-- `.gitkeep` files placed in empty directories to ensure Git tracks them.
+- SOP-003: Monorepo structure follows `/docs/tech-stack.md` §8 exactly: `apps/mobile`, `apps/web`, `packages/shared`, `supabase`.
+- SOP-003: Path alias `@/*` maps to `./src/*` in both apps; `@tabadul/shared/*` maps to `../../packages/shared/src/*`.
+- SOP-003: Web app uses `[locale]` dynamic segment for i18n routing (`/ar/...`, `/en/...`) with route groups `(auth)`, `(main)`, and `admin`.
+- SOP-003: Mobile app uses Expo Router route groups `(tabs)` and `(auth)`.
+- SOP-003: Naming conventions: PascalCase (components), camelCase (hooks/utils), kebab-case (routes/configs), SCREAMING_SNAKE (constants).
+- SOP-003: `.gitkeep` files placed in empty directories to ensure Git tracks them.
+- SOP-004: Local development uses Supabase CLI (`supabase start`) for the full stack (PostgreSQL, Auth, Storage, Realtime, Studio, Edge Functions). Docker Compose provides a standalone PostgreSQL fallback.
+- SOP-004: Root `package.json` defines pnpm workspace scripts. `pnpm setup` does install + `.env` copy. `pnpm db:start/stop/reset/migrate/seed` wraps Supabase CLI commands.
+- SOP-004: Environment variables grouped into Supabase, Mobile (EXPO*PUBLIC*), Web (NEXT*PUBLIC*), App Config, and Feature Flags. No real secrets committed.
+- SOP-004: VS Code settings include format-on-save (Prettier), ESLint auto-fix, Tailwind CSS IntelliSense, and search exclusions for build artifacts.

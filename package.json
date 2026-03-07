@@ -1,0 +1,36 @@
+{
+  "name": "tabadul",
+  "version": "0.0.1",
+  "private": true,
+  "description": "B2B AI-powered Industrial Symbiosis Platform",
+  "scripts": {
+    "dev": "pnpm --filter @tabadul/web dev",
+    "dev:mobile": "pnpm --filter @tabadul/mobile start",
+    "dev:web": "pnpm --filter @tabadul/web dev",
+    "build": "pnpm --filter @tabadul/web build",
+    "build:web": "pnpm --filter @tabadul/web build",
+    "start": "pnpm --filter @tabadul/web start",
+    "lint": "pnpm -r lint",
+    "lint:web": "pnpm --filter @tabadul/web lint",
+    "lint:mobile": "pnpm --filter @tabadul/mobile lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "setup": "pnpm install && cp -n .env.example .env 2>/dev/null; echo '✅ Setup complete — fill in .env with your Supabase keys'",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:migrate": "supabase migration up",
+    "db:seed": "supabase db reset --seed-only",
+    "db:studio": "echo 'Open http://127.0.0.1:54323 (requires supabase start)'",
+    "db:diff": "supabase db diff --use-migra",
+    "db:push": "supabase db push",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "clean": "rm -rf apps/web/.next apps/mobile/.expo node_modules/.cache"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

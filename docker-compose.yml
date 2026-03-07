@@ -1,0 +1,34 @@
+# Tabadul — Docker Compose (Local Development)
+#
+# This file provides a fallback PostgreSQL instance for local development.
+#
+# RECOMMENDED: Use `supabase start` instead — it spins up the full Supabase
+# stack (PostgreSQL, Auth, Storage, Realtime, Studio, Edge Functions) via
+# Docker automatically. This compose file is for scenarios where you need
+# a standalone PostgreSQL without the full Supabase stack.
+#
+# Usage:
+#   docker compose up -d        # Start services
+#   docker compose down         # Stop services
+#   docker compose down -v      # Stop and remove volumes (reset data)
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tabadul_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
