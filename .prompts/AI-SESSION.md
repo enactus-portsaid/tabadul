@@ -65,7 +65,7 @@
 | --- | ---------------------- | ------ | --------------------------------------- | ----- |
 | 000 | Requirements Gathering | ✅      | `/docs/requirements.md`                 | 12 sections, 30+ user stories, MoSCoW prioritized |
 | 001 | Tech Stack Selection   | ✅      | `/docs/tech-stack.md`                   | RN + Expo (mobile), Next.js 15 (web), Supabase, monorepo |
-| 002 | Repository Setup       | ⬚      | `README.md`, `.gitignore`               |       |
+| 002 | Repository Setup       | ✅      | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md` | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul |
 | 003 | Project Structure      | ⬚      | Folder structure                        |       |
 | 004 | Environment Setup      | ⬚      | `.env.example`, `/docs/setup.md`        |       |
 | 005 | Design Patterns        | ⬚      | `/docs/architecture/design-patterns.md` |       |
@@ -250,7 +250,7 @@ These are human-approved and must never be contradicted:
 | State Mgmt      | TanStack Query + Zustand                     | `/docs/tech-stack.md`                   | SOP-001 |
 | Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web) | `/docs/tech-stack.md`                   | SOP-001 |
 | Entities        | {e.g., User, List, Item, ...}                | `/docs/requirements.md`                 | SOP-000 |
-| Branching       | {e.g., GitHub Flow}                          | `CONTRIBUTING.md`                       | SOP-002 |
+| Branching       | GitHub Flow (main + feature/fix/chore branches) | `CONTRIBUTING.md`                       | SOP-002 |
 | Design Patterns | {e.g., Service + Repository, function-based} | `/docs/architecture/design-patterns.md` | SOP-005 |
 
 ### Cached File Locations
@@ -260,6 +260,9 @@ These are human-approved and must never be contradicted:
 | Requirements    | `/docs/requirements.md`                   | SOP-000         |
 | Tech Stack      | `/docs/tech-stack.md`                     | SOP-001         |
 | Execution Brief | `/docs/execution-brief.md`                | Phase 0         |
+| README          | `/README.md`                              | SOP-002         |
+| CONTRIBUTING    | `/CONTRIBUTING.md`                        | SOP-002         |
+| PR Template     | `/.github/PULL_REQUEST_TEMPLATE.md`       | SOP-002         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
@@ -272,8 +275,8 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-002  
-**Title:** Repository Setup  
+**SOP:** SOP-003  
+**Title:** Project Structure  
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
@@ -281,14 +284,15 @@ These are human-approved and must never be contradicted:
 ```
 .prompts/AI-SESSION.md                                            # This file (context)
 /docs/requirements.md                                             # Platform requirements
-/docs/tech-stack.md                                               # Tech decisions
-.sops/phase-0-initialization/SOP-002-repository-setup.md          # The procedure
+/docs/tech-stack.md                                               # Tech decisions (monorepo structure in §8)
+.sops/phase-0-initialization/SOP-003-project-structure.md          # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] `README.md`
-- [ ] `.gitignore`
+- [ ] Folder structure created per SOP-003
+- [ ] Naming conventions documented
+- [ ] Module boundaries defined
 
 ### Iterative SOP Progress
 
@@ -327,13 +331,13 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-002 (Repository Setup).
+Execute SOP-003 (Project Structure).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/tech-stack.md` for tech decisions
-- `.sops/phase-0-initialization/SOP-002-repository-setup.md` for the procedure
+- `/docs/tech-stack.md` for tech decisions (monorepo structure in §8)
+- `.sops/phase-0-initialization/SOP-003-project-structure.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -360,3 +364,20 @@ Update `.sops/templates/project-checklist.md` when complete.
 - Supabase chosen as BaaS over Firebase (PostgreSQL relational model fits marketplace data better than NoSQL) and custom Node.js (too much overhead for MVP).
 - Admin panel lives in the Next.js web app (role-gated routes) — natural fit for data-heavy admin workflows.
 - Only unavoidable costs: Apple Developer Program ($99/year) for iOS + Google Play ($25 one-time).
+
+### Session 2 — 2026-03-06
+
+**SOPs Completed:** SOP-002  
+**Files Created:**
+
+- `.gitignore` (Node.js/TypeScript/Expo/Next.js/Supabase ignores)
+- `README.md` (project overview, tech stack table, setup instructions, monorepo structure)
+- `CONTRIBUTING.md` (GitHub Flow branching, Conventional Commits, PR process)
+- `.github/PULL_REQUEST_TEMPLATE.md` (type-of-change checkboxes, self-review checklist, RTL/LTR testing reminder)
+
+**Notes:**
+
+- Branching strategy: GitHub Flow (`main` + short-lived `feature/xxx`, `fix/xxx`, `chore/xxx` branches).
+- Commit convention: Conventional Commits with scopes for app/module (`mobile`, `web`, `shared`, `supabase`).
+- Repository pushed to `https://github.com/enactus-portsaid/tabadul.git`.
+- Two commits: (1) SOP-002 output files, (2) existing docs/SOPs/prompts.
