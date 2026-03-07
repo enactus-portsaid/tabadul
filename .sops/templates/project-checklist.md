@@ -31,9 +31,9 @@
 - [x] Commit message format documented
 
 ### Project Structure (SOP-003)
-- [ ] Folder structure created per SOP-003
-- [ ] Naming conventions documented
-- [ ] Module boundaries defined
+- [x] Folder structure created per SOP-003
+- [x] Naming conventions documented
+- [x] Module boundaries defined
 
 ### Environment Setup (SOP-004)
 - [ ] `.env.example` template created
