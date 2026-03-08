@@ -1,17 +1,17 @@
 ---
-sop: "SOP-403"
-title: "AI Cost Monitoring"
+sop: 'SOP-403'
+title: 'AI Cost Monitoring'
 phase: 4
 iterative: false
 prerequisites:
-  - sop: "SOP-401"
-    output: "src/lib/ai/"
+  - sop: 'SOP-401'
+    output: 'src/lib/ai/'
 outputs:
-  - "src/lib/ai/usage.ts"
-  - "src/lib/ai/limits.ts"
-  - "src/lib/ai/alerts.ts"
-  - "/docs/ai/cost-monitoring.md"
-related: ["SOP-400", "SOP-401", "SOP-602"]
+  - 'src/lib/ai/usage.ts'
+  - 'src/lib/ai/limits.ts'
+  - 'src/lib/ai/alerts.ts'
+  - '/docs/ai/cost-monitoring.md'
+related: ['SOP-400', 'SOP-401', 'SOP-602']
 ---
 
 # SOP-403: AI Cost Monitoring

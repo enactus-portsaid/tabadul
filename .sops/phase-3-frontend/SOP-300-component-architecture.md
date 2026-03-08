@@ -1,19 +1,19 @@
 ---
-sop: "SOP-300"
-title: "Component Architecture"
+sop: 'SOP-300'
+title: 'Component Architecture'
 phase: 3
 iterative: false
 prerequisites:
-  - sop: "SOP-003"
-    output: "/docs/architecture/project-structure.md"
-  - sop: "SOP-005"
-    output: "/docs/architecture/design-patterns.md"
+  - sop: 'SOP-003'
+    output: '/docs/architecture/project-structure.md'
+  - sop: 'SOP-005'
+    output: '/docs/architecture/design-patterns.md'
 outputs:
-  - "src/components/ui/"
-  - "src/components/layout/"
-  - "src/components/features/"
-  - "/docs/components/README.md"
-related: ["SOP-003", "SOP-301", "SOP-304"]
+  - 'src/components/ui/'
+  - 'src/components/layout/'
+  - 'src/components/features/'
+  - '/docs/components/README.md'
+related: ['SOP-003', 'SOP-301', 'SOP-304']
 ---
 
 # SOP-300: Component Architecture

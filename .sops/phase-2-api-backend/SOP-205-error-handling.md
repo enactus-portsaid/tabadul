@@ -1,15 +1,15 @@
 ---
-sop: "SOP-205"
-title: "Error Handling"
+sop: 'SOP-205'
+title: 'Error Handling'
 phase: 2
 iterative: false
 prerequisites:
-  - sop: "SOP-202"
-    output: "/docs/api/openapi.yaml"
+  - sop: 'SOP-202'
+    output: '/docs/api/openapi.yaml'
 outputs:
-  - "src/lib/errors.ts"
-  - "src/middleware/error-handler.ts"
-related: ["SOP-202", "SOP-206", "SOP-200"]
+  - 'src/lib/errors.ts'
+  - 'src/middleware/error-handler.ts'
+related: ['SOP-202', 'SOP-206', 'SOP-200']
 ---
 
 # SOP-205: Error Handling

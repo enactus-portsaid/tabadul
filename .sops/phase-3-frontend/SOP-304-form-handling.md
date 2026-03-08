@@ -1,17 +1,17 @@
 ---
-sop: "SOP-304"
-title: "Form Handling"
+sop: 'SOP-304'
+title: 'Form Handling'
 phase: 3
 iterative: true
 prerequisites:
-  - sop: "SOP-300"
-    output: "src/components/ui/"
-  - sop: "SOP-206"
-    output: "src/validators/"
+  - sop: 'SOP-300'
+    output: 'src/components/ui/'
+  - sop: 'SOP-206'
+    output: 'src/validators/'
 outputs:
-  - "src/components/ui/Form/"
-  - "src/hooks/useZodForm.ts"
-related: ["SOP-300", "SOP-206", "SOP-303"]
+  - 'src/components/ui/Form/'
+  - 'src/hooks/useZodForm.ts'
+related: ['SOP-300', 'SOP-206', 'SOP-303']
 ---
 
 # SOP-304: Form Handling
@@ -56,13 +56,13 @@ Required components (all use `react-hook-form` context internally):
 Thin wrapper around `useForm` that pre-configures `zodResolver`:
 
 ```typescript
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type UseFormProps } from "react-hook-form";
-import type { ZodSchema, z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, type UseFormProps } from 'react-hook-form';
+import type { ZodSchema, z } from 'zod';
 
 export function useZodForm<TSchema extends ZodSchema>(
   schema: TSchema,
-  options?: Omit<UseFormProps<z.infer<TSchema>>, "resolver">,
+  options?: Omit<UseFormProps<z.infer<TSchema>>, 'resolver'>
 ) {
   return useForm<z.infer<TSchema>>({
     resolver: zodResolver(schema),

@@ -1,18 +1,18 @@
 ---
-sop: "SOP-501"
-title: "Integration Testing"
+sop: 'SOP-501'
+title: 'Integration Testing'
 phase: 5
 iterative: false
 prerequisites:
-  - sop: "SOP-500"
-  - sop: "SOP-101"
-  - sop: "SOP-202"
+  - sop: 'SOP-500'
+  - sop: 'SOP-101'
+  - sop: 'SOP-202'
 outputs:
-  - ".env.test"
-  - "tests/helpers/db.ts"
-  - "tests/factories/"
-  - "tests/integration/"
-related: ["SOP-500", "SOP-502", "SOP-202", "SOP-203"]
+  - '.env.test'
+  - 'tests/helpers/db.ts'
+  - 'tests/factories/'
+  - 'tests/integration/'
+related: ['SOP-500', 'SOP-502', 'SOP-202', 'SOP-203']
 ---
 
 # SOP-501: Integration Testing

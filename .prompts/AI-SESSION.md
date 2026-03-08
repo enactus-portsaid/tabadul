@@ -61,15 +61,15 @@
 
 ### Phase 0: Initialization
 
-| SOP | Title                  | Status | Output Location                                                                                                                                                                                 | Notes                                                                                      |
-| --- | ---------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| 000 | Requirements Gathering | ✅     | `/docs/requirements.md`                                                                                                                                                                         | 12 sections, 30+ user stories, MoSCoW prioritized                                          |
-| 001 | Tech Stack Selection   | ✅     | `/docs/tech-stack.md`                                                                                                                                                                           | RN + Expo (mobile), Next.js 15 (web), Supabase, monorepo                                   |
-| 002 | Repository Setup       | ✅     | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`                                                                                                                | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul |
-| 003 | Project Structure      | ✅     | `apps/`, `packages/`, `supabase/`, `/docs/architecture/project-structure.md`, `tsconfig.base.json`                                                                                              | Monorepo: apps/mobile + apps/web + packages/shared + supabase, path aliases, barrel files  |
-| 004 | Environment Setup      | ✅     | `.env.example`, `/docs/environment-variables.md`, `/docs/development-setup.md`, `docker-compose.yml`, `.vscode/settings.json`, `.vscode/extensions.json`, `package.json`, `pnpm-workspace.yaml` | Supabase-based local dev (supabase start), root pnpm workspace scripts                     |
-| 005 | Design Patterns        | ✅     | `/docs/architecture/design-patterns.md`                                                                                                                                                         | BaaS-Driven Layered Architecture, function-based services, Custom Hooks + Composition      |
-| 006 | Code Style Standards   | ⬚      | Linter/formatter configs                                                                                                                                                                        |                                                                                            |
+| SOP | Title                  | Status | Output Location                                                                                                                                                                                 | Notes                                                                                       |
+| --- | ---------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 000 | Requirements Gathering | ✅     | `/docs/requirements.md`                                                                                                                                                                         | 12 sections, 30+ user stories, MoSCoW prioritized                                           |
+| 001 | Tech Stack Selection   | ✅     | `/docs/tech-stack.md`                                                                                                                                                                           | RN + Expo (mobile), Next.js 15 (web), Supabase, monorepo                                    |
+| 002 | Repository Setup       | ✅     | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`                                                                                                                | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul  |
+| 003 | Project Structure      | ✅     | `apps/`, `packages/`, `supabase/`, `/docs/architecture/project-structure.md`, `tsconfig.base.json`                                                                                              | Monorepo: apps/mobile + apps/web + packages/shared + supabase, path aliases, barrel files   |
+| 004 | Environment Setup      | ✅     | `.env.example`, `/docs/environment-variables.md`, `/docs/development-setup.md`, `docker-compose.yml`, `.vscode/settings.json`, `.vscode/extensions.json`, `package.json`, `pnpm-workspace.yaml` | Supabase-based local dev (supabase start), root pnpm workspace scripts                      |
+| 005 | Design Patterns        | ✅     | `/docs/architecture/design-patterns.md`                                                                                                                                                         | BaaS-Driven Layered Architecture, function-based services, Custom Hooks + Composition       |
+| 006 | Code Style Standards   | ✅     | `eslint.config.mjs`, `prettier.config.js`, `lint-staged.config.js`, `.husky/pre-commit`, `.prettierignore`, `.vscode/settings.json`                                                             | ESLint 9 flat config, Prettier, Husky + lint-staged, import sorting, Tailwind class sorting |
 
 ### Phase 1: Database
 
@@ -240,20 +240,21 @@ These are human-approved and must never be contradicted:
 
 ### Cached Decisions
 
-| Decision        | Value                                                                 | Source                                    | Set By  |
-| --------------- | --------------------------------------------------------------------- | ----------------------------------------- | ------- |
-| Framework       | React Native + Expo SDK 52 (mobile) + Next.js 15 (web)                | `/docs/tech-stack.md`                     | SOP-001 |
-| Database        | PostgreSQL (via Supabase)                                             | `/docs/tech-stack.md`                     | SOP-001 |
-| ORM             | Supabase JS Client + @supabase/ssr (web)                              | `/docs/tech-stack.md`                     | SOP-001 |
-| Auth            | Supabase Auth (email/password, JWT)                                   | `/docs/tech-stack.md`                     | SOP-001 |
-| Styling         | NativeWind (Tailwind CSS for React Native)                            | `/docs/tech-stack.md`                     | SOP-001 |
-| State Mgmt      | TanStack Query + Zustand                                              | `/docs/tech-stack.md`                     | SOP-001 |
-| Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                          | `/docs/tech-stack.md`                     | SOP-001 |
-| Entities        | {e.g., User, List, Item, ...}                                         | `/docs/requirements.md`                   | SOP-000 |
-| Branching       | GitHub Flow (main + feature/fix/chore branches)                       | `CONTRIBUTING.md`                         | SOP-002 |
-| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                   | `/docs/architecture/project-structure.md` | SOP-003 |
-| Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces | `/docs/development-setup.md`              | SOP-004 |
-| Design Patterns | BaaS-Driven Layered Architecture; Service Functions (no Repository); Custom Hooks + Composition; TanStack Query + Zustand; React Hook Form + Zod; Result Pattern (`{ data, error }`); Auth Hook + RLS + Route Guards | `/docs/architecture/design-patterns.md` | SOP-005 |
+| Decision        | Value                                                                                                                                                                                                                | Source                                    | Set By  |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------- |
+| Framework       | React Native + Expo SDK 52 (mobile) + Next.js 15 (web)                                                                                                                                                               | `/docs/tech-stack.md`                     | SOP-001 |
+| Database        | PostgreSQL (via Supabase)                                                                                                                                                                                            | `/docs/tech-stack.md`                     | SOP-001 |
+| ORM             | Supabase JS Client + @supabase/ssr (web)                                                                                                                                                                             | `/docs/tech-stack.md`                     | SOP-001 |
+| Auth            | Supabase Auth (email/password, JWT)                                                                                                                                                                                  | `/docs/tech-stack.md`                     | SOP-001 |
+| Styling         | NativeWind (Tailwind CSS for React Native)                                                                                                                                                                           | `/docs/tech-stack.md`                     | SOP-001 |
+| State Mgmt      | TanStack Query + Zustand                                                                                                                                                                                             | `/docs/tech-stack.md`                     | SOP-001 |
+| Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                                                                                                                                                                         | `/docs/tech-stack.md`                     | SOP-001 |
+| Entities        | {e.g., User, List, Item, ...}                                                                                                                                                                                        | `/docs/requirements.md`                   | SOP-000 |
+| Branching       | GitHub Flow (main + feature/fix/chore branches)                                                                                                                                                                      | `CONTRIBUTING.md`                         | SOP-002 |
+| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                                                                                                                                                                  | `/docs/architecture/project-structure.md` | SOP-003 |
+| Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces                                                                                                                                                | `/docs/development-setup.md`              | SOP-004 |
+| Design Patterns | BaaS-Driven Layered Architecture; Service Functions (no Repository); Custom Hooks + Composition; TanStack Query + Zustand; React Hook Form + Zod; Result Pattern (`{ data, error }`); Auth Hook + RLS + Route Guards | `/docs/architecture/design-patterns.md`   | SOP-005 |
+| Code Style      | ESLint 9 flat config + Prettier + Husky + lint-staged; simple-import-sort; Tailwind class sorting; printWidth 80; singleQuote; trailingComma es5                                                                     | `eslint.config.mjs`, `prettier.config.js` | SOP-006 |
 
 ### Cached File Locations
 
@@ -271,6 +272,10 @@ These are human-approved and must never be contradicted:
 | Env Docs        | `/docs/environment-variables.md`          | SOP-004         |
 | Dev Setup Guide | `/docs/development-setup.md`              | SOP-004         |
 | Design Patterns | `/docs/architecture/design-patterns.md`   | SOP-005         |
+| ESLint Config   | `/eslint.config.mjs`                      | SOP-006         |
+| Prettier Config | `/prettier.config.js`                     | SOP-006         |
+| Lint-Staged     | `/lint-staged.config.js`                  | SOP-006         |
+| Pre-commit Hook | `/.husky/pre-commit`                      | SOP-006         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
@@ -285,7 +290,7 @@ These are human-approved and must never be contradicted:
 
 **SOP:** SOP-006  
 **Title:** Code Style Standards  
-**Status:** ⬚ Not Started
+**Status:** ✅ Complete
 
 ### Context Files to Read
 
@@ -298,12 +303,10 @@ These are human-approved and must never be contradicted:
 
 ### Expected Outputs
 
-- [ ] Linter configured (ESLint)
-- [ ] Formatter configured (Prettier)
-- [ ] Pre-commit hooks set up
-- [ ] Style guide documented
-
-### Iterative SOP Progress
+- [x] Linter configured (ESLint)
+- [x] Formatter configured (Prettier)
+- [x] Pre-commit hooks set up
+- [x] Style guide documented
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -340,14 +343,13 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-006 (Code Style Standards).
+Execute SOP-100 (Database Selection).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
 - `/docs/tech-stack.md` for tech decisions
-- `/docs/architecture/design-patterns.md` for design patterns
-- `.sops/phase-0-initialization/SOP-006-code-style-standards.md` for the procedure
+- `.sops/phase-1-database/SOP-100-database-selection.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -448,3 +450,27 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-005: Three-tier authorization: route-level guards (middleware/layouts) → RLS policies (database) → Edge Function business rule checks.
 - SOP-005: Real-time data (chat, bids) handled via Supabase Realtime subscription hooks that update TanStack Query cache directly.
 - SOP-005: Anti-patterns documented (direct Supabase calls in components, Zustand for server data, hardcoded strings, fat components, etc.).
+
+### Session 5 — 2026-03-08
+
+**SOPs Completed:** SOP-006
+**Files Created/Updated:**
+
+- `eslint.config.mjs` — ESLint 9 flat config for monorepo (TypeScript, React, Next.js web-only rules, import sorting, Prettier compat)
+- `prettier.config.js` — Prettier config (semi, singleQuote, tabWidth 2, trailingComma es5, printWidth 80, endOfLine lf, Tailwind class sorting plugin)
+- `lint-staged.config.js` — Lint-staged config (ESLint + Prettier on staged TS/JS files, Prettier on JSON/MD/YAML/CSS)
+- `.husky/pre-commit` — Husky pre-commit hook running `pnpm lint-staged`
+- `.prettierignore` — Ignore patterns for Prettier (node_modules, .next, .expo, dist, pnpm-lock.yaml, supabase/functions)
+- `.vscode/settings.json` — Updated: ESLint flat config enabled, ESLint validate languages added, ruler changed to 80
+- `package.json` — Updated: added `lint:fix`, `format`, `format:check`, `type-check` scripts; `lint` now runs ESLint directly at root
+
+**Notes:**
+
+- SOP-006: **ESLint 9** flat config (`eslint.config.mjs`) chosen over legacy `.eslintrc` — modern standard, better monorepo support.
+- SOP-006: ESLint pinned to v9 (not v10) due to peer dependency incompatibility with `eslint-plugin-react`, `eslint-plugin-react-hooks`, and `eslint-config-next`.
+- SOP-006: Next.js-specific rules (`@next/next` plugin with `recommended` + `core-web-vitals`) scoped to `apps/web/**` only — doesn't affect mobile app files.
+- SOP-006: Import order enforced by `simple-import-sort` — automatic sorting: React/framework → external → internal (`@/`) → relative.
+- SOP-006: Tailwind CSS class sorting via `prettier-plugin-tailwindcss` — works for both NativeWind (mobile) and Tailwind CSS (web).
+- SOP-006: Naming conventions from SOP-003 already documented: PascalCase (components/types), camelCase (variables/functions/hooks), SCREAMING_SNAKE (constants), kebab-case (utility files).
+- SOP-006: Comment standards: `// TODO(name): reason (target date)` format; JSDoc for exported public functions; explain "why" not "what".
+- SOP-006: Pre-commit workflow: staged files → ESLint --fix → Prettier --write → commit (via Husky + lint-staged).

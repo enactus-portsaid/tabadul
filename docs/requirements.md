@@ -456,6 +456,6 @@ and environmental damage from unnecessary waste disposal.
 
 ## 12. Approval
 
-| Stakeholder   | Date       | Status   | Signature  |
-| ------------- | ---------- | -------- | ---------- |
-| Product Owner | 2026-03-05 | Approved | Tech Team  |
+| Stakeholder   | Date       | Status   | Signature |
+| ------------- | ---------- | -------- | --------- |
+| Product Owner | 2026-03-05 | Approved | Tech Team |

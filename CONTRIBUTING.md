@@ -45,15 +45,15 @@ We use [Conventional Commits](https://www.conventionalcommits.org/):
 
 ### Types
 
-| Type       | Description                      |
-| ---------- | -------------------------------- |
-| `feat`     | New feature                      |
-| `fix`      | Bug fix                          |
-| `docs`     | Documentation only               |
-| `style`    | Formatting (no logic change)     |
-| `refactor` | Code restructuring               |
-| `test`     | Adding/updating tests            |
-| `chore`    | Build, config, tooling           |
+| Type       | Description                  |
+| ---------- | ---------------------------- |
+| `feat`     | New feature                  |
+| `fix`      | Bug fix                      |
+| `docs`     | Documentation only           |
+| `style`    | Formatting (no logic change) |
+| `refactor` | Code restructuring           |
+| `test`     | Adding/updating tests        |
+| `chore`    | Build, config, tooling       |
 
 ### Scopes
 

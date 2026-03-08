@@ -1,16 +1,16 @@
 ---
-sop: "SOP-005"
-title: "Design Patterns"
+sop: 'SOP-005'
+title: 'Design Patterns'
 phase: 0
 iterative: false
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
-  - sop: "SOP-001"
-    output: "/docs/tech-stack.md"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
+  - sop: 'SOP-001'
+    output: '/docs/tech-stack.md'
 outputs:
-  - "/docs/architecture/design-patterns.md"
-related: ["SOP-001", "SOP-003", "SOP-006"]
+  - '/docs/architecture/design-patterns.md'
+related: ['SOP-001', 'SOP-003', 'SOP-006']
 ---
 
 # SOP-005: Design Patterns

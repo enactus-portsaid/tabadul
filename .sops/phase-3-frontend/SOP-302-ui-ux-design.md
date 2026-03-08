@@ -1,20 +1,20 @@
 ---
-sop: "SOP-302"
-title: "UI/UX Design & Planning"
+sop: 'SOP-302'
+title: 'UI/UX Design & Planning'
 phase: 3
 iterative: true
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
-  - sop: "SOP-300"
-    output: "src/components/"
-  - sop: "SOP-301"
-    output: "tailwind.config.ts"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
+  - sop: 'SOP-300'
+    output: 'src/components/'
+  - sop: 'SOP-301'
+    output: 'tailwind.config.ts'
 outputs:
-  - "/docs/frontend/ui-analysis.md"
-  - "/docs/frontend/ui-design/[feature].md"
-  - "/docs/frontend/visual-design.md"
-related: ["SOP-000", "SOP-300", "SOP-301", "SOP-305"]
+  - '/docs/frontend/ui-analysis.md'
+  - '/docs/frontend/ui-design/[feature].md'
+  - '/docs/frontend/visual-design.md'
+related: ['SOP-000', 'SOP-300', 'SOP-301', 'SOP-305']
 ---
 
 # SOP-302: UI/UX Design & Planning

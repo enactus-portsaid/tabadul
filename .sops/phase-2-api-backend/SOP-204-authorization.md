@@ -1,18 +1,18 @@
 ---
-sop: "SOP-204"
-title: "Authorization"
+sop: 'SOP-204'
+title: 'Authorization'
 phase: 2
 iterative: false
 prerequisites:
-  - sop: "SOP-203"
-    output: "src/middleware/auth.ts"
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
+  - sop: 'SOP-203'
+    output: 'src/middleware/auth.ts'
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
 outputs:
-  - "src/middleware/authorize.ts"
-  - "src/lib/permissions.ts"
-  - "/docs/architecture/permissions.md"
-related: ["SOP-203", "SOP-202", "SOP-200"]
+  - 'src/middleware/authorize.ts'
+  - 'src/lib/permissions.ts'
+  - '/docs/architecture/permissions.md'
+related: ['SOP-203', 'SOP-202', 'SOP-200']
 ---
 
 # SOP-204: Authorization

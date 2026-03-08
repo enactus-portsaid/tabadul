@@ -1,17 +1,17 @@
 ---
-sop: "SOP-504"
-title: "Documentation"
+sop: 'SOP-504'
+title: 'Documentation'
 phase: 5
 iterative: false
 prerequisites:
-  - sop: "SOP-003"
-  - sop: "SOP-202"
+  - sop: 'SOP-003'
+  - sop: 'SOP-202'
 outputs:
-  - "README.md"
-  - "CONTRIBUTING.md"
-  - "docs/api/openapi.yaml"
-  - "docs/architecture/"
-related: ["SOP-202", "SOP-003", "SOP-002"]
+  - 'README.md'
+  - 'CONTRIBUTING.md'
+  - 'docs/api/openapi.yaml'
+  - 'docs/architecture/'
+related: ['SOP-202', 'SOP-003', 'SOP-002']
 ---
 
 # SOP-504: Documentation

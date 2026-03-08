@@ -10,9 +10,13 @@
     "build": "pnpm --filter @tabadul/web build",
     "build:web": "pnpm --filter @tabadul/web build",
     "start": "pnpm --filter @tabadul/web start",
-    "lint": "pnpm -r lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:web": "pnpm --filter @tabadul/web lint",
     "lint:mobile": "pnpm --filter @tabadul/mobile lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "pnpm -r typecheck",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "setup": "pnpm install && cp -n .env.example .env 2>/dev/null; echo '✅ Setup complete — fill in .env with your Supabase keys'",
@@ -26,11 +30,28 @@
     "db:push": "supabase db push",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
-    "clean": "rm -rf apps/web/.next apps/mobile/.expo node_modules/.cache"
+    "clean": "rm -rf apps/web/.next apps/mobile/.expo node_modules/.cache",
+    "prepare": "husky"
   },
   "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.1.6",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2"
   }
 }

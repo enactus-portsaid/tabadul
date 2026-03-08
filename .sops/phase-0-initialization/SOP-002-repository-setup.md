@@ -1,17 +1,17 @@
 ---
-sop: "SOP-002"
-title: "Repository Setup"
+sop: 'SOP-002'
+title: 'Repository Setup'
 phase: 0
 iterative: false
 prerequisites:
-  - sop: "SOP-001"
-    output: "/docs/tech-stack.md"
+  - sop: 'SOP-001'
+    output: '/docs/tech-stack.md'
 outputs:
-  - ".gitignore"
-  - "README.md"
-  - "CONTRIBUTING.md"
-  - ".github/PULL_REQUEST_TEMPLATE.md"
-related: ["SOP-001", "SOP-003", "SOP-006"]
+  - '.gitignore'
+  - 'README.md'
+  - 'CONTRIBUTING.md'
+  - '.github/PULL_REQUEST_TEMPLATE.md'
+related: ['SOP-001', 'SOP-003', 'SOP-006']
 ---
 
 # SOP-002: Repository Setup

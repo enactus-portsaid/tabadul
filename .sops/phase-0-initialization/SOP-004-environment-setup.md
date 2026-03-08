@@ -1,20 +1,20 @@
 ---
-sop: "SOP-004"
-title: "Environment Setup"
+sop: 'SOP-004'
+title: 'Environment Setup'
 phase: 0
 iterative: false
 prerequisites:
-  - sop: "SOP-002"
-    output: "README.md"
-  - sop: "SOP-003"
-    output: "/docs/architecture/project-structure.md"
+  - sop: 'SOP-002'
+    output: 'README.md'
+  - sop: 'SOP-003'
+    output: '/docs/architecture/project-structure.md'
 outputs:
-  - ".env.example"
-  - "/docs/environment-variables.md"
-  - "docker-compose.yml"
-  - ".vscode/settings.json"
-  - "/docs/development-setup.md"
-related: ["SOP-002", "SOP-003", "SOP-006"]
+  - '.env.example'
+  - '/docs/environment-variables.md'
+  - 'docker-compose.yml'
+  - '.vscode/settings.json'
+  - '/docs/development-setup.md'
+related: ['SOP-002', 'SOP-003', 'SOP-006']
 ---
 
 # SOP-004: Environment Setup

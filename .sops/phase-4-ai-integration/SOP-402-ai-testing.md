@@ -1,18 +1,18 @@
 ---
-sop: "SOP-402"
-title: "AI Testing"
+sop: 'SOP-402'
+title: 'AI Testing'
 phase: 4
 iterative: false
 prerequisites:
-  - sop: "SOP-401"
-    output: "src/lib/ai/"
-  - sop: "SOP-500"
-    output: "tests/"
+  - sop: 'SOP-401'
+    output: 'src/lib/ai/'
+  - sop: 'SOP-500'
+    output: 'tests/'
 outputs:
-  - "src/lib/ai/__mocks__/client.ts"
-  - "tests/ai/*.test.ts"
-  - "tests/evals/*.ts"
-related: ["SOP-401", "SOP-500", "SOP-501"]
+  - 'src/lib/ai/__mocks__/client.ts'
+  - 'tests/ai/*.test.ts'
+  - 'tests/evals/*.ts'
+related: ['SOP-401', 'SOP-500', 'SOP-501']
 ---
 
 # SOP-402: AI Testing

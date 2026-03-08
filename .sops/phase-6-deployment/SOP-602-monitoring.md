@@ -1,17 +1,17 @@
 ---
-sop: "SOP-602"
-title: "Monitoring & Alerting"
+sop: 'SOP-602'
+title: 'Monitoring & Alerting'
 phase: 6
 iterative: false
 prerequisites:
-  - sop: "SOP-600"
-  - sop: "SOP-601"
+  - sop: 'SOP-600'
+  - sop: 'SOP-601'
 outputs:
-  - "sentry.*.config.ts"
-  - "src/lib/monitoring/"
-  - "src/app/api/health/route.ts"
-  - "docs/monitoring/"
-related: ["SOP-600", "SOP-601", "SOP-603"]
+  - 'sentry.*.config.ts'
+  - 'src/lib/monitoring/'
+  - 'src/app/api/health/route.ts'
+  - 'docs/monitoring/'
+related: ['SOP-600', 'SOP-601', 'SOP-603']
 ---
 
 # SOP-602: Monitoring & Alerting

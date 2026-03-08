@@ -1,17 +1,17 @@
 ---
-sop: "SOP-202"
-title: "API Design"
+sop: 'SOP-202'
+title: 'API Design'
 phase: 2
 iterative: true
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
-  - sop: "SOP-200"
-    output: "src/services/"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
+  - sop: 'SOP-200'
+    output: 'src/services/'
 outputs:
-  - "/docs/api/openapi.yaml"
-  - "/docs/api/endpoints.md"
-related: ["SOP-200", "SOP-203", "SOP-204", "SOP-205", "SOP-206"]
+  - '/docs/api/openapi.yaml'
+  - '/docs/api/endpoints.md'
+related: ['SOP-200', 'SOP-203', 'SOP-204', 'SOP-205', 'SOP-206']
 ---
 
 # SOP-202: API Design
