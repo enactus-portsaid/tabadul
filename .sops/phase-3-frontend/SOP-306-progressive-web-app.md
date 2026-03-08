@@ -1,21 +1,21 @@
 ---
-sop: "SOP-306"
-title: "Progressive Web App"
+sop: 'SOP-306'
+title: 'Progressive Web App'
 phase: 3
 iterative: false
 optional: true
 prerequisites:
-  - sop: "SOP-003"
-    output: "/docs/architecture/project-structure.md"
-  - sop: "SOP-300"
-    output: "src/components/"
-  - sop: "SOP-301"
-    output: "tailwind.config.ts"
+  - sop: 'SOP-003'
+    output: '/docs/architecture/project-structure.md'
+  - sop: 'SOP-300'
+    output: 'src/components/'
+  - sop: 'SOP-301'
+    output: 'tailwind.config.ts'
 outputs:
-  - "public/manifest.json"
-  - "src/sw.ts"
-  - "src/hooks/use-pwa-install.ts"
-related: ["SOP-300", "SOP-301", "SOP-303", "SOP-602"]
+  - 'public/manifest.json'
+  - 'src/sw.ts'
+  - 'src/hooks/use-pwa-install.ts'
+related: ['SOP-300', 'SOP-301', 'SOP-303', 'SOP-602']
 ---
 
 # SOP-306: Progressive Web App (PWA) Setup

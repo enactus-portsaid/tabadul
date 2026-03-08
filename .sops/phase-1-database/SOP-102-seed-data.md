@@ -1,15 +1,15 @@
 ---
-sop: "SOP-102"
-title: "Seed Data"
+sop: 'SOP-102'
+title: 'Seed Data'
 phase: 1
 iterative: false
 prerequisites:
-  - sop: "SOP-101"
-    output: "prisma/schema.prisma"
+  - sop: 'SOP-101'
+    output: 'prisma/schema.prisma'
 outputs:
-  - "prisma/seed.ts"
-  - "/docs/database/seed-data.md"
-related: ["SOP-101", "SOP-004", "SOP-500"]
+  - 'prisma/seed.ts'
+  - '/docs/database/seed-data.md'
+related: ['SOP-101', 'SOP-004', 'SOP-500']
 ---
 
 # SOP-102: Seed Data

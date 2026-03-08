@@ -1,17 +1,17 @@
 ---
-sop: "SOP-201"
-title: "Repository Pattern"
+sop: 'SOP-201'
+title: 'Repository Pattern'
 phase: 2
 iterative: true
 prerequisites:
-  - sop: "SOP-101"
-    output: "prisma/schema.prisma"
-  - sop: "SOP-005"
-    output: "/docs/architecture/design-patterns.md"
+  - sop: 'SOP-101'
+    output: 'prisma/schema.prisma'
+  - sop: 'SOP-005'
+    output: '/docs/architecture/design-patterns.md'
 outputs:
-  - "src/repositories/*.repository.ts"
-  - "src/repositories/interfaces/*.interface.ts"
-related: ["SOP-101", "SOP-200", "SOP-202"]
+  - 'src/repositories/*.repository.ts'
+  - 'src/repositories/interfaces/*.interface.ts'
+related: ['SOP-101', 'SOP-200', 'SOP-202']
 ---
 
 # SOP-201: Repository Pattern

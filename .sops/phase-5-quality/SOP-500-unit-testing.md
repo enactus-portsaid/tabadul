@@ -1,16 +1,16 @@
 ---
-sop: "SOP-500"
-title: "Unit Testing"
+sop: 'SOP-500'
+title: 'Unit Testing'
 phase: 5
 iterative: false
 prerequisites:
-  - sop: "SOP-003"
-  - sop: "SOP-006"
+  - sop: 'SOP-003'
+  - sop: 'SOP-006'
 outputs:
-  - "vitest.config.ts"
-  - "tests/setup.ts"
-  - "**/*.test.ts"
-related: ["SOP-501", "SOP-502", "SOP-503"]
+  - 'vitest.config.ts'
+  - 'tests/setup.ts'
+  - '**/*.test.ts'
+related: ['SOP-501', 'SOP-502', 'SOP-503']
 ---
 
 # SOP-500: Unit Testing
@@ -42,27 +42,27 @@ pnpm add -D msw
 ### 2. Configure Vitest (`vitest.config.ts`)
 
 ```typescript
-import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: ["./tests/setup.ts"],
-    include: ["**/*.{test,spec}.{ts,tsx}"],
-    exclude: ["**/node_modules/**", "**/e2e/**"],
+    environment: 'jsdom',
+    setupFiles: ['./tests/setup.ts'],
+    include: ['**/*.{test,spec}.{ts,tsx}'],
+    exclude: ['**/node_modules/**', '**/e2e/**'],
     coverage: {
-      provider: "v8",
-      reporter: ["text", "json", "html"],
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
       exclude: [
-        "node_modules/",
-        "tests/",
-        "**/*.d.ts",
-        "**/*.config.*",
-        "**/types/**",
+        'node_modules/',
+        'tests/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/types/**',
       ],
       thresholds: { lines: 70, functions: 70, branches: 70, statements: 70 },
     },
@@ -113,7 +113,7 @@ Co-locate test files: `Button.tsx` → `Button.test.tsx` in same folder. Global 
 ### 7. Test Structure (AAA Pattern)
 
 ```typescript
-describe("ComponentOrFunction", () => {
+describe('ComponentOrFunction', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -121,18 +121,18 @@ describe("ComponentOrFunction", () => {
     vi.restoreAllMocks();
   });
 
-  describe("when [condition]", () => {
-    it("should [expected behavior]", () => {
+  describe('when [condition]', () => {
+    it('should [expected behavior]', () => {
       // Arrange
       // Act
       // Assert
     });
   });
 
-  describe("edge cases", () => {
+  describe('edge cases', () => {
     /* empty, null, max */
   });
-  describe("error handling", () => {
+  describe('error handling', () => {
     /* throws on invalid */
   });
 });

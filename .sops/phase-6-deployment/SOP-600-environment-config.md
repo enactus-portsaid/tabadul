@@ -1,16 +1,16 @@
 ---
-sop: "SOP-600"
-title: "Environment Configuration"
+sop: 'SOP-600'
+title: 'Environment Configuration'
 phase: 6
 iterative: false
 prerequisites:
-  - sop: "SOP-004"
+  - sop: 'SOP-004'
 outputs:
-  - ".env.example"
-  - "src/lib/env.ts"
-  - "src/config/index.ts"
-  - "src/app/api/health/route.ts"
-related: ["SOP-004", "SOP-601", "SOP-602"]
+  - '.env.example'
+  - 'src/lib/env.ts'
+  - 'src/config/index.ts'
+  - 'src/app/api/health/route.ts'
+related: ['SOP-004', 'SOP-601', 'SOP-602']
 ---
 
 # SOP-600: Environment Configuration

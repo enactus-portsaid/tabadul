@@ -1,18 +1,18 @@
 ---
-sop: "SOP-601"
-title: "CI/CD Pipelines"
+sop: 'SOP-601'
+title: 'CI/CD Pipelines'
 phase: 6
 iterative: false
 prerequisites:
-  - sop: "SOP-500"
-  - sop: "SOP-501"
-  - sop: "SOP-600"
+  - sop: 'SOP-500'
+  - sop: 'SOP-501'
+  - sop: 'SOP-600'
 outputs:
-  - ".github/workflows/ci.yml"
-  - ".github/workflows/deploy.yml"
-  - ".github/workflows/preview.yml"
-  - ".github/workflows/migrate.yml"
-related: ["SOP-500", "SOP-501", "SOP-600", "SOP-602"]
+  - '.github/workflows/ci.yml'
+  - '.github/workflows/deploy.yml'
+  - '.github/workflows/preview.yml'
+  - '.github/workflows/migrate.yml'
+related: ['SOP-500', 'SOP-501', 'SOP-600', 'SOP-602']
 ---
 
 # SOP-601: CI/CD Pipelines

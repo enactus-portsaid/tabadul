@@ -3,19 +3,21 @@
 > **Project Name:** Tabadul (تبادل)  
 > **Start Date:** 2026-03-05  
 > **Lead Developer:** Tech Committee  
-> **Target Completion:** _____________________
+> **Target Completion:** \***\*\*\*\*\***\_\***\*\*\*\*\***
 
 ---
 
 ## Phase 0: Initialization
 
 ### Requirements & Planning
+
 - [x] Stakeholder requirements documented (SOP-000)
 - [x] User stories written with acceptance criteria
 - [x] MVP scope defined and approved
 - [ ] Timeline and milestones established
 
 ### Tech Stack Selection (SOP-001)
+
 - [x] Programming language(s) selected: TypeScript 5.x
 - [x] Framework(s) selected: React Native + Expo SDK 52 (mobile), Next.js 15 (web)
 - [x] Database type selected: PostgreSQL (via Supabase)
@@ -23,6 +25,7 @@
 - [x] Decision rationale documented
 
 ### Repository Setup (SOP-002)
+
 - [x] Repository created
 - [x] Branch protection rules configured
 - [x] `.gitignore` configured for tech stack
@@ -31,17 +34,20 @@
 - [x] Commit message format documented
 
 ### Project Structure (SOP-003)
+
 - [x] Folder structure created per SOP-003
 - [x] Naming conventions documented
 - [x] Module boundaries defined
 
 ### Environment Setup (SOP-004)
+
 - [x] `.env.example` template created
 - [x] Local development instructions documented
 - [x] Required tools/versions listed
 - [x] Dev container configured (if applicable)
 
 ### Design Patterns (SOP-005)
+
 - [x] Architectural pattern selected: BaaS-Driven Layered Architecture
   - [x] Serverless/BaaS (Supabase) with Layered Frontend
 - [x] Code-level patterns identified:
@@ -52,21 +58,24 @@
 - [x] Pattern usage documented in `/docs/architecture/design-patterns.md`
 
 ### Code Style Standards (SOP-006)
-- [ ] Linter configured: _____________________
-- [ ] Formatter configured: _____________________
-- [ ] Pre-commit hooks set up
-- [ ] Style guide documented or linked
+
+- [x] Linter configured: ESLint 9 (flat config, `eslint.config.mjs`)
+- [x] Formatter configured: Prettier (`prettier.config.js`)
+- [x] Pre-commit hooks set up
+- [x] Style guide documented or linked
 
 ---
 
 ## Phase 1: Database & Data Layer
 
 ### Database Selection (SOP-100)
-- [ ] Database engine selected: _____________________
+
+- [ ] Database engine selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
 - [ ] Justification documented
 - [ ] Local database setup instructions added
 
 ### Schema Design (SOP-101)
+
 - [ ] ERD diagram created
 - [ ] Table naming follows conventions
 - [ ] Primary/foreign keys defined
@@ -74,6 +83,7 @@
 - [ ] Schema reviewed by team member
 
 ### Seed Data (SOP-102)
+
 - [ ] Seed script created
 - [ ] Test data covers edge cases
 - [ ] Seed data is anonymized (no real PII)
@@ -83,40 +93,47 @@
 ## Phase 2: API & Backend
 
 ### Service Layer (SOP-200)
+
 - [ ] User stories mapped to service methods
 - [ ] Service interfaces defined
 - [ ] Business rules documented
 - [ ] Traceability matrix created
 
 ### Repository Pattern (SOP-201)
+
 - [ ] Repository interfaces defined
 - [ ] Data access encapsulated
 - [ ] Transaction support implemented
 
 ### API Design (SOP-202)
+
 - [ ] API specification created (OpenAPI/Swagger)
 - [ ] Endpoints follow RESTful conventions
 - [ ] Versioning strategy defined
 - [ ] Rate limiting considered
 
 ### Authentication (SOP-203)
-- [ ] Auth method selected: _____________________
+
+- [ ] Auth method selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
 - [ ] Token management implemented
 - [ ] Password hashing configured
 - [ ] Session/token expiry defined
 
 ### Authorization (SOP-204)
-- [ ] Roles defined: _____________________
+
+- [ ] Roles defined: \***\*\*\*\*\***\_\***\*\*\*\*\***
 - [ ] Permission matrix documented
 - [ ] Route protection implemented
 
 ### Error Handling (SOP-205)
+
 - [ ] Standard error response format defined
 - [ ] Error codes documented
 - [ ] Logging configured
 - [ ] User-friendly messages for common errors
 
 ### Validation (SOP-206)
+
 - [ ] Input validation library selected
 - [ ] Request schemas defined
 - [ ] Sanitization for user inputs
@@ -126,17 +143,20 @@
 ## Phase 3: Frontend
 
 ### Component Architecture (SOP-300)
+
 - [ ] Component structure defined
 - [ ] State management approach selected
 - [ ] Shared components identified
 
 ### Styling Standards (SOP-301)
-- [ ] CSS methodology selected: _____________________
+
+- [ ] CSS methodology selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
 - [ ] Design tokens/variables defined
 - [ ] Responsive breakpoints set
 - [ ] Accessibility basics covered (WCAG 2.1 AA)
 
 ### UI/UX Design (SOP-302)
+
 - [ ] User stories analyzed for UI implications
 - [ ] Wireframes created (text-based or Figma)
 - [ ] User flows documented
@@ -144,24 +164,28 @@
 - [ ] Design approved by stakeholder
 
 ### API Integration (SOP-303)
+
 - [ ] API client/wrapper created
 - [ ] Loading states handled
 - [ ] Error states handled
 - [ ] Caching strategy defined (if needed)
 
 ### Form Handling (SOP-304)
+
 - [ ] Form library selected (if any)
 - [ ] Validation feedback patterns
 - [ ] Submission loading states
 
 ### Page Implementation (SOP-305)
+
 - [ ] Page planning documents created
 - [ ] Server/client components structured
 - [ ] Loading skeletons implemented
 - [ ] Error boundaries configured
 - [ ] Navigation wired up
 
-### Progressive Web App (SOP-306) — *Optional*
+### Progressive Web App (SOP-306) — _Optional_
+
 - [ ] PWA required for this project: ☐ Yes / ☐ No
 - [ ] Service worker configured (Serwist/next-pwa)
 - [ ] Web manifest with icons
@@ -193,16 +217,19 @@
 ## Phase 5: Quality Assurance
 
 ### Unit Testing (SOP-500)
+
 - [ ] Test framework configured
-- [ ] Coverage threshold set: _____%
+- [ ] Coverage threshold set: **\_**%
 - [ ] Critical paths identified for testing
 
 ### Integration Testing (SOP-501)
+
 - [ ] Integration test setup complete
 - [ ] API contract tests written
 - [ ] Database integration tests written
 
 ### E2E Testing (SOP-502)
+
 - [ ] Playwright configured
 - [ ] Page objects created
 - [ ] Critical user flows tested
@@ -210,11 +237,13 @@
 - [ ] CI pipeline runs E2E tests
 
 ### Code Review (SOP-503)
+
 - [ ] PR template created
 - [ ] Review checklist defined
-- [ ] Minimum reviewers set: _____
+- [ ] Minimum reviewers set: **\_**
 
 ### Documentation (SOP-504)
+
 - [ ] README complete
 - [ ] API documentation generated
 - [ ] Architecture documented
@@ -225,23 +254,27 @@
 ## Phase 6: Deployment
 
 ### Container Standards (SOP-600)
+
 - [ ] Dockerfile created
 - [ ] Multi-stage build (if applicable)
 - [ ] Image size optimized
 - [ ] Non-root user configured
 
 ### Deployment Strategy (SOP-601)
-- [ ] Deployment method selected: _____________________
+
+- [ ] Deployment method selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
 - [ ] Rollback procedure documented
 - [ ] Feature flags considered (if needed)
 
 ### Monitoring & Alerting (SOP-602)
+
 - [ ] Health check endpoint created
 - [ ] Logging aggregation configured
 - [ ] Key metrics identified
 - [ ] Alert thresholds set
 
 ### Incident Response (SOP-603)
+
 - [ ] Severity levels defined
 - [ ] Escalation contacts listed
 - [ ] Runbook for common issues
@@ -250,11 +283,11 @@
 
 ## Final Sign-Off
 
-| Role | Name | Date | Signature |
-|------|------|------|-----------|
-| Lead Developer | | | |
-| Reviewer | | | |
-| Project Owner | | | |
+| Role           | Name | Date | Signature |
+| -------------- | ---- | ---- | --------- |
+| Lead Developer |      |      |           |
+| Reviewer       |      |      |           |
+| Project Owner  |      |      |           |
 
 ---
 

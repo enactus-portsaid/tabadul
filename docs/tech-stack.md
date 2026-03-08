@@ -8,33 +8,33 @@
 
 ## 1. Technology Overview
 
-| Layer                | Technology               | Version   | Purpose                                      |
-| -------------------- | ------------------------ | --------- | -------------------------------------------- |
-| **Mobile Framework** | React Native + Expo      | SDK 52    | Cross-platform native app (Android + iOS)    |
-| **Web Framework**    | Next.js (App Router)     | 15.x      | Public website + marketplace web interface   |
-| **Language**         | TypeScript               | 5.x       | Type-safe development across entire stack    |
-| **Mobile Routing**   | Expo Router              | 4.x       | File-based navigation for React Native      |
-| **Web Routing**      | Next.js App Router       | 15.x      | File-based routing, SSR, i18n routing        |
-| **Backend (BaaS)**   | Supabase                 | Latest    | PostgreSQL, Auth, Storage, Realtime, Edge Fn |
-| **Database**         | PostgreSQL               | 15+       | Relational database (via Supabase)           |
-| **ORM/Client**       | Supabase JS Client       | 2.x       | Type-safe database queries                   |
-| **Authentication**   | Supabase Auth            | —         | Email/password, JWT, session management      |
-| **File Storage**     | Supabase Storage         | —         | Photos, receipts, inspection reports         |
-| **Real-time**        | Supabase Realtime        | —         | Chat messaging, live notifications           |
-| **Server Functions** | Supabase Edge Functions  | Deno      | Business logic (matching, moderation)        |
-| **State (Server)**   | TanStack Query           | 5.x       | Server state caching & synchronization       |
-| **State (Client)**   | Zustand                  | 5.x       | Lightweight client-side state                |
-| **Forms**            | React Hook Form          | 7.x       | Form validation and handling                 |
-| **Validation**       | Zod                      | 3.x       | Schema validation (forms + API)              |
-| **Styling (Mobile)** | NativeWind (Tailwind)    | 4.x       | Utility-first styling for React Native       |
-| **Styling (Web)**    | Tailwind CSS             | 3.x       | Utility-first styling for Next.js web app    |
-| **i18n**             | i18next + react-i18next  | 24.x      | Arabic/English translation + RTL/LTR         |
-| **Notifications**    | Expo Notifications       | —         | Push notifications (free, unlimited)         |
-| **Image Handling**   | Expo Image Picker        | —         | Camera + gallery for photo uploads           |
-| **Icons**            | Expo Vector Icons        | —         | Icon library                                 |
-| **Build (Mobile)**   | EAS (Expo App Services)  | —         | Cloud builds, OTA updates, app store submit  |
-| **Deploy (Web)**     | Vercel                   | Free      | Next.js hosting, edge functions, CDN         |
-| **Version Control**  | Git + GitHub             | —         | Source control and collaboration             |
+| Layer                | Technology              | Version | Purpose                                      |
+| -------------------- | ----------------------- | ------- | -------------------------------------------- |
+| **Mobile Framework** | React Native + Expo     | SDK 52  | Cross-platform native app (Android + iOS)    |
+| **Web Framework**    | Next.js (App Router)    | 15.x    | Public website + marketplace web interface   |
+| **Language**         | TypeScript              | 5.x     | Type-safe development across entire stack    |
+| **Mobile Routing**   | Expo Router             | 4.x     | File-based navigation for React Native       |
+| **Web Routing**      | Next.js App Router      | 15.x    | File-based routing, SSR, i18n routing        |
+| **Backend (BaaS)**   | Supabase                | Latest  | PostgreSQL, Auth, Storage, Realtime, Edge Fn |
+| **Database**         | PostgreSQL              | 15+     | Relational database (via Supabase)           |
+| **ORM/Client**       | Supabase JS Client      | 2.x     | Type-safe database queries                   |
+| **Authentication**   | Supabase Auth           | —       | Email/password, JWT, session management      |
+| **File Storage**     | Supabase Storage        | —       | Photos, receipts, inspection reports         |
+| **Real-time**        | Supabase Realtime       | —       | Chat messaging, live notifications           |
+| **Server Functions** | Supabase Edge Functions | Deno    | Business logic (matching, moderation)        |
+| **State (Server)**   | TanStack Query          | 5.x     | Server state caching & synchronization       |
+| **State (Client)**   | Zustand                 | 5.x     | Lightweight client-side state                |
+| **Forms**            | React Hook Form         | 7.x     | Form validation and handling                 |
+| **Validation**       | Zod                     | 3.x     | Schema validation (forms + API)              |
+| **Styling (Mobile)** | NativeWind (Tailwind)   | 4.x     | Utility-first styling for React Native       |
+| **Styling (Web)**    | Tailwind CSS            | 3.x     | Utility-first styling for Next.js web app    |
+| **i18n**             | i18next + react-i18next | 24.x    | Arabic/English translation + RTL/LTR         |
+| **Notifications**    | Expo Notifications      | —       | Push notifications (free, unlimited)         |
+| **Image Handling**   | Expo Image Picker       | —       | Camera + gallery for photo uploads           |
+| **Icons**            | Expo Vector Icons       | —       | Icon library                                 |
+| **Build (Mobile)**   | EAS (Expo App Services) | —       | Cloud builds, OTA updates, app store submit  |
+| **Deploy (Web)**     | Vercel                  | Free    | Next.js hosting, edge functions, CDN         |
+| **Version Control**  | Git + GitHub            | —       | Source control and collaboration             |
 
 ---
 
@@ -44,15 +44,15 @@
 
 **Decision Matrix** (score 1–5, weighted):
 
-| Criteria               | Weight | Next.js     | Remix      | Nuxt (Vue) |
-| ---------------------- | ------ | ----------- | ---------- | ---------- |
-| Free Tier / Cost       | 20%    | 5           | 4          | 4          |
-| React Code Sharing     | 25%    | 5           | 5          | 1          |
-| SEO / SSR              | 15%    | 5           | 5          | 5          |
-| RTL/i18n Support       | 15%    | 5           | 3          | 4          |
-| Ecosystem / Community  | 15%    | 5           | 3          | 4          |
-| Learning Curve         | 10%    | 4           | 4          | 3          |
-| **Weighted Total**     |        | **4.85**    | **4.00**   | **3.15**   |
+| Criteria              | Weight | Next.js  | Remix    | Nuxt (Vue) |
+| --------------------- | ------ | -------- | -------- | ---------- |
+| Free Tier / Cost      | 20%    | 5        | 4        | 4          |
+| React Code Sharing    | 25%    | 5        | 5        | 1          |
+| SEO / SSR             | 15%    | 5        | 5        | 5          |
+| RTL/i18n Support      | 15%    | 5        | 3        | 4          |
+| Ecosystem / Community | 15%    | 5        | 3        | 4          |
+| Learning Curve        | 10%    | 4        | 4        | 3          |
+| **Weighted Total**    |        | **4.85** | **4.00** | **3.15**   |
 
 **Chosen: Next.js 15 (App Router)** because:
 
@@ -73,15 +73,15 @@
 
 **Decision Matrix** (score 1–5, weighted):
 
-| Criteria               | Weight | React Native + Expo | Flutter | Kotlin Multiplatform |
-| ---------------------- | ------ | ------------------- | ------- | -------------------- |
-| Free Tier / Cost       | 25%    | 5                   | 5       | 5                    |
-| RTL/i18n Support       | 20%    | 4                   | 5       | 3                    |
-| Ecosystem / Community  | 15%    | 5                   | 4       | 3                    |
-| Learning Curve         | 15%    | 4                   | 3       | 2                    |
-| Feature Coverage (SDK) | 15%    | 5                   | 4       | 3                    |
-| Performance            | 10%    | 4                   | 5       | 4                    |
-| **Weighted Total**     |        | **4.55**            | **4.40**| **3.45**             |
+| Criteria               | Weight | React Native + Expo | Flutter  | Kotlin Multiplatform |
+| ---------------------- | ------ | ------------------- | -------- | -------------------- |
+| Free Tier / Cost       | 25%    | 5                   | 5        | 5                    |
+| RTL/i18n Support       | 20%    | 4                   | 5        | 3                    |
+| Ecosystem / Community  | 15%    | 5                   | 4        | 3                    |
+| Learning Curve         | 15%    | 4                   | 3        | 2                    |
+| Feature Coverage (SDK) | 15%    | 5                   | 4        | 3                    |
+| Performance            | 10%    | 4                   | 5        | 4                    |
+| **Weighted Total**     |        | **4.55**            | **4.40** | **3.45**             |
 
 **Chosen: React Native + Expo** because:
 
@@ -103,15 +103,15 @@
 
 **Decision Matrix:**
 
-| Criteria               | Weight | Supabase | Firebase | Custom Node.js/Express |
-| ---------------------- | ------ | -------- | -------- | ---------------------- |
-| Free Tier / Cost       | 25%    | 5        | 5        | 3                      |
-| Relational Data Fit    | 20%    | 5        | 2        | 5                      |
-| Ecosystem / Community  | 15%    | 4        | 5        | 4                      |
-| Learning Curve         | 15%    | 4        | 3        | 3                      |
-| Feature Coverage       | 15%    | 5        | 4        | 2                      |
-| Performance            | 10%    | 4        | 4        | 4                      |
-| **Weighted Total**     |        | **4.60** | **3.75** | **3.35**               |
+| Criteria              | Weight | Supabase | Firebase | Custom Node.js/Express |
+| --------------------- | ------ | -------- | -------- | ---------------------- |
+| Free Tier / Cost      | 25%    | 5        | 5        | 3                      |
+| Relational Data Fit   | 20%    | 5        | 2        | 5                      |
+| Ecosystem / Community | 15%    | 4        | 5        | 4                      |
+| Learning Curve        | 15%    | 4        | 3        | 3                      |
+| Feature Coverage      | 15%    | 5        | 4        | 2                      |
+| Performance           | 10%    | 4        | 4        | 4                      |
+| **Weighted Total**    |        | **4.60** | **3.75** | **3.35**               |
 
 **Chosen: Supabase** because:
 
@@ -232,7 +232,7 @@ The admin section is a set of protected routes within the same Next.js app (e.g.
 
 | Service                | Purpose                           | Cost Tier    | Free Tier Limits                       |
 | ---------------------- | --------------------------------- | ------------ | -------------------------------------- |
-| **Supabase**           | BaaS (DB, Auth, Storage, RT, FN)  | Free         | 500 MB DB, 1 GB storage, 50K MAU      |
+| **Supabase**           | BaaS (DB, Auth, Storage, RT, FN)  | Free         | 500 MB DB, 1 GB storage, 50K MAU       |
 | **Expo / EAS**         | Mobile build, deploy, OTA updates | Free         | 30 builds/month, limited OTA updates   |
 | **Vercel**             | Next.js web hosting               | Free         | 100 GB bandwidth, serverless functions |
 | **Expo Notifications** | Push notifications (mobile)       | Free         | Unlimited messages                     |
@@ -262,9 +262,9 @@ The chosen stack is a **proven combination** with strong interoperability:
 │  │ Zustand   │ │ Expo Notifs  │ │ Expo Image   │ │
 │  └──────────┘ └──────────────┘ └──────────────┘ │
 └───────────────────────┬─────────────────────────┘
-                        │                          
-                        │ @supabase/supabase-js     
-                        │                          
+                        │
+                        │ @supabase/supabase-js
+                        │
 ┌───────────────────────┼─────────────────────────┐
 │                   WEB APP                        │
 │  Next.js 15 + App Router (TypeScript)            │
@@ -279,8 +279,8 @@ The chosen stack is a **proven combination** with strong interoperability:
 │  │ Zustand   │ │ Admin Panel (role-gated)     │   │
 │  └──────────┘ └──────────────────────────────┘   │
 └───────────────────────┬─────────────────────────┘
-                        │ @supabase/ssr             
-                        ▼                          
+                        │ @supabase/ssr
+                        ▼
 ┌─────────────────────────────────────────────────┐
 │                   SUPABASE                       │
 │  ┌──────────┐ ┌──────────┐ ┌──────────────────┐ │
@@ -309,58 +309,58 @@ The chosen stack is a **proven combination** with strong interoperability:
 
 ## 5. Feature-to-Technology Mapping
 
-| Feature                        | Technologies Used                                                |
-| ------------------------------ | ---------------------------------------------------------------- |
-| User registration & login      | Supabase Auth, SecureStore (mobile), `@supabase/ssr` (web)       |
-| Factory profiles               | Supabase PostgreSQL + RLS (both platforms)                       |
-| Waste listings (CRUD)          | Supabase PostgreSQL + Storage (photos) + TanStack Query          |
-| Auction system                 | Supabase PostgreSQL + Realtime (live bids) + Edge Functions      |
-| Marketplace browsing           | Supabase PostgreSQL (full-text search, filters) + TanStack Query |
-| Marketplace SEO                | Next.js SSR/SSG for listing pages (web only)                     |
-| AI matching (rule-based)       | Supabase Edge Functions (TypeScript) + PostgreSQL queries        |
-| Chat messaging                 | Supabase Realtime + PostgreSQL (both platforms)                  |
-| Chat moderation                | Supabase Edge Functions (regex filters for phone/email/profanity)|
-| InstaPay receipt upload        | Expo Image Picker (mobile) / `<input type="file">` (web)        |
-| Admin panel                    | Next.js web app, role-gated routes via middleware + Supabase RLS |
-| Admin payment verification     | Web admin panel — data tables, receipt image viewer              |
-| Middleman inspection           | Supabase Storage (report photos) + PostgreSQL (report data)      |
-| Transaction lifecycle          | Supabase PostgreSQL (state machine) + Edge Functions (triggers)  |
-| Push notifications             | Expo Notifications (mobile) + browser notifications (web, post-MVP)|
-| Rating & reviews               | Supabase PostgreSQL + TanStack Query                             |
-| 3PL logistics connection       | Supabase Edge Functions (API integration) + PostgreSQL           |
-| Bilingual UI (AR/EN)           | i18next (shared locales) + expo-localization / Next.js i18n      |
-| RTL/LTR layout switching       | NativeWind RTL (mobile) + Tailwind RTL + `dir` attr (web)       |
+| Feature                    | Technologies Used                                                   |
+| -------------------------- | ------------------------------------------------------------------- |
+| User registration & login  | Supabase Auth, SecureStore (mobile), `@supabase/ssr` (web)          |
+| Factory profiles           | Supabase PostgreSQL + RLS (both platforms)                          |
+| Waste listings (CRUD)      | Supabase PostgreSQL + Storage (photos) + TanStack Query             |
+| Auction system             | Supabase PostgreSQL + Realtime (live bids) + Edge Functions         |
+| Marketplace browsing       | Supabase PostgreSQL (full-text search, filters) + TanStack Query    |
+| Marketplace SEO            | Next.js SSR/SSG for listing pages (web only)                        |
+| AI matching (rule-based)   | Supabase Edge Functions (TypeScript) + PostgreSQL queries           |
+| Chat messaging             | Supabase Realtime + PostgreSQL (both platforms)                     |
+| Chat moderation            | Supabase Edge Functions (regex filters for phone/email/profanity)   |
+| InstaPay receipt upload    | Expo Image Picker (mobile) / `<input type="file">` (web)            |
+| Admin panel                | Next.js web app, role-gated routes via middleware + Supabase RLS    |
+| Admin payment verification | Web admin panel — data tables, receipt image viewer                 |
+| Middleman inspection       | Supabase Storage (report photos) + PostgreSQL (report data)         |
+| Transaction lifecycle      | Supabase PostgreSQL (state machine) + Edge Functions (triggers)     |
+| Push notifications         | Expo Notifications (mobile) + browser notifications (web, post-MVP) |
+| Rating & reviews           | Supabase PostgreSQL + TanStack Query                                |
+| 3PL logistics connection   | Supabase Edge Functions (API integration) + PostgreSQL              |
+| Bilingual UI (AR/EN)       | i18next (shared locales) + expo-localization / Next.js i18n         |
+| RTL/LTR layout switching   | NativeWind RTL (mobile) + Tailwind RTL + `dir` attr (web)           |
 
 ---
 
 ## 6. Risks & Mitigations
 
-| Risk                                            | Impact | Likelihood | Mitigation                                                                                      |
-| ----------------------------------------------- | ------ | ---------- | ----------------------------------------------------------------------------------------------- |
-| Supabase free tier limits exceeded               | High   | Low        | MVP targets ~10 factories; limits are 100x beyond need. Monitor usage dashboard.                |
-| Supabase service outage                          | High   | Low        | Supabase has 99.9% uptime SLA. For MVP, acceptable risk. Data is in PostgreSQL (exportable).    |
+| Risk                                             | Impact | Likelihood | Mitigation                                                                                                 |
+| ------------------------------------------------ | ------ | ---------- | ---------------------------------------------------------------------------------------------------------- |
+| Supabase free tier limits exceeded               | High   | Low        | MVP targets ~10 factories; limits are 100x beyond need. Monitor usage dashboard.                           |
+| Supabase service outage                          | High   | Low        | Supabase has 99.9% uptime SLA. For MVP, acceptable risk. Data is in PostgreSQL (exportable).               |
 | Expo managed workflow limits native module needs | Medium | Low        | Expo SDK 52 covers all required native modules. Development builds available if custom native code needed. |
-| NativeWind RTL rendering issues                  | Medium | Medium     | Test RTL layout early in Phase 3. Fallback to StyleSheet API for specific components if needed.  |
-| React Native performance on low-end devices      | Medium | Low        | Hermes engine optimized for low-end. Paginate lists, lazy-load images. Target 3G performance.    |
-| Supabase Edge Functions cold starts              | Low    | Medium     | Edge Functions run on Deno Deploy (fast cold starts). Acceptable for MVP traffic levels.         |
-| Apple Developer Program cost ($99/year)          | Low    | Certain    | Required for iOS. Budget for this. Use TestFlight during development.                            |
-| Vendor lock-in (Supabase)                        | Medium | —          | Supabase is open-source. Database is standard PostgreSQL. Auth and Storage APIs are replaceable. |
-| Maintaining two apps (mobile + web)              | Medium | Certain    | Shared package for types, schemas, hooks, translations. Monorepo structure keeps code co-located. |
-| Vercel free tier limits                           | Low    | Low        | 100 GB bandwidth is ample for MVP. Serverless function limits (~100K invocations) sufficient.    |
+| NativeWind RTL rendering issues                  | Medium | Medium     | Test RTL layout early in Phase 3. Fallback to StyleSheet API for specific components if needed.            |
+| React Native performance on low-end devices      | Medium | Low        | Hermes engine optimized for low-end. Paginate lists, lazy-load images. Target 3G performance.              |
+| Supabase Edge Functions cold starts              | Low    | Medium     | Edge Functions run on Deno Deploy (fast cold starts). Acceptable for MVP traffic levels.                   |
+| Apple Developer Program cost ($99/year)          | Low    | Certain    | Required for iOS. Budget for this. Use TestFlight during development.                                      |
+| Vendor lock-in (Supabase)                        | Medium | —          | Supabase is open-source. Database is standard PostgreSQL. Auth and Storage APIs are replaceable.           |
+| Maintaining two apps (mobile + web)              | Medium | Certain    | Shared package for types, schemas, hooks, translations. Monorepo structure keeps code co-located.          |
+| Vercel free tier limits                          | Low    | Low        | 100 GB bandwidth is ample for MVP. Serverless function limits (~100K invocations) sufficient.              |
 
 ---
 
 ## 7. Future Considerations (Post-MVP)
 
-| Enhancement                    | Technology Options                                          | When                                    |
-| ------------------------------ | ----------------------------------------------------------- | --------------------------------------- |
-| LLM-based AI matching          | OpenAI API, Gemini API, or local models via Edge Functions  | After validating rule-based matching    |
-| Automated receipt OCR          | Google Cloud Vision (free tier: 1K/month) or Tesseract      | After manual flow is validated          |
-| Dedicated admin dashboard      | Separate admin app if complexity grows                       | When admin panel needs exceed current scope |
-| Advanced analytics             | Supabase PostgreSQL views + charting library                 | After achieving transaction volume      |
-| Geospatial queries             | PostGIS extension on Supabase PostgreSQL                    | For shipping cost estimates             |
-| Multi-region expansion         | Supabase project regions + CDN                              | After Suez Canal Zone traction          |
-| Payment gateway integration    | Paymob (Egyptian gateway) or Stripe                         | When scaling beyond manual verification |
+| Enhancement                 | Technology Options                                         | When                                        |
+| --------------------------- | ---------------------------------------------------------- | ------------------------------------------- |
+| LLM-based AI matching       | OpenAI API, Gemini API, or local models via Edge Functions | After validating rule-based matching        |
+| Automated receipt OCR       | Google Cloud Vision (free tier: 1K/month) or Tesseract     | After manual flow is validated              |
+| Dedicated admin dashboard   | Separate admin app if complexity grows                     | When admin panel needs exceed current scope |
+| Advanced analytics          | Supabase PostgreSQL views + charting library               | After achieving transaction volume          |
+| Geospatial queries          | PostGIS extension on Supabase PostgreSQL                   | For shipping cost estimates                 |
+| Multi-region expansion      | Supabase project regions + CDN                             | After Suez Canal Zone traction              |
+| Payment gateway integration | Paymob (Egyptian gateway) or Stripe                        | When scaling beyond manual verification     |
 
 ---
 
@@ -475,8 +475,8 @@ Edge Functions use Deno runtime with imports from `jsr:` and `npm:` specifiers. 
 
 ```typescript
 // Example Edge Function imports
-import { createClient } from "jsr:@supabase/supabase-js@2";
-import { z } from "npm:zod@3";
+import { createClient } from 'jsr:@supabase/supabase-js@2';
+import { z } from 'npm:zod@3';
 ```
 
 ---
@@ -496,6 +496,6 @@ import { z } from "npm:zod@3";
 
 ## 10. Approval
 
-| Stakeholder   | Date       | Status   | Signature  |
-| ------------- | ---------- | -------- | ---------- |
-| Product Owner | 2026-03-05 | Approved | Tech Team  |
+| Stakeholder   | Date       | Status   | Signature |
+| ------------- | ---------- | -------- | --------- |
+| Product Owner | 2026-03-05 | Approved | Tech Team |

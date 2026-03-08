@@ -1,17 +1,17 @@
 ---
-sop: "SOP-003"
-title: "Project Structure"
+sop: 'SOP-003'
+title: 'Project Structure'
 phase: 0
 iterative: false
 prerequisites:
-  - sop: "SOP-001"
-    output: "/docs/tech-stack.md"
-  - sop: "SOP-002"
-    output: "README.md"
+  - sop: 'SOP-001'
+    output: '/docs/tech-stack.md'
+  - sop: 'SOP-002'
+    output: 'README.md'
 outputs:
-  - "Folder structure (created on disk)"
-  - "/docs/architecture/project-structure.md"
-related: ["SOP-001", "SOP-002", "SOP-004", "SOP-005"]
+  - 'Folder structure (created on disk)'
+  - '/docs/architecture/project-structure.md'
+related: ['SOP-001', 'SOP-002', 'SOP-004', 'SOP-005']
 ---
 
 # SOP-003: Project Structure

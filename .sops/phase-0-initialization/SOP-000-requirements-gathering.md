@@ -1,12 +1,12 @@
 ---
-sop: "SOP-000"
-title: "Requirements Gathering"
+sop: 'SOP-000'
+title: 'Requirements Gathering'
 phase: 0
 iterative: false
 prerequisites: []
 outputs:
-  - "/docs/requirements.md"
-related: ["SOP-001", "SOP-101", "SOP-202"]
+  - '/docs/requirements.md'
+related: ['SOP-001', 'SOP-101', 'SOP-202']
 ---
 
 # SOP-000: Requirements Gathering

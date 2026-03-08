@@ -1,14 +1,14 @@
 ---
-sop: "SOP-400"
-title: "AI Feasibility Assessment"
+sop: 'SOP-400'
+title: 'AI Feasibility Assessment'
 phase: 4
 iterative: false
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
 outputs:
-  - "/docs/ai/feasibility-assessment.md"
-related: ["SOP-000", "SOP-401", "SOP-403"]
+  - '/docs/ai/feasibility-assessment.md'
+related: ['SOP-000', 'SOP-401', 'SOP-403']
 ---
 
 # SOP-400: AI Feasibility Assessment

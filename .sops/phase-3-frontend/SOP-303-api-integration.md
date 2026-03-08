@@ -1,19 +1,19 @@
 ---
-sop: "SOP-303"
-title: "API Integration"
+sop: 'SOP-303'
+title: 'API Integration'
 phase: 3
 iterative: true
 prerequisites:
-  - sop: "SOP-202"
-    output: "/docs/api/endpoints.md"
-  - sop: "SOP-300"
-    output: "src/components/"
+  - sop: 'SOP-202'
+    output: '/docs/api/endpoints.md'
+  - sop: 'SOP-300'
+    output: 'src/components/'
 outputs:
-  - "src/lib/api/client.ts"
-  - "src/lib/query-client.ts"
-  - "src/components/providers/QueryProvider.tsx"
-  - "src/hooks/api/*.ts"
-related: ["SOP-202", "SOP-300", "SOP-205"]
+  - 'src/lib/api/client.ts'
+  - 'src/lib/query-client.ts'
+  - 'src/components/providers/QueryProvider.tsx'
+  - 'src/hooks/api/*.ts'
+related: ['SOP-202', 'SOP-300', 'SOP-205']
 ---
 
 # SOP-303: API Integration

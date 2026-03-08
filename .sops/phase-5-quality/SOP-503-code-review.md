@@ -1,17 +1,17 @@
 ---
-sop: "SOP-503"
-title: "Code Review"
+sop: 'SOP-503'
+title: 'Code Review'
 phase: 5
 iterative: false
 prerequisites:
-  - sop: "SOP-002"
-  - sop: "SOP-006"
+  - sop: 'SOP-002'
+  - sop: 'SOP-006'
 outputs:
-  - ".github/PULL_REQUEST_TEMPLATE.md"
-  - ".github/CODEOWNERS"
-  - ".github/workflows/pr-checks.yml"
-  - "CONTRIBUTING.md"
-related: ["SOP-002", "SOP-006", "SOP-601"]
+  - '.github/PULL_REQUEST_TEMPLATE.md'
+  - '.github/CODEOWNERS'
+  - '.github/workflows/pr-checks.yml'
+  - 'CONTRIBUTING.md'
+related: ['SOP-002', 'SOP-006', 'SOP-601']
 ---
 
 # SOP-503: Code Review

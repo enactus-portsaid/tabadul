@@ -1,19 +1,19 @@
 ---
-sop: "SOP-200"
-title: "Service Layer"
+sop: 'SOP-200'
+title: 'Service Layer'
 phase: 2
 iterative: true
 prerequisites:
-  - sop: "SOP-101"
-    output: "prisma/schema.prisma"
-  - sop: "SOP-005"
-    output: "/docs/architecture/design-patterns.md"
+  - sop: 'SOP-101'
+    output: 'prisma/schema.prisma'
+  - sop: 'SOP-005'
+    output: '/docs/architecture/design-patterns.md'
 outputs:
-  - "src/services/*.service.ts"
-  - "src/services/interfaces/*.interface.ts"
-  - "src/lib/service-factory.ts"
-  - "/docs/architecture/business-rules.md"
-related: ["SOP-101", "SOP-201", "SOP-202"]
+  - 'src/services/*.service.ts'
+  - 'src/services/interfaces/*.interface.ts'
+  - 'src/lib/service-factory.ts'
+  - '/docs/architecture/business-rules.md'
+related: ['SOP-101', 'SOP-201', 'SOP-202']
 ---
 
 # SOP-200: Service Layer

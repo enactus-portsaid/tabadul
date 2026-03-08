@@ -1,18 +1,18 @@
 ---
-sop: "SOP-203"
-title: "Authentication"
+sop: 'SOP-203'
+title: 'Authentication'
 phase: 2
 iterative: false
 prerequisites:
-  - sop: "SOP-001"
-    output: "/docs/tech-stack.md"
-  - sop: "SOP-202"
-    output: "/docs/api/openapi.yaml"
+  - sop: 'SOP-001'
+    output: '/docs/tech-stack.md'
+  - sop: 'SOP-202'
+    output: '/docs/api/openapi.yaml'
 outputs:
-  - "src/lib/auth.ts"
-  - "src/middleware/auth.ts"
-  - "/docs/architecture/auth-flow.md"
-related: ["SOP-202", "SOP-204", "SOP-203"]
+  - 'src/lib/auth.ts'
+  - 'src/middleware/auth.ts'
+  - '/docs/architecture/auth-flow.md'
+related: ['SOP-202', 'SOP-204', 'SOP-203']
 ---
 
 # SOP-203: Authentication

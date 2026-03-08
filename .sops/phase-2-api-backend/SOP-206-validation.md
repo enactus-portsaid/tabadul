@@ -1,17 +1,17 @@
 ---
-sop: "SOP-206"
-title: "Validation"
+sop: 'SOP-206'
+title: 'Validation'
 phase: 2
 iterative: true
 prerequisites:
-  - sop: "SOP-202"
-    output: "/docs/api/openapi.yaml"
-  - sop: "SOP-205"
-    output: "src/lib/errors.ts"
+  - sop: 'SOP-202'
+    output: '/docs/api/openapi.yaml'
+  - sop: 'SOP-205'
+    output: 'src/lib/errors.ts'
 outputs:
-  - "src/validators/*.schema.ts"
-  - "src/middleware/validate.ts"
-related: ["SOP-202", "SOP-205", "SOP-200"]
+  - 'src/validators/*.schema.ts'
+  - 'src/middleware/validate.ts'
+related: ['SOP-202', 'SOP-205', 'SOP-200']
 ---
 
 # SOP-206: Validation

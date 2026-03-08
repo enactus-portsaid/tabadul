@@ -1,20 +1,20 @@
 ---
-sop: "SOP-006"
-title: "Code Style Standards"
+sop: 'SOP-006'
+title: 'Code Style Standards'
 phase: 0
 iterative: false
 prerequisites:
-  - sop: "SOP-001"
-    output: "/docs/tech-stack.md"
-  - sop: "SOP-003"
-    output: "/docs/architecture/project-structure.md"
+  - sop: 'SOP-001'
+    output: '/docs/tech-stack.md'
+  - sop: 'SOP-003'
+    output: '/docs/architecture/project-structure.md'
 outputs:
-  - "eslint.config.js"
-  - "prettier.config.js"
-  - ".vscode/settings.json"
-  - ".husky/pre-commit"
-  - "lint-staged.config.js"
-related: ["SOP-003", "SOP-005", "SOP-503"]
+  - 'eslint.config.js'
+  - 'prettier.config.js'
+  - '.vscode/settings.json'
+  - '.husky/pre-commit'
+  - 'lint-staged.config.js'
+related: ['SOP-003', 'SOP-005', 'SOP-503']
 ---
 
 # SOP-006: Code Style Standards

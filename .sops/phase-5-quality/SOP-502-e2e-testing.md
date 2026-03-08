@@ -1,17 +1,17 @@
 ---
-sop: "SOP-502"
-title: "End-to-End Testing"
+sop: 'SOP-502'
+title: 'End-to-End Testing'
 phase: 5
 iterative: false
 prerequisites:
-  - sop: "SOP-500"
-  - sop: "SOP-501"
-  - sop: "SOP-305"
+  - sop: 'SOP-500'
+  - sop: 'SOP-501'
+  - sop: 'SOP-305'
 outputs:
-  - "playwright.config.ts"
-  - "e2e/"
-  - ".github/workflows/e2e.yml"
-related: ["SOP-500", "SOP-501", "SOP-305"]
+  - 'playwright.config.ts'
+  - 'e2e/'
+  - '.github/workflows/e2e.yml'
+related: ['SOP-500', 'SOP-501', 'SOP-305']
 ---
 
 # SOP-502: End-to-End Testing

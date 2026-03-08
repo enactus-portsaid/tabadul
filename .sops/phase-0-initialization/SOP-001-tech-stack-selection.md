@@ -1,14 +1,14 @@
 ---
-sop: "SOP-001"
-title: "Tech Stack Selection"
+sop: 'SOP-001'
+title: 'Tech Stack Selection'
 phase: 0
 iterative: false
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
 outputs:
-  - "/docs/tech-stack.md"
-related: ["SOP-000", "SOP-002", "SOP-003", "SOP-006"]
+  - '/docs/tech-stack.md'
+related: ['SOP-000', 'SOP-002', 'SOP-003', 'SOP-006']
 ---
 
 # SOP-001: Tech Stack Selection

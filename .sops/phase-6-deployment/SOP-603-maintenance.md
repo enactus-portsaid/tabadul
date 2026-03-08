@@ -1,17 +1,17 @@
 ---
-sop: "SOP-603"
-title: "Maintenance & Incident Response"
+sop: 'SOP-603'
+title: 'Maintenance & Incident Response'
 phase: 6
 iterative: false
 prerequisites:
-  - sop: "SOP-602"
-  - sop: "SOP-601"
+  - sop: 'SOP-602'
+  - sop: 'SOP-601'
 outputs:
-  - ".github/dependabot.yml"
-  - "docs/incidents/template.md"
-  - "docs/runbooks/"
-  - "docs/maintenance/"
-related: ["SOP-601", "SOP-602", "SOP-600"]
+  - '.github/dependabot.yml'
+  - 'docs/incidents/template.md'
+  - 'docs/runbooks/'
+  - 'docs/maintenance/'
+related: ['SOP-601', 'SOP-602', 'SOP-600']
 ---
 
 # SOP-603: Maintenance & Incident Response
@@ -54,14 +54,14 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: "09:00"
+      time: '09:00'
     open-pull-requests-limit: 10
     groups:
       production-dependencies:
-        patterns: ["*"]
-        exclude-patterns: ["@types/*", "eslint*", "prettier*"]
+        patterns: ['*']
+        exclude-patterns: ['@types/*', 'eslint*', 'prettier*']
       development-dependencies:
-        patterns: ["@types/*", "eslint*", "prettier*"]
+        patterns: ['@types/*', 'eslint*', 'prettier*']
     labels: [dependencies, automated]
 ```
 

@@ -1,17 +1,17 @@
 ---
-sop: "SOP-401"
-title: "LLM Integration"
+sop: 'SOP-401'
+title: 'LLM Integration'
 phase: 4
 iterative: true
 prerequisites:
-  - sop: "SOP-400"
-    output: "/docs/ai/feasibility-assessment.md"
+  - sop: 'SOP-400'
+    output: '/docs/ai/feasibility-assessment.md'
 outputs:
-  - "src/lib/ai/client.ts"
-  - "src/lib/ai/prompts.ts"
-  - "src/lib/ai/errors.ts"
-  - "src/app/api/chat/route.ts"
-related: ["SOP-400", "SOP-402", "SOP-403"]
+  - 'src/lib/ai/client.ts'
+  - 'src/lib/ai/prompts.ts'
+  - 'src/lib/ai/errors.ts'
+  - 'src/app/api/chat/route.ts'
+related: ['SOP-400', 'SOP-402', 'SOP-403']
 ---
 
 # SOP-401: LLM Integration

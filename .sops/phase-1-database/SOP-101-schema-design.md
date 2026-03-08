@@ -1,17 +1,17 @@
 ---
-sop: "SOP-101"
-title: "Schema Design"
+sop: 'SOP-101'
+title: 'Schema Design'
 phase: 1
 iterative: false
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
-  - sop: "SOP-100"
-    output: "/docs/database/database-decision.md"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
+  - sop: 'SOP-100'
+    output: '/docs/database/database-decision.md'
 outputs:
-  - "prisma/schema.prisma"
-  - "/docs/database/schema.md"
-related: ["SOP-100", "SOP-102", "SOP-202"]
+  - 'prisma/schema.prisma'
+  - '/docs/database/schema.md'
+related: ['SOP-100', 'SOP-102', 'SOP-202']
 ---
 
 # SOP-101: Schema Design

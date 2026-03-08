@@ -15,20 +15,20 @@
 
 ## 🛠 Tech Stack
 
-| Layer              | Technology                    |
-| ------------------ | ----------------------------- |
-| Mobile Framework   | React Native + Expo (SDK 52)  |
-| Web Framework      | Next.js 15 (App Router)       |
-| Language           | TypeScript 5.x                |
-| Backend (BaaS)     | Supabase                      |
-| Database           | PostgreSQL (via Supabase)     |
-| Auth               | Supabase Auth (email/password)|
-| Styling (Mobile)   | NativeWind (Tailwind CSS)     |
-| Styling (Web)      | Tailwind CSS                  |
-| State Management   | TanStack Query + Zustand      |
-| Forms              | React Hook Form + Zod         |
-| i18n               | i18next + react-i18next       |
-| Notifications      | Expo Notifications            |
+| Layer            | Technology                     |
+| ---------------- | ------------------------------ |
+| Mobile Framework | React Native + Expo (SDK 52)   |
+| Web Framework    | Next.js 15 (App Router)        |
+| Language         | TypeScript 5.x                 |
+| Backend (BaaS)   | Supabase                       |
+| Database         | PostgreSQL (via Supabase)      |
+| Auth             | Supabase Auth (email/password) |
+| Styling (Mobile) | NativeWind (Tailwind CSS)      |
+| Styling (Web)    | Tailwind CSS                   |
+| State Management | TanStack Query + Zustand       |
+| Forms            | React Hook Form + Zod          |
+| i18n             | i18next + react-i18next        |
+| Notifications    | Expo Notifications             |
 
 See [`docs/tech-stack.md`](docs/tech-stack.md) for full decision rationale and architecture diagrams.
 
@@ -68,23 +68,23 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 🔐 Environment Variables
 
-| Variable                          | Description                          | Required |
-| --------------------------------- | ------------------------------------ | -------- |
-| `EXPO_PUBLIC_SUPABASE_URL`        | Supabase project URL                 | ✅       |
-| `EXPO_PUBLIC_SUPABASE_ANON_KEY`   | Supabase anonymous key               | ✅       |
-| `NEXT_PUBLIC_SUPABASE_URL`        | Supabase project URL (web)           | ✅       |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY`   | Supabase anonymous key (web)         | ✅       |
+| Variable                        | Description                  | Required |
+| ------------------------------- | ---------------------------- | -------- |
+| `EXPO_PUBLIC_SUPABASE_URL`      | Supabase project URL         | ✅       |
+| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key       | ✅       |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL (web)   | ✅       |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key (web) | ✅       |
 
 See `.env.example` for all variables.
 
 ## 📦 Scripts
 
-| Script          | Description                    |
-| --------------- | ------------------------------ |
-| `pnpm dev`      | Start dev server (web)         |
-| `pnpm build`    | Production build               |
-| `pnpm lint`     | Lint code                      |
-| `pnpm test`     | Run tests                      |
+| Script       | Description            |
+| ------------ | ---------------------- |
+| `pnpm dev`   | Start dev server (web) |
+| `pnpm build` | Production build       |
+| `pnpm lint`  | Lint code              |
+| `pnpm test`  | Run tests              |
 
 ## 📁 Project Structure
 

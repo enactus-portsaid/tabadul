@@ -1,16 +1,16 @@
 ---
-sop: "SOP-100"
-title: "Database Selection"
+sop: 'SOP-100'
+title: 'Database Selection'
 phase: 1
 iterative: false
 prerequisites:
-  - sop: "SOP-000"
-    output: "/docs/requirements.md"
-  - sop: "SOP-001"
-    output: "/docs/tech-stack.md"
+  - sop: 'SOP-000'
+    output: '/docs/requirements.md'
+  - sop: 'SOP-001'
+    output: '/docs/tech-stack.md'
 outputs:
-  - "/docs/database/database-decision.md"
-related: ["SOP-000", "SOP-001", "SOP-101"]
+  - '/docs/database/database-decision.md'
+related: ['SOP-000', 'SOP-001', 'SOP-101']
 ---
 
 # SOP-100: Database Selection

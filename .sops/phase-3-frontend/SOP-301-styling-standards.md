@@ -1,19 +1,19 @@
 ---
-sop: "SOP-301"
-title: "Styling Standards"
+sop: 'SOP-301'
+title: 'Styling Standards'
 phase: 3
 iterative: false
 prerequisites:
-  - sop: "SOP-003"
-    output: "/docs/architecture/project-structure.md"
-  - sop: "SOP-300"
-    output: "src/components/"
+  - sop: 'SOP-003'
+    output: '/docs/architecture/project-structure.md'
+  - sop: 'SOP-300'
+    output: 'src/components/'
 outputs:
-  - "tailwind.config.ts"
-  - "src/app/globals.css"
-  - "src/lib/utils.ts"
-  - "src/components/ThemeProvider.tsx"
-related: ["SOP-300", "SOP-006", "SOP-304"]
+  - 'tailwind.config.ts'
+  - 'src/app/globals.css'
+  - 'src/lib/utils.ts'
+  - 'src/components/ThemeProvider.tsx'
+related: ['SOP-300', 'SOP-006', 'SOP-304']
 ---
 
 # SOP-301: Styling Standards
@@ -57,8 +57,8 @@ Define `:root` (light) and `.dark` HSL color values for every Tailwind CSS varia
 ### 4. Create Utility Functions (`src/lib/utils.ts`)
 
 ```typescript
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

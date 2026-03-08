@@ -1,24 +1,24 @@
 ---
-sop: "SOP-305"
-title: "Page Implementation"
+sop: 'SOP-305'
+title: 'Page Implementation'
 phase: 3
 iterative: true
 prerequisites:
-  - sop: "SOP-302"
-    output: "/docs/frontend/visual-design.md"
-  - sop: "SOP-300"
-    output: "src/components/"
-  - sop: "SOP-303"
-    output: "src/hooks/api/"
-  - sop: "SOP-304"
-    output: "src/components/ui/Form/"
+  - sop: 'SOP-302'
+    output: '/docs/frontend/visual-design.md'
+  - sop: 'SOP-300'
+    output: 'src/components/'
+  - sop: 'SOP-303'
+    output: 'src/hooks/api/'
+  - sop: 'SOP-304'
+    output: 'src/components/ui/Form/'
 outputs:
-  - "app/[route]/page.tsx"
-  - "app/[route]/[page]-content.tsx"
-  - "app/[route]/loading.tsx"
-  - "app/[route]/error.tsx"
-  - "app/[route]/not-found.tsx"
-related: ["SOP-302", "SOP-300", "SOP-303", "SOP-304"]
+  - 'app/[route]/page.tsx'
+  - 'app/[route]/[page]-content.tsx'
+  - 'app/[route]/loading.tsx'
+  - 'app/[route]/error.tsx'
+  - 'app/[route]/not-found.tsx'
+related: ['SOP-302', 'SOP-300', 'SOP-303', 'SOP-304']
 ---
 
 # SOP-305: Page Implementation

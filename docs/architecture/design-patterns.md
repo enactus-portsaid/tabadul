@@ -10,12 +10,12 @@
 
 ### Selection
 
-| Pattern              | Best For                    | Complexity | Team Size | Fit  |
-| -------------------- | --------------------------- | ---------- | --------- | ---- |
-| **Monolith**         | MVPs, simple domains        | Low        | 1–5       | ⚠️   |
-| **Modular Monolith** | Growing apps, clear domains | Medium     | 3–10      | ⚠️   |
-| **Microservices**    | Large scale, multiple teams | High       | 10+       | ❌   |
-| **Serverless/BaaS**  | Event-driven, variable load | Medium     | Any       | ✅   |
+| Pattern              | Best For                    | Complexity | Team Size | Fit |
+| -------------------- | --------------------------- | ---------- | --------- | --- |
+| **Monolith**         | MVPs, simple domains        | Low        | 1–5       | ⚠️  |
+| **Modular Monolith** | Growing apps, clear domains | Medium     | 3–10      | ⚠️  |
+| **Microservices**    | Large scale, multiple teams | High       | 10+       | ❌  |
+| **Serverless/BaaS**  | Event-driven, variable load | Medium     | Any       | ✅  |
 
 **Chosen: Serverless/BaaS (Supabase) with Layered Frontend Architecture**
 
@@ -77,12 +77,12 @@ The application code consists of **two frontend clients** (mobile + web) and a *
 
 ### Selection
 
-| Pattern                | Fit  | Reason                                                         |
-| ---------------------- | ---- | -------------------------------------------------------------- |
-| MVC                    | ❌   | Server-rendered paradigm; does not map to React + BaaS         |
-| Clean Architecture     | ⚠️   | Over-engineered for a BaaS-backed MVP with no custom API layer |
-| **Feature-Based**      | ⚠️   | Good for large apps; premature for MVP with shared UI patterns |
-| **Layer-Based**        | ✅   | Natural fit for React apps consuming a BaaS backend            |
+| Pattern            | Fit | Reason                                                         |
+| ------------------ | --- | -------------------------------------------------------------- |
+| MVC                | ❌  | Server-rendered paradigm; does not map to React + BaaS         |
+| Clean Architecture | ⚠️  | Over-engineered for a BaaS-backed MVP with no custom API layer |
+| **Feature-Based**  | ⚠️  | Good for large apps; premature for MVP with shared UI patterns |
+| **Layer-Based**    | ✅  | Natural fit for React apps consuming a BaaS backend            |
 
 **Chosen: Layer-Based** (already established by SOP-003)
 
@@ -90,16 +90,16 @@ The application code consists of **two frontend clients** (mobile + web) and a *
 
 Each app (`apps/mobile/`, `apps/web/`) has the same internal layering:
 
-| Layer              | Directory      | Responsibility                                   | Depends On                          |
-| ------------------ | -------------- | ------------------------------------------------ | ----------------------------------- |
-| **Presentation**   | `components/`  | UI rendering — how things look                   | hooks, lib, types, config, shared   |
-| **Routing**        | `app/`         | Page/screen definitions, layout composition      | All layers                          |
-| **Application**    | `hooks/`       | Stateful logic — how things behave               | services, stores, lib, types        |
-| **State**          | `stores/`      | Client-only state (Zustand)                      | types, shared                       |
-| **Service**        | `services/`    | Business logic + data access (Supabase queries)  | lib, types, shared                  |
-| **Infrastructure** | `lib/`         | Utility functions, Supabase client initialization | types, shared                       |
-| **Configuration**  | `config/`      | Feature flags, app constants                     | shared only                         |
-| **Type**           | `types/`       | App-specific TypeScript types                    | shared                              |
+| Layer              | Directory     | Responsibility                                    | Depends On                        |
+| ------------------ | ------------- | ------------------------------------------------- | --------------------------------- |
+| **Presentation**   | `components/` | UI rendering — how things look                    | hooks, lib, types, config, shared |
+| **Routing**        | `app/`        | Page/screen definitions, layout composition       | All layers                        |
+| **Application**    | `hooks/`      | Stateful logic — how things behave                | services, stores, lib, types      |
+| **State**          | `stores/`     | Client-only state (Zustand)                       | types, shared                     |
+| **Service**        | `services/`   | Business logic + data access (Supabase queries)   | lib, types, shared                |
+| **Infrastructure** | `lib/`        | Utility functions, Supabase client initialization | types, shared                     |
+| **Configuration**  | `config/`     | Feature flags, app constants                      | shared only                       |
+| **Type**           | `types/`      | App-specific TypeScript types                     | shared                            |
 
 ### Data Flow
 
@@ -141,18 +141,18 @@ Feature-based organization (e.g., `src/features/listings/`, `src/features/chat/`
 
 ### 3.1 Pattern Decision Table
 
-| Area               | Pattern                           | Where Used                                      |
-| ------------------ | --------------------------------- | ----------------------------------------------- |
-| Data access        | Service Functions (function-based)| `services/` in both apps                        |
-| Business logic     | Domain Service Functions          | `services/`, Edge Functions, `shared/utils/`    |
-| Object creation    | Factory Functions                 | Query key factories, form default factories     |
-| Algorithm variation| Strategy (via config objects)     | Matching rules, moderation filters              |
-| React state        | TanStack Query + Zustand          | `hooks/` (server state) + `stores/` (UI state)  |
-| React components   | Custom Hooks + Composition        | `hooks/` (logic) + `components/` (rendering)   |
-| Validation         | Schema-First (Zod)                | `shared/schemas/`, form resolvers               |
-| Error handling     | Result Pattern (`{ data, error }`)| All service functions                           |
-| Authentication     | Auth Hook + Route Guards          | `useAuth()` hook, middleware, layouts           |
-| Real-time          | Subscription Hooks                | Chat, live bids, notifications                  |
+| Area                | Pattern                            | Where Used                                     |
+| ------------------- | ---------------------------------- | ---------------------------------------------- |
+| Data access         | Service Functions (function-based) | `services/` in both apps                       |
+| Business logic      | Domain Service Functions           | `services/`, Edge Functions, `shared/utils/`   |
+| Object creation     | Factory Functions                  | Query key factories, form default factories    |
+| Algorithm variation | Strategy (via config objects)      | Matching rules, moderation filters             |
+| React state         | TanStack Query + Zustand           | `hooks/` (server state) + `stores/` (UI state) |
+| React components    | Custom Hooks + Composition         | `hooks/` (logic) + `components/` (rendering)   |
+| Validation          | Schema-First (Zod)                 | `shared/schemas/`, form resolvers              |
+| Error handling      | Result Pattern (`{ data, error }`) | All service functions                          |
+| Authentication      | Auth Hook + Route Guards           | `useAuth()` hook, middleware, layouts          |
+| Real-time           | Subscription Hooks                 | Chat, live bids, notifications                 |
 
 ---
 
@@ -164,31 +164,31 @@ Supabase JS client is the data access layer. No additional Repository pattern is
 
 ```typescript
 // services/listing.ts
-import { supabase } from "@/lib/supabase";
-import type { Listing } from "@tabadul/shared/types";
+import { supabase } from '@/lib/supabase';
+import type { Listing } from '@tabadul/shared/types';
 
 export async function getListings(filters: ListingFilters) {
   let query = supabase
-    .from("listings")
-    .select("*, seller:profiles(name, rating)")
-    .eq("status", "active");
+    .from('listings')
+    .select('*, seller:profiles(name, rating)')
+    .eq('status', 'active');
 
   if (filters.wasteType) {
-    query = query.eq("waste_type", filters.wasteType);
+    query = query.eq('waste_type', filters.wasteType);
   }
   if (filters.maxPrice) {
-    query = query.lte("price", filters.maxPrice);
+    query = query.lte('price', filters.maxPrice);
   }
 
-  return query.order("created_at", { ascending: false });
+  return query.order('created_at', { ascending: false });
 }
 
 export async function createListing(data: CreateListingInput) {
-  return supabase.from("listings").insert(data).select().single();
+  return supabase.from('listings').insert(data).select().single();
 }
 
 export async function updateListing(id: string, data: UpdateListingInput) {
-  return supabase.from("listings").update(data).eq("id", id).select().single();
+  return supabase.from('listings').update(data).eq('id', id).select().single();
 }
 ```
 
@@ -201,16 +201,16 @@ export async function updateListing(id: string, data: UpdateListingInput) {
 
 ### Domain Service Files
 
-| Service File       | Responsibility                                      | Key Functions                                         |
-| ------------------ | --------------------------------------------------- | ----------------------------------------------------- |
-| `auth.ts`          | Authentication and profile management               | `signIn`, `signUp`, `signOut`, `getProfile`, `updateProfile` |
-| `listing.ts`       | Waste listing CRUD and search                       | `getListings`, `getListing`, `createListing`, `updateListing` |
-| `transaction.ts`   | Transaction lifecycle management                    | `createTransaction`, `uploadReceipt`, `updateStatus`  |
-| `chat.ts`          | Chat messaging                                      | `getMessages`, `sendMessage`, `getThreads`            |
-| `matching.ts`      | AI matching queries                                  | `getRecommendations`, `getMatchScore`                 |
-| `inspection.ts`    | Inspector verification flow                          | `submitReport`, `getReport`                           |
-| `notification.ts`  | Notification management                              | `getNotifications`, `markRead`, `updatePreferences`   |
-| `admin.ts`         | Admin operations (web only)                          | `getUsers`, `moderateListing`, `verifyReceipt`        |
+| Service File      | Responsibility                        | Key Functions                                                 |
+| ----------------- | ------------------------------------- | ------------------------------------------------------------- |
+| `auth.ts`         | Authentication and profile management | `signIn`, `signUp`, `signOut`, `getProfile`, `updateProfile`  |
+| `listing.ts`      | Waste listing CRUD and search         | `getListings`, `getListing`, `createListing`, `updateListing` |
+| `transaction.ts`  | Transaction lifecycle management      | `createTransaction`, `uploadReceipt`, `updateStatus`          |
+| `chat.ts`         | Chat messaging                        | `getMessages`, `sendMessage`, `getThreads`                    |
+| `matching.ts`     | AI matching queries                   | `getRecommendations`, `getMatchScore`                         |
+| `inspection.ts`   | Inspector verification flow           | `submitReport`, `getReport`                                   |
+| `notification.ts` | Notification management               | `getNotifications`, `markRead`, `updatePreferences`           |
+| `admin.ts`        | Admin operations (web only)           | `getUsers`, `moderateListing`, `verifyReceipt`                |
 
 ---
 
@@ -218,12 +218,12 @@ export async function updateListing(id: string, data: UpdateListingInput) {
 
 Complex server-side logic that should not run on the client lives in Supabase Edge Functions:
 
-| Edge Function        | Trigger                      | Responsibility                                         |
-| -------------------- | ---------------------------- | ------------------------------------------------------ |
-| `match-listings`     | New listing / new buyer pref | Rule-based matching: waste type + location + quantity   |
-| `moderate-chat`      | New chat message             | Regex filters for phone, email, profanity              |
-| `calculate-commission` | Transaction completed      | Compute platform commission on transaction amount      |
-| `send-notification`  | Various domain events        | Push notification dispatch via Expo Notifications       |
+| Edge Function          | Trigger                      | Responsibility                                        |
+| ---------------------- | ---------------------------- | ----------------------------------------------------- |
+| `match-listings`       | New listing / new buyer pref | Rule-based matching: waste type + location + quantity |
+| `moderate-chat`        | New chat message             | Regex filters for phone, email, profanity             |
+| `calculate-commission` | Transaction completed        | Compute platform commission on transaction amount     |
+| `send-notification`    | Various domain events        | Push notification dispatch via Expo Notifications     |
 
 **Pattern:** Edge Functions receive webhooks (Supabase Database Webhooks or direct invocation) and return JSON responses. They import shared types from a local copy of the shared package types.
 
@@ -289,12 +289,12 @@ components/
 
 **Rules:**
 
-| Component Type | Can Import                     | Knows About Business Logic? |
-| -------------- | ------------------------------ | --------------------------- |
+| Component Type | Can Import                             | Knows About Business Logic? |
+| -------------- | -------------------------------------- | --------------------------- |
 | `ui/`          | Only props and `@tabadul/shared` types | No                          |
-| `forms/`       | `ui/`, Zod schemas, React Hook Form | Schema validation only      |
-| `layout/`      | `ui/`, navigation hooks        | No                          |
-| `features/`    | `ui/`, `hooks/`, `types/`      | Yes (via hooks)             |
+| `forms/`       | `ui/`, Zod schemas, React Hook Form    | Schema validation only      |
+| `layout/`      | `ui/`, navigation hooks                | No                          |
+| `features/`    | `ui/`, `hooks/`, `types/`              | Yes (via hooks)             |
 
 ---
 
@@ -309,18 +309,19 @@ All data from Supabase is server state, managed exclusively by TanStack Query.
 ```typescript
 // lib/queryKeys.ts
 export const listingKeys = {
-  all: ["listings"] as const,
-  lists: () => [...listingKeys.all, "list"] as const,
+  all: ['listings'] as const,
+  lists: () => [...listingKeys.all, 'list'] as const,
   list: (filters: ListingFilters) => [...listingKeys.lists(), filters] as const,
-  details: () => [...listingKeys.all, "detail"] as const,
+  details: () => [...listingKeys.all, 'detail'] as const,
   detail: (id: string) => [...listingKeys.details(), id] as const,
 };
 
 export const transactionKeys = {
-  all: ["transactions"] as const,
-  lists: () => [...transactionKeys.all, "list"] as const,
-  list: (filters: TransactionFilters) => [...transactionKeys.lists(), filters] as const,
-  detail: (id: string) => [...transactionKeys.all, "detail", id] as const,
+  all: ['transactions'] as const,
+  lists: () => [...transactionKeys.all, 'list'] as const,
+  list: (filters: TransactionFilters) =>
+    [...transactionKeys.lists(), filters] as const,
+  detail: (id: string) => [...transactionKeys.all, 'detail', id] as const,
 };
 ```
 
@@ -338,9 +339,9 @@ queryClient.invalidateQueries({ queryKey: listingKeys.lists() });
 
 ```typescript
 // hooks/useCreateListing.ts
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createListing } from "@/services/listing";
-import { listingKeys } from "@/lib/queryKeys";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createListing } from '@/services/listing';
+import { listingKeys } from '@/lib/queryKeys';
 
 export function useCreateListing() {
   const queryClient = useQueryClient();
@@ -360,17 +361,17 @@ Client-only state that doesn't come from the server. Keep stores minimal.
 
 ```typescript
 // stores/useUIStore.ts
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface UIState {
-  language: "ar" | "en";
-  setLanguage: (lang: "ar" | "en") => void;
+  language: 'ar' | 'en';
+  setLanguage: (lang: 'ar' | 'en') => void;
   sidebarOpen: boolean;
   toggleSidebar: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
-  language: "ar",
+  language: 'ar',
   setLanguage: (language) => set({ language }),
   sidebarOpen: false,
   toggleSidebar: () => set((s) => ({ sidebarOpen: !s.sidebarOpen })),
@@ -379,12 +380,12 @@ export const useUIStore = create<UIState>((set) => ({
 
 **What goes where:**
 
-| TanStack Query (Server State)              | Zustand (Client State)               |
-| ------------------------------------------ | ------------------------------------ |
-| Listings, transactions, messages, profiles | Language preference                  |
-| User session / auth status                 | Sidebar open/close                   |
-| Notifications from server                  | Active filters (before API call)     |
-| Any data fetched from Supabase             | Modal visibility, form wizard step   |
+| TanStack Query (Server State)              | Zustand (Client State)             |
+| ------------------------------------------ | ---------------------------------- |
+| Listings, transactions, messages, profiles | Language preference                |
+| User session / auth status                 | Sidebar open/close                 |
+| Notifications from server                  | Active filters (before API call)   |
+| Any data fetched from Supabase             | Modal visibility, form wizard step |
 
 ---
 
@@ -394,14 +395,14 @@ All forms use the same pattern: shared Zod schema → React Hook Form with resol
 
 ```typescript
 // packages/shared/schemas/listing.ts
-import { z } from "zod";
+import { z } from 'zod';
 
 export const createListingSchema = z.object({
-  wasteType: z.string().min(1, "Required"),
+  wasteType: z.string().min(1, 'Required'),
   quantity: z.number().positive(),
-  unit: z.enum(["kg", "ton", "m3", "piece"]),
+  unit: z.enum(['kg', 'ton', 'm3', 'piece']),
   price: z.number().positive(),
-  mode: z.enum(["fixed", "auction"]),
+  mode: z.enum(['fixed', 'auction']),
   description: z.string().min(10).max(1000),
   location: z.string().min(1),
 });
@@ -472,7 +473,7 @@ function ListingDetail({ id }: Props) {
 // hooks/useAuth.ts
 export function useAuth() {
   const { data: session } = useQuery({
-    queryKey: ["auth", "session"],
+    queryKey: ['auth', 'session'],
     queryFn: () => supabase.auth.getSession(),
   });
 
@@ -486,10 +487,10 @@ export function useAuth() {
 
 #### Route Guards
 
-| Platform | Mechanism                                                             |
-| -------- | --------------------------------------------------------------------- |
-| Mobile   | Expo Router layout files check `useAuth()` and redirect to `(auth)/`  |
-| Web      | Next.js middleware checks Supabase session and redirects to `/login`   |
+| Platform | Mechanism                                                            |
+| -------- | -------------------------------------------------------------------- |
+| Mobile   | Expo Router layout files check `useAuth()` and redirect to `(auth)/` |
+| Web      | Next.js middleware checks Supabase session and redirects to `/login` |
 
 #### Authorization
 
@@ -522,9 +523,9 @@ Chat and live auction bids use Supabase Realtime subscriptions, wrapped in custo
 
 ```typescript
 // hooks/useRealtimeMessages.ts
-import { useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/lib/supabase";
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabase';
 
 export function useRealtimeMessages(threadId: string) {
   const queryClient = useQueryClient();
@@ -533,14 +534,19 @@ export function useRealtimeMessages(threadId: string) {
     const channel = supabase
       .channel(`chat:${threadId}`)
       .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "messages", filter: `thread_id=eq.${threadId}` },
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'messages',
+          filter: `thread_id=eq.${threadId}`,
+        },
         (payload) => {
           queryClient.setQueryData(
-            ["messages", threadId],
-            (old: Message[] = []) => [...old, payload.new as Message],
+            ['messages', threadId],
+            (old: Message[] = []) => [...old, payload.new as Message]
           );
-        },
+        }
       )
       .subscribe();
 
@@ -635,31 +641,31 @@ supabase/
 
 These constraints drove the pattern choices above:
 
-| Constraint                                | Impact on Patterns                                                                                |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Supabase BaaS (no custom API server)      | No Repository pattern needed — Supabase client IS the data access layer                           |
-| Two frontend apps sharing one backend     | Shared package for types, schemas, constants; identical service/hook layer structure in both apps |
-| Small team (1–5 developers)               | Layer-based over feature-based (cross-cutting visibility more valuable than feature isolation)    |
-| MVP scale (~10–50 users)                  | No caching infrastructure, no message queues — Supabase handles everything                       |
-| Bilingual RTL/LTR requirement             | RTL-aware component patterns; Tailwind `rtl:`/`ltr:` variants; shared locale files               |
-| InstaPay manual verification (no gateway) | Transaction state machine pattern in services + Edge Functions                                    |
-| Multiple user roles (buyer/seller/admin/inspector) | RLS-driven authorization; role-gated routes; middleware guards                           |
-| Real-time features (chat, live bids)      | Supabase Realtime subscriptions integrated into TanStack Query cache                             |
+| Constraint                                         | Impact on Patterns                                                                                |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Supabase BaaS (no custom API server)               | No Repository pattern needed — Supabase client IS the data access layer                           |
+| Two frontend apps sharing one backend              | Shared package for types, schemas, constants; identical service/hook layer structure in both apps |
+| Small team (1–5 developers)                        | Layer-based over feature-based (cross-cutting visibility more valuable than feature isolation)    |
+| MVP scale (~10–50 users)                           | No caching infrastructure, no message queues — Supabase handles everything                        |
+| Bilingual RTL/LTR requirement                      | RTL-aware component patterns; Tailwind `rtl:`/`ltr:` variants; shared locale files                |
+| InstaPay manual verification (no gateway)          | Transaction state machine pattern in services + Edge Functions                                    |
+| Multiple user roles (buyer/seller/admin/inspector) | RLS-driven authorization; role-gated routes; middleware guards                                    |
+| Real-time features (chat, live bids)               | Supabase Realtime subscriptions integrated into TanStack Query cache                              |
 
 ---
 
 ## 6. Anti-Patterns to Avoid
 
-| Anti-Pattern                                | Why It's Harmful                                     | What to Do Instead                              |
-| ------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------- |
-| Direct Supabase calls in components         | Mixes data fetching with rendering                   | Call services from hooks, hooks from components |
-| Zustand for server data                     | Duplicates TanStack Query's caching                  | Use TanStack Query for all Supabase data        |
-| Throwing exceptions in service functions    | Breaks Supabase's `{ data, error }` convention       | Return `{ data, error }`, handle in hooks       |
-| Shared component importing `services/`     | Breaks layer boundaries                              | Components depend on hooks, not services        |
-| Hardcoded strings in JSX                    | Breaks i18n                                          | Always use `t("key")` from `useTranslation()`   |
-| Fat components (logic + rendering)          | Hard to test, hard to reuse                          | Extract logic into custom hooks                 |
-| App-specific types in `packages/shared/`   | Pollutes shared package with platform concerns       | Only share types needed by both apps            |
-| Inline Supabase queries in Edge Functions  | No type safety, hard to maintain                     | Use typed Supabase client in Edge Functions     |
+| Anti-Pattern                              | Why It's Harmful                               | What to Do Instead                              |
+| ----------------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| Direct Supabase calls in components       | Mixes data fetching with rendering             | Call services from hooks, hooks from components |
+| Zustand for server data                   | Duplicates TanStack Query's caching            | Use TanStack Query for all Supabase data        |
+| Throwing exceptions in service functions  | Breaks Supabase's `{ data, error }` convention | Return `{ data, error }`, handle in hooks       |
+| Shared component importing `services/`    | Breaks layer boundaries                        | Components depend on hooks, not services        |
+| Hardcoded strings in JSX                  | Breaks i18n                                    | Always use `t("key")` from `useTranslation()`   |
+| Fat components (logic + rendering)        | Hard to test, hard to reuse                    | Extract logic into custom hooks                 |
+| App-specific types in `packages/shared/`  | Pollutes shared package with platform concerns | Only share types needed by both apps            |
+| Inline Supabase queries in Edge Functions | No type safety, hard to maintain               | Use typed Supabase client in Edge Functions     |
 
 ---
 
