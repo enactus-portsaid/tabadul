@@ -68,7 +68,7 @@
 | 002 | Repository Setup       | ✅     | `README.md`, `.gitignore`, `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`                                                                                                                | GitHub Flow branching, Conventional Commits, pushed to github.com/enactus-portsaid/tabadul |
 | 003 | Project Structure      | ✅     | `apps/`, `packages/`, `supabase/`, `/docs/architecture/project-structure.md`, `tsconfig.base.json`                                                                                              | Monorepo: apps/mobile + apps/web + packages/shared + supabase, path aliases, barrel files  |
 | 004 | Environment Setup      | ✅     | `.env.example`, `/docs/environment-variables.md`, `/docs/development-setup.md`, `docker-compose.yml`, `.vscode/settings.json`, `.vscode/extensions.json`, `package.json`, `pnpm-workspace.yaml` | Supabase-based local dev (supabase start), root pnpm workspace scripts                     |
-| 005 | Design Patterns        | ⬚      | `/docs/architecture/design-patterns.md`                                                                                                                                                         |                                                                                            |
+| 005 | Design Patterns        | ✅     | `/docs/architecture/design-patterns.md`                                                                                                                                                         | BaaS-Driven Layered Architecture, function-based services, Custom Hooks + Composition      |
 | 006 | Code Style Standards   | ⬚      | Linter/formatter configs                                                                                                                                                                        |                                                                                            |
 
 ### Phase 1: Database
@@ -253,7 +253,7 @@ These are human-approved and must never be contradicted:
 | Branching       | GitHub Flow (main + feature/fix/chore branches)                       | `CONTRIBUTING.md`                         | SOP-002 |
 | Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                   | `/docs/architecture/project-structure.md` | SOP-003 |
 | Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces | `/docs/development-setup.md`              | SOP-004 |
-| Design Patterns | {e.g., Service + Repository, function-based}                          | `/docs/architecture/design-patterns.md`   | SOP-005 |
+| Design Patterns | BaaS-Driven Layered Architecture; Service Functions (no Repository); Custom Hooks + Composition; TanStack Query + Zustand; React Hook Form + Zod; Result Pattern (`{ data, error }`); Auth Hook + RLS + Route Guards | `/docs/architecture/design-patterns.md` | SOP-005 |
 
 ### Cached File Locations
 
@@ -270,6 +270,7 @@ These are human-approved and must never be contradicted:
 | Shared Package  | `/packages/shared/`                       | SOP-003         |
 | Env Docs        | `/docs/environment-variables.md`          | SOP-004         |
 | Dev Setup Guide | `/docs/development-setup.md`              | SOP-004         |
+| Design Patterns | `/docs/architecture/design-patterns.md`   | SOP-005         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
@@ -282,8 +283,8 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-005  
-**Title:** Design Patterns  
+**SOP:** SOP-006  
+**Title:** Code Style Standards  
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
@@ -291,15 +292,16 @@ These are human-approved and must never be contradicted:
 ```
 .prompts/AI-SESSION.md                                            # This file (context)
 /docs/tech-stack.md                                               # Tech decisions
-/docs/architecture/project-structure.md                            # Folder structure (SOP-003 output)
-.sops/phase-0-initialization/SOP-005-design-patterns.md            # The procedure
+/docs/architecture/design-patterns.md                              # Design patterns (SOP-005 output)
+.sops/phase-0-initialization/SOP-006-code-style-standards.md       # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] `/docs/architecture/design-patterns.md` created
-- [ ] Architectural pattern documented
-- [ ] Code-level patterns documented
+- [ ] Linter configured (ESLint)
+- [ ] Formatter configured (Prettier)
+- [ ] Pre-commit hooks set up
+- [ ] Style guide documented
 
 ### Iterative SOP Progress
 
@@ -338,14 +340,14 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-005 (Design Patterns).
+Execute SOP-006 (Code Style Standards).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
 - `/docs/tech-stack.md` for tech decisions
-- `/docs/architecture/project-structure.md` for folder structure
-- `.sops/phase-0-initialization/SOP-005-design-patterns.md` for the procedure
+- `/docs/architecture/design-patterns.md` for design patterns
+- `.sops/phase-0-initialization/SOP-006-code-style-standards.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -426,3 +428,23 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-004: Root `package.json` defines pnpm workspace scripts. `pnpm setup` does install + `.env` copy. `pnpm db:start/stop/reset/migrate/seed` wraps Supabase CLI commands.
 - SOP-004: Environment variables grouped into Supabase, Mobile (EXPO*PUBLIC*), Web (NEXT*PUBLIC*), App Config, and Feature Flags. No real secrets committed.
 - SOP-004: VS Code settings include format-on-save (Prettier), ESLint auto-fix, Tailwind CSS IntelliSense, and search exclusions for build artifacts.
+
+### Session 4 — 2026-03-07
+
+**SOPs Completed:** SOP-005  
+**Files Created:**
+
+- `/docs/architecture/design-patterns.md` — Architectural pattern, application layer pattern, 10 code-level patterns with examples
+
+**Notes:**
+
+- SOP-005: Selected **BaaS-Driven Layered Architecture** — Supabase handles the entire backend; frontend apps follow layer-based internal organization.
+- SOP-005: Application layer uses **Layer-Based** organization (not Feature-Based) to match SOP-003's established structure. Cross-cutting visibility prioritized over feature isolation for small team.
+- SOP-005: Data access uses **Service Functions** (function-based, one file per domain) wrapping Supabase JS client directly — no Repository pattern needed since Supabase client IS the data access abstraction.
+- SOP-005: React patterns: **Custom Hooks** for logic extraction, **Composition** for UI, component hierarchy (ui → forms → layout → features).
+- SOP-005: State split: **TanStack Query** for all server state (Supabase data), **Zustand** for client-only state (language pref, UI toggles).
+- SOP-005: **Query Key Factory** pattern for consistent TanStack Query cache management and invalidation.
+- SOP-005: **Result Pattern** (`{ data, error }`) preserved from Supabase throughout service layer — no exception throwing.
+- SOP-005: Three-tier authorization: route-level guards (middleware/layouts) → RLS policies (database) → Edge Function business rule checks.
+- SOP-005: Real-time data (chat, bids) handled via Supabase Realtime subscription hooks that update TanStack Query cache directly.
+- SOP-005: Anti-patterns documented (direct Supabase calls in components, Zustand for server data, hardcoded strings, fat components, etc.).
