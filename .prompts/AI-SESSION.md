@@ -75,7 +75,7 @@
 
 | SOP | Title              | Status | Output Location                     | Notes |
 | --- | ------------------ | ------ | ----------------------------------- | ----- |
-| 100 | Database Selection | ⬚      | `/docs/tech-stack.md`               |       |
+| 100 | Database Selection | ✅     | `/docs/database/database-decision.md`               | PostgreSQL via Supabase |
 | 101 | Schema Design      | ⬚      | `/docs/database/erd.md`, migrations |       |
 | 102 | Seed Data          | ⬚      | `/seeds/` or `/fixtures/`           |       |
 
@@ -160,7 +160,7 @@ These are human-approved and must never be contradicted:
 
 | Design Doc (Level 1) | Location        | Traces to Requirement                           |
 | -------------------- | --------------- | ----------------------------------------------- |
-| Database Selection   | {location or ⬚} | {e.g., "PostgreSQL for relational data needs"}  |
+| Database Selection   | `/docs/database/database-decision.md` | PostgreSQL for relational data needs            |
 | Schema/ERD           | {location or ⬚} | {e.g., "All entities from requirements mapped"} |
 | Seed Data            | {location or ⬚} | {e.g., "Test data for all user roles"}          |
 
@@ -276,6 +276,7 @@ These are human-approved and must never be contradicted:
 | Prettier Config | `/prettier.config.js`                     | SOP-006         |
 | Lint-Staged     | `/lint-staged.config.js`                  | SOP-006         |
 | Pre-commit Hook | `/.husky/pre-commit`                      | SOP-006         |
+| DB Decision     | `/docs/database/database-decision.md`     | SOP-100         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
@@ -288,25 +289,24 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-006  
-**Title:** Code Style Standards  
-**Status:** ✅ Complete
+**SOP:** SOP-101  
+**Title:** Schema Design  
+**Status:** ⬚ Not Started
 
 ### Context Files to Read
 
-```
-.prompts/AI-SESSION.md                                            # This file (context)
-/docs/tech-stack.md                                               # Tech decisions
-/docs/architecture/design-patterns.md                              # Design patterns (SOP-005 output)
-.sops/phase-0-initialization/SOP-006-code-style-standards.md       # The procedure
+```text
+.prompts/AI-SESSION.md                                             # This file (context)
+/docs/database/database-decision.md                                # DB choice
+/docs/requirements.md                                              # Entites
+.sops/phase-1-database/SOP-101-schema-design.md                    # The procedure
 ```
 
 ### Expected Outputs
 
-- [x] Linter configured (ESLint)
-- [x] Formatter configured (Prettier)
-- [x] Pre-commit hooks set up
-- [x] Style guide documented
+- [ ] `/docs/database/erd.md`
+- [ ] Schema design complete
+- [ ] Migrations generated
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -343,13 +343,14 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-100 (Database Selection).
+Execute SOP-101 (Schema Design).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/tech-stack.md` for tech decisions
-- `.sops/phase-1-database/SOP-100-database-selection.md` for the procedure
+- `/docs/database/database-decision.md` for DB choice
+- `/docs/requirements.md` for entities
+- `.sops/phase-1-database/SOP-101-schema-design.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -474,3 +475,16 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-006: Naming conventions from SOP-003 already documented: PascalCase (components/types), camelCase (variables/functions/hooks), SCREAMING_SNAKE (constants), kebab-case (utility files).
 - SOP-006: Comment standards: `// TODO(name): reason (target date)` format; JSDoc for exported public functions; explain "why" not "what".
 - SOP-006: Pre-commit workflow: staged files → ESLint --fix → Prettier --write → commit (via Husky + lint-staged).
+
+### Session 6 — 2026-03-09
+
+**SOPs Completed:** SOP-100  
+**Files Created:**
+
+- `/docs/database/database-decision.md`
+
+**Notes:**
+
+- Evaluated data requirements from `/docs/requirements.md`.
+- Confirmed PostgreSQL hosted on Supabase as the best fit for relational marketplace interactions and robust transactions.
+- Confirmed Supabase JS Client as the ORM approach without abstraction layers to maintain alignment with the chosen layered BaaS architecture.

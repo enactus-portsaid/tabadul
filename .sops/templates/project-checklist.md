@@ -70,9 +70,9 @@
 
 ### Database Selection (SOP-100)
 
-- [ ] Database engine selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
-- [ ] Justification documented
-- [ ] Local database setup instructions added
+- [x] Database engine selected: PostgreSQL (via Supabase)
+- [x] Justification documented
+- [x] Local database setup instructions added
 
 ### Schema Design (SOP-101)
 
