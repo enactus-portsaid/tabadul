@@ -73,11 +73,11 @@
 
 ### Phase 1: Database
 
-| SOP | Title              | Status | Output Location                     | Notes |
-| --- | ------------------ | ------ | ----------------------------------- | ----- |
-| 100 | Database Selection | ✅     | `/docs/database/database-decision.md`               | PostgreSQL via Supabase |
-| 101 | Schema Design      | ⬚      | `/docs/database/erd.md`, migrations |       |
-| 102 | Seed Data          | ⬚      | `/seeds/` or `/fixtures/`           |       |
+| SOP | Title              | Status | Output Location                       | Notes                   |
+| --- | ------------------ | ------ | ------------------------------------- | ----------------------- |
+| 100 | Database Selection | ✅     | `/docs/database/database-decision.md` | PostgreSQL via Supabase |
+| 101 | Schema Design      | ⬚      | `/docs/database/erd.md`, migrations   |                         |
+| 102 | Seed Data          | ⬚      | `/seeds/` or `/fixtures/`             |                         |
 
 ### Phase 2: Backend
 
@@ -158,11 +158,11 @@ These are human-approved and must never be contradicted:
 
 ### Phase 1 Checkpoint — Database Design
 
-| Design Doc (Level 1) | Location        | Traces to Requirement                           |
-| -------------------- | --------------- | ----------------------------------------------- |
+| Design Doc (Level 1) | Location                              | Traces to Requirement                           |
+| -------------------- | ------------------------------------- | ----------------------------------------------- |
 | Database Selection   | `/docs/database/database-decision.md` | PostgreSQL for relational data needs            |
-| Schema/ERD           | {location or ⬚} | {e.g., "All entities from requirements mapped"} |
-| Seed Data            | {location or ⬚} | {e.g., "Test data for all user roles"}          |
+| Schema/ERD           | {location or ⬚}                       | {e.g., "All entities from requirements mapped"} |
+| Seed Data            | {location or ⬚}                       | {e.g., "Test data for all user roles"}          |
 
 | Implementation (Level 2) | Location                            | Traces to Design      |
 | ------------------------ | ----------------------------------- | --------------------- |
@@ -262,20 +262,13 @@ These are human-approved and must never be contradicted:
 | --------------- | ----------------------------------------- | --------------- |
 | Requirements    | `/docs/requirements.md`                   | SOP-000         |
 | Tech Stack      | `/docs/tech-stack.md`                     | SOP-001         |
-| Execution Brief | `/docs/execution-brief.md`                | Phase 0         |
 | README          | `/README.md`                              | SOP-002         |
 | CONTRIBUTING    | `/CONTRIBUTING.md`                        | SOP-002         |
 | PR Template     | `/.github/PULL_REQUEST_TEMPLATE.md`       | SOP-002         |
 | Structure Doc   | `/docs/architecture/project-structure.md` | SOP-003         |
-| TS Base Config  | `/tsconfig.base.json`                     | SOP-003         |
 | Shared Package  | `/packages/shared/`                       | SOP-003         |
 | Env Docs        | `/docs/environment-variables.md`          | SOP-004         |
-| Dev Setup Guide | `/docs/development-setup.md`              | SOP-004         |
 | Design Patterns | `/docs/architecture/design-patterns.md`   | SOP-005         |
-| ESLint Config   | `/eslint.config.mjs`                      | SOP-006         |
-| Prettier Config | `/prettier.config.js`                     | SOP-006         |
-| Lint-Staged     | `/lint-staged.config.js`                  | SOP-006         |
-| Pre-commit Hook | `/.husky/pre-commit`                      | SOP-006         |
 | DB Decision     | `/docs/database/database-decision.md`     | SOP-100         |
 | Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
@@ -298,7 +291,7 @@ These are human-approved and must never be contradicted:
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
 /docs/database/database-decision.md                                # DB choice
-/docs/requirements.md                                              # Entites
+/docs/requirements.md                                              # Entities
 .sops/phase-1-database/SOP-101-schema-design.md                    # The procedure
 ```
 
