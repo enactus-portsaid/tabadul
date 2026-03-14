@@ -76,7 +76,7 @@
 | SOP | Title              | Status | Output Location                       | Notes                   |
 | --- | ------------------ | ------ | ------------------------------------- | ----------------------- |
 | 100 | Database Selection | ✅     | `/docs/database/database-decision.md` | PostgreSQL via Supabase |
-| 101 | Schema Design      | ⬚      | `/docs/database/erd.md`, migrations   |                         |
+| 101 | Schema Design      | ✅     | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | 16 tables, 10 enums, Supabase SQL migration (adapted from Prisma per tech stack) |
 | 102 | Seed Data          | ⬚      | `/seeds/` or `/fixtures/`             |                         |
 
 ### Phase 2: Backend
@@ -161,14 +161,14 @@ These are human-approved and must never be contradicted:
 | Design Doc (Level 1) | Location                              | Traces to Requirement                           |
 | -------------------- | ------------------------------------- | ----------------------------------------------- |
 | Database Selection   | `/docs/database/database-decision.md` | PostgreSQL for relational data needs            |
-| Schema/ERD           | {location or ⬚}                       | {e.g., "All entities from requirements mapped"} |
+| Schema/ERD           | `/docs/database/schema.md`             | All 16 entities from requirements mapped, 3NF normalized |
 | Seed Data            | {location or ⬚}                       | {e.g., "Test data for all user roles"}          |
 
 | Implementation (Level 2) | Location                            | Traces to Design      |
 | ------------------------ | ----------------------------------- | --------------------- |
-| Prisma Schema            | {e.g., `prisma/schema.prisma` or ⬚} | {e.g., "Matches ERD"} |
-| Migrations               | {e.g., `prisma/migrations/` or ⬚}   |                       |
-| Seed Script              | {e.g., `prisma/seed.ts` or ⬚}       |                       |
+| SQL Schema               | `supabase/migrations/00001_init_schema.sql` | Matches ERD in schema.md |
+| Migrations               | `supabase/migrations/`               | Init schema migration created |
+| Seed Script              | {e.g., `supabase/seed/` or ⬚}       |                       |
 
 **Checkpoint Status:** ⬚ Not Run / ✅ Passed / ⚠️ Issues Found  
 **Last Run:** {date}  
@@ -249,7 +249,7 @@ These are human-approved and must never be contradicted:
 | Styling         | NativeWind (Tailwind CSS for React Native)                                                                                                                                                                           | `/docs/tech-stack.md`                     | SOP-001 |
 | State Mgmt      | TanStack Query + Zustand                                                                                                                                                                                             | `/docs/tech-stack.md`                     | SOP-001 |
 | Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                                                                                                                                                                         | `/docs/tech-stack.md`                     | SOP-001 |
-| Entities        | {e.g., User, List, Item, ...}                                                                                                                                                                                        | `/docs/requirements.md`                   | SOP-000 |
+| Entities        | Profile, WasteCategory, Listing, ListingPhoto, Bid, Bookmark, ChatThread, Message, Transaction, Payment, InspectionReport, Review, Notification, NotificationPreference, Dispute, MatchRecommendation (16 total)      | `/docs/requirements.md`                   | SOP-101 |
 | Branching       | GitHub Flow (main + feature/fix/chore branches)                                                                                                                                                                      | `CONTRIBUTING.md`                         | SOP-002 |
 | Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                                                                                                                                                                  | `/docs/architecture/project-structure.md` | SOP-003 |
 | Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces                                                                                                                                                | `/docs/development-setup.md`              | SOP-004 |
@@ -270,7 +270,7 @@ These are human-approved and must never be contradicted:
 | Env Docs        | `/docs/environment-variables.md`          | SOP-004         |
 | Design Patterns | `/docs/architecture/design-patterns.md`   | SOP-005         |
 | DB Decision     | `/docs/database/database-decision.md`     | SOP-100         |
-| Schema / ERD    | {e.g., `prisma/schema.prisma`}            | SOP-101         |
+| Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
 | Visual Design   | {e.g., `/docs/frontend/visual-design.md`} | SOP-302         |
@@ -282,24 +282,24 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-101  
-**Title:** Schema Design  
+**SOP:** SOP-102  
+**Title:** Seed Data  
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-/docs/database/database-decision.md                                # DB choice
-/docs/requirements.md                                              # Entities
-.sops/phase-1-database/SOP-101-schema-design.md                    # The procedure
+/docs/database/schema.md                                           # Schema design
+/docs/requirements.md                                              # Entities & test scenarios
+.sops/phase-1-database/SOP-102-seed-data.md                        # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] `/docs/database/erd.md`
-- [ ] Schema design complete
-- [ ] Migrations generated
+- [ ] Seed data script(s)
+- [ ] Test data for all user roles
+- [ ] Edge case data coverage
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -336,14 +336,14 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-101 (Schema Design).
+Execute SOP-102 (Seed Data).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/database/database-decision.md` for DB choice
-- `/docs/requirements.md` for entities
-- `.sops/phase-1-database/SOP-101-schema-design.md` for the procedure
+- `/docs/database/schema.md` for schema design
+- `/docs/requirements.md` for entities & test scenarios
+- `.sops/phase-1-database/SOP-102-seed-data.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -481,3 +481,21 @@ Update `.sops/templates/project-checklist.md` when complete.
 - Evaluated data requirements from `/docs/requirements.md`.
 - Confirmed PostgreSQL hosted on Supabase as the best fit for relational marketplace interactions and robust transactions.
 - Confirmed Supabase JS Client as the ORM approach without abstraction layers to maintain alignment with the chosen layered BaaS architecture.
+
+### Session 7 — 2026-03-13
+
+**SOPs Completed:** SOP-101
+**Files Created:**
+
+- `/docs/database/schema.md` — Complete schema documentation (Mermaid ERD, 16 table definitions, 10 enums, 29 indexes, normalization notes, design decisions)
+- `supabase/migrations/00001_init_schema.sql` — PostgreSQL init migration (enums, tables, indexes, triggers, check constraints)
+
+**Notes:**
+
+- SOP-101: **Adapted SOP output from Prisma to Supabase SQL migration** — SOP template references `prisma/schema.prisma`, but approved tech stack (SOP-001, SOP-100) uses Supabase JS Client. Output changed to `supabase/migrations/00001_init_schema.sql`.
+- SOP-101: 16 entities extracted from requirements: Profile, WasteCategory, Listing, ListingPhoto, Bid, Bookmark, ChatThread, Message, Transaction, Payment, InspectionReport, Review, Notification, NotificationPreference, Dispute, MatchRecommendation.
+- SOP-101: `profiles` table references `auth.users(id)` — standard Supabase pattern where Auth manages credentials and `profiles` stores app-specific data.
+- SOP-101: Monetary fields use `numeric(12,2)` for exact EGP arithmetic. Timestamps use `timestamptz` for timezone-aware storage.
+- SOP-101: Check constraints enforce business rules: fixed-price listings require `price`, auction listings require `minimum_bid` + `auction_ends_at`, buyer ≠ seller on transactions/chats/reviews.
+- SOP-101: `avg_rating` / `total_reviews` on `profiles` are intentionally denormalized (3NF violation) for read performance, maintained by a database trigger on `reviews` insert.
+- SOP-101: `updated_at` auto-maintained by trigger function `update_updated_at_column()` on 5 tables.
