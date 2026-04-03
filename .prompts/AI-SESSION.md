@@ -77,7 +77,7 @@
 | --- | ------------------ | ------ | ------------------------------------- | ----------------------- |
 | 100 | Database Selection | ✅     | `/docs/database/database-decision.md` | PostgreSQL via Supabase |
 | 101 | Schema Design      | ✅     | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | 16 tables, 10 enums, Supabase SQL migration (adapted from Prisma per tech stack) |
-| 102 | Seed Data          | ⬚      | `/seeds/` or `/fixtures/`             |                         |
+| 102 | Seed Data          | ✅     | `supabase/seed.sql`, `/docs/database/seed-data.md` | 5 test users, 5 categories, 3 listings with full transaction and chat lifecycle |
 
 ### Phase 2: Backend
 
@@ -162,17 +162,17 @@ These are human-approved and must never be contradicted:
 | -------------------- | ------------------------------------- | ----------------------------------------------- |
 | Database Selection   | `/docs/database/database-decision.md` | PostgreSQL for relational data needs            |
 | Schema/ERD           | `/docs/database/schema.md`             | All 16 entities from requirements mapped, 3NF normalized |
-| Seed Data            | {location or ⬚}                       | {e.g., "Test data for all user roles"}          |
+| Seed Data            | `/docs/database/seed-data.md`          | Test data for all user roles, categories, and full transaction lifecycle |
 
 | Implementation (Level 2) | Location                            | Traces to Design      |
 | ------------------------ | ----------------------------------- | --------------------- |
 | SQL Schema               | `supabase/migrations/00001_init_schema.sql` | Matches ERD in schema.md |
 | Migrations               | `supabase/migrations/`               | Init schema migration created |
-| Seed Script              | {e.g., `supabase/seed/` or ⬚}       |                       |
+| Seed Script              | `supabase/seed.sql`                  | Comprehensive test data |
 
-**Checkpoint Status:** ⬚ Not Run / ✅ Passed / ⚠️ Issues Found  
-**Last Run:** {date}  
-**Issues:** {none or list issues}
+**Checkpoint Status:** ✅ Passed
+**Last Run:** 2026-03-17
+**Issues:** None
 
 ---
 
@@ -271,6 +271,7 @@ These are human-approved and must never be contradicted:
 | Design Patterns | `/docs/architecture/design-patterns.md`   | SOP-005         |
 | DB Decision     | `/docs/database/database-decision.md`     | SOP-100         |
 | Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
+| Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql` | SOP-102         |
 | API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
 | Visual Design   | {e.g., `/docs/frontend/visual-design.md`} | SOP-302         |
@@ -282,24 +283,24 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-102  
-**Title:** Seed Data  
+**SOP:** SOP-200
+**Title:** Service Layer
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-/docs/database/schema.md                                           # Schema design
-/docs/requirements.md                                              # Entities & test scenarios
-.sops/phase-1-database/SOP-102-seed-data.md                        # The procedure
+/docs/architecture/design-patterns.md                              # Required patterns
+/docs/database/schema.md                                           # Database entities
+.sops/phase-2-backend/SOP-200-service-layer.md                     # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] Seed data script(s)
-- [ ] Test data for all user roles
-- [ ] Edge case data coverage
+- [ ] Service functions implemented
+- [ ] Domain logic handled
+- [ ] Documentation updated
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -336,14 +337,14 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-102 (Seed Data).
+Execute SOP-200 (Service Layer).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/database/schema.md` for schema design
-- `/docs/requirements.md` for entities & test scenarios
-- `.sops/phase-1-database/SOP-102-seed-data.md` for the procedure
+- `/docs/architecture/design-patterns.md` for required patterns
+- `/docs/database/schema.md` for database entities
+- `.sops/phase-2-backend/SOP-200-service-layer.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -467,7 +468,22 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-006: Tailwind CSS class sorting via `prettier-plugin-tailwindcss` — works for both NativeWind (mobile) and Tailwind CSS (web).
 - SOP-006: Naming conventions from SOP-003 already documented: PascalCase (components/types), camelCase (variables/functions/hooks), SCREAMING_SNAKE (constants), kebab-case (utility files).
 - SOP-006: Comment standards: `// TODO(name): reason (target date)` format; JSDoc for exported public functions; explain "why" not "what".
+- SOP-006: Component hierarchy documentation not created here, as it belongs to frontend phase.
 - SOP-006: Pre-commit workflow: staged files → ESLint --fix → Prettier --write → commit (via Husky + lint-staged).
+
+### Session 8 — 2026-03-17
+
+**SOPs Completed:** SOP-102  
+**Files Created:**
+
+- `supabase/seed.sql` (Comprehensive seed script with 5 auth users, profiles, categories, listings, bids, chat, and full transaction lifecycle)
+- `/docs/database/seed-data.md` (Documentation on test credentials and seeded data topologies)
+
+**Notes:**
+
+- Adapted SOP-102's Prisma instruction to Supabase's native `seed.sql`.
+- Inserted users into `auth.users` directly in the seed script using `pgcrypto` to hash standard passwords (`password123`) to streamline local development testing across roles.
+
 
 ### Session 6 — 2026-03-09
 
