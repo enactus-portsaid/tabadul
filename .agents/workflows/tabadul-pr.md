@@ -46,3 +46,18 @@ pnpm type-check
 git add .
 git commit -m "your_generated_message_here"
 ```
+
+6. **Push to Remote**
+   Execute the git push command to upload the commits to the current remote branch. Wait for the user to approve this execution.
+
+```bash
+git push -u origin $(git rev-parse --abbrev-ref HEAD)
+```
+
+7. **Prepare Pull Request**
+   Determine the boundaries of the pushed branch and propose a PR title and description strictly following `.github/PULL_REQUEST_TEMPLATE.md`. Wait for the user to preview and approve the PR content.
+
+8. **Create Pull Request (MCP Integration)**
+   Once approved, verify if you have access to the `github-mcp-server_create_pull_request` tool.
+   - **If YES:** Automatically create the PR using the tool and report the created URL.
+   - **If NO:** Present the approved PR description in a markdown block for the user to manually copy-paste into GitHub.
