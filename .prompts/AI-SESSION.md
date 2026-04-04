@@ -73,11 +73,11 @@
 
 ### Phase 1: Database
 
-| SOP | Title              | Status | Output Location                       | Notes                   |
-| --- | ------------------ | ------ | ------------------------------------- | ----------------------- |
-| 100 | Database Selection | ✅     | `/docs/database/database-decision.md` | PostgreSQL via Supabase |
+| SOP | Title              | Status | Output Location                                                         | Notes                                                                            |
+| --- | ------------------ | ------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| 100 | Database Selection | ✅     | `/docs/database/database-decision.md`                                   | PostgreSQL via Supabase                                                          |
 | 101 | Schema Design      | ✅     | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | 16 tables, 10 enums, Supabase SQL migration (adapted from Prisma per tech stack) |
-| 102 | Seed Data          | ✅     | `supabase/seed.sql`, `/docs/database/seed-data.md` | 5 test users, 5 categories, 3 listings with full transaction and chat lifecycle |
+| 102 | Seed Data          | ✅     | `supabase/seed.sql`, `/docs/database/seed-data.md`                      | 5 test users, 5 categories, 3 listings with full transaction and chat lifecycle  |
 
 ### Phase 2: Backend
 
@@ -150,28 +150,28 @@
 
 These are human-approved and must never be contradicted:
 
-| Document        | Location                   | Last Updated | Key Decisions                                                                              |
-| --------------- | -------------------------- | ------------ | ------------------------------------------------------------------------------------------ |
-| Requirements    | `/docs/requirements.md`    | 2026-02-24   | 30+ user stories, MVP scope defined, MoSCoW prioritized                                    |
-| Tech Stack      | `/docs/tech-stack.md`      | 2026-03-05   | React Native + Expo (mobile), Next.js 15 (web), Supabase, PostgreSQL, TypeScript, monorepo |
-| Execution Brief | `/docs/execution-brief.md` | ⬚            | {e.g., "5 entities, 3 tech adaptations, 2 SOPs skipped"}                                   |
+| Document        | Location                   | Last Updated | Key Decisions                                                                               |
+| --------------- | -------------------------- | ------------ | ------------------------------------------------------------------------------------------- |
+| Requirements    | `/docs/requirements.md`    | 2026-02-24   | 30+ user stories, MVP scope defined, MoSCoW prioritized                                     |
+| Tech Stack      | `/docs/tech-stack.md`      | 2026-03-05   | React Native + Expo (mobile), Next.js 15 (web), Supabase, PostgreSQL, TypeScript, monorepo  |
+| Execution Brief | `/docs/execution-brief.md` | 2026-04-04   | 16 entities mapped, 3 pattern overrides (BaaS Service Functions), Phase 2 trims SOP-201/202 |
 
 ### Phase 1 Checkpoint — Database Design
 
-| Design Doc (Level 1) | Location                              | Traces to Requirement                           |
-| -------------------- | ------------------------------------- | ----------------------------------------------- |
-| Database Selection   | `/docs/database/database-decision.md` | PostgreSQL for relational data needs            |
-| Schema/ERD           | `/docs/database/schema.md`             | All 16 entities from requirements mapped, 3NF normalized |
-| Seed Data            | `/docs/database/seed-data.md`          | Test data for all user roles, categories, and full transaction lifecycle |
+| Design Doc (Level 1) | Location                              | Traces to Requirement                                                    |
+| -------------------- | ------------------------------------- | ------------------------------------------------------------------------ |
+| Database Selection   | `/docs/database/database-decision.md` | PostgreSQL for relational data needs                                     |
+| Schema/ERD           | `/docs/database/schema.md`            | All 16 entities from requirements mapped, 3NF normalized                 |
+| Seed Data            | `/docs/database/seed-data.md`         | Test data for all user roles, categories, and full transaction lifecycle |
 
-| Implementation (Level 2) | Location                            | Traces to Design      |
-| ------------------------ | ----------------------------------- | --------------------- |
-| SQL Schema               | `supabase/migrations/00001_init_schema.sql` | Matches ERD in schema.md |
-| Migrations               | `supabase/migrations/`               | Init schema migration created |
-| Seed Script              | `supabase/seed.sql`                  | Comprehensive test data |
+| Design Decision        | Expected                          | Actual Code                             | Compliant? | File:Line                                   |
+| :--------------------- | :-------------------------------- | :-------------------------------------- | :--------- | :------------------------------------------ |
+| **Database Selection** | Supabase PostgreSQL natively      | Used Supabase SQL Migration             | ✅ Yes     | `supabase/migrations/00001_init_schema.sql` |
+| **Schema Map**         | 16 entities from MVP requirements | All entities natively translated to SQL | ✅ Yes     | `supabase/migrations/00001_init_schema.sql` |
+| **Seed Data**          | Full lifecycle users/transactions | Comprehensive test data seed            | ✅ Yes     | `supabase/seed.sql`                         |
 
 **Checkpoint Status:** ✅ Passed
-**Last Run:** 2026-03-17
+**Last Run:** 2026-04-04
 **Issues:** None
 
 ---
@@ -249,7 +249,7 @@ These are human-approved and must never be contradicted:
 | Styling         | NativeWind (Tailwind CSS for React Native)                                                                                                                                                                           | `/docs/tech-stack.md`                     | SOP-001 |
 | State Mgmt      | TanStack Query + Zustand                                                                                                                                                                                             | `/docs/tech-stack.md`                     | SOP-001 |
 | Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                                                                                                                                                                         | `/docs/tech-stack.md`                     | SOP-001 |
-| Entities        | Profile, WasteCategory, Listing, ListingPhoto, Bid, Bookmark, ChatThread, Message, Transaction, Payment, InspectionReport, Review, Notification, NotificationPreference, Dispute, MatchRecommendation (16 total)      | `/docs/requirements.md`                   | SOP-101 |
+| Entities        | Profile, WasteCategory, Listing, ListingPhoto, Bid, Bookmark, ChatThread, Message, Transaction, Payment, InspectionReport, Review, Notification, NotificationPreference, Dispute, MatchRecommendation (16 total)     | `/docs/requirements.md`                   | SOP-101 |
 | Branching       | GitHub Flow (main + feature/fix/chore branches)                                                                                                                                                                      | `CONTRIBUTING.md`                         | SOP-002 |
 | Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                                                                                                                                                                  | `/docs/architecture/project-structure.md` | SOP-003 |
 | Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces                                                                                                                                                | `/docs/development-setup.md`              | SOP-004 |
@@ -258,24 +258,24 @@ These are human-approved and must never be contradicted:
 
 ### Cached File Locations
 
-| Artifact        | Path                                      | Last Updated By |
-| --------------- | ----------------------------------------- | --------------- |
-| Requirements    | `/docs/requirements.md`                   | SOP-000         |
-| Tech Stack      | `/docs/tech-stack.md`                     | SOP-001         |
-| README          | `/README.md`                              | SOP-002         |
-| CONTRIBUTING    | `/CONTRIBUTING.md`                        | SOP-002         |
-| PR Template     | `/.github/PULL_REQUEST_TEMPLATE.md`       | SOP-002         |
-| Structure Doc   | `/docs/architecture/project-structure.md` | SOP-003         |
-| Shared Package  | `/packages/shared/`                       | SOP-003         |
-| Env Docs        | `/docs/environment-variables.md`          | SOP-004         |
-| Design Patterns | `/docs/architecture/design-patterns.md`   | SOP-005         |
-| DB Decision     | `/docs/database/database-decision.md`     | SOP-100         |
+| Artifact        | Path                                                                    | Last Updated By |
+| --------------- | ----------------------------------------------------------------------- | --------------- |
+| Requirements    | `/docs/requirements.md`                                                 | SOP-000         |
+| Tech Stack      | `/docs/tech-stack.md`                                                   | SOP-001         |
+| README          | `/README.md`                                                            | SOP-002         |
+| CONTRIBUTING    | `/CONTRIBUTING.md`                                                      | SOP-002         |
+| PR Template     | `/.github/PULL_REQUEST_TEMPLATE.md`                                     | SOP-002         |
+| Structure Doc   | `/docs/architecture/project-structure.md`                               | SOP-003         |
+| Shared Package  | `/packages/shared/`                                                     | SOP-003         |
+| Env Docs        | `/docs/environment-variables.md`                                        | SOP-004         |
+| Design Patterns | `/docs/architecture/design-patterns.md`                                 | SOP-005         |
+| DB Decision     | `/docs/database/database-decision.md`                                   | SOP-100         |
 | Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
-| Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql` | SOP-102         |
-| API Spec        | {e.g., `/docs/api/openapi.yaml`}          | SOP-202         |
-| Component Docs  | {e.g., `/docs/frontend/components.md`}    | SOP-300         |
-| Visual Design   | {e.g., `/docs/frontend/visual-design.md`} | SOP-302         |
-| Page Manifest   | {e.g., `/docs/frontend/page-manifest.md`} | SOP-305         |
+| Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
+| API Spec        | {e.g., `/docs/api/openapi.yaml`}                                        | SOP-202         |
+| Component Docs  | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
+| Visual Design   | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
+| Page Manifest   | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
 
 ---
 
@@ -483,7 +483,6 @@ Update `.sops/templates/project-checklist.md` when complete.
 
 - Adapted SOP-102's Prisma instruction to Supabase's native `seed.sql`.
 - Inserted users into `auth.users` directly in the seed script using `pgcrypto` to hash standard passwords (`password123`) to streamline local development testing across roles.
-
 
 ### Session 6 — 2026-03-09
 
