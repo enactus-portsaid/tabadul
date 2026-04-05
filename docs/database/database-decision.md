@@ -13,6 +13,7 @@
 ## 2. Requirements Analysis
 
 The Tabadul platform requires a database that supports:
+
 - **Relational Data:** Complex relationships between factories (users), waste listings, transactions, payments, inspections, and reviews.
 - **ACID Transactions:** Financial integrity for deposit payments, remainders, and commissions.
 - **Real-time Capabilities:** For the auction system (live bids) and chat messaging.
@@ -25,6 +26,7 @@ The B2B marketplace model is inherently relational. A factory can act as both bu
 
 **Why Supabase for Hosting?**
 Supabase provides a complete backend-as-a-service centered around PostgreSQL. It offers:
+
 - A generous free tier (500 MB DB, 50K MAU) suitable for the MVP.
 - Row Level Security (RLS) directly in the database for access control.
 - Built-in Auth, Storage (for photos and receipts), and Realtime (for chat and auctions).
