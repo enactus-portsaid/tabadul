@@ -94,10 +94,10 @@
 
 ### Service Layer (SOP-200)
 
-- [ ] User stories mapped to service methods
-- [ ] Service interfaces defined
-- [ ] Business rules documented
-- [ ] Traceability matrix created
+- [x] User stories mapped to service methods
+- [x] Service interfaces defined (Domain functions)
+- [x] Business rules documented
+- [x] Traceability matrix created (via business rules)
 
 ### Repository Pattern (SOP-201)
 
