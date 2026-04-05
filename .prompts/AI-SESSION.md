@@ -81,15 +81,15 @@
 
 ### Phase 2: Backend
 
-| SOP | Title              | Status | Output Location                                                         | Notes                                         |
-| --- | ------------------ | ------ | ----------------------------------------------------------------------- | --------------------------------------------- |
-| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md` | Extracted domain services via Supabase Client |
-| 201 | Repository Pattern | ⬚      | `src/repositories/`, `/docs/backend/repositories.md`                    |                                               |
-| 202 | API Design         | ⬚      | `/docs/api/openapi.yaml`, `/docs/api/endpoints.md`                      |                                               |
-| 203 | Authentication     | ⬚      | Auth module/routes                                                      |                                               |
-| 204 | Authorization      | ⬚      | `/docs/authorization.md`, middleware                                    |                                               |
-| 205 | Error Handling     | ⬚      | Error handler module                                                    |                                               |
-| 206 | Validation         | ⬚      | Validation schemas                                                      |                                               |
+| SOP | Title              | Status | Output Location                                                         | Notes                                                                          |
+| --- | ------------------ | ------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md` | Extracted domain services via Supabase Client                                  |
+| 201 | Repository Pattern | ⏭️     | —                                                                       | Skipped per execution brief: Supabase abstracts data access natively           |
+| 202 | API Design         | ⏭️     | —                                                                       | Skipped per execution brief: Supabase handles API generation                   |
+| 203 | Authentication     | ✅     | `apps/*/src/hooks/useAuth.ts`, `apps/*/src/lib/supabase*.ts`, `/docs/architecture/auth-flow.md` | Supabase Auth, expo-secure-store, @supabase/ssr, middleware, route guards |
+| 204 | Authorization      | ⬚      | `/docs/authorization.md`, middleware                                    |                                                                                |
+| 205 | Error Handling     | ⬚      | Error handler module                                                    |                                                                                |
+| 206 | Validation         | ⬚      | Validation schemas                                                      |                                                                                |
 
 ### Phase 3: Frontend
 
@@ -272,7 +272,10 @@ These are human-approved and must never be contradicted:
 | DB Decision     | `/docs/database/database-decision.md`                                   | SOP-100         |
 | Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
 | Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
-| API Spec        | {e.g., `/docs/api/openapi.yaml`}                                        | SOP-202         |
+| API Spec        | ⏭️ Skipped (Supabase BaaS)                                               | SOP-202         |
+| Auth Flow       | `/docs/architecture/auth-flow.md`                                       | SOP-203         |
+| Auth Schemas    | `packages/shared/src/schemas/auth.ts`                                   | SOP-203         |
+| Auth Types      | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
 | Visual Design   | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
 | Page Manifest   | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
@@ -283,21 +286,23 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-203
-**Title:** Authentication
+**SOP:** SOP-204
+**Title:** Authorization
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-2-backend/SOP-203-authentication.md                    # The procedure
+.sops/phase-2-api-backend/SOP-204-authorization.md                 # The procedure
+/docs/architecture/auth-flow.md                                    # Auth flow (SOP-203 output)
+/docs/architecture/design-patterns.md                              # Auth patterns (§3.8)
 ```
 
 ### Expected Outputs
 
-- [ ] Auth Hook implemented
-- [ ] Documentation updated
+- [ ] RLS policies implemented
+- [ ] Authorization documentation updated
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -334,14 +339,15 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-200 (Service Layer).
+Execute SOP-204 (Authorization).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/architecture/design-patterns.md` for required patterns
-- `/docs/database/schema.md` for database entities
-- `.sops/phase-2-backend/SOP-200-service-layer.md` for the procedure
+- `/docs/architecture/auth-flow.md` for authentication architecture (SOP-203 output)
+- `/docs/architecture/design-patterns.md` for auth patterns (§3.8)
+- `/docs/database/schema.md` for table structure and RLS needs
+- `.sops/phase-2-api-backend/SOP-204-authorization.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -511,3 +517,41 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-101: Check constraints enforce business rules: fixed-price listings require `price`, auction listings require `minimum_bid` + `auction_ends_at`, buyer ≠ seller on transactions/chats/reviews.
 - SOP-101: `avg_rating` / `total_reviews` on `profiles` are intentionally denormalized (3NF violation) for read performance, maintained by a database trigger on `reviews` insert.
 - SOP-101: `updated_at` auto-maintained by trigger function `update_updated_at_column()` on 5 tables.
+
+### Session 9 — 2026-04-05
+
+**SOPs Completed:** SOP-203 (Authentication)  
+**SOPs Skipped:** SOP-201 (Repository Pattern), SOP-202 (API Design) — per execution brief  
+**Files Created:**
+
+- `packages/shared/src/schemas/auth.ts` (Zod schemas: signIn, signUp, updateProfile, resetPassword, updatePassword)
+- `packages/shared/src/types/auth.ts` (TypeScript types: Profile, AuthUser, AuthState, AuthActions, route constants)
+- `apps/mobile/src/lib/supabase.ts` (Supabase client with expo-secure-store adapter)
+- `apps/web/src/lib/supabase.ts` (Browser Supabase client via @supabase/ssr)
+- `apps/web/src/lib/supabaseServer.ts` (Server Supabase client for RSC/Route Handlers)
+- `apps/mobile/src/hooks/useAuth.ts` (Auth hook: session, profile, signIn/signUp/signOut/resetPassword)
+- `apps/web/src/hooks/useAuth.ts` (Web auth hook with Next.js router integration)
+- `apps/mobile/src/lib/queryKeys.ts` (Query key factory: auth, listings, transactions, chat, notifications, matching)
+- `apps/web/src/lib/queryKeys.ts` (Query key factory: identical to mobile)
+- `apps/mobile/src/app/_layout.tsx` (Root layout: QueryClientProvider + AuthGuard)
+- `apps/mobile/src/app/(auth)/_layout.tsx` (Auth route group: headerless Stack)
+- `apps/mobile/src/app/(tabs)/_layout.tsx` (Protected tabs: Home, Marketplace, Chat, Profile)
+- `apps/web/src/middleware.ts` (Next.js middleware: locale detection + session refresh + auth redirect + admin role gate)
+- `apps/web/src/app/[locale]/(auth)/layout.tsx` (Auth pages: centered form container)
+- `apps/web/src/app/[locale]/(main)/layout.tsx` (Protected pages: server-side auth check)
+- `/docs/architecture/auth-flow.md` (Auth documentation: sequence diagrams, security model, file manifest)
+
+**Files Updated:**
+
+- `packages/shared/src/schemas/index.ts` (Added auth schema exports)
+- `packages/shared/src/types/index.ts` (Added auth type exports)
+
+**Notes:**
+
+- SOP-203: **Auth strategy confirmed as Supabase Auth** per tech-stack.md — email/password with JWT tokens.
+- SOP-203: **Mobile tokens stored in expo-secure-store** (iOS Keychain / Android Keystore). Web uses HTTP-only cookies via `@supabase/ssr`.
+- SOP-203: **useAuth hook** pattern follows design-patterns.md §3.8 — TanStack Query for session + profile caching, `onAuthStateChange` listener keeps cache synced.
+- SOP-203: **Three-tier route protection**: (1) Middleware/AuthGuard redirects, (2) Server-side layout auth check, (3) RLS policies at DB level.
+- SOP-203: **Web middleware uses `getUser()` not `getSession()`** — server-validates the token with Supabase Auth to prevent forgery (official Supabase recommendation).
+- SOP-203: **Zod schemas use i18n keys** as error messages (e.g., `'auth.validation.emailRequired'`) — ready for Arabic/English translation in Phase 3.
+- SOP-203: **SOP-201 and SOP-202 marked as skipped** per execution brief §5 — Supabase handles API generation and data access natively.
