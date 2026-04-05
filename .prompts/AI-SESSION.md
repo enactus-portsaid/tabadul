@@ -81,15 +81,15 @@
 
 ### Phase 2: Backend
 
-| SOP | Title              | Status | Output Location                                      | Notes |
-| --- | ------------------ | ------ | ---------------------------------------------------- | ----- |
-| 200 | Service Layer      | ⬚      | `src/services/`, `/docs/backend/services.md`         |       |
-| 201 | Repository Pattern | ⬚      | `src/repositories/`, `/docs/backend/repositories.md` |       |
-| 202 | API Design         | ⬚      | `/docs/api/openapi.yaml`, `/docs/api/endpoints.md`   |       |
-| 203 | Authentication     | ⬚      | Auth module/routes                                   |       |
-| 204 | Authorization      | ⬚      | `/docs/authorization.md`, middleware                 |       |
-| 205 | Error Handling     | ⬚      | Error handler module                                 |       |
-| 206 | Validation         | ⬚      | Validation schemas                                   |       |
+| SOP | Title              | Status | Output Location                                                         | Notes                                         |
+| --- | ------------------ | ------ | ----------------------------------------------------------------------- | --------------------------------------------- |
+| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md` | Extracted domain services via Supabase Client |
+| 201 | Repository Pattern | ⬚      | `src/repositories/`, `/docs/backend/repositories.md`                    |                                               |
+| 202 | API Design         | ⬚      | `/docs/api/openapi.yaml`, `/docs/api/endpoints.md`                      |                                               |
+| 203 | Authentication     | ⬚      | Auth module/routes                                                      |                                               |
+| 204 | Authorization      | ⬚      | `/docs/authorization.md`, middleware                                    |                                               |
+| 205 | Error Handling     | ⬚      | Error handler module                                                    |                                               |
+| 206 | Validation         | ⬚      | Validation schemas                                                      |                                               |
 
 ### Phase 3: Frontend
 
@@ -283,23 +283,20 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-200
-**Title:** Service Layer
+**SOP:** SOP-203
+**Title:** Authentication
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-/docs/architecture/design-patterns.md                              # Required patterns
-/docs/database/schema.md                                           # Database entities
-.sops/phase-2-backend/SOP-200-service-layer.md                     # The procedure
+.sops/phase-2-backend/SOP-203-authentication.md                    # The procedure
 ```
 
 ### Expected Outputs
 
-- [ ] Service functions implemented
-- [ ] Domain logic handled
+- [ ] Auth Hook implemented
 - [ ] Documentation updated
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
