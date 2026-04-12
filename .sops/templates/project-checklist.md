@@ -121,9 +121,9 @@
 
 ### Authorization (SOP-204)
 
-- [ ] Roles defined: \***\*\*\*\*\***\_\***\*\*\*\*\***
-- [ ] Permission matrix documented
-- [ ] Route protection implemented
+- [x] Roles defined: buyer, seller, admin, inspector
+- [x] Permission matrix documented
+- [x] Route protection implemented (via Supabase RLS and UI guards)
 
 ### Error Handling (SOP-205)
 

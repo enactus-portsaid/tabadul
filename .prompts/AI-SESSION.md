@@ -81,15 +81,15 @@
 
 ### Phase 2: Backend
 
-| SOP | Title              | Status | Output Location                                                         | Notes                                                                          |
-| --- | ------------------ | ------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md` | Extracted domain services via Supabase Client                                  |
-| 201 | Repository Pattern | ⏭️     | —                                                                       | Skipped per execution brief: Supabase abstracts data access natively           |
-| 202 | API Design         | ⏭️     | —                                                                       | Skipped per execution brief: Supabase handles API generation                   |
-| 203 | Authentication     | ✅     | `apps/*/src/hooks/useAuth.ts`, `apps/*/src/lib/supabase*.ts`, `/docs/architecture/auth-flow.md` | Supabase Auth, expo-secure-store, @supabase/ssr, middleware, route guards |
-| 204 | Authorization      | ⬚      | `/docs/authorization.md`, middleware                                    |                                                                                |
-| 205 | Error Handling     | ⬚      | Error handler module                                                    |                                                                                |
-| 206 | Validation         | ⬚      | Validation schemas                                                      |                                                                                |
+| SOP | Title              | Status | Output Location                                                                                                               | Notes                                                                     |
+| --- | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md`                                                       | Extracted domain services via Supabase Client                             |
+| 201 | Repository Pattern | ⏭️     | —                                                                                                                             | Skipped per execution brief: Supabase abstracts data access natively      |
+| 202 | API Design         | ⏭️     | —                                                                                                                             | Skipped per execution brief: Supabase handles API generation              |
+| 203 | Authentication     | ✅     | `apps/*/src/hooks/useAuth.ts`, `apps/*/src/lib/supabase*.ts`, `/docs/architecture/auth-flow.md`                               | Supabase Auth, expo-secure-store, @supabase/ssr, middleware, route guards |
+| 204 | Authorization      | ✅     | `supabase/migrations/00002_rls_policies.sql`, `packages/shared/src/utils/permissions.ts`, `/docs/architecture/permissions.md` | Supabase Row-Level Security, UI utility functions                         |
+| 205 | Error Handling     | ⬚      | Error handler module                                                                                                          |                                                                           |
+| 206 | Validation         | ⬚      | Validation schemas                                                                                                            |                                                                           |
 
 ### Phase 3: Frontend
 
@@ -272,7 +272,7 @@ These are human-approved and must never be contradicted:
 | DB Decision     | `/docs/database/database-decision.md`                                   | SOP-100         |
 | Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
 | Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
-| API Spec        | ⏭️ Skipped (Supabase BaaS)                                               | SOP-202         |
+| API Spec        | ⏭️ Skipped (Supabase BaaS)                                              | SOP-202         |
 | Auth Flow       | `/docs/architecture/auth-flow.md`                                       | SOP-203         |
 | Auth Schemas    | `packages/shared/src/schemas/auth.ts`                                   | SOP-203         |
 | Auth Types      | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
@@ -288,7 +288,7 @@ These are human-approved and must never be contradicted:
 
 **SOP:** SOP-204
 **Title:** Authorization
-**Status:** ⬚ Not Started
+**Status:** ✅ Complete
 
 ### Context Files to Read
 
