@@ -114,10 +114,10 @@
 
 ### Authentication (SOP-203)
 
-- [ ] Auth method selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
-- [ ] Token management implemented
-- [ ] Password hashing configured
-- [ ] Session/token expiry defined
+- [x] Auth method selected: Supabase Auth (Email/Password, JWT)
+- [x] Token management implemented
+- [x] Password hashing configured
+- [x] Session/token expiry defined
 
 ### Authorization (SOP-204)
 

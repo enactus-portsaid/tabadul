@@ -255,6 +255,8 @@ These are human-approved and must never be contradicted:
 | Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces                                                                                                                                                | `/docs/development-setup.md`              | SOP-004 |
 | Design Patterns | BaaS-Driven Layered Architecture; Service Functions (no Repository); Custom Hooks + Composition; TanStack Query + Zustand; React Hook Form + Zod; Result Pattern (`{ data, error }`); Auth Hook + RLS + Route Guards | `/docs/architecture/design-patterns.md`   | SOP-005 |
 | Code Style      | ESLint 9 flat config + Prettier + Husky + lint-staged; simple-import-sort; Tailwind class sorting; printWidth 80; singleQuote; trailingComma es5                                                                     | `eslint.config.mjs`, `prettier.config.js` | SOP-006 |
+| Service Layer   | Supabase JS client wrapped in domain service functions (Result Pattern returned)                                                                                                                                     | `/docs/architecture/business-rules.md`    | SOP-200 |
+| Authorization   | Row Level Security (RLS) policies at the DB level, UI guards, and route guards for roles: buyer, seller, admin, inspector                                                                                            | `/docs/architecture/permissions.md`       | SOP-204 |
 
 ### Cached File Locations
 
@@ -272,10 +274,14 @@ These are human-approved and must never be contradicted:
 | DB Decision     | `/docs/database/database-decision.md`                                   | SOP-100         |
 | Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
 | Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
+| Service Layer   | `packages/shared/src/services/`                                         | SOP-200         |
+| Business Rules  | `/docs/architecture/business-rules.md`                                  | SOP-200         |
 | API Spec        | ⏭️ Skipped (Supabase BaaS)                                              | SOP-202         |
 | Auth Flow       | `/docs/architecture/auth-flow.md`                                       | SOP-203         |
 | Auth Schemas    | `packages/shared/src/schemas/auth.ts`                                   | SOP-203         |
 | Auth Types      | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
+| Auth Policies   | `supabase/migrations/00002_rls_policies.sql`                            | SOP-204         |
+| Permissions     | `/docs/architecture/permissions.md`                                     | SOP-204         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
 | Visual Design   | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
 | Page Manifest   | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
@@ -286,23 +292,23 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-204
-**Title:** Authorization
-**Status:** ✅ Complete
+**SOP:** SOP-205
+**Title:** Error Handling
+**Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-2-api-backend/SOP-204-authorization.md                 # The procedure
-/docs/architecture/auth-flow.md                                    # Auth flow (SOP-203 output)
-/docs/architecture/design-patterns.md                              # Auth patterns (§3.8)
+.sops/phase-2-api-backend/SOP-205-error-handling.md                # The procedure
+/docs/architecture/design-patterns.md                              # Result Pattern reference
 ```
 
 ### Expected Outputs
 
-- [ ] RLS policies implemented
-- [ ] Authorization documentation updated
+- [ ] Standard error response format defined
+- [ ] Error codes documented
+- [ ] User-friendly error messages mapped
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -339,15 +345,13 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-204 (Authorization).
+Execute SOP-205 (Error Handling).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/architecture/auth-flow.md` for authentication architecture (SOP-203 output)
-- `/docs/architecture/design-patterns.md` for auth patterns (§3.8)
-- `/docs/database/schema.md` for table structure and RLS needs
-- `.sops/phase-2-api-backend/SOP-204-authorization.md` for the procedure
+- `/docs/architecture/design-patterns.md` for Result Pattern structure reference
+- `.sops/phase-2-api-backend/SOP-205-error-handling.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -555,3 +559,30 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-203: **Web middleware uses `getUser()` not `getSession()`** — server-validates the token with Supabase Auth to prevent forgery (official Supabase recommendation).
 - SOP-203: **Zod schemas use i18n keys** as error messages (e.g., `'auth.validation.emailRequired'`) — ready for Arabic/English translation in Phase 3.
 - SOP-203: **SOP-201 and SOP-202 marked as skipped** per execution brief §5 — Supabase handles API generation and data access natively.
+
+### Session 10 — 2026-04-05
+
+**SOPs Completed:** SOP-200 (Service Layer)  
+**Files Created:**
+
+- `packages/shared/src/services/**` (Domain service functions)
+- `/docs/architecture/business-rules.md` (Core business rules documentation)
+
+**Notes:**
+
+- SOP-200: Implemented Backend Service Layer wraps Supabase JS client.
+- SOP-200: Adopted the standardized Result Pattern (`{ data, error }`) instead of throwing exceptions.
+
+### Session 11 — 2026-04-12
+
+**SOPs Completed:** SOP-204 (Authorization)  
+**Files Created:**
+
+- `supabase/migrations/00002_rls_policies.sql` (Row-Level Security configurations)
+- `packages/shared/src/utils/permissions.ts` (UI permission utility functions)
+- `/docs/architecture/permissions.md` (Permissions matrix documenting roles)
+
+**Notes:**
+
+- SOP-204: Implemented platform authorization layer with RLS policies defining data ownership rules.
+- SOP-204: Defined roles and authorization middleware following the BaaS-Driven Layered Architecture.
