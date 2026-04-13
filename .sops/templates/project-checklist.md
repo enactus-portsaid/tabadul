@@ -114,16 +114,16 @@
 
 ### Authentication (SOP-203)
 
-- [ ] Auth method selected: \***\*\*\*\*\***\_\***\*\*\*\*\***
-- [ ] Token management implemented
-- [ ] Password hashing configured
-- [ ] Session/token expiry defined
+- [x] Auth method selected: Supabase Auth (Email/Password, JWT)
+- [x] Token management implemented
+- [x] Password hashing configured
+- [x] Session/token expiry defined
 
 ### Authorization (SOP-204)
 
-- [ ] Roles defined: \***\*\*\*\*\***\_\***\*\*\*\*\***
-- [ ] Permission matrix documented
-- [ ] Route protection implemented
+- [x] Roles defined: buyer, seller, admin, inspector
+- [x] Permission matrix documented
+- [x] Route protection implemented (via Supabase RLS and UI guards)
 
 ### Error Handling (SOP-205)
 
