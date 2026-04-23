@@ -88,7 +88,7 @@
 | 202 | API Design         | ⏭️     | —                                                                                                                             | Skipped per execution brief: Supabase handles API generation              |
 | 203 | Authentication     | ✅     | `apps/*/src/hooks/useAuth.ts`, `apps/*/src/lib/supabase*.ts`, `/docs/architecture/auth-flow.md`                               | Supabase Auth, expo-secure-store, @supabase/ssr, middleware, route guards |
 | 204 | Authorization      | ✅     | `supabase/migrations/00002_rls_policies.sql`, `packages/shared/src/utils/permissions.ts`, `/docs/architecture/permissions.md` | Supabase Row-Level Security, UI utility functions                         |
-| 205 | Error Handling     | ⬚      | Error handler module                                                                                                          |                                                                           |
+| 205 | Error Handling     | ✅     | `packages/shared/src/lib/errors.ts`, `packages/shared/src/lib/errorHandler.ts`, `packages/shared/src/lib/errorMessages.ts`, `/docs/architecture/error-handling.md` | AppError class hierarchy, error normalization, i18n message keys           |
 | 206 | Validation         | ⬚      | Validation schemas                                                                                                            |                                                                           |
 
 ### Phase 3: Frontend
@@ -257,6 +257,7 @@ These are human-approved and must never be contradicted:
 | Code Style      | ESLint 9 flat config + Prettier + Husky + lint-staged; simple-import-sort; Tailwind class sorting; printWidth 80; singleQuote; trailingComma es5                                                                     | `eslint.config.mjs`, `prettier.config.js` | SOP-006 |
 | Service Layer   | Supabase JS client wrapped in domain service functions (Result Pattern returned)                                                                                                                                     | `/docs/architecture/business-rules.md`    | SOP-200 |
 | Authorization   | Row Level Security (RLS) policies at the DB level, UI guards, and route guards for roles: buyer, seller, admin, inspector                                                                                            | `/docs/architecture/permissions.md`       | SOP-204 |
+| Error Handling  | AppError class hierarchy (8 subclasses), ErrorCode enum, normalizeError() for Supabase→AppError conversion, i18n error message keys, isRetryableError() helper                                                       | `/docs/architecture/error-handling.md`    | SOP-205 |
 
 ### Cached File Locations
 
@@ -282,6 +283,10 @@ These are human-approved and must never be contradicted:
 | Auth Types      | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
 | Auth Policies   | `supabase/migrations/00002_rls_policies.sql`                            | SOP-204         |
 | Permissions     | `/docs/architecture/permissions.md`                                     | SOP-204         |
+| Error Types     | `packages/shared/src/lib/errors.ts`                                     | SOP-205         |
+| Error Handler   | `packages/shared/src/lib/errorHandler.ts`                               | SOP-205         |
+| Error Messages  | `packages/shared/src/lib/errorMessages.ts`                              | SOP-205         |
+| Error Docs      | `/docs/architecture/error-handling.md`                                  | SOP-205         |
 | Component Docs  | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
 | Visual Design   | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
 | Page Manifest   | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
@@ -292,23 +297,25 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-205
-**Title:** Error Handling
+**SOP:** SOP-206
+**Title:** Validation
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-2-api-backend/SOP-205-error-handling.md                # The procedure
-/docs/architecture/design-patterns.md                              # Result Pattern reference
+.sops/phase-2-api-backend/SOP-206-validation.md                    # The procedure
+packages/shared/src/schemas/auth.ts                                # Existing Zod schema pattern
+packages/shared/src/lib/errors.ts                                  # Error types from SOP-205
+/docs/architecture/design-patterns.md                              # Form Patterns §3.6
 ```
 
 ### Expected Outputs
 
-- [ ] Standard error response format defined
-- [ ] Error codes documented
-- [ ] User-friendly error messages mapped
+- [ ] Validation schemas for all domain entities
+- [ ] Validation integrated with error handling
+- [ ] Sanitization for user inputs
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 
@@ -345,13 +352,15 @@ These are human-approved and must never be contradicted:
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-205 (Error Handling).
+Execute SOP-206 (Validation).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `/docs/architecture/design-patterns.md` for Result Pattern structure reference
-- `.sops/phase-2-api-backend/SOP-205-error-handling.md` for the procedure
+- `packages/shared/src/schemas/auth.ts` for existing Zod schema pattern
+- `packages/shared/src/lib/errors.ts` for error types from SOP-205
+- `/docs/architecture/design-patterns.md` §3.6 for Form Patterns
+- `.sops/phase-2-api-backend/SOP-206-validation.md` for the procedure
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
@@ -586,3 +595,27 @@ Update `.sops/templates/project-checklist.md` when complete.
 
 - SOP-204: Implemented platform authorization layer with RLS policies defining data ownership rules.
 - SOP-204: Defined roles and authorization middleware following the BaaS-Driven Layered Architecture.
+
+### Session 12 — 2026-04-14
+
+**SOPs Completed:** SOP-205 (Error Handling)  
+**Files Created:**
+
+- `packages/shared/src/lib/errors.ts` (AppError base class, 8 error subclasses, ErrorCode enum, type guards)
+- `packages/shared/src/lib/errorMessages.ts` (i18n error message key mappings, domain-specific keys, English fallbacks)
+- `packages/shared/src/lib/errorHandler.ts` (normalizeError, getDisplayMessage, isRetryableError — Supabase→AppError conversion)
+- `/docs/architecture/error-handling.md` (Error architecture: flow diagram, code catalog, usage patterns per layer)
+
+**Files Updated:**
+
+- `packages/shared/src/index.ts` (Added barrel exports for lib/errors, lib/errorHandler, lib/errorMessages)
+
+**Notes:**
+
+- SOP-205: **Adapted from Express middleware to BaaS architecture** — SOP template references `src/middleware/error-handler.ts` (Express catch-all). Replaced with portable `normalizeError()` function callable from hooks/components.
+- SOP-205: **Preserved Result Pattern** — Services continue returning `{ data, error }` as-is. Error normalization happens at the hook layer via `normalizeError()`.
+- SOP-205: **AppError class hierarchy** — 8 subclasses covering all HTTP error categories plus network/timeout. Each stores `code`, `statusCode`, `isOperational`, `details` and serializes via `toJSON()`.
+- SOP-205: **Supabase error mapping** — PostgrestError mapped by PostgreSQL error codes (23505→Conflict, 23503→Validation, PGRST116→NotFound, etc.). AuthError mapped by message pattern matching + HTTP status fallback.
+- SOP-205: **i18n-ready messages** — Every ErrorCode maps to an i18n key (e.g., `errors.notFound`). Domain-specific keys defined for all entities (listing, transaction, payment, chat, inspection, dispute, auth).
+- SOP-205: **Operational vs. programming errors** — `isOperational` flag distinguishes user-facing errors from bugs. Non-operational errors display generic "Something went wrong" to avoid leaking internals.
+- SOP-205: **Retry logic** — `isRetryableError()` identifies network, rate-limit, and timeout errors for TanStack Query retry configuration.
