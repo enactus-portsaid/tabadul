@@ -317,6 +317,23 @@ packages/shared/src/lib/errors.ts                                  # Error types
 - [ ] Validation integrated with error handling
 - [ ] Sanitization for user inputs
 
+> **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
+
+<!--
+### Iterative SOP: SOP-{XXX} — {Title}
+
+**Manifest Approved:** ⬚ / ✅
+
+| # | Work Unit | Status | Output Files | Checkpoint |
+|---|-----------|--------|--------------|------------|
+| 1 | {Unit A}  | ⬚     | {files}      | ⬚         |
+| 2 | {Unit B}  | ⬚     | {files}      | ⬚         |
+| 3 | {Unit C}  | ⬚     | {files}      | ⬚         |
+
+**Coverage:** 0/{total} units complete
+**Status Legend:** ⬚ Not Started · 🔄 In Progress · ✅ Complete
+-->
+
 ---
 
 ## 📝 Session Prompt Template
