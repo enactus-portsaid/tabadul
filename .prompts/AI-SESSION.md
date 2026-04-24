@@ -81,15 +81,15 @@
 
 ### Phase 2: Backend
 
-| SOP | Title              | Status | Output Location                                                                                                               | Notes                                                                     |
-| --- | ------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md`                                                       | Extracted domain services via Supabase Client                             |
-| 201 | Repository Pattern | ⏭️     | —                                                                                                                             | Skipped per execution brief: Supabase abstracts data access natively      |
-| 202 | API Design         | ⏭️     | —                                                                                                                             | Skipped per execution brief: Supabase handles API generation              |
-| 203 | Authentication     | ✅     | `apps/*/src/hooks/useAuth.ts`, `apps/*/src/lib/supabase*.ts`, `/docs/architecture/auth-flow.md`                               | Supabase Auth, expo-secure-store, @supabase/ssr, middleware, route guards |
-| 204 | Authorization      | ✅     | `supabase/migrations/00002_rls_policies.sql`, `packages/shared/src/utils/permissions.ts`, `/docs/architecture/permissions.md` | Supabase Row-Level Security, UI utility functions                         |
-| 205 | Error Handling     | ✅     | `packages/shared/src/lib/errors.ts`, `packages/shared/src/lib/errorHandler.ts`, `packages/shared/src/lib/errorMessages.ts`, `/docs/architecture/error-handling.md` | AppError class hierarchy, error normalization, i18n message keys           |
-| 206 | Validation         | ⬚      | Validation schemas                                                                                                            |                                                                           |
+| SOP | Title              | Status | Output Location                                                                                                                                                    | Notes                                                                     |
+| --- | ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| 200 | Service Layer      | ✅     | `packages/shared/src/services/`, `/docs/architecture/business-rules.md`                                                                                            | Extracted domain services via Supabase Client                             |
+| 201 | Repository Pattern | ⏭️     | —                                                                                                                                                                  | Skipped per execution brief: Supabase abstracts data access natively      |
+| 202 | API Design         | ⏭️     | —                                                                                                                                                                  | Skipped per execution brief: Supabase handles API generation              |
+| 203 | Authentication     | ✅     | `apps/*/src/hooks/useAuth.ts`, `apps/*/src/lib/supabase*.ts`, `/docs/architecture/auth-flow.md`                                                                    | Supabase Auth, expo-secure-store, @supabase/ssr, middleware, route guards |
+| 204 | Authorization      | ✅     | `supabase/migrations/00002_rls_policies.sql`, `packages/shared/src/utils/permissions.ts`, `/docs/architecture/permissions.md`                                      | Supabase Row-Level Security, UI utility functions                         |
+| 205 | Error Handling     | ✅     | `packages/shared/src/lib/errors.ts`, `packages/shared/src/lib/errorHandler.ts`, `packages/shared/src/lib/errorMessages.ts`, `/docs/architecture/error-handling.md` | AppError class hierarchy, error normalization, i18n message keys          |
+| 206 | Validation         | ✅     | `packages/shared/src/schemas/`, `packages/shared/src/utils/validation.ts`                                                                                          | Adapted from SOP to BaaS architecture (Zod schemas + validation utility)  |
 
 ### Phase 3: Frontend
 
@@ -258,38 +258,41 @@ These are human-approved and must never be contradicted:
 | Service Layer   | Supabase JS client wrapped in domain service functions (Result Pattern returned)                                                                                                                                     | `/docs/architecture/business-rules.md`    | SOP-200 |
 | Authorization   | Row Level Security (RLS) policies at the DB level, UI guards, and route guards for roles: buyer, seller, admin, inspector                                                                                            | `/docs/architecture/permissions.md`       | SOP-204 |
 | Error Handling  | AppError class hierarchy (8 subclasses), ErrorCode enum, normalizeError() for Supabase→AppError conversion, i18n error message keys, isRetryableError() helper                                                       | `/docs/architecture/error-handling.md`    | SOP-205 |
+| Validation      | Zod-based schema registry for listing, transaction, chat, bid, review, and inspection entities; explicit validation.ts utility to enforce standard Error response parsing                                            | `packages/shared/src/schemas/`            | SOP-206 |
 
 ### Cached File Locations
 
-| Artifact        | Path                                                                    | Last Updated By |
-| --------------- | ----------------------------------------------------------------------- | --------------- |
-| Requirements    | `/docs/requirements.md`                                                 | SOP-000         |
-| Tech Stack      | `/docs/tech-stack.md`                                                   | SOP-001         |
-| README          | `/README.md`                                                            | SOP-002         |
-| CONTRIBUTING    | `/CONTRIBUTING.md`                                                      | SOP-002         |
-| PR Template     | `/.github/PULL_REQUEST_TEMPLATE.md`                                     | SOP-002         |
-| Structure Doc   | `/docs/architecture/project-structure.md`                               | SOP-003         |
-| Shared Package  | `/packages/shared/`                                                     | SOP-003         |
-| Env Docs        | `/docs/environment-variables.md`                                        | SOP-004         |
-| Design Patterns | `/docs/architecture/design-patterns.md`                                 | SOP-005         |
-| DB Decision     | `/docs/database/database-decision.md`                                   | SOP-100         |
-| Schema / ERD    | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
-| Seed Data       | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
-| Service Layer   | `packages/shared/src/services/`                                         | SOP-200         |
-| Business Rules  | `/docs/architecture/business-rules.md`                                  | SOP-200         |
-| API Spec        | ⏭️ Skipped (Supabase BaaS)                                              | SOP-202         |
-| Auth Flow       | `/docs/architecture/auth-flow.md`                                       | SOP-203         |
-| Auth Schemas    | `packages/shared/src/schemas/auth.ts`                                   | SOP-203         |
-| Auth Types      | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
-| Auth Policies   | `supabase/migrations/00002_rls_policies.sql`                            | SOP-204         |
-| Permissions     | `/docs/architecture/permissions.md`                                     | SOP-204         |
-| Error Types     | `packages/shared/src/lib/errors.ts`                                     | SOP-205         |
-| Error Handler   | `packages/shared/src/lib/errorHandler.ts`                               | SOP-205         |
-| Error Messages  | `packages/shared/src/lib/errorMessages.ts`                              | SOP-205         |
-| Error Docs      | `/docs/architecture/error-handling.md`                                  | SOP-205         |
-| Component Docs  | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
-| Visual Design   | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
-| Page Manifest   | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
+| Artifact         | Path                                                                    | Last Updated By |
+| ---------------- | ----------------------------------------------------------------------- | --------------- |
+| Requirements     | `/docs/requirements.md`                                                 | SOP-000         |
+| Tech Stack       | `/docs/tech-stack.md`                                                   | SOP-001         |
+| README           | `/README.md`                                                            | SOP-002         |
+| CONTRIBUTING     | `/CONTRIBUTING.md`                                                      | SOP-002         |
+| PR Template      | `/.github/PULL_REQUEST_TEMPLATE.md`                                     | SOP-002         |
+| Structure Doc    | `/docs/architecture/project-structure.md`                               | SOP-003         |
+| Shared Package   | `/packages/shared/`                                                     | SOP-003         |
+| Env Docs         | `/docs/environment-variables.md`                                        | SOP-004         |
+| Design Patterns  | `/docs/architecture/design-patterns.md`                                 | SOP-005         |
+| DB Decision      | `/docs/database/database-decision.md`                                   | SOP-100         |
+| Schema / ERD     | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
+| Seed Data        | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
+| Service Layer    | `packages/shared/src/services/`                                         | SOP-200         |
+| Business Rules   | `/docs/architecture/business-rules.md`                                  | SOP-200         |
+| API Spec         | ⏭️ Skipped (Supabase BaaS)                                              | SOP-202         |
+| Auth Flow        | `/docs/architecture/auth-flow.md`                                       | SOP-203         |
+| Auth Schemas     | `packages/shared/src/schemas/auth.ts`                                   | SOP-203         |
+| Auth Types       | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
+| Auth Policies    | `supabase/migrations/00002_rls_policies.sql`                            | SOP-204         |
+| Permissions      | `/docs/architecture/permissions.md`                                     | SOP-204         |
+| Error Types      | `packages/shared/src/lib/errors.ts`                                     | SOP-205         |
+| Error Handler    | `packages/shared/src/lib/errorHandler.ts`                               | SOP-205         |
+| Error Messages   | `packages/shared/src/lib/errorMessages.ts`                              | SOP-205         |
+| Error Docs       | `/docs/architecture/error-handling.md`                                  | SOP-205         |
+| Validation Utils | `packages/shared/src/utils/validation.ts`                               | SOP-206         |
+| Entity Schemas   | `packages/shared/src/schemas/*.ts`                                      | SOP-206         |
+| Component Docs   | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
+| Visual Design    | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
+| Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
 
 ---
 
@@ -297,8 +300,8 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-206
-**Title:** Validation
+**SOP:** SOP-300
+**Title:** Component Architecture
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
@@ -366,7 +369,28 @@ Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
 Update `.prompts/AI-SESSION.md` when complete.
 Update `.sops/templates/project-checklist.md` when complete.
-```
+
+### Session 13 — 2026-04-24
+
+**SOPs Completed:** SOP-206 (Validation)  
+**Files Created:**
+
+- `packages/shared/src/schemas/listing.ts`
+- `packages/shared/src/schemas/transaction.ts`
+- `packages/shared/src/schemas/chat.ts`
+- `packages/shared/src/schemas/bid.ts`
+- `packages/shared/src/schemas/review.ts`
+- `packages/shared/src/schemas/inspection.ts`
+- `packages/shared/src/utils/validation.ts`
+  **Files Updated:**
+- `packages/shared/src/schemas/index.ts`
+- `packages/shared/src/index.ts`
+
+**Notes:**
+
+- Pivoted from the SOP's Express middleware pattern to a tailored BaaS architectural pattern that uses Zod schemas within `shared` and a `validateData()` utility.
+- Preserved alignment with `AppError` architecture from SOP-205 by throwing `ValidationError` configured with precise issue traces when parsing fails.
+- Schema rules align directly with constraints implemented in SQL within SOP-101.
 
 ---
 
@@ -619,3 +643,4 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-205: **i18n-ready messages** — Every ErrorCode maps to an i18n key (e.g., `errors.notFound`). Domain-specific keys defined for all entities (listing, transaction, payment, chat, inspection, dispute, auth).
 - SOP-205: **Operational vs. programming errors** — `isOperational` flag distinguishes user-facing errors from bugs. Non-operational errors display generic "Something went wrong" to avoid leaking internals.
 - SOP-205: **Retry logic** — `isRetryableError()` identifies network, rate-limit, and timeout errors for TanStack Query retry configuration.
+```

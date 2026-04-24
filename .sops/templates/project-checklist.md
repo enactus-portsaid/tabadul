@@ -134,9 +134,9 @@
 
 ### Validation (SOP-206)
 
-- [ ] Input validation library selected
-- [ ] Request schemas defined
-- [ ] Sanitization for user inputs
+- [x] Input validation library selected
+- [x] Request schemas defined
+- [x] Sanitization for user inputs
 
 ---
 
