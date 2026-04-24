@@ -178,18 +178,18 @@ These are human-approved and must never be contradicted:
 
 ### Phase 2 Checkpoint — Backend/API
 
-| Design Doc (Level 1) | Location        | Traces to Requirement            |
-| -------------------- | --------------- | -------------------------------- |
-| API Endpoints        | {location or ⬚} | {e.g., "CRUD for all resources"} |
-| OpenAPI Spec         | {location or ⬚} |                                  |
-| Auth Strategy        | {location or ⬚} | {e.g., "JWT per tech-stack.md"}  |
-| Error Codes          | {location or ⬚} |                                  |
+| Design Doc (Level 1) | Location                               | Traces to Requirement          |
+| -------------------- | -------------------------------------- | ------------------------------ |
+| API Endpoints        | ⏭️ Skipped (BaaS)                      | Supabase JS Client abstraction |
+| OpenAPI Spec         | ⏭️ Skipped (BaaS)                      | Supabase Auto-generated API    |
+| Auth Strategy        | `/docs/architecture/auth-flow.md`      | "Secure buyer/seller logins"   |
+| Error Codes          | `/docs/architecture/error-handling.md` | Consistent error states        |
 
-| Implementation (Level 2) | Location                    | Traces to Design |
-| ------------------------ | --------------------------- | ---------------- |
-| API Routes               | {e.g., `src/app/api/` or ⬚} |                  |
-| Auth Module              | {location or ⬚}             |                  |
-| Validation Schemas       | {location or ⬚}             |                  |
+| Implementation (Level 2) | Location                        | Traces to Design      |
+| ------------------------ | ------------------------------- | --------------------- |
+| API Routes               | `packages/shared/src/services/` | Wraps Supabase Client |
+| Auth Module              | `apps/*/src/hooks/useAuth.ts`   | Auth Strategy         |
+| Validation Schemas       | `packages/shared/src/schemas/`  | Input Validation      |
 
 **Checkpoint Status:** ⬚ Not Run / ✅ Passed / ⚠️ Issues Found  
 **Last Run:** {date}  
@@ -355,20 +355,12 @@ packages/shared/src/lib/errors.ts                                  # Error types
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-206 (Validation).
+/sop-checkpoint
+```
 
-Read:
+---
 
-- `.prompts/AI-SESSION.md` for context
-- `packages/shared/src/schemas/auth.ts` for existing Zod schema pattern
-- `packages/shared/src/lib/errors.ts` for error types from SOP-205
-- `/docs/architecture/design-patterns.md` §3.6 for Form Patterns
-- `.sops/phase-2-api-backend/SOP-206-validation.md` for the procedure
-
-Follow the SOP's Procedure section step by step.
-Create all outputs listed in the SOP's Outputs section.
-Update `.prompts/AI-SESSION.md` when complete.
-Update `.sops/templates/project-checklist.md` when complete.
+## 📓 Session Log
 
 ### Session 13 — 2026-04-24
 
@@ -382,7 +374,9 @@ Update `.sops/templates/project-checklist.md` when complete.
 - `packages/shared/src/schemas/review.ts`
 - `packages/shared/src/schemas/inspection.ts`
 - `packages/shared/src/utils/validation.ts`
-  **Files Updated:**
+
+**Files Updated:**
+
 - `packages/shared/src/schemas/index.ts`
 - `packages/shared/src/index.ts`
 
@@ -391,10 +385,6 @@ Update `.sops/templates/project-checklist.md` when complete.
 - Pivoted from the SOP's Express middleware pattern to a tailored BaaS architectural pattern that uses Zod schemas within `shared` and a `validateData()` utility.
 - Preserved alignment with `AppError` architecture from SOP-205 by throwing `ValidationError` configured with precise issue traces when parsing fails.
 - Schema rules align directly with constraints implemented in SQL within SOP-101.
-
----
-
-## 📓 Session Log
 
 ### Session 1 — 2026-03-05
 
@@ -643,4 +633,7 @@ Update `.sops/templates/project-checklist.md` when complete.
 - SOP-205: **i18n-ready messages** — Every ErrorCode maps to an i18n key (e.g., `errors.notFound`). Domain-specific keys defined for all entities (listing, transaction, payment, chat, inspection, dispute, auth).
 - SOP-205: **Operational vs. programming errors** — `isOperational` flag distinguishes user-facing errors from bugs. Non-operational errors display generic "Something went wrong" to avoid leaking internals.
 - SOP-205: **Retry logic** — `isRetryableError()` identifies network, rate-limit, and timeout errors for TanStack Query retry configuration.
+
+```
+
 ```
