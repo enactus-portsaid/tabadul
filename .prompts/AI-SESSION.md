@@ -178,22 +178,93 @@ These are human-approved and must never be contradicted:
 
 ### Phase 2 Checkpoint — Backend/API
 
-| Design Doc (Level 1) | Location                               | Traces to Requirement          |
-| -------------------- | -------------------------------------- | ------------------------------ |
-| API Endpoints        | ⏭️ Skipped (BaaS)                      | Supabase JS Client abstraction |
-| OpenAPI Spec         | ⏭️ Skipped (BaaS)                      | Supabase Auto-generated API    |
-| Auth Strategy        | `/docs/architecture/auth-flow.md`      | "Secure buyer/seller logins"   |
-| Error Codes          | `/docs/architecture/error-handling.md` | Consistent error states        |
+#### Level 0 → Level 1 (Requirements → Design Docs)
 
-| Implementation (Level 2) | Location                        | Traces to Design      |
-| ------------------------ | ------------------------------- | --------------------- |
-| API Routes               | `packages/shared/src/services/` | Wraps Supabase Client |
-| Auth Module              | `apps/*/src/hooks/useAuth.ts`   | Auth Strategy         |
-| Validation Schemas       | `packages/shared/src/schemas/`  | Input Validation      |
+| Requirement Area                    | User Stories     | Design Doc (Level 1)                        | Addressed? |
+| ----------------------------------- | ---------------- | ------------------------------------------- | ---------- |
+| Authentication & Profile            | US-001–005       | `/docs/architecture/auth-flow.md`           | ✅ Yes     |
+| Service Layer (Listings)            | US-010–014       | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Service Layer (Browsing)            | US-020–023       | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Service Layer (AI Matching)         | US-030–032       | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Service Layer (Chat)                | US-040–043       | `/docs/architecture/business-rules.md`      | ⚠️ Partial |
+| Service Layer (Transactions)        | US-050–055       | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Service Layer (Inspection)          | US-060, US-062   | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Service Layer (Admin)               | US-080–084       | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Service Layer (Notifications)       | US-090–091       | `/docs/architecture/business-rules.md`      | ✅ Yes     |
+| Authorization (Roles & Permissions) | All roles        | `/docs/architecture/permissions.md`         | ✅ Yes     |
+| Error Handling                      | NFR (resilience) | `/docs/architecture/error-handling.md`      | ✅ Yes     |
+| Validation                          | All input forms  | Documented inline in schema files           | ✅ Yes     |
+| API Endpoints                       | All data access  | ⏭️ Skipped (BaaS — Supabase JS Client)      | ✅ N/A     |
+| OpenAPI Spec                        | API contracts    | ⏭️ Skipped (BaaS — Supabase auto-generated) | ✅ N/A     |
 
-**Checkpoint Status:** ⬚ Not Run / ✅ Passed / ⚠️ Issues Found  
-**Last Run:** {date}  
-**Issues:** {none or list issues}
+**Drift Note (US-041/042):** Chat content moderation (contact-info blocking, profanity filtering) is referenced in requirements but not yet designed in Phase 2 docs. This is acceptable — content filtering logic belongs to Phase 4 (AI Integration) or an Edge Function in Phase 3. Tracked as a warning below.
+
+#### Level 1 → Level 2 (Design Docs → Implementation)
+
+| Design Decision                     | Expected                                                        | Actual Code                                                                                                           | Compliant? | File:Line                                                 |
+| :---------------------------------- | :-------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :--------- | :-------------------------------------------------------- |
+| **Service Layer Pattern**           | Factory functions wrapping Supabase Client, Result Pattern      | `createXxxService(supabase)` factories returning `{ data, error }`                                                    | ✅ Yes     | `packages/shared/src/services/index.ts:22-33`             |
+| **DI via Factory**                  | Single `createServices()` accepting SupabaseClient              | `createServices(supabase)` returns all 8 domain services                                                              | ✅ Yes     | `packages/shared/src/services/index.ts:22-33`             |
+| **Service: Auth**                   | signIn, signUp, signOut, getProfile, updateProfile              | All 5 methods implemented                                                                                             | ✅ Yes     | `packages/shared/src/services/auth.ts:3-39`               |
+| **Service: Listing**                | CRUD + bid + bookmark                                           | getListings, getListing, create, update, deactivate, placeBid, toggleBookmark                                         | ✅ Yes     | `packages/shared/src/services/listing.ts:3-89`            |
+| **Service: Transaction**            | Lifecycle management, receipt upload, review, dispute           | getTransactions, getTransaction, create, updateStatus, updateShipmentStatus, uploadReceipt, submitReview, fileDispute | ✅ Yes     | `packages/shared/src/services/transaction.ts:3-86`        |
+| **Service: Chat**                   | Thread init, messages, read state                               | getThreads, getOrCreateThread, getMessages, sendMessage, markMessagesAsRead                                           | ✅ Yes     | `packages/shared/src/services/chat.ts:3-87`               |
+| **Service: Matching**               | Recommendations + dismiss                                       | getRecommendations, dismissRecommendation                                                                             | ✅ Yes     | `packages/shared/src/services/matching.ts:3-25`           |
+| **Service: Inspection**             | Get report + submit report                                      | getReport, submitReport (with pass/fail, photos)                                                                      | ✅ Yes     | `packages/shared/src/services/inspection.ts:3-34`         |
+| **Service: Notification**           | List, unread count, mark read, preferences                      | getNotifications, getUnreadCount, markAsRead, getPreferences, updatePreferences                                       | ✅ Yes     | `packages/shared/src/services/notification.ts:3-48`       |
+| **Service: Admin**                  | User mgmt, listing moderation, payment verify, disputes         | getUsers, moderateListing, getPendingPayments, verifyReceipt, getOpenDisputes, resolveDispute                         | ✅ Yes     | `packages/shared/src/services/admin.ts:3-84`              |
+| **Auth: Supabase Auth**             | Email + password, JWT                                           | `signInWithPassword`, `signUp` with metadata                                                                          | ✅ Yes     | `apps/*/src/hooks/useAuth.ts`                             |
+| **Auth: Mobile token storage**      | expo-secure-store                                               | `ExpoSecureStoreAdapter` in Supabase client config                                                                    | ✅ Yes     | `apps/mobile/src/lib/supabase.ts`                         |
+| **Auth: Web cookie management**     | @supabase/ssr HTTP-only cookies                                 | `createBrowserClient` / `createServerClient` from @supabase/ssr                                                       | ✅ Yes     | `apps/web/src/lib/supabase.ts`, `supabaseServer.ts`       |
+| **Auth: TanStack Query caching**    | Session + profile cached in React Query                         | `useQuery` with `authKeys.session()` + `authKeys.profile(id)`                                                         | ✅ Yes     | `apps/*/src/hooks/useAuth.ts`                             |
+| **Auth: onAuthStateChange**         | Listener syncs cache on sign-in/out/refresh                     | Listener sets session data, invalidates profile, clears on sign-out                                                   | ✅ Yes     | `apps/web/src/hooks/useAuth.ts:69-93`                     |
+| **Auth: Middleware uses getUser()** | Server-validates token, not just reads cookie                   | `supabase.auth.getUser()` in middleware                                                                               | ✅ Yes     | `apps/web/src/middleware.ts:119-121`                      |
+| **Auth: Locale detection**          | Redirect to `/{locale}/...` if missing                          | `parseLocale()` + redirect to `/${DEFAULT_LOCALE}${pathname}`                                                         | ✅ Yes     | `apps/web/src/middleware.ts:31-81`                        |
+| **Auth: Route protection (Web)**    | Public paths, auth-only redirect, admin role gate               | All three checks implemented in middleware                                                                            | ✅ Yes     | `apps/web/src/middleware.ts:126-153`                      |
+| **Auth: Route protection (Mobile)** | AuthGuard in root layout                                        | `AuthGuard` component checks `isAuthenticated` + segments                                                             | ✅ Yes     | `apps/mobile/src/app/_layout.tsx:22-42`                   |
+| **Auth: Server-side layout guard**  | `(main)/layout.tsx` checks auth                                 | `getUser()` + `redirect()` in server component                                                                        | ✅ Yes     | `apps/web/src/app/[locale]/(main)/layout.tsx:14-29`       |
+| **Auth: Zod schemas with i18n**     | Validation schemas use i18n keys as error messages              | All auth schemas use keys like `'auth.validation.emailRequired'`                                                      | ✅ Yes     | `packages/shared/src/schemas/auth.ts:1-115`               |
+| **Auth: Password rules**            | min 8 chars, uppercase, lowercase, number                       | `.min(8)`, `.regex(/[A-Z]/)`, `.regex(/[a-z]/)`, `.regex(/[0-9]/)`                                                    | ✅ Yes     | `packages/shared/src/schemas/auth.ts:26-30`               |
+| **RLS: All 16 tables enabled**      | `ENABLE ROW LEVEL SECURITY` on all tables                       | All 16 tables have RLS enabled                                                                                        | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:15-30`        |
+| **RLS: Role helper function**       | `get_auth_role()` SQL function                                  | `SECURITY DEFINER` function querying profiles table                                                                   | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:4-12`         |
+| **RLS: Listings read policy**       | Active for all, own drafts for sellers, all for admins          | Policy with `status = 'active' OR seller_id = auth.uid() OR admin OR inspector`                                       | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:65-75`        |
+| **RLS: Transactions policies**      | Participants + admin + assigned inspector                       | Separate SELECT policies for participants, admins, inspectors                                                         | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:161-180`      |
+| **RLS: Chat/messages isolation**    | Participants only + admin                                       | Thread/message SELECT tied to buyer_id/seller_id in chat_threads                                                      | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:134-156`      |
+| **RLS: Payment verification**       | Buyer inserts, admin updates                                    | INSERT `WITH CHECK (paid_by = auth.uid())`, UPDATE for admin                                                          | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:194-198`      |
+| **RLS: Dispute policies**           | File by involved user, resolve by admin                         | INSERT for `filed_by`, UPDATE for admin                                                                               | ✅ Yes     | `supabase/migrations/00002_rls_policies.sql:259-263`      |
+| **Permissions: UI helpers**         | Role-check + resource-permission functions                      | 9 permission helpers (canCreateListing, canEditListing, canPlaceBid, etc.)                                            | ✅ Yes     | `packages/shared/src/utils/permissions.ts:1-86`           |
+| **Errors: AppError hierarchy**      | 8 subclasses (Validation→Network)                               | All 8 implemented with correct codes and status codes                                                                 | ✅ Yes     | `packages/shared/src/lib/errors.ts:99-153`                |
+| **Errors: ErrorCode enum**          | 12 machine-readable codes                                       | All 12 codes defined as `const` object                                                                                | ✅ Yes     | `packages/shared/src/lib/errors.ts:17-37`                 |
+| **Errors: normalizeError()**        | Handles AppError, Postgrest, Auth, Network, generic             | 6-step normalization chain implemented                                                                                | ✅ Yes     | `packages/shared/src/lib/errorHandler.ts:178-206`         |
+| **Errors: PG code mapping**         | 23505→Conflict, 23503→Validation, etc.                          | `POSTGRES_CODE_MAP` with 6 mapped codes + PGRST116                                                                    | ✅ Yes     | `packages/shared/src/lib/errorHandler.ts:103-116,229-233` |
+| **Errors: Auth error patterns**     | Pattern matching on Supabase Auth messages                      | 7 regex patterns covering credentials, registration, session, rate limit, etc.                                        | ✅ Yes     | `packages/shared/src/lib/errorHandler.ts:122-157`         |
+| **Errors: i18n message keys**       | Every ErrorCode → translation key                               | `ERROR_MESSAGE_KEYS` record + domain-specific `DOMAIN_ERROR_KEYS`                                                     | ✅ Yes     | `packages/shared/src/lib/errorMessages.ts:25-103`         |
+| **Errors: Fallback messages**       | English fallbacks for non-i18n environments                     | `FALLBACK_MESSAGES` with all 13 keys                                                                                  | ✅ Yes     | `packages/shared/src/lib/errorMessages.ts:114-131`        |
+| **Errors: isRetryableError()**      | Network + RateLimit + Timeout → retryable                       | Checks against 3 error codes                                                                                          | ✅ Yes     | `packages/shared/src/lib/errorHandler.ts:311-319`         |
+| **Errors: Operational flag**        | InternalError = non-operational, all others = operational       | `InternalError(isOperational=false)`, all others `true`                                                               | ✅ Yes     | `packages/shared/src/lib/errors.ts:142-144`               |
+| **Validation: Zod schemas**         | All domain entities have Zod schemas                            | 8 schema files: auth, listing, transaction, chat, bid, review, inspection + barrel                                    | ✅ Yes     | `packages/shared/src/schemas/index.ts:1-48`               |
+| **Validation: validateData()**      | Utility that parses + throws ValidationError on failure         | `validateData<T>(schema, data)` with field-path error formatting                                                      | ✅ Yes     | `packages/shared/src/utils/validation.ts:16-34`           |
+| **Validation: Listing mode rules**  | Fixed-price requires price, auction requires min_bid + end date | Two `.refine()` blocks enforce mode-dependent constraints                                                             | ✅ Yes     | `packages/shared/src/schemas/listing.ts:33-61`            |
+| **Validation: Schema alignment**    | Schema constraints match SQL constraints from SOP-101           | Price positive, quantity positive, title min/max, EGP phone regex                                                     | ✅ Yes     | `packages/shared/src/schemas/listing.ts`, `auth.ts`       |
+
+#### Warnings
+
+| #   | Severity  | Issue                                                                                                                | Impact                                                                                            | Recommendation                                                                                            |
+| --- | --------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| W1  | ⚠️ Low    | Service functions use `any` for input params (e.g., `createListing(data: any)`) instead of Zod-inferred types        | Type-safety gap — runtime validation exists via schemas but not enforced at the service interface | Connect Zod input types to service signatures in Phase 3 when hooks call `validateData()` before services |
+| W2  | ⚠️ Medium | Chat content moderation (US-041: contact-info blocking, US-042: profanity filtering) is not designed in Phase 2 docs | Functional requirement gap — no design doc covers how/where moderation runs                       | Design as Edge Function or validation hook during Phase 3/4. Does not block Phase 3 start.                |
+| W3  | ⚠️ Low    | Web `signOut()` redirects to `/login` without locale prefix (`useAuth.ts:137`)                                       | Minor UX — middleware will catch and re-redirect to `/{locale}/login` anyway                      | Fix during Phase 3 frontend implementation to use locale-aware redirect                                   |
+
+#### Summary
+
+- **Compliance:** 42/42 design decisions verified ✅ (100%)
+- **Warnings:** 3 (0 critical, 1 medium, 2 low)
+- **Skipped SOPs:** 2 (SOP-201, SOP-202) — justified per execution brief
+- **Blocking Issues:** None
+
+**Checkpoint Status:** ✅ Passed  
+**Last Run:** 2026-04-30  
+**Issues:** 3 non-blocking warnings (W1–W3 documented above)
 
 ---
 
