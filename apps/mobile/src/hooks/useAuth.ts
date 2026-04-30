@@ -1,14 +1,14 @@
-import { useEffect, useCallback } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-
-import { supabase } from '@/lib/supabase';
-import { authKeys } from '@/lib/queryKeys';
 import type {
   AuthUser,
   Profile,
   SignUpMetadata,
   UseAuthReturn,
 } from '@tabadul/shared/types';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback,useEffect } from 'react';
+
+import { authKeys } from '@/lib/queryKeys';
+import { supabase } from '@/lib/supabase';
 
 // ---------------------------------------------------------------------------
 // useAuth — Core authentication hook for the mobile app
@@ -26,10 +26,7 @@ export function useAuth(): UseAuthReturn {
   // -------------------------------------------------------------------------
   // Session Query — fetches the current session from Supabase Auth
   // -------------------------------------------------------------------------
-  const {
-    data: sessionData,
-    isLoading: isSessionLoading,
-  } = useQuery({
+  const { data: sessionData, isLoading: isSessionLoading } = useQuery({
     queryKey: authKeys.session(),
     queryFn: async () => {
       const { data, error } = await supabase.auth.getSession();
@@ -101,23 +98,16 @@ export function useAuth(): UseAuthReturn {
   // -------------------------------------------------------------------------
   // Auth Actions
   // -------------------------------------------------------------------------
-  const signIn = useCallback(
-    async (email: string, password: string) => {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      return { error: error ? new Error(error.message) : null };
-    },
-    []
-  );
+  const signIn = useCallback(async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return { error: error ? new Error(error.message) : null };
+  }, []);
 
   const signUp = useCallback(
-    async (
-      email: string,
-      password: string,
-      metadata: SignUpMetadata
-    ) => {
+    async (email: string, password: string, metadata: SignUpMetadata) => {
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -136,9 +126,7 @@ export function useAuth(): UseAuthReturn {
   }, [queryClient]);
 
   const resetPassword = useCallback(async (email: string) => {
-    const { error } = await supabase.auth.resetPasswordForEmail(
-      email
-    );
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
     return { error: error ? new Error(error.message) : null };
   }, []);
 

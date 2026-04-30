@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
+import { type NextRequest, NextResponse } from 'next/server';
 
 // ---------------------------------------------------------------------------
 // Supported locales and default locale
@@ -21,11 +21,7 @@ const PUBLIC_PATHS = [
 // ---------------------------------------------------------------------------
 // Auth-only paths that should redirect TO main app if already authenticated
 // ---------------------------------------------------------------------------
-const AUTH_ONLY_PATHS = [
-  '/login',
-  '/register',
-  '/forgot-password',
-];
+const AUTH_ONLY_PATHS = ['/login', '/register', '/forgot-password'];
 
 /**
  * Extracts the locale and pathname from the URL.
@@ -127,12 +123,8 @@ export async function middleware(request: NextRequest) {
   // -------------------------------------------------------------------------
   // 3. Auth-based route protection
   // -------------------------------------------------------------------------
-  const isPublicPath = PUBLIC_PATHS.some((p) =>
-    localePath.startsWith(p)
-  );
-  const isAuthOnlyPath = AUTH_ONLY_PATHS.some((p) =>
-    localePath.startsWith(p)
-  );
+  const isPublicPath = PUBLIC_PATHS.some((p) => localePath.startsWith(p));
+  const isAuthOnlyPath = AUTH_ONLY_PATHS.some((p) => localePath.startsWith(p));
   const isAdminPath = localePath.startsWith('/admin');
 
   // Not authenticated and trying to access a protected route

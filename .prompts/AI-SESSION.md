@@ -93,15 +93,15 @@
 
 ### Phase 3: Frontend
 
-| SOP | Title                  | Status | Output Location                | Notes |
-| --- | ---------------------- | ------ | ------------------------------ | ----- |
-| 300 | Component Architecture | ⬚      | `/src/components/` structure   |       |
-| 301 | Styling Standards      | ⬚      | Style configs, design tokens   |       |
-| 302 | UI/UX Design           | ⬚      | `/docs/frontend/wireframes.md` |       |
-| 303 | API Integration        | ⬚      | API client module              |       |
-| 304 | Form Handling          | ⬚      | Form components/hooks          |       |
-| 305 | Page Implementation    | ⬚      | `/src/app/` pages              |       |
-| 306 | Progressive Web App    | ⬚      | PWA config, service worker     |       |
+| SOP | Title                  | Status | Output Location                                                                                                  | Notes                                                                                                                                                                   |
+| --- | ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 300 | Component Architecture | ⬚      | `/src/components/` structure                                                                                     |                                                                                                                                                                         |
+| 301 | Styling Standards      | ⬚      | Style configs, design tokens                                                                                     |                                                                                                                                                                         |
+| 302 | UI/UX Design           | ⬚      | `/docs/design/DESIGN-REFERENCE.md` (approved visual direction from v0 prototype), `/docs/frontend/wireframes.md` | **Input mode: Detailed** — v0 prototype provides approved visual direction. Skip "Propose Visual Design" gate. See `docs/design/screenshots/` for 19 reference screens. |
+| 303 | API Integration        | ⬚      | API client module                                                                                                |                                                                                                                                                                         |
+| 304 | Form Handling          | ⬚      | Form components/hooks                                                                                            |                                                                                                                                                                         |
+| 305 | Page Implementation    | ⬚      | `/src/app/` pages                                                                                                |                                                                                                                                                                         |
+| 306 | Progressive Web App    | ⬚      | PWA config, service worker                                                                                       |                                                                                                                                                                         |
 
 ### Phase 4: AI Integration (If Applicable)
 
@@ -240,59 +240,61 @@ These are human-approved and must never be contradicted:
 
 ### Cached Decisions
 
-| Decision        | Value                                                                                                                                                                                                                | Source                                    | Set By  |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------- |
-| Framework       | React Native + Expo SDK 52 (mobile) + Next.js 15 (web)                                                                                                                                                               | `/docs/tech-stack.md`                     | SOP-001 |
-| Database        | PostgreSQL (via Supabase)                                                                                                                                                                                            | `/docs/tech-stack.md`                     | SOP-001 |
-| ORM             | Supabase JS Client + @supabase/ssr (web)                                                                                                                                                                             | `/docs/tech-stack.md`                     | SOP-001 |
-| Auth            | Supabase Auth (email/password, JWT)                                                                                                                                                                                  | `/docs/tech-stack.md`                     | SOP-001 |
-| Styling         | NativeWind (Tailwind CSS for React Native)                                                                                                                                                                           | `/docs/tech-stack.md`                     | SOP-001 |
-| State Mgmt      | TanStack Query + Zustand                                                                                                                                                                                             | `/docs/tech-stack.md`                     | SOP-001 |
-| Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                                                                                                                                                                         | `/docs/tech-stack.md`                     | SOP-001 |
-| Entities        | Profile, WasteCategory, Listing, ListingPhoto, Bid, Bookmark, ChatThread, Message, Transaction, Payment, InspectionReport, Review, Notification, NotificationPreference, Dispute, MatchRecommendation (16 total)     | `/docs/requirements.md`                   | SOP-101 |
-| Branching       | GitHub Flow (main + feature/fix/chore branches)                                                                                                                                                                      | `CONTRIBUTING.md`                         | SOP-002 |
-| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                                                                                                                                                                  | `/docs/architecture/project-structure.md` | SOP-003 |
-| Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces                                                                                                                                                | `/docs/development-setup.md`              | SOP-004 |
-| Design Patterns | BaaS-Driven Layered Architecture; Service Functions (no Repository); Custom Hooks + Composition; TanStack Query + Zustand; React Hook Form + Zod; Result Pattern (`{ data, error }`); Auth Hook + RLS + Route Guards | `/docs/architecture/design-patterns.md`   | SOP-005 |
-| Code Style      | ESLint 9 flat config + Prettier + Husky + lint-staged; simple-import-sort; Tailwind class sorting; printWidth 80; singleQuote; trailingComma es5                                                                     | `eslint.config.mjs`, `prettier.config.js` | SOP-006 |
-| Service Layer   | Supabase JS client wrapped in domain service functions (Result Pattern returned)                                                                                                                                     | `/docs/architecture/business-rules.md`    | SOP-200 |
-| Authorization   | Row Level Security (RLS) policies at the DB level, UI guards, and route guards for roles: buyer, seller, admin, inspector                                                                                            | `/docs/architecture/permissions.md`       | SOP-204 |
-| Error Handling  | AppError class hierarchy (8 subclasses), ErrorCode enum, normalizeError() for Supabase→AppError conversion, i18n error message keys, isRetryableError() helper                                                       | `/docs/architecture/error-handling.md`    | SOP-205 |
-| Validation      | Zod-based schema registry for listing, transaction, chat, bid, review, and inspection entities; explicit validation.ts utility to enforce standard Error response parsing                                            | `packages/shared/src/schemas/`            | SOP-206 |
+| Decision        | Value                                                                                                                                                                                                                                                                                                                                                                                                                                             | Source                                                        | Set By      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
+| Framework       | React Native + Expo SDK 52 (mobile) + Next.js 15 (web)                                                                                                                                                                                                                                                                                                                                                                                            | `/docs/tech-stack.md`                                         | SOP-001     |
+| Database        | PostgreSQL (via Supabase)                                                                                                                                                                                                                                                                                                                                                                                                                         | `/docs/tech-stack.md`                                         | SOP-001     |
+| ORM             | Supabase JS Client + @supabase/ssr (web)                                                                                                                                                                                                                                                                                                                                                                                                          | `/docs/tech-stack.md`                                         | SOP-001     |
+| Auth            | Supabase Auth (email/password, JWT)                                                                                                                                                                                                                                                                                                                                                                                                               | `/docs/tech-stack.md`                                         | SOP-001     |
+| Styling         | NativeWind (Tailwind CSS for React Native)                                                                                                                                                                                                                                                                                                                                                                                                        | `/docs/tech-stack.md`                                         | SOP-001     |
+| State Mgmt      | TanStack Query + Zustand                                                                                                                                                                                                                                                                                                                                                                                                                          | `/docs/tech-stack.md`                                         | SOP-001     |
+| Hosting         | Supabase Cloud + EAS (mobile) + Vercel (web)                                                                                                                                                                                                                                                                                                                                                                                                      | `/docs/tech-stack.md`                                         | SOP-001     |
+| Entities        | Profile, WasteCategory, Listing, ListingPhoto, Bid, Bookmark, ChatThread, Message, Transaction, Payment, InspectionReport, Review, Notification, NotificationPreference, Dispute, MatchRecommendation (16 total)                                                                                                                                                                                                                                  | `/docs/requirements.md`                                       | SOP-101     |
+| Branching       | GitHub Flow (main + feature/fix/chore branches)                                                                                                                                                                                                                                                                                                                                                                                                   | `CONTRIBUTING.md`                                             | SOP-002     |
+| Monorepo Layout | apps/mobile + apps/web + packages/shared + supabase                                                                                                                                                                                                                                                                                                                                                                                               | `/docs/architecture/project-structure.md`                     | SOP-003     |
+| Local Dev       | Supabase CLI (`supabase start`) for full local stack; pnpm workspaces                                                                                                                                                                                                                                                                                                                                                                             | `/docs/development-setup.md`                                  | SOP-004     |
+| Design Patterns | BaaS-Driven Layered Architecture; Service Functions (no Repository); Custom Hooks + Composition; TanStack Query + Zustand; React Hook Form + Zod; Result Pattern (`{ data, error }`); Auth Hook + RLS + Route Guards                                                                                                                                                                                                                              | `/docs/architecture/design-patterns.md`                       | SOP-005     |
+| Code Style      | ESLint 9 flat config + Prettier + Husky + lint-staged; simple-import-sort; Tailwind class sorting; printWidth 80; singleQuote; trailingComma es5                                                                                                                                                                                                                                                                                                  | `eslint.config.mjs`, `prettier.config.js`                     | SOP-006     |
+| Service Layer   | Supabase JS client wrapped in domain service functions (Result Pattern returned)                                                                                                                                                                                                                                                                                                                                                                  | `/docs/architecture/business-rules.md`                        | SOP-200     |
+| Authorization   | Row Level Security (RLS) policies at the DB level, UI guards, and route guards for roles: buyer, seller, admin, inspector                                                                                                                                                                                                                                                                                                                         | `/docs/architecture/permissions.md`                           | SOP-204     |
+| Error Handling  | AppError class hierarchy (8 subclasses), ErrorCode enum, normalizeError() for Supabase→AppError conversion, i18n error message keys, isRetryableError() helper                                                                                                                                                                                                                                                                                    | `/docs/architecture/error-handling.md`                        | SOP-205     |
+| Validation      | Zod-based schema registry for listing, transaction, chat, bid, review, and inspection entities; explicit validation.ts utility to enforce standard Error response parsing                                                                                                                                                                                                                                                                         | `packages/shared/src/schemas/`                                | SOP-206     |
+| UI Design       | **Approved visual direction from v0 prototype.** Forest green primary (`#1B4332`), orange accent (`#D4760A`), warm cream background (`#F5F1EB`). 12 component patterns (cards, toggles, badges, chat threads, etc.), 4-tab bottom nav (Home, Marketplace, Chat, Profile), Buying/Selling mode toggle. 19 reference screenshots. Agent executing SOP-301/302 MUST read `docs/design/DESIGN-REFERENCE.md` first — skip visual design proposal gate. | `docs/design/DESIGN-REFERENCE.md`, `docs/design/screenshots/` | Pre-Phase 3 |
 
 ### Cached File Locations
 
-| Artifact         | Path                                                                    | Last Updated By |
-| ---------------- | ----------------------------------------------------------------------- | --------------- |
-| Requirements     | `/docs/requirements.md`                                                 | SOP-000         |
-| Tech Stack       | `/docs/tech-stack.md`                                                   | SOP-001         |
-| README           | `/README.md`                                                            | SOP-002         |
-| CONTRIBUTING     | `/CONTRIBUTING.md`                                                      | SOP-002         |
-| PR Template      | `/.github/PULL_REQUEST_TEMPLATE.md`                                     | SOP-002         |
-| Structure Doc    | `/docs/architecture/project-structure.md`                               | SOP-003         |
-| Shared Package   | `/packages/shared/`                                                     | SOP-003         |
-| Env Docs         | `/docs/environment-variables.md`                                        | SOP-004         |
-| Design Patterns  | `/docs/architecture/design-patterns.md`                                 | SOP-005         |
-| DB Decision      | `/docs/database/database-decision.md`                                   | SOP-100         |
-| Schema / ERD     | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101         |
-| Seed Data        | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102         |
-| Service Layer    | `packages/shared/src/services/`                                         | SOP-200         |
-| Business Rules   | `/docs/architecture/business-rules.md`                                  | SOP-200         |
-| API Spec         | ⏭️ Skipped (Supabase BaaS)                                              | SOP-202         |
-| Auth Flow        | `/docs/architecture/auth-flow.md`                                       | SOP-203         |
-| Auth Schemas     | `packages/shared/src/schemas/auth.ts`                                   | SOP-203         |
-| Auth Types       | `packages/shared/src/types/auth.ts`                                     | SOP-203         |
-| Auth Policies    | `supabase/migrations/00002_rls_policies.sql`                            | SOP-204         |
-| Permissions      | `/docs/architecture/permissions.md`                                     | SOP-204         |
-| Error Types      | `packages/shared/src/lib/errors.ts`                                     | SOP-205         |
-| Error Handler    | `packages/shared/src/lib/errorHandler.ts`                               | SOP-205         |
-| Error Messages   | `packages/shared/src/lib/errorMessages.ts`                              | SOP-205         |
-| Error Docs       | `/docs/architecture/error-handling.md`                                  | SOP-205         |
-| Validation Utils | `packages/shared/src/utils/validation.ts`                               | SOP-206         |
-| Entity Schemas   | `packages/shared/src/schemas/*.ts`                                      | SOP-206         |
-| Component Docs   | {e.g., `/docs/frontend/components.md`}                                  | SOP-300         |
-| Visual Design    | {e.g., `/docs/frontend/visual-design.md`}                               | SOP-302         |
-| Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305         |
+| Artifact         | Path                                                                    | Last Updated By                       |
+| ---------------- | ----------------------------------------------------------------------- | ------------------------------------- |
+| Requirements     | `/docs/requirements.md`                                                 | SOP-000                               |
+| Tech Stack       | `/docs/tech-stack.md`                                                   | SOP-001                               |
+| README           | `/README.md`                                                            | SOP-002                               |
+| CONTRIBUTING     | `/CONTRIBUTING.md`                                                      | SOP-002                               |
+| PR Template      | `/.github/PULL_REQUEST_TEMPLATE.md`                                     | SOP-002                               |
+| Structure Doc    | `/docs/architecture/project-structure.md`                               | SOP-003                               |
+| Shared Package   | `/packages/shared/`                                                     | SOP-003                               |
+| Env Docs         | `/docs/environment-variables.md`                                        | SOP-004                               |
+| Design Patterns  | `/docs/architecture/design-patterns.md`                                 | SOP-005                               |
+| DB Decision      | `/docs/database/database-decision.md`                                   | SOP-100                               |
+| Schema / ERD     | `/docs/database/schema.md`, `supabase/migrations/00001_init_schema.sql` | SOP-101                               |
+| Seed Data        | `/docs/database/seed-data.md`, `supabase/seed.sql`                      | SOP-102                               |
+| Service Layer    | `packages/shared/src/services/`                                         | SOP-200                               |
+| Business Rules   | `/docs/architecture/business-rules.md`                                  | SOP-200                               |
+| API Spec         | ⏭️ Skipped (Supabase BaaS)                                              | SOP-202                               |
+| Auth Flow        | `/docs/architecture/auth-flow.md`                                       | SOP-203                               |
+| Auth Schemas     | `packages/shared/src/schemas/auth.ts`                                   | SOP-203                               |
+| Auth Types       | `packages/shared/src/types/auth.ts`                                     | SOP-203                               |
+| Auth Policies    | `supabase/migrations/00002_rls_policies.sql`                            | SOP-204                               |
+| Permissions      | `/docs/architecture/permissions.md`                                     | SOP-204                               |
+| Error Types      | `packages/shared/src/lib/errors.ts`                                     | SOP-205                               |
+| Error Handler    | `packages/shared/src/lib/errorHandler.ts`                               | SOP-205                               |
+| Error Messages   | `packages/shared/src/lib/errorMessages.ts`                              | SOP-205                               |
+| Error Docs       | `/docs/architecture/error-handling.md`                                  | SOP-205                               |
+| Validation Utils | `packages/shared/src/utils/validation.ts`                               | SOP-206                               |
+| Entity Schemas   | `packages/shared/src/schemas/*.ts`                                      | SOP-206                               |
+| Component Docs   | {e.g., `/docs/frontend/components.md`}                                  | SOP-300                               |
+| Visual Design    | `/docs/design/DESIGN-REFERENCE.md`                                      | Pre-Phase 3 (v0 prototype extraction) |
+| Design Screens   | `docs/design/screenshots/*.png` (19 screens)                            | Pre-Phase 3 (v0 prototype extraction) |
+| Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305                               |
 
 ---
 
@@ -308,17 +310,21 @@ These are human-approved and must never be contradicted:
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-2-api-backend/SOP-206-validation.md                    # The procedure
-packages/shared/src/schemas/auth.ts                                # Existing Zod schema pattern
-packages/shared/src/lib/errors.ts                                  # Error types from SOP-205
-/docs/architecture/design-patterns.md                              # Form Patterns §3.6
+.sops/phase-3-frontend/SOP-300-component-architecture.md           # The procedure
+docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction (v0 prototype) — READ FIRST
+docs/design/screenshots/                                           # 19 reference screenshots from prototype
+/docs/architecture/design-patterns.md                              # Component patterns §3
+/docs/architecture/project-structure.md                             # Folder conventions
+packages/shared/src/services/index.ts                              # Service layer shape
 ```
 
 ### Expected Outputs
 
-- [ ] Validation schemas for all domain entities
-- [ ] Validation integrated with error handling
-- [ ] Sanitization for user inputs
+- [ ] Component folder structure (`ui/`, `layout/`, `forms/`, `features/`)
+- [ ] Base UI components (Button, Input, Card, Modal)
+- [ ] Layout components (Header, Footer, Container)
+- [ ] Feature skeleton folders
+- [ ] Component documentation
 
 > **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
 

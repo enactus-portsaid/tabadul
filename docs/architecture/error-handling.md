@@ -41,7 +41,7 @@ All errors, whether from Supabase, Edge Functions, or application code, are norm
 ```typescript
 interface ApiError {
   error: {
-    code: string;    // Machine-readable: "NOT_FOUND", "VALIDATION_ERROR"
+    code: string; // Machine-readable: "NOT_FOUND", "VALIDATION_ERROR"
     message: string; // Human-readable (or i18n key)
     details?: unknown; // Additional context (field errors, entity IDs, etc.)
   };
@@ -56,20 +56,20 @@ This is implemented by `AppError.toJSON()` in `packages/shared/src/lib/errors.ts
 
 ### Generic Error Codes
 
-| Code | HTTP Status | Description | When to Use |
-|:-----|:------------|:------------|:------------|
-| `VALIDATION_ERROR` | 400 | Input or business rule violation | Invalid form data, constraint failures |
-| `UNAUTHORIZED` | 401 | Missing or invalid authentication | Expired session, bad credentials |
-| `FORBIDDEN` | 403 | Authenticated but lacks permission | Wrong role, RLS policy rejection |
-| `NOT_FOUND` | 404 | Resource does not exist | Entity lookup returns null |
-| `CONFLICT` | 409 | Duplicate or stale resource | Unique constraint violation |
-| `RATE_LIMIT` | 429 | Too many requests | Supabase rate limiting |
-| `INTERNAL_ERROR` | 500 | Unexpected server error | Programming bugs, unhandled exceptions |
-| `NETWORK_ERROR` | 0 | Connectivity failure | Offline device, DNS failure |
-| `TIMEOUT` | 0 | Request timed out | Slow network or server |
-| `INVALID_STATE_TRANSITION` | 400 | Invalid status change | e.g., paying a cancelled transaction |
-| `INSUFFICIENT_PERMISSIONS` | 403 | Missing specific permission | Fine-grained permission failure |
-| `DUPLICATE_ENTRY` | 409 | Exact duplicate detected | Re-submitting the same entity |
+| Code                       | HTTP Status | Description                        | When to Use                            |
+| :------------------------- | :---------- | :--------------------------------- | :------------------------------------- |
+| `VALIDATION_ERROR`         | 400         | Input or business rule violation   | Invalid form data, constraint failures |
+| `UNAUTHORIZED`             | 401         | Missing or invalid authentication  | Expired session, bad credentials       |
+| `FORBIDDEN`                | 403         | Authenticated but lacks permission | Wrong role, RLS policy rejection       |
+| `NOT_FOUND`                | 404         | Resource does not exist            | Entity lookup returns null             |
+| `CONFLICT`                 | 409         | Duplicate or stale resource        | Unique constraint violation            |
+| `RATE_LIMIT`               | 429         | Too many requests                  | Supabase rate limiting                 |
+| `INTERNAL_ERROR`           | 500         | Unexpected server error            | Programming bugs, unhandled exceptions |
+| `NETWORK_ERROR`            | 0           | Connectivity failure               | Offline device, DNS failure            |
+| `TIMEOUT`                  | 0           | Request timed out                  | Slow network or server                 |
+| `INVALID_STATE_TRANSITION` | 400         | Invalid status change              | e.g., paying a cancelled transaction   |
+| `INSUFFICIENT_PERMISSIONS` | 403         | Missing specific permission        | Fine-grained permission failure        |
+| `DUPLICATE_ENTRY`          | 409         | Exact duplicate detected           | Re-submitting the same entity          |
 
 ### Error Class Hierarchy
 
@@ -92,26 +92,26 @@ Error (built-in)
 
 The `normalizeError(error: unknown): AppError` function in `packages/shared/src/lib/errorHandler.ts` converts any error into a typed `AppError`:
 
-| Input Error Type | Normalization Logic |
-|:-----|:-----|
-| `AppError` | Pass-through |
-| Supabase `PostgrestError` | Map by PostgreSQL error code (e.g., 23505 → `ConflictError`) |
-| Supabase `AuthError` | Pattern-match message, fall back to HTTP status |
-| `TypeError` (fetch/network) | → `NetworkError` |
-| Generic `Error` | → `InternalError` |
-| Non-Error (string, etc.) | Stringify → `InternalError` |
+| Input Error Type            | Normalization Logic                                          |
+| :-------------------------- | :----------------------------------------------------------- |
+| `AppError`                  | Pass-through                                                 |
+| Supabase `PostgrestError`   | Map by PostgreSQL error code (e.g., 23505 → `ConflictError`) |
+| Supabase `AuthError`        | Pattern-match message, fall back to HTTP status              |
+| `TypeError` (fetch/network) | → `NetworkError`                                             |
+| Generic `Error`             | → `InternalError`                                            |
+| Non-Error (string, etc.)    | Stringify → `InternalError`                                  |
 
 ### PostgreSQL Error Code Mappings
 
-| PG Code | AppError Class | Description |
-|:--------|:---------------|:------------|
-| `23505` | `ConflictError` | Unique violation |
-| `23503` | `ValidationError` | Foreign key violation |
-| `23502` | `ValidationError` | Not-null violation |
-| `23514` | `ValidationError` | Check constraint violation |
-| `42501` | `ForbiddenError` | Insufficient privilege |
-| `PGRST301` | `NotFoundError` | RLS policy denial |
-| `PGRST116` | `NotFoundError` | `.single()` returned no rows |
+| PG Code    | AppError Class    | Description                  |
+| :--------- | :---------------- | :--------------------------- |
+| `23505`    | `ConflictError`   | Unique violation             |
+| `23503`    | `ValidationError` | Foreign key violation        |
+| `23502`    | `ValidationError` | Not-null violation           |
+| `23514`    | `ValidationError` | Check constraint violation   |
+| `42501`    | `ForbiddenError`  | Insufficient privilege       |
+| `PGRST301` | `NotFoundError`   | RLS policy denial            |
+| `PGRST116` | `NotFoundError`   | `.single()` returned no rows |
 
 ---
 
@@ -153,7 +153,10 @@ export function useListing(id: string) {
 ```typescript
 // hooks/useCreateListing.ts
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { normalizeError, isRetryableError } from '@tabadul/shared/lib/errorHandler';
+import {
+  normalizeError,
+  isRetryableError,
+} from '@tabadul/shared/lib/errorHandler';
 
 export function useCreateListing() {
   const queryClient = useQueryClient();
@@ -164,8 +167,7 @@ export function useCreateListing() {
       if (error) throw normalizeError(error);
       return data;
     },
-    retry: (failureCount, error) =>
-      failureCount < 3 && isRetryableError(error),
+    retry: (failureCount, error) => failureCount < 3 && isRetryableError(error),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: listingKeys.lists() });
     },
@@ -220,9 +222,7 @@ Deno.serve(async (req) => {
     });
   } catch (error) {
     const appError =
-      error instanceof AppError
-        ? error
-        : new InternalError('Matching failed');
+      error instanceof AppError ? error : new InternalError('Matching failed');
 
     return new Response(JSON.stringify(appError.toJSON()), {
       status: appError.statusCode || 500,
@@ -236,10 +236,10 @@ Deno.serve(async (req) => {
 
 ## 6. Operational vs. Programming Errors
 
-| Category | `isOperational` | User Sees | Action |
-|:---------|:----------------|:----------|:-------|
-| **Operational** (expected) | `true` | Translated error message | User can retry or fix input |
-| **Programming** (bug) | `false` | Generic "Something went wrong" | Log/report, don't expose details |
+| Category                   | `isOperational` | User Sees                      | Action                           |
+| :------------------------- | :-------------- | :----------------------------- | :------------------------------- |
+| **Operational** (expected) | `true`          | Translated error message       | User can retry or fix input      |
+| **Programming** (bug)      | `false`         | Generic "Something went wrong" | Log/report, don't expose details |
 
 All error subclasses except `InternalError` default to `isOperational = true`. Use `isOperationalError(error)` to check.
 
@@ -247,12 +247,12 @@ All error subclasses except `InternalError` default to `isOperational = true`. U
 
 ## 7. File Manifest
 
-| File | Purpose |
-|:-----|:--------|
-| `packages/shared/src/lib/errors.ts` | `AppError` class hierarchy, `ErrorCode` enum, type guards |
-| `packages/shared/src/lib/errorMessages.ts` | i18n key mappings, domain-specific keys, English fallbacks |
-| `packages/shared/src/lib/errorHandler.ts` | `normalizeError()`, `getDisplayMessage()`, `isRetryableError()` |
-| `docs/architecture/error-handling.md` | This document |
+| File                                       | Purpose                                                         |
+| :----------------------------------------- | :-------------------------------------------------------------- |
+| `packages/shared/src/lib/errors.ts`        | `AppError` class hierarchy, `ErrorCode` enum, type guards       |
+| `packages/shared/src/lib/errorMessages.ts` | i18n key mappings, domain-specific keys, English fallbacks      |
+| `packages/shared/src/lib/errorHandler.ts`  | `normalizeError()`, `getDisplayMessage()`, `isRetryableError()` |
+| `docs/architecture/error-handling.md`      | This document                                                   |
 
 ---
 

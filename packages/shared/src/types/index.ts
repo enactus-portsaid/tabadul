@@ -1,11 +1,10 @@
 export type {
-  UserRole,
-  Profile,
-  AuthUser,
-  AuthState,
   AuthActions,
+  AuthState,
+  AuthUser,
+  Profile,
   SignUpMetadata,
   UseAuthReturn,
+  UserRole,
 } from './auth';
-
-export { PUBLIC_ROUTES, PROTECTED_ROUTE_PREFIXES } from './auth';
+export { PROTECTED_ROUTE_PREFIXES,PUBLIC_ROUTES } from './auth';

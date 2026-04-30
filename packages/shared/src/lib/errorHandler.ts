@@ -17,7 +17,13 @@
 // ---------------------------------------------------------------------------
 
 import {
-  AppError,
+  FALLBACK_ERROR_KEY,
+  getErrorMessageKey,
+  getFallbackMessage,
+} from './errorMessages';
+import type {
+  AppError} from './errors';
+import {
   ConflictError,
   ErrorCode,
   ForbiddenError,
@@ -29,11 +35,6 @@ import {
   UnauthorizedError,
   ValidationError,
 } from './errors';
-import {
-  FALLBACK_ERROR_KEY,
-  getErrorMessageKey,
-  getFallbackMessage,
-} from './errorMessages';
 
 // -----------------------------------------------------------------------------
 // Supabase Error Shape Interfaces
@@ -103,8 +104,7 @@ const POSTGRES_CODE_MAP: Record<string, () => AppError> = {
   // Unique violation
   '23505': () => new ConflictError('A duplicate entry was detected.'),
   // Foreign key violation
-  '23503': () =>
-    new ValidationError('Referenced resource does not exist.'),
+  '23503': () => new ValidationError('Referenced resource does not exist.'),
   // Not null violation
   '23502': () => new ValidationError('A required field is missing.'),
   // Check constraint violation
@@ -112,7 +112,7 @@ const POSTGRES_CODE_MAP: Record<string, () => AppError> = {
   // Insufficient privilege
   '42501': () => new ForbiddenError('Insufficient database privileges.'),
   // RLS violation (Supabase returns this for policy failures)
-  'PGRST301': () => new NotFoundError(),
+  PGRST301: () => new NotFoundError(),
 };
 
 // -----------------------------------------------------------------------------
@@ -125,8 +125,7 @@ const AUTH_MESSAGE_MAP: Array<{
 }> = [
   {
     pattern: /invalid.*credentials|invalid.*password|invalid.*email/i,
-    factory: () =>
-      new UnauthorizedError('Invalid email or password.'),
+    factory: () => new UnauthorizedError('Invalid email or password.'),
   },
   {
     pattern: /email.*already.*registered|user.*already.*registered/i,
@@ -135,8 +134,7 @@ const AUTH_MESSAGE_MAP: Array<{
   },
   {
     pattern: /email.*not.*confirmed/i,
-    factory: () =>
-      new UnauthorizedError('Please confirm your email address.'),
+    factory: () => new UnauthorizedError('Please confirm your email address.'),
   },
   {
     pattern: /session.*expired|token.*expired|jwt.*expired/i,

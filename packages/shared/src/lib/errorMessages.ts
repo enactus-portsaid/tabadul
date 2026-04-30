@@ -47,9 +47,7 @@ export const FALLBACK_ERROR_KEY = 'errors.unknown';
  * Falls back to `errors.unknown` for unrecognized codes.
  */
 export function getErrorMessageKey(code: ErrorCode | string): string {
-  return (
-    ERROR_MESSAGE_KEYS[code as ErrorCode] ?? FALLBACK_ERROR_KEY
-  );
+  return ERROR_MESSAGE_KEYS[code as ErrorCode] ?? FALLBACK_ERROR_KEY;
 }
 
 // -----------------------------------------------------------------------------
@@ -127,8 +125,7 @@ export const FALLBACK_MESSAGES: Record<string, string> = {
   'errors.timeout': 'The request timed out. Please try again.',
   'errors.invalidStateTransition':
     'This action is not allowed in the current state.',
-  'errors.insufficientPermissions':
-    'You do not have the required permissions.',
+  'errors.insufficientPermissions': 'You do not have the required permissions.',
   'errors.duplicateEntry': 'A duplicate entry was detected.',
   'errors.unknown': 'An unexpected error occurred.',
 };

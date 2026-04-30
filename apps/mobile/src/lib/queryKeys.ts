@@ -30,15 +30,13 @@ export const transactionKeys = {
   lists: () => [...transactionKeys.all, 'list'] as const,
   list: (filters: Record<string, unknown>) =>
     [...transactionKeys.lists(), filters] as const,
-  detail: (id: string) =>
-    [...transactionKeys.all, 'detail', id] as const,
+  detail: (id: string) => [...transactionKeys.all, 'detail', id] as const,
 };
 
 export const chatKeys = {
   all: ['chat'] as const,
   threads: () => [...chatKeys.all, 'threads'] as const,
-  thread: (threadId: string) =>
-    [...chatKeys.threads(), threadId] as const,
+  thread: (threadId: string) => [...chatKeys.threads(), threadId] as const,
   messages: (threadId: string) =>
     [...chatKeys.all, 'messages', threadId] as const,
 };
@@ -46,10 +44,8 @@ export const chatKeys = {
 export const notificationKeys = {
   all: ['notifications'] as const,
   lists: () => [...notificationKeys.all, 'list'] as const,
-  unreadCount: () =>
-    [...notificationKeys.all, 'unreadCount'] as const,
-  preferences: () =>
-    [...notificationKeys.all, 'preferences'] as const,
+  unreadCount: () => [...notificationKeys.all, 'unreadCount'] as const,
+  preferences: () => [...notificationKeys.all, 'preferences'] as const,
 };
 
 export const matchingKeys = {
