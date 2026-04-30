@@ -8,9 +8,7 @@ export const signInSchema = z.object({
     .string()
     .min(1, 'auth.validation.emailRequired')
     .email('auth.validation.emailInvalid'),
-  password: z
-    .string()
-    .min(1, 'auth.validation.passwordRequired'),
+  password: z.string().min(1, 'auth.validation.passwordRequired'),
 });
 
 export type SignInInput = z.infer<typeof signInSchema>;
@@ -47,10 +45,7 @@ export const signUpSchema = z
     phone: z
       .string()
       .min(1, 'auth.validation.phoneRequired')
-      .regex(
-        /^(\+20|0)?1[0-9]{9}$/,
-        'auth.validation.phoneInvalid'
-      ),
+      .regex(/^(\+20|0)?1[0-9]{9}$/, 'auth.validation.phoneInvalid'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'auth.validation.passwordMismatch',
@@ -75,10 +70,7 @@ export const updateProfileSchema = z.object({
     .optional(),
   phone: z
     .string()
-    .regex(
-      /^(\+20|0)?1[0-9]{9}$/,
-      'auth.validation.phoneInvalid'
-    )
+    .regex(/^(\+20|0)?1[0-9]{9}$/, 'auth.validation.phoneInvalid')
     .optional(),
   avatar_url: z.string().url().optional().nullable(),
   location: z.string().max(255).optional(),

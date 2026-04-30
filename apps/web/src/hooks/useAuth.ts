@@ -1,17 +1,17 @@
 'use client';
 
-import { useEffect, useCallback, useMemo } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-
-import { createClient } from '@/lib/supabase';
-import { authKeys } from '@/lib/queryKeys';
 import type {
   AuthUser,
   Profile,
   SignUpMetadata,
   UseAuthReturn,
 } from '@tabadul/shared/types';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useMemo } from 'react';
+
+import { authKeys } from '@/lib/queryKeys';
+import { createClient } from '@/lib/supabase';
 
 // ---------------------------------------------------------------------------
 // useAuth — Core authentication hook for the web app
@@ -31,10 +31,7 @@ export function useAuth(): UseAuthReturn {
   // -------------------------------------------------------------------------
   // Session Query — fetches the current session from Supabase Auth
   // -------------------------------------------------------------------------
-  const {
-    data: sessionData,
-    isLoading: isSessionLoading,
-  } = useQuery({
+  const { data: sessionData, isLoading: isSessionLoading } = useQuery({
     queryKey: authKeys.session(),
     queryFn: async () => {
       const { data, error } = await supabase.auth.getSession();
@@ -121,11 +118,7 @@ export function useAuth(): UseAuthReturn {
   );
 
   const signUp = useCallback(
-    async (
-      email: string,
-      password: string,
-      metadata: SignUpMetadata
-    ) => {
+    async (email: string, password: string, metadata: SignUpMetadata) => {
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -146,9 +139,7 @@ export function useAuth(): UseAuthReturn {
 
   const resetPassword = useCallback(
     async (email: string) => {
-      const { error } = await supabase.auth.resetPasswordForEmail(
-        email
-      );
+      const { error } = await supabase.auth.resetPasswordForEmail(email);
       return { error: error ? new Error(error.message) : null };
     },
     [supabase]

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { Slot, useRouter, useSegments } from 'expo-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Slot, useRouter, useSegments } from 'expo-router';
+import { useEffect } from 'react';
 
 import { useAuth } from '@/hooks/useAuth';
 

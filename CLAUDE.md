@@ -25,6 +25,17 @@ The system employs a **BaaS-Driven Layered Architecture** leveraging Supabase as
 - `supabase/`: DB migrations (`migrations/`), seed scripts (`seed.sql`), and Edge Functions.
 - `.sops/`: The standard operating procedures guiding the development lifecycle.
 - `.prompts/`: AI session tracker and guidelines.
+- `docs/design/`: **UI Design Reference** — approved visual direction extracted from the v0 prototype.
+
+### 🎨 UI Design Reference (IMPORTANT for Phase 3+)
+
+A v0 prototype was built to establish the visual identity of Tabadul. The design decisions have been distilled into:
+
+- **`docs/design/DESIGN-REFERENCE.md`** — Color palette, typography, component patterns, navigation structure, layout specs. This is the **approved visual direction** — agents executing SOP-301/302 MUST read this before proposing designs.
+- **`docs/design/screenshots/`** — 19 annotated screenshots covering all prototype screens (Home buyer/seller, Marketplace, Chat, Profile, Notifications, Create Listing, Arabic RTL mode).
+- **Prototype Source:** [GitHub](https://github.com/eima40x4c/v0-tabadul-prototype) · [Deployed](https://v0-tabadul-prototype-bkd85j8cm-imalwaysforlife-5769s-projects.vercel.app/)
+
+> **Rule:** The design reference is authoritative for _how the app looks_ (colors, layout, component patterns). The SOPs and `/docs/requirements.md` remain authoritative for _what the app does_ (features, data, business logic). When in conflict, functional requirements win.
 
 ## 📖 SOP Framework Execution (CRITICAL)
 

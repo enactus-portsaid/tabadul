@@ -43,10 +43,7 @@ export interface AuthState {
 /** Auth action methods exposed by the useAuth hook. */
 export interface AuthActions {
   /** Sign in with email and password. */
-  signIn: (
-    email: string,
-    password: string
-  ) => Promise<{ error: Error | null }>;
+  signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   /** Sign up with email, password, and user metadata. */
   signUp: (
     email: string,
