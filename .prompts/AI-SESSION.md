@@ -95,7 +95,7 @@
 
 | SOP | Title                  | Status | Output Location                                                                                                  | Notes                                                                                                                                                                   |
 | --- | ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 300 | Component Architecture | ⬚      | `/src/components/` structure                                                                                     |                                                                                                                                                                         |
+| 300 | Component Architecture | ✅     | `apps/*/src/components/`, `/docs/components/README.md`                                                           | UI: Button, Input, Card, Modal, Badge, Avatar; Layout: Header, Footer, Container; both platforms |
 | 301 | Styling Standards      | ⬚      | Style configs, design tokens                                                                                     |                                                                                                                                                                         |
 | 302 | UI/UX Design           | ⬚      | `/docs/design/DESIGN-REFERENCE.md` (approved visual direction from v0 prototype), `/docs/frontend/wireframes.md` | **Input mode: Detailed** — v0 prototype provides approved visual direction. Skip "Propose Visual Design" gate. See `docs/design/screenshots/` for 19 reference screens. |
 | 303 | API Integration        | ⬚      | API client module                                                                                                |                                                                                                                                                                         |
@@ -363,7 +363,7 @@ These are human-approved and must never be contradicted:
 | Validation Utils | `packages/shared/src/utils/validation.ts`                               | SOP-206                               |
 | Entity Schemas   | `packages/shared/src/schemas/*.ts`                                      | SOP-206                               |
 | Sanitize Utils   | `packages/shared/src/utils/sanitize.ts`                                 | SOP-206                               |
-| Component Docs   | {e.g., `/docs/frontend/components.md`}                                  | SOP-300                               |
+| Component Docs   | `/docs/components/README.md`                                            | SOP-300                               |
 | Visual Design    | `/docs/design/DESIGN-REFERENCE.md`                                      | Pre-Phase 3 (v0 prototype extraction) |
 | Design Screens   | `docs/design/screenshots/*.png` (19 screens)                            | Pre-Phase 3 (v0 prototype extraction) |
 | Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305                               |
@@ -374,26 +374,26 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-300
-**Title:** Component Architecture
+**SOP:** SOP-301
+**Title:** Styling Standards
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-3-frontend/SOP-300-component-architecture.md           # The procedure
-docs/architecture/design-patterns.md                               # Component patterns §3.4
-docs/design/DESIGN-REFERENCE.md                                    # UI design reference
-packages/shared/src/schemas/index.ts                               # Available Zod schemas
-packages/shared/src/types/index.ts                                 # Shared types
+.sops/phase-3-frontend/SOP-301-styling-standards.md                # The procedure
+docs/design/DESIGN-REFERENCE.md                                    # Color palette, typography, spacing
+docs/architecture/design-patterns.md                               # Styling conventions
+apps/web/src/components/ui/Button.tsx                              # Existing Tailwind class patterns
 ```
 
 ### Expected Outputs
 
-- [ ] Component architecture documentation
-- [ ] Shared component inventory and hierarchy
-- [ ] State management approach finalized
+- [ ] Tailwind CSS configuration with design tokens
+- [ ] Global CSS with custom properties
+- [ ] Responsive breakpoints
+- [ ] NativeWind configuration for mobile
 
 ---
 
@@ -413,15 +413,15 @@ packages/shared/src/types/index.ts                                 # Shared type
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-Execute SOP-300 (Component Architecture).
+Execute SOP-301 (Styling Standards).
 
 Read:
 
 - `.prompts/AI-SESSION.md` for context
-- `.sops/phase-3-frontend/SOP-300-component-architecture.md` for the procedure
-- `docs/architecture/design-patterns.md` §3.4 for Component Patterns
-- `docs/design/DESIGN-REFERENCE.md` for UI design reference
-- `packages/shared/src/schemas/index.ts` for available validation schemas
+- `.sops/phase-3-frontend/SOP-301-styling-standards.md` for the procedure
+- `docs/design/DESIGN-REFERENCE.md` for color palette, typography, spacing
+- `docs/architecture/design-patterns.md` for styling conventions
+- `apps/web/src/components/ui/Button.tsx` for existing Tailwind class patterns
 
 Follow the SOP's Procedure section step by step.
 Create all outputs listed in the SOP's Outputs section.
