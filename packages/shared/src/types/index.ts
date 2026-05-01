@@ -7,4 +7,4 @@ export type {
   UseAuthReturn,
   UserRole,
 } from './auth';
-export { PROTECTED_ROUTE_PREFIXES,PUBLIC_ROUTES } from './auth';
+export { PROTECTED_ROUTE_PREFIXES, PUBLIC_ROUTES } from './auth';

@@ -74,7 +74,11 @@ _The following overrides apply to standard sequence rules based on our BaaS stru
 - [ ] **Phase 2 (Backend):**
   - **Execute:** SOP-200 (Service Functions), SOP-203 (Auth Hook), SOP-206 (Zod Validations).
   - **⏭️ Skip:** SOP-201 (Repository Pattern), SOP-202 (API REST Design). _Reason: Supabase handles API generation automagically._
-- [ ] **Phase 3 (Frontend):** ✅ Execute iteratively across both Mobile and Web platforms.
+- [ ] **Phase 3 (Frontend):**
+  - **⚠️ Web First, Mobile Deferred.** Implement `apps/web/` (Next.js) first. `apps/mobile/` (Expo) is deferred to a later phase.
+  - **Rationale:** (1) Faster iteration — no device builds, hot reload in browser. (2) Admin panel is web-only by design (§2.11 of tech-stack.md). (3) Avoids $99/yr Apple Developer overhead during MVP validation. (4) Shared components in `packages/shared/` will flow naturally to mobile later. (5) The v0 prototype used a mobile viewport for demonstration, but the design tokens (colors, typography, component patterns) are platform-agnostic and apply to responsive web equally.
+  - **Execute:** SOP-300 through SOP-306 targeting `apps/web/` only.
+  - **Deferred:** Mobile-specific SOPs (Expo navigation, NativeWind setup, push notifications) move to a dedicated "Phase 3b — Mobile" after web MVP is validated.
 - [ ] **Phase 4 (AI Integration):** ✅ Execute later (currently focusing on rule-based math matching per requirements).
 - [ ] **Phase 5 (Quality):** ✅
 - [ ] **Phase 6 (Deploy):** ✅
@@ -85,7 +89,8 @@ _The following overrides apply to standard sequence rules based on our BaaS stru
 
 - **Bilingual Core:** UI must natively handle Arabic (RTL) and English (LTR) transitions effortlessly.
 - **Transactions are manual:** InstaPay necessitates human verification in the admin panel; no Stripe backend setup needed.
-- **Multi-app consistency:** UI and functionality should be natively mirrored across React Native and Web whenever referencing user and buyer actions.
+- **Web First:** Phase 3 targets `apps/web/` (Next.js) exclusively. Mobile (`apps/mobile/`) is deferred until the web MVP is validated. Do NOT create or modify files in `apps/mobile/` during Phase 3.
+- **Multi-app consistency:** When mobile is eventually implemented, UI and functionality should be natively mirrored across React Native and Web whenever referencing user and buyer actions.
 - **Edge Deployment:** Deploy web assets securely utilizing Vercel's zero-config system.
 
 ---

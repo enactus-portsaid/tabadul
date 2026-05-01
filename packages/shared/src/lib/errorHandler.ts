@@ -21,8 +21,7 @@ import {
   getErrorMessageKey,
   getFallbackMessage,
 } from './errorMessages';
-import type {
-  AppError} from './errors';
+import type { AppError } from './errors';
 import {
   ConflictError,
   ErrorCode,

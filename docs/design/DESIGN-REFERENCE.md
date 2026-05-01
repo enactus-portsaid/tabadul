@@ -6,6 +6,15 @@
 >
 > **Authority:** This guide is authoritative for _how the app looks_. The SOPs and `/docs/requirements.md` remain authoritative for _what the app does_. When in conflict, functional requirements win.
 
+> [!CAUTION]
+> **Web First — Mobile Deferred.** The v0 prototype uses a mobile viewport (~390×844px) for demonstration purposes only. **Phase 3 targets `apps/web/` (Next.js) exclusively.** Do NOT build a mobile app layout. Instead:
+>
+> - **Adopt** the design tokens below (colors, typography, component patterns) — they are platform-agnostic.
+> - **Adapt** the layouts to responsive web (desktop + tablet + mobile breakpoints via Tailwind CSS).
+> - **Ignore** mobile-specific patterns (bottom tab bar, native navigation gestures, Expo Router).
+>
+> The bottom navigation from the prototype should become a responsive **sidebar or top navigation** on web. See `docs/execution-brief.md` §5 for the full rationale.
+
 ---
 
 ## 1. Color Palette

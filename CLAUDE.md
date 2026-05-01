@@ -37,6 +37,8 @@ A v0 prototype was built to establish the visual identity of Tabadul. The design
 
 > **Rule:** The design reference is authoritative for _how the app looks_ (colors, layout, component patterns). The SOPs and `/docs/requirements.md` remain authoritative for _what the app does_ (features, data, business logic). When in conflict, functional requirements win.
 
+> **⚠️ Web First:** Phase 3 targets `apps/web/` (Next.js) exclusively. The mobile app (`apps/mobile/`) is deferred. The v0 prototype uses a mobile viewport for demonstration only — adapt its patterns to responsive web layouts. See `docs/execution-brief.md` §5.
+
 ## 📖 SOP Framework Execution (CRITICAL)
 
 Tabadul is entirely driven by an internal **Standard Operating Procedures (SOP)** framework located in `.sops/` and `.prompts/`.
