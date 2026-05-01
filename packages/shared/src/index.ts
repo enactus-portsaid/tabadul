@@ -7,4 +7,5 @@ export * from './lib/errorMessages';
 export * from './lib/errors';
 export * from './schemas';
 export * from './types';
+export * from './utils/sanitize';
 export * from './utils/validation';

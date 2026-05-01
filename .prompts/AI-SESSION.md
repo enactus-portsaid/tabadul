@@ -140,7 +140,7 @@
 
 ---
 
-## �️ Checkpoint Tracker
+## ⬢ Checkpoint Tracker
 
 > **AI Agent Responsibility:** Update this section as you complete each phase. Fill in the document locations and key decisions so checkpoints can be run efficiently.
 >
@@ -362,6 +362,7 @@ These are human-approved and must never be contradicted:
 | Error Docs       | `/docs/architecture/error-handling.md`                                  | SOP-205                               |
 | Validation Utils | `packages/shared/src/utils/validation.ts`                               | SOP-206                               |
 | Entity Schemas   | `packages/shared/src/schemas/*.ts`                                      | SOP-206                               |
+| Sanitize Utils   | `packages/shared/src/utils/sanitize.ts`                                 | SOP-206                               |
 | Component Docs   | {e.g., `/docs/frontend/components.md`}                                  | SOP-300                               |
 | Visual Design    | `/docs/design/DESIGN-REFERENCE.md`                                      | Pre-Phase 3 (v0 prototype extraction) |
 | Design Screens   | `docs/design/screenshots/*.png` (19 screens)                            | Pre-Phase 3 (v0 prototype extraction) |
@@ -382,37 +383,17 @@ These are human-approved and must never be contradicted:
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
 .sops/phase-3-frontend/SOP-300-component-architecture.md           # The procedure
-docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction (v0 prototype) — READ FIRST
-docs/design/screenshots/                                           # 19 reference screenshots from prototype
-/docs/architecture/design-patterns.md                              # Component patterns §3
-/docs/architecture/project-structure.md                             # Folder conventions
-packages/shared/src/services/index.ts                              # Service layer shape
+docs/architecture/design-patterns.md                               # Component patterns §3.4
+docs/design/DESIGN-REFERENCE.md                                    # UI design reference
+packages/shared/src/schemas/index.ts                               # Available Zod schemas
+packages/shared/src/types/index.ts                                 # Shared types
 ```
 
 ### Expected Outputs
 
-- [ ] Component folder structure (`ui/`, `layout/`, `forms/`, `features/`)
-- [ ] Base UI components (Button, Input, Card, Modal)
-- [ ] Layout components (Header, Footer, Container)
-- [ ] Feature skeleton folders
-- [ ] Component documentation
-
-> **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
-
-<!--
-### Iterative SOP: SOP-{XXX} — {Title}
-
-**Manifest Approved:** ⬚ / ✅
-
-| # | Work Unit | Status | Output Files | Checkpoint |
-|---|-----------|--------|--------------|------------|
-| 1 | {Unit A}  | ⬚     | {files}      | ⬚         |
-| 2 | {Unit B}  | ⬚     | {files}      | ⬚         |
-| 3 | {Unit C}  | ⬚     | {files}      | ⬚         |
-
-**Coverage:** 0/{total} units complete
-**Status Legend:** ⬚ Not Started · 🔄 In Progress · ✅ Complete
--->
+- [ ] Component architecture documentation
+- [ ] Shared component inventory and hierarchy
+- [ ] State management approach finalized
 
 ---
 
@@ -432,7 +413,20 @@ packages/shared/src/services/index.ts                              # Service lay
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-/sop-checkpoint
+Execute SOP-300 (Component Architecture).
+
+Read:
+
+- `.prompts/AI-SESSION.md` for context
+- `.sops/phase-3-frontend/SOP-300-component-architecture.md` for the procedure
+- `docs/architecture/design-patterns.md` §3.4 for Component Patterns
+- `docs/design/DESIGN-REFERENCE.md` for UI design reference
+- `packages/shared/src/schemas/index.ts` for available validation schemas
+
+Follow the SOP's Procedure section step by step.
+Create all outputs listed in the SOP's Outputs section.
+Update `.prompts/AI-SESSION.md` when complete.
+Update `.sops/templates/project-checklist.md` when complete.
 ```
 
 ---
@@ -710,6 +704,31 @@ packages/shared/src/services/index.ts                              # Service lay
 - SOP-205: **i18n-ready messages** — Every ErrorCode maps to an i18n key (e.g., `errors.notFound`). Domain-specific keys defined for all entities (listing, transaction, payment, chat, inspection, dispute, auth).
 - SOP-205: **Operational vs. programming errors** — `isOperational` flag distinguishes user-facing errors from bugs. Non-operational errors display generic "Something went wrong" to avoid leaking internals.
 - SOP-205: **Retry logic** — `isRetryableError()` identifies network, rate-limit, and timeout errors for TanStack Query retry configuration.
+
+### Session 13 — 2026-05-01
+
+**SOPs Completed:** SOP-206 (Validation) — finalized
+**Files Created:**
+
+- `packages/shared/src/schemas/bookmark.ts` (toggleBookmark schema for saved listings)
+- `packages/shared/src/schemas/dispute.ts` (fileDispute, resolveDispute schemas, disputeStatus enum)
+- `packages/shared/src/schemas/notification.ts` (notificationFilter, updateNotificationPreferences schemas, notificationType enum)
+- `packages/shared/src/utils/sanitize.ts` (trimWhitespace, trimPreserveNewlines, escapeHtml, emptyToUndefined, sanitizedString)
+
+**Files Updated:**
+
+- `packages/shared/src/schemas/index.ts` (Added barrel exports for bookmark, dispute, notification schemas)
+- `packages/shared/src/index.ts` (Added sanitize utilities barrel export)
+
+**Notes:**
+
+- SOP-206: **Validation schemas cover all 10 user-facing domains** — auth (5 schemas), listing (4), bid (1), bookmark (1), chat (2), transaction (5), inspection (1), review (1), dispute (2), notification (2). Total: 24 Zod schemas.
+- SOP-206: **Adapted SOP from Express middleware to BaaS architecture** — SOP template references `src/middleware/validate.ts` (Express request parsing). Replaced with portable `validateData()` function and Zod transform-based sanitization callable from hooks/components.
+- SOP-206: **Sanitization via Zod transforms** — No global Express middleware exists in BaaS architecture. Instead, sanitization functions (`trimWhitespace`, `escapeHtml`, `emptyToUndefined`) are designed as Zod `.transform()` / `.pipe()` steps applied at the schema level.
+- SOP-206: **sanitizedString() factory** — Creates a pre-configured Zod pipeline that trims → validates min/max length, reducing boilerplate for common string fields.
+- SOP-206: **i18n error keys** — All validation messages use dot-notation keys (e.g., `dispute.validation.reasonMinLength`) consistent with SOP-203/SOP-205 patterns.
+- SOP-206: **Cross-field refinements** — Listing schemas include `.refine()` for mode-dependent validation (fixed_price requires price, auction requires minimum_bid + auction_ends_at).
+- SOP-206: **Phase 2 fully complete** — All backend SOPs (200, 203, 204, 205, 206) are ✅. SOP-201 and SOP-202 were ⏭️ skipped per execution brief. Ready to proceed to Phase 3 (Frontend).
 
 ```
 
