@@ -5,7 +5,7 @@ import type {
   UseAuthReturn,
 } from '@tabadul/shared/types';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback,useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { authKeys } from '@/lib/queryKeys';
 import { supabase } from '@/lib/supabase';
