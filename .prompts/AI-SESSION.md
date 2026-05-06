@@ -97,7 +97,7 @@
 
 | SOP | Title                  | Status | Output Location                                                                                                  | Notes                                                                                                                                                                   |
 | --- | ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 300 | Component Architecture | ⬚      | `/src/components/` structure                                                                                     |                                                                                                                                                                         |
+| 300 | Component Architecture | ✅     | `apps/web/src/components/`, `/docs/components/README.md`                                                         | 6 UI + 4 layout + 6 feature skeletons, `cn()` utility, `package.json`, barrel exports, component docs                                                                   |
 | 301 | Styling Standards      | ⬚      | Style configs, design tokens                                                                                     |                                                                                                                                                                         |
 | 302 | UI/UX Design           | ⬚      | `/docs/design/DESIGN-REFERENCE.md` (approved visual direction from v0 prototype), `/docs/frontend/wireframes.md` | **Input mode: Detailed** — v0 prototype provides approved visual direction. Skip "Propose Visual Design" gate. See `docs/design/screenshots/` for 19 reference screens. |
 | 303 | API Integration        | ⬚      | API client module                                                                                                |                                                                                                                                                                         |
@@ -365,7 +365,7 @@ These are human-approved and must never be contradicted:
 | Error Docs       | `/docs/architecture/error-handling.md`                                  | SOP-205                               |
 | Validation Utils | `packages/shared/src/utils/validation.ts`                               | SOP-206                               |
 | Entity Schemas   | `packages/shared/src/schemas/*.ts`                                      | SOP-206                               |
-| Component Docs   | {e.g., `/docs/frontend/components.md`}                                  | SOP-300                               |
+| Component Docs   | `/docs/components/README.md`                                            | SOP-300                               |
 | Visual Design    | `/docs/design/DESIGN-REFERENCE.md`                                      | Pre-Phase 3 (v0 prototype extraction) |
 | Design Screens   | `docs/design/screenshots/*.png` (19 screens)                            | Pre-Phase 3 (v0 prototype extraction) |
 | Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305                               |
@@ -376,46 +376,29 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-300
-**Title:** Component Architecture
+**SOP:** SOP-301
+**Title:** Styling Standards
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-3-frontend/SOP-300-component-architecture.md           # The procedure
-docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction (v0 prototype) — READ FIRST
+.sops/phase-3-frontend/SOP-301-styling-standards.md                # The procedure
+docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction — color palette, typography, spacing
 docs/design/screenshots/                                           # 19 reference screenshots from prototype
-/docs/architecture/design-patterns.md                              # Component patterns §3
-/docs/architecture/project-structure.md                             # Folder conventions
-packages/shared/src/services/index.ts                              # Service layer shape
+/docs/components/README.md                                         # Component architecture (SOP-300 output)
+apps/web/src/components/ui/Button.tsx                               # Reference: uses design token class names
+apps/web/src/lib/cn.ts                                             # cn() utility (SOP-300 output)
 ```
 
 ### Expected Outputs
 
-- [ ] Component folder structure (`ui/`, `layout/`, `forms/`, `features/`)
-- [ ] Base UI components (Button, Input, Card, Modal)
-- [ ] Layout components (Header, Footer, Container)
-- [ ] Feature skeleton folders
-- [ ] Component documentation
-
-> **AI Agent:** If the current SOP is iterative (SOP-200, 201, 202, or 305), track per-unit progress here. Copy this template for each iterative SOP you execute.
-
-<!--
-### Iterative SOP: SOP-{XXX} — {Title}
-
-**Manifest Approved:** ⬚ / ✅
-
-| # | Work Unit | Status | Output Files | Checkpoint |
-|---|-----------|--------|--------------|------------|
-| 1 | {Unit A}  | ⬚     | {files}      | ⬚         |
-| 2 | {Unit B}  | ⬚     | {files}      | ⬚         |
-| 3 | {Unit C}  | ⬚     | {files}      | ⬚         |
-
-**Coverage:** 0/{total} units complete
-**Status Legend:** ⬚ Not Started · 🔄 In Progress · ✅ Complete
--->
+- [ ] Tailwind CSS configuration with design tokens
+- [ ] Global CSS variables (colors, typography, spacing)
+- [ ] Dark mode support
+- [ ] `cn()` utility already created (SOP-300)
+- [ ] Component variant setup via `cva` already established (SOP-300)
 
 ---
 
@@ -435,12 +418,68 @@ packages/shared/src/services/index.ts                              # Service lay
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-/sop-checkpoint
+# Execute SOP-301: Styling Standards
+
+## Context
+Project: Tabadul — B2B Industrial Symbiosis Platform
+Phase: 3 (Frontend) — Web First
+Branch: feat/sop-301-styling
+
+## Read First
+1. `.prompts/AI-SESSION.md` (this file — context cache)
+2. `.sops/phase-3-frontend/SOP-301-styling-standards.md` (the procedure)
+3. `docs/design/DESIGN-REFERENCE.md` (approved visual direction)
+4. `apps/web/src/components/ui/Button.tsx` (reference for token usage)
+
+## Execute
+Follow the SOP procedure. Configure Tailwind CSS with design tokens from the
+v0 prototype. Create global CSS variables, set up dark mode, and ensure all
+component classes from SOP-300 resolve correctly.
 ```
 
 ---
 
 ## 📓 Session Log
+
+### Session 14 — 2026-05-05
+
+**SOPs Completed:** SOP-300 (Component Architecture)  
+**Files Created:**
+
+- `apps/web/package.json` (Next.js 15, React 19, Supabase, TanStack Query, Zustand, cva, clsx, tailwind-merge, Lucide)
+- `apps/web/src/lib/cn.ts` (class merge utility: clsx + tailwind-merge)
+- `apps/web/src/components/ui/Button.tsx` (5 variants, 3 sizes, loading state, icon slots)
+- `apps/web/src/components/ui/Input.tsx` (label, error, helper text, addons, a11y)
+- `apps/web/src/components/ui/Card.tsx` (compound: Card, CardHeader, CardTitle, CardContent, CardFooter)
+- `apps/web/src/components/ui/Modal.tsx` (portal, escape key, backdrop click, scroll lock)
+- `apps/web/src/components/ui/Badge.tsx` (6 variants: default/success/warning/danger/info/accent)
+- `apps/web/src/components/ui/Avatar.tsx` (image, initials fallback, online indicator)
+- `apps/web/src/components/layout/Container.tsx` (polymorphic max-w-7xl wrapper)
+- `apps/web/src/components/layout/Header.tsx` (green header bar, notification bell, language toggle)
+- `apps/web/src/components/layout/Footer.tsx` (copyright, navigation links)
+- `apps/web/src/components/layout/Sidebar.tsx` (responsive sidebar, admin section, mobile overlay)
+- `apps/web/src/components/features/listings/index.ts` (skeleton)
+- `apps/web/src/components/features/transactions/index.ts` (skeleton)
+- `apps/web/src/components/features/chat/index.ts` (skeleton)
+- `apps/web/src/components/features/notifications/index.ts` (skeleton)
+- `apps/web/src/components/features/auth/index.ts` (skeleton)
+- `apps/web/src/components/features/admin/index.ts` (skeleton)
+- `docs/components/README.md` (component architecture documentation)
+
+**Files Updated:**
+
+- `apps/web/src/components/ui/index.ts` (barrel: 6 components + prop types)
+- `apps/web/src/components/layout/index.ts` (barrel: 4 layout components)
+
+**Notes:**
+
+- Created `apps/web/package.json` — was missing from SOP-003 scaffold. Added Next.js 15, React 19, and all component utility deps.
+- All UI components use `forwardRef` + `displayName` per SOP-300 spec.
+- Used `class-variance-authority` (cva) for variant management — establishes the pattern for SOP-301 token integration.
+- Components reference design token class names (e.g., `bg-primary`, `text-accent`) that will resolve once SOP-301 configures Tailwind.
+- Sidebar replaces mobile bottom tabs per design reference §7 — persistent on desktop (lg+), overlay on mobile.
+- Feature skeletons document expected components per domain, mapped to design reference sections.
+- Pre-existing TS errors in `supabaseServer.ts` and `middleware.ts` (implicit `any`) are from SOP-203 — not introduced by SOP-300.
 
 ### Session 13 — 2026-04-24
 
