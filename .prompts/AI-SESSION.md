@@ -98,7 +98,7 @@
 | SOP | Title                  | Status | Output Location                                                                                                  | Notes                                                                                                                                                                   |
 | --- | ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 300 | Component Architecture | ✅     | `apps/web/src/components/`, `/docs/components/README.md`                                                         | 6 UI + 4 layout + 6 feature skeletons, `cn()` utility, `package.json`, barrel exports, component docs                                                                   |
-| 301 | Styling Standards      | ⬚      | Style configs, design tokens                                                                                     |                                                                                                                                                                         |
+| 301 | Styling Standards      | ✅     | `globals.css`, `next.config.ts`, `postcss.config.mjs`, `ThemeProvider`, `ThemeToggle`                            | Tailwind v4 CSS-first config, design tokens from v0, dark mode via next-themes, Inter+Cairo fonts                                                                       |
 | 302 | UI/UX Design           | ⬚      | `/docs/design/DESIGN-REFERENCE.md` (approved visual direction from v0 prototype), `/docs/frontend/wireframes.md` | **Input mode: Detailed** — v0 prototype provides approved visual direction. Skip "Propose Visual Design" gate. See `docs/design/screenshots/` for 19 reference screens. |
 | 303 | API Integration        | ⬚      | API client module                                                                                                |                                                                                                                                                                         |
 | 304 | Form Handling          | ⬚      | Form components/hooks                                                                                            |                                                                                                                                                                         |
@@ -376,29 +376,26 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-301
-**Title:** Styling Standards
+**SOP:** SOP-302
+**Title:** UI/UX Design
 **Status:** ⬚ Not Started
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-3-frontend/SOP-301-styling-standards.md                # The procedure
-docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction — color palette, typography, spacing
+.sops/phase-3-frontend/SOP-302-ui-ux-design.md                     # The procedure
+docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction
 docs/design/screenshots/                                           # 19 reference screenshots from prototype
-/docs/components/README.md                                         # Component architecture (SOP-300 output)
-apps/web/src/components/ui/Button.tsx                               # Reference: uses design token class names
-apps/web/src/lib/cn.ts                                             # cn() utility (SOP-300 output)
+docs/components/README.md                                          # Component architecture (SOP-300 output)
+apps/web/src/app/globals.css                                       # Design tokens + dark mode (SOP-301 output)
 ```
 
 ### Expected Outputs
 
-- [ ] Tailwind CSS configuration with design tokens
-- [ ] Global CSS variables (colors, typography, spacing)
-- [ ] Dark mode support
-- [ ] `cn()` utility already created (SOP-300)
-- [ ] Component variant setup via `cva` already established (SOP-300)
+- [ ] Wireframes / page layouts documentation
+- [ ] Finalized visual direction aligned with design reference
+- [ ] Component usage guidelines for feature pages
 
 ---
 
@@ -418,28 +415,55 @@ apps/web/src/lib/cn.ts                                             # cn() utilit
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-# Execute SOP-301: Styling Standards
+# Execute SOP-302: UI/UX Design
 
 ## Context
 Project: Tabadul — B2B Industrial Symbiosis Platform
 Phase: 3 (Frontend) — Web First
-Branch: feat/sop-301-styling
+Branch: feat/sop-302-design
 
 ## Read First
 1. `.prompts/AI-SESSION.md` (this file — context cache)
-2. `.sops/phase-3-frontend/SOP-301-styling-standards.md` (the procedure)
+2. `.sops/phase-3-frontend/SOP-302-ui-ux-design.md` (the procedure)
 3. `docs/design/DESIGN-REFERENCE.md` (approved visual direction)
-4. `apps/web/src/components/ui/Button.tsx` (reference for token usage)
+4. `docs/design/screenshots/` (19 prototype reference screens)
 
 ## Execute
-Follow the SOP procedure. Configure Tailwind CSS with design tokens from the
-v0 prototype. Create global CSS variables, set up dark mode, and ensure all
-component classes from SOP-300 resolve correctly.
+Follow the SOP procedure. The v0 prototype provides the approved visual
+direction — skip the "Propose Visual Design" gate (design input is Detailed).
+Document wireframes and page layouts for responsive web.
 ```
 
 ---
 
 ## 📓 Session Log
+
+### Session 15 — 2026-05-06
+
+**SOPs Completed:** SOP-301 (Styling Standards)  
+**Files Created:**
+
+- `apps/web/postcss.config.mjs` (Tailwind v4 PostCSS plugin)
+- `apps/web/next.config.ts` (Next.js 15 config, image patterns, optimized imports)
+- `apps/web/src/app/globals.css` (Tailwind v4 @theme inline, :root + .dark CSS vars, base styles, keyframes, RTL support, reduced motion)
+- `apps/web/src/app/layout.tsx` (Root layout, Inter + Cairo fonts via next/font, ThemeProvider, SEO metadata)
+- `apps/web/src/app/[locale]/layout.tsx` (Locale layout, sets lang/dir, generates static params for ar/en)
+- `apps/web/src/components/ThemeProvider.tsx` (next-themes wrapper, class-based dark mode)
+- `apps/web/src/components/ui/ThemeToggle.tsx` (Light/dark/system cycle, hydration-safe, Lucide icons)
+
+**Files Updated:**
+
+- `apps/web/package.json` (added next-themes, @tailwindcss/postcss)
+- `apps/web/src/components/ui/index.ts` (added ThemeToggle export)
+
+**Notes:**
+
+- Adapted SOP-301 from Tailwind v3 (`tailwind.config.ts`) to Tailwind v4 CSS-first approach (`@theme inline` in globals.css). This is analogous to the Prisma→Supabase adaptation in Phase 1.
+- `@theme inline` makes token values resolve at runtime via CSS custom properties, enabling light/dark switching without build-time duplication.
+- `@custom-variant dark` scoped with `:where(.dark, .dark *)` avoids specificity inflation.
+- Dark mode colors: surfaces shift to warm dark (#0F1419), primary green lightens (#2D6A4F→#40916C) for contrast, accent orange brightens.
+- SOP-301 references `src/lib/utils.ts` for cn() — already created as `src/lib/cn.ts` in SOP-300. No duplicate created.
+- Build verified: Tailwind compiled successfully. Pre-existing TS errors in supabaseServer.ts blocked full build (not SOP-301 related).
 
 ### Session 14 — 2026-05-05
 
