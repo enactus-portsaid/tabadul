@@ -378,7 +378,7 @@ These are human-approved and must never be contradicted:
 
 **SOP:** SOP-302
 **Title:** UI/UX Design & Planning
-**Status:** 🔄 In Progress (Iteration 2 of ~8 complete)
+**Status:** 🔄 In Progress (Iteration 3 of ~8 complete)
 
 ### Context Files to Read
 
@@ -390,6 +390,7 @@ docs/design/screenshots/                                           # 19 referenc
 docs/frontend/ui-analysis.md                                       # UI analysis (all user stories)
 docs/frontend/ui-design/marketplace-listings.md                    # Iteration 1 output
 docs/frontend/ui-design/auth-profile.md                             # Iteration 2 output
+docs/frontend/ui-design/dashboard-home.md                            # Iteration 3 output
 docs/components/README.md                                          # Component architecture (SOP-300 output)
 apps/web/src/app/globals.css                                       # Design tokens + dark mode (SOP-301 output)
 ```
@@ -398,11 +399,12 @@ apps/web/src/app/globals.css                                       # Design toke
 
 - [x] **Iteration 1:** Marketplace & Listings (US-010–014, US-020–023)
 - [x] **Iteration 2:** Authentication & Profile (US-001–005)
+- [x] **Iteration 3:** Dashboard & Home (US-004, US-030–032)
 
 ### Remaining Iterations
 
 - [ ] Authentication & Profile — ✅ Done
-- [ ] Dashboard & Home (US-004, US-030–032)
+- [ ] Dashboard & Home — ✅ Done
 - [ ] Chat & Communication (US-040–043)
 - [ ] Transactions & Payment (US-050–055)
 - [ ] Quality & Inspection (US-060–063)
@@ -414,6 +416,7 @@ apps/web/src/app/globals.css                                       # Design toke
 - [x] `/docs/frontend/ui-analysis.md` — UI analysis of all user stories
 - [x] `/docs/frontend/ui-design/marketplace-listings.md` — Wireframes, flows, components, a11y
 - [x] `/docs/frontend/ui-design/auth-profile.md` — Auth flows, wireframes, profile components, a11y
+- [x] `/docs/frontend/ui-design/dashboard-home.md` — Dashboard wireframes, mode toggle, match carousel, a11y
 - [ ] `/docs/frontend/ui-design/[remaining features].md` — One per iteration
 - [x] Visual direction — **Approved** (from `DESIGN-REFERENCE.md`, gate skipped)
 
@@ -463,13 +466,14 @@ Document wireframes and page layouts for responsive web.
 
 ### Session 16 — 2026-05-08
 
-**SOPs In Progress:** SOP-302 (UI/UX Design — Iterations 1 & 2)  
+**SOPs In Progress:** SOP-302 (UI/UX Design — Iterations 1–3)  
 **Branch:** `feature/sop-302-marketplace-design`  
 **Files Created:**
 
 - `docs/frontend/ui-analysis.md` (Full UI analysis mapping all user stories to components, interactions, a11y, responsive behavior)
 - `docs/frontend/ui-design/marketplace-listings.md` (Marketplace & Listings feature design: 4 user flows, 4 wireframes desktop+mobile, 4 component hierarchies, 10 micro-interactions, responsive breakpoint tables for all screens, WCAG 2.1 AA accessibility spec)
 - `docs/frontend/ui-design/auth-profile.md` (Authentication & Profile: 5 user flows, 6 wireframes, 6 component hierarchies, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA accessibility)
+- `docs/frontend/ui-design/dashboard-home.md` (Dashboard & Home: 5 user flows, 3 wireframes, buyer/seller mode components, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL behavior)
 
 **Notes:**
 
