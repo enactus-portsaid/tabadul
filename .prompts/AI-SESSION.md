@@ -95,15 +95,15 @@
 
 > **⚠️ Web First — Mobile Deferred.** All Phase 3 SOPs target `apps/web/` (Next.js) exclusively. Do NOT create or modify files in `apps/mobile/`. The v0 prototype uses a mobile viewport for demonstration only — adapt its design tokens to responsive web. See `docs/execution-brief.md` §5.
 
-| SOP | Title                  | Status | Output Location                                                                                                  | Notes                                                                                                                                                                   |
-| --- | ---------------------- | ------ | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 300 | Component Architecture | ✅     | `apps/web/src/components/`, `/docs/components/README.md`                                                         | 6 UI + 4 layout + 6 feature skeletons, `cn()` utility, `package.json`, barrel exports, component docs                                                                   |
-| 301 | Styling Standards      | ✅     | `globals.css`, `next.config.ts`, `postcss.config.mjs`, `ThemeProvider`, `ThemeToggle`                            | Tailwind v4 CSS-first config, design tokens from v0, dark mode via next-themes, Inter+Cairo fonts                                                                       |
-| 302 | UI/UX Design           | ⬚      | `/docs/design/DESIGN-REFERENCE.md` (approved visual direction from v0 prototype), `/docs/frontend/wireframes.md` | **Input mode: Detailed** — v0 prototype provides approved visual direction. Skip "Propose Visual Design" gate. See `docs/design/screenshots/` for 19 reference screens. |
-| 303 | API Integration        | ⬚      | API client module                                                                                                |                                                                                                                                                                         |
-| 304 | Form Handling          | ⬚      | Form components/hooks                                                                                            |                                                                                                                                                                         |
-| 305 | Page Implementation    | ⬚      | `/src/app/` pages                                                                                                |                                                                                                                                                                         |
-| 306 | Progressive Web App    | ⬚      | PWA config, service worker                                                                                       |                                                                                                                                                                         |
+| SOP | Title                  | Status | Output Location                                                                                                         | Notes                                                                                                                                                                                                 |
+| --- | ---------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 300 | Component Architecture | ✅     | `apps/web/src/components/`, `/docs/components/README.md`                                                                | 6 UI + 4 layout + 6 feature skeletons, `cn()` utility, `package.json`, barrel exports, component docs                                                                                                 |
+| 301 | Styling Standards      | ✅     | `globals.css`, `next.config.ts`, `postcss.config.mjs`, `ThemeProvider`, `ThemeToggle`                                   | Tailwind v4 CSS-first config, design tokens from v0, dark mode via next-themes, Inter+Cairo fonts                                                                                                     |
+| 302 | UI/UX Design           | 🔄     | `/docs/frontend/ui-analysis.md`, `/docs/frontend/ui-design/marketplace-listings.md`, `/docs/design/DESIGN-REFERENCE.md` | **Input mode: Detailed** — v0 prototype as approved visual direction. Iteration 1: Marketplace & Listings complete. Remaining: Auth, Dashboard, Chat, Transactions, Inspection, Notifications, Admin. |
+| 303 | API Integration        | ⬚      | API client module                                                                                                       |                                                                                                                                                                                                       |
+| 304 | Form Handling          | ⬚      | Form components/hooks                                                                                                   |                                                                                                                                                                                                       |
+| 305 | Page Implementation    | ⬚      | `/src/app/` pages                                                                                                       |                                                                                                                                                                                                       |
+| 306 | Progressive Web App    | ⬚      | PWA config, service worker                                                                                              |                                                                                                                                                                                                       |
 
 ### Phase 4: AI Integration (If Applicable)
 
@@ -377,8 +377,8 @@ These are human-approved and must never be contradicted:
 ### Active SOP
 
 **SOP:** SOP-302
-**Title:** UI/UX Design
-**Status:** ⬚ Not Started
+**Title:** UI/UX Design & Planning
+**Status:** 🔄 In Progress (Iteration 1 of ~8 complete)
 
 ### Context Files to Read
 
@@ -387,15 +387,32 @@ These are human-approved and must never be contradicted:
 .sops/phase-3-frontend/SOP-302-ui-ux-design.md                     # The procedure
 docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction
 docs/design/screenshots/                                           # 19 reference screenshots from prototype
+docs/frontend/ui-analysis.md                                       # UI analysis (all user stories)
+docs/frontend/ui-design/marketplace-listings.md                    # Iteration 1 output
 docs/components/README.md                                          # Component architecture (SOP-300 output)
 apps/web/src/app/globals.css                                       # Design tokens + dark mode (SOP-301 output)
 ```
 
+### Completed Iterations
+
+- [x] **Iteration 1:** Marketplace & Listings (US-010–014, US-020–023)
+
+### Remaining Iterations
+
+- [ ] Authentication & Profile (US-001–005)
+- [ ] Dashboard & Home (US-004, US-030–032)
+- [ ] Chat & Communication (US-040–043)
+- [ ] Transactions & Payment (US-050–055)
+- [ ] Quality & Inspection (US-060–063)
+- [ ] Notifications (US-090–091)
+- [ ] Admin Panel (US-080–084)
+
 ### Expected Outputs
 
-- [ ] Wireframes / page layouts documentation
-- [ ] Finalized visual direction aligned with design reference
-- [ ] Component usage guidelines for feature pages
+- [x] `/docs/frontend/ui-analysis.md` — UI analysis of all user stories
+- [x] `/docs/frontend/ui-design/marketplace-listings.md` — Wireframes, flows, components, a11y
+- [ ] `/docs/frontend/ui-design/[remaining features].md` — One per iteration
+- [x] Visual direction — **Approved** (from `DESIGN-REFERENCE.md`, gate skipped)
 
 ---
 
@@ -418,17 +435,20 @@ apps/web/src/app/globals.css                                       # Design toke
 # Execute SOP-302: UI/UX Design
 
 ## Context
+
 Project: Tabadul — B2B Industrial Symbiosis Platform
 Phase: 3 (Frontend) — Web First
 Branch: feat/sop-302-design
 
 ## Read First
+
 1. `.prompts/AI-SESSION.md` (this file — context cache)
 2. `.sops/phase-3-frontend/SOP-302-ui-ux-design.md` (the procedure)
 3. `docs/design/DESIGN-REFERENCE.md` (approved visual direction)
 4. `docs/design/screenshots/` (19 prototype reference screens)
 
 ## Execute
+
 Follow the SOP procedure. The v0 prototype provides the approved visual
 direction — skip the "Propose Visual Design" gate (design input is Detailed).
 Document wireframes and page layouts for responsive web.
@@ -437,6 +457,29 @@ Document wireframes and page layouts for responsive web.
 ---
 
 ## 📓 Session Log
+
+### Session 16 — 2026-05-08
+
+**SOPs In Progress:** SOP-302 (UI/UX Design — Iteration 1: Marketplace & Listings)  
+**Branch:** `feature/sop-302-marketplace-design`  
+**Files Created:**
+
+- `docs/frontend/ui-analysis.md` (Full UI analysis mapping all user stories to components, interactions, a11y, responsive behavior)
+- `docs/frontend/ui-design/marketplace-listings.md` (Marketplace & Listings feature design: 4 user flows, 4 wireframes desktop+mobile, 4 component hierarchies, 10 micro-interactions, responsive breakpoint tables for all screens, WCAG 2.1 AA accessibility spec)
+
+**Notes:**
+
+- SOP-302 Step 1: Design input mode = **Detailed** (v0 prototype provides approved visual direction per `DESIGN-REFERENCE.md`). Visual design gate (Step 9) skipped.
+- SOP-302 Step 2: Created comprehensive `ui-analysis.md` covering all 30+ user stories across 9 feature groups. Identified 16 new components needed beyond SOP-300 output.
+- SOP-302 Steps 3–8 (Iteration 1 — Marketplace & Listings):
+  - **User Flows:** 4 flows (Browse & Purchase, Create Listing, Manage Listings, Bookmarks)
+  - **Wireframes:** 4 screens × 2 breakpoints (Marketplace Browse, Listing Detail, Create Listing Wizard, My Listings) — all adapted from mobile prototype to responsive web with persistent sidebar nav
+  - **Component Hierarchy:** 4 full component trees mapping Page → Layout → Feature → UI components per SOP-300 architecture
+  - **Micro-Interactions:** 10 interactions specified (card hover, bookmark toggle, filter apply, photo upload, wizard steps, buy/bid, deactivate, search, image gallery)
+  - **Responsive Breakpoints:** 3 breakpoints (mobile <640, tablet 640–1023, desktop ≥1024) with per-element behavior tables for all 4 screens
+  - **Accessibility:** WCAG 2.1 AA requirements per screen (ARIA roles, keyboard navigation flow, live regions, focus management, color contrast, RTL support)
+- Web First adaptation: bottom tab bar → sidebar nav, mobile viewport → desktop-first responsive grid, mobile swipe → click/keyboard interactions
+- Design token mapping verified against `globals.css` (SOP-301 output)
 
 ### Session 15 — 2026-05-06
 
