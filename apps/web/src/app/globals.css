@@ -1,0 +1,260 @@
+/* =========================================================================
+ * Tabadul — Global Stylesheet
+ * =========================================================================
+ * Design tokens extracted from the v0 prototype (DESIGN-REFERENCE.md).
+ * Tailwind CSS v4 — CSS-first configuration via @theme.
+ * ========================================================================= */
+
+@import 'tailwindcss';
+
+/* -------------------------------------------------------------------------
+ * Custom dark-mode variant — class-based, driven by next-themes
+ * Scoped with :where() to avoid specificity inflation.
+ * ------------------------------------------------------------------------- */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* -------------------------------------------------------------------------
+ * Design Tokens — mapped to Tailwind utility classes
+ *
+ * @theme inline → values resolve at RUNTIME (CSS custom properties),
+ * enabling light/dark theme switching via :root / .dark overrides.
+ *
+ * Usage in components:
+ *   bg-primary  → var(--color-primary)  → #1B4332 (light) / #2D6A4F (dark)
+ *   text-accent → var(--color-accent)   → #D4760A (light) / #E8890C (dark)
+ * ------------------------------------------------------------------------- */
+@theme inline {
+  /* ── Primary (Forest Green) ─────────────────────────────────────────── */
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-foreground: var(--primary-foreground);
+
+  /* ── Accent (Orange) ────────────────────────────────────────────────── */
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+
+  /* ── Surfaces ───────────────────────────────────────────────────────── */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+
+  /* ── Text ───────────────────────────────────────────────────────────── */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /* ── Status ─────────────────────────────────────────────────────────── */
+  --color-status-active: var(--status-active);
+  --color-status-pending: var(--status-pending);
+  --color-status-success: var(--status-success);
+
+  /* ── Border ─────────────────────────────────────────────────────────── */
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter), var(--font-cairo), ui-sans-serif, system-ui,
+    -apple-system, sans-serif;
+
+  /* ── Border Radius ──────────────────────────────────────────────────── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* ── Shadows ────────────────────────────────────────────────────────── */
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06);
+
+  /* ── Animation ──────────────────────────────────────────────────────── */
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-slide-up: slide-up 0.3s ease-out;
+  --animate-slide-down: slide-down 0.3s ease-out;
+}
+
+/* =========================================================================
+ * Light Theme (Default)
+ *
+ * Warm, earthy palette per design reference:
+ *   - Cream background (#F5F1EB) — NOT cold gray
+ *   - Forest green (#1B4332) for authority/trust
+ *   - Orange (#D4760A) for action/attention
+ * ========================================================================= */
+:root {
+  /* Primary — Forest Green */
+  --primary: #1b4332;
+  --primary-light: #2d6a4f;
+  --primary-foreground: #ffffff;
+
+  /* Accent — Orange */
+  --accent: #d4760a;
+  --accent-light: #e8890c;
+
+  /* Surfaces */
+  --background: #f5f1eb;
+  --surface: #ffffff;
+  --surface-muted: #faf7f2;
+
+  /* Text */
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* Status */
+  --status-active: #2d6a4f;
+  --status-pending: #d4760a;
+  --status-success: #22c55e;
+
+  /* Border & Ring */
+  --border: #e5e7eb;
+  --ring: #1b4332;
+
+  color-scheme: light;
+}
+
+/* =========================================================================
+ * Dark Theme
+ *
+ * Muted, low-contrast variant preserving the warm tone.
+ * Primary green shifts lighter for readability on dark surfaces.
+ * ========================================================================= */
+.dark {
+  /* Primary — Lighter Green for contrast */
+  --primary: #2d6a4f;
+  --primary-light: #40916c;
+  --primary-foreground: #ffffff;
+
+  /* Accent — Brighter Orange */
+  --accent: #e8890c;
+  --accent-light: #f5a623;
+
+  /* Surfaces — Warm dark (not pure black) */
+  --background: #0f1419;
+  --surface: #1c2128;
+  --surface-muted: #252c35;
+
+  /* Text — Adjusted for dark backgrounds */
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+
+  /* Status — Slightly brighter for dark bg */
+  --status-active: #40916c;
+  --status-pending: #e8890c;
+  --status-success: #3fb950;
+
+  /* Border & Ring */
+  --border: #30363d;
+  --ring: #40916c;
+
+  color-scheme: dark;
+}
+
+/* =========================================================================
+ * Base Styles
+ * ========================================================================= */
+
+*,
+::after,
+::before {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================================
+ * RTL Support — Arabic text direction
+ * ========================================================================= */
+[dir='rtl'] {
+  font-feature-settings: 'rlig' 1, 'calt' 1, 'liga' 0;
+}
+
+/* =========================================================================
+ * Accessibility — Reduced Motion
+ * ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::after,
+  ::before {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================================
+ * Focus Styles — Consistent ring for keyboard navigation
+ * ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+ * Keyframes
+ * ========================================================================= */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================================
+ * Scrollbar Styling
+ * ========================================================================= */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
