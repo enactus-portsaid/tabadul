@@ -378,7 +378,7 @@ These are human-approved and must never be contradicted:
 
 **SOP:** SOP-302
 **Title:** UI/UX Design & Planning
-**Status:** 🔄 In Progress (Iteration 3 of ~8 complete)
+**Status:** 🔄 In Progress (Iteration 4 of ~8 complete)
 
 ### Context Files to Read
 
@@ -391,6 +391,7 @@ docs/frontend/ui-analysis.md                                       # UI analysis
 docs/frontend/ui-design/marketplace-listings.md                    # Iteration 1 output
 docs/frontend/ui-design/auth-profile.md                             # Iteration 2 output
 docs/frontend/ui-design/dashboard-home.md                            # Iteration 3 output
+docs/frontend/ui-design/chat-communication.md                        # Iteration 4 output
 docs/components/README.md                                          # Component architecture (SOP-300 output)
 apps/web/src/app/globals.css                                       # Design tokens + dark mode (SOP-301 output)
 ```
@@ -400,12 +401,13 @@ apps/web/src/app/globals.css                                       # Design toke
 - [x] **Iteration 1:** Marketplace & Listings (US-010–014, US-020–023)
 - [x] **Iteration 2:** Authentication & Profile (US-001–005)
 - [x] **Iteration 3:** Dashboard & Home (US-004, US-030–032)
+- [x] **Iteration 4:** Chat & Communication (US-040–043)
 
 ### Remaining Iterations
 
 - [ ] Authentication & Profile — ✅ Done
 - [ ] Dashboard & Home — ✅ Done
-- [ ] Chat & Communication (US-040–043)
+- [ ] Chat & Communication — ✅ Done
 - [ ] Transactions & Payment (US-050–055)
 - [ ] Quality & Inspection (US-060–063)
 - [ ] Notifications (US-090–091)
@@ -417,6 +419,7 @@ apps/web/src/app/globals.css                                       # Design toke
 - [x] `/docs/frontend/ui-design/marketplace-listings.md` — Wireframes, flows, components, a11y
 - [x] `/docs/frontend/ui-design/auth-profile.md` — Auth flows, wireframes, profile components, a11y
 - [x] `/docs/frontend/ui-design/dashboard-home.md` — Dashboard wireframes, mode toggle, match carousel, a11y
+- [x] `/docs/frontend/ui-design/chat-communication.md` — Chat 2-panel layout, real-time messaging, moderation UI, a11y
 - [ ] `/docs/frontend/ui-design/[remaining features].md` — One per iteration
 - [x] Visual direction — **Approved** (from `DESIGN-REFERENCE.md`, gate skipped)
 
@@ -466,7 +469,7 @@ Document wireframes and page layouts for responsive web.
 
 ### Session 16 — 2026-05-08
 
-**SOPs In Progress:** SOP-302 (UI/UX Design — Iterations 1–3)  
+**SOPs In Progress:** SOP-302 (UI/UX Design — Iterations 1–4)  
 **Branch:** `feature/sop-302-marketplace-design`  
 **Files Created:**
 
@@ -474,6 +477,7 @@ Document wireframes and page layouts for responsive web.
 - `docs/frontend/ui-design/marketplace-listings.md` (Marketplace & Listings feature design: 4 user flows, 4 wireframes desktop+mobile, 4 component hierarchies, 10 micro-interactions, responsive breakpoint tables for all screens, WCAG 2.1 AA accessibility spec)
 - `docs/frontend/ui-design/auth-profile.md` (Authentication & Profile: 5 user flows, 6 wireframes, 6 component hierarchies, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA accessibility)
 - `docs/frontend/ui-design/dashboard-home.md` (Dashboard & Home: 5 user flows, 3 wireframes, buyer/seller mode components, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL behavior)
+- `docs/frontend/ui-design/chat-communication.md` (Chat: 5 user flows, 5 wireframes, 2-panel desktop layout, real-time messaging, typing indicator, content moderation UI, 11 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL)
 
 **Notes:**
 
