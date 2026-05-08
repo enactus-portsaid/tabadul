@@ -27,7 +27,7 @@ Each feature group is analyzed independently and will receive its own
 | **Dashboard & Home**         | US-004, US-014 (partial), US-030–032 | `/docs/frontend/ui-design/dashboard-home.md`       | ✅ Complete |
 | **Chat & Communication**     | US-040–043                           | `/docs/frontend/ui-design/chat-communication.md`   | ✅ Complete |
 | **Transactions & Payment**   | US-050–055                           | `/docs/frontend/ui-design/transactions-payment.md` | ✅ Complete |
-| **Quality & Inspection**     | US-060–063                           | `/docs/frontend/ui-design/inspection.md`           | ⬚ Planned   |
+| **Quality & Inspection**     | US-060–063                           | `/docs/frontend/ui-design/quality-inspection.md`   | ✅ Complete |
 | **Notifications**            | US-090–091                           | `/docs/frontend/ui-design/notifications.md`        | ⬚ Planned   |
 | **Admin Panel**              | US-080–084                           | `/docs/frontend/ui-design/admin.md`                | ⬚ Planned   |
 | **Internationalization**     | US-100–101                           | Cross-cutting (all feature docs)                   | ⬚ Planned   |

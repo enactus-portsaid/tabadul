@@ -378,7 +378,7 @@ These are human-approved and must never be contradicted:
 
 **SOP:** SOP-302
 **Title:** UI/UX Design & Planning
-**Status:** 🔄 In Progress (Iteration 5 of ~8 complete)
+**Status:** 🔄 In Progress (Iteration 6 of ~8 complete)
 
 ### Context Files to Read
 
@@ -393,6 +393,7 @@ docs/frontend/ui-design/auth-profile.md                             # Iteration 
 docs/frontend/ui-design/dashboard-home.md                            # Iteration 3 output
 docs/frontend/ui-design/chat-communication.md                        # Iteration 4 output
 docs/frontend/ui-design/transactions-payment.md                      # Iteration 5 output
+docs/frontend/ui-design/quality-inspection.md                        # Iteration 6 output
 docs/components/README.md                                          # Component architecture (SOP-300 output)
 apps/web/src/app/globals.css                                       # Design tokens + dark mode (SOP-301 output)
 ```
@@ -404,6 +405,7 @@ apps/web/src/app/globals.css                                       # Design toke
 - [x] **Iteration 3:** Dashboard & Home (US-004, US-030–032)
 - [x] **Iteration 4:** Chat & Communication (US-040–043)
 - [x] **Iteration 5:** Transactions & Payment (US-050–055)
+- [x] **Iteration 6:** Quality & Inspection (US-060–063)
 
 ### Remaining Iterations
 
@@ -411,7 +413,7 @@ apps/web/src/app/globals.css                                       # Design toke
 - [ ] Dashboard & Home — ✅ Done
 - [ ] Chat & Communication — ✅ Done
 - [ ] Transactions & Payment — ✅ Done
-- [ ] Quality & Inspection (US-060–063)
+- [ ] Quality & Inspection — ✅ Done
 - [ ] Notifications (US-090–091)
 - [ ] Admin Panel (US-080–084)
 
@@ -423,6 +425,7 @@ apps/web/src/app/globals.css                                       # Design toke
 - [x] `/docs/frontend/ui-design/dashboard-home.md` — Dashboard wireframes, mode toggle, match carousel, a11y
 - [x] `/docs/frontend/ui-design/chat-communication.md` — Chat 2-panel layout, real-time messaging, moderation UI, a11y
 - [x] `/docs/frontend/ui-design/transactions-payment.md` — Transaction lifecycle, timeline, receipt upload, dispute, a11y
+- [x] `/docs/frontend/ui-design/quality-inspection.md` — Inspection reports, star ratings, reviews, a11y
 - [ ] `/docs/frontend/ui-design/[remaining features].md` — One per iteration
 - [x] Visual direction — **Approved** (from `DESIGN-REFERENCE.md`, gate skipped)
 
@@ -472,7 +475,7 @@ Document wireframes and page layouts for responsive web.
 
 ### Session 16 — 2026-05-08
 
-**SOPs In Progress:** SOP-302 (UI/UX Design — Iterations 1–5)  
+**SOPs In Progress:** SOP-302 (UI/UX Design — Iterations 1–6)  
 **Branch:** `feature/sop-302-marketplace-design`  
 **Files Created:**
 
@@ -482,6 +485,7 @@ Document wireframes and page layouts for responsive web.
 - `docs/frontend/ui-design/dashboard-home.md` (Dashboard & Home: 5 user flows, 3 wireframes, buyer/seller mode components, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL behavior)
 - `docs/frontend/ui-design/chat-communication.md` (Chat: 5 user flows, 5 wireframes, 2-panel desktop layout, real-time messaging, typing indicator, content moderation UI, 11 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL)
 - `docs/frontend/ui-design/transactions-payment.md` (Transactions: 6 user flows, 5 wireframes + contextual action states, status timeline, receipt upload, dispute form, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL)
+- `docs/frontend/ui-design/quality-inspection.md` (Quality: 5 user flows, 4 wireframes, inspection report form+view, star rating input+display, review form, seller reviews page, 10 micro-interactions, responsive breakpoints, WCAG 2.1 AA, RTL)
 
 **Notes:**
 
