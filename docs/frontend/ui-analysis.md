@@ -20,17 +20,17 @@ Each feature group is analyzed independently and will receive its own
 
 ## Feature Group Index
 
-| Group                        | User Stories                         | Design Doc                                         | Status         |
-| ---------------------------- | ------------------------------------ | -------------------------------------------------- | -------------- |
-| **Marketplace & Listings**   | US-010–014, US-020–023               | `/docs/frontend/ui-design/marketplace-listings.md` | 🔄 In Progress |
-| **Authentication & Profile** | US-001–005                           | `/docs/frontend/ui-design/auth-profile.md`         | ⬚ Planned      |
-| **Dashboard & Home**         | US-004, US-014 (partial), US-030–032 | `/docs/frontend/ui-design/dashboard-home.md`       | ⬚ Planned      |
-| **Chat & Communication**     | US-040–043                           | `/docs/frontend/ui-design/chat.md`                 | ⬚ Planned      |
-| **Transactions & Payment**   | US-050–055                           | `/docs/frontend/ui-design/transactions.md`         | ⬚ Planned      |
-| **Quality & Inspection**     | US-060–063                           | `/docs/frontend/ui-design/inspection.md`           | ⬚ Planned      |
-| **Notifications**            | US-090–091                           | `/docs/frontend/ui-design/notifications.md`        | ⬚ Planned      |
-| **Admin Panel**              | US-080–084                           | `/docs/frontend/ui-design/admin.md`                | ⬚ Planned      |
-| **Internationalization**     | US-100–101                           | Cross-cutting (all feature docs)                   | ⬚ Planned      |
+| Group                        | User Stories                         | Design Doc                                         | Status      |
+| ---------------------------- | ------------------------------------ | -------------------------------------------------- | ----------- |
+| **Marketplace & Listings**   | US-010–014, US-020–023               | `/docs/frontend/ui-design/marketplace-listings.md` | ✅ Complete |
+| **Authentication & Profile** | US-001–005                           | `/docs/frontend/ui-design/auth-profile.md`         | ✅ Complete |
+| **Dashboard & Home**         | US-004, US-014 (partial), US-030–032 | `/docs/frontend/ui-design/dashboard-home.md`       | ⬚ Planned   |
+| **Chat & Communication**     | US-040–043                           | `/docs/frontend/ui-design/chat.md`                 | ⬚ Planned   |
+| **Transactions & Payment**   | US-050–055                           | `/docs/frontend/ui-design/transactions.md`         | ⬚ Planned   |
+| **Quality & Inspection**     | US-060–063                           | `/docs/frontend/ui-design/inspection.md`           | ⬚ Planned   |
+| **Notifications**            | US-090–091                           | `/docs/frontend/ui-design/notifications.md`        | ⬚ Planned   |
+| **Admin Panel**              | US-080–084                           | `/docs/frontend/ui-design/admin.md`                | ⬚ Planned   |
+| **Internationalization**     | US-100–101                           | Cross-cutting (all feature docs)                   | ⬚ Planned   |
 
 ---
 
