@@ -376,11 +376,11 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-302
-**Title:** UI/UX Design & Planning
-**Status:** ✅ COMPLETE (All 8 iterations done)
+**SOP:** SOP-303
+**Title:** API Integration
+**Status:** ⬚ Not Started
 
-**Next SOP:** SOP-303 (API Integration) — ready to begin
+**Previous SOP:** SOP-302 (UI/UX Design) — ✅ Complete (all 8 iterations)
 
 ### Context Files to Read
 
@@ -445,26 +445,28 @@ apps/web/src/app/globals.css                                       # Design toke
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-# Execute SOP-302: UI/UX Design
+# Execute SOP-303: API Integration
 
 ## Context
 
 Project: Tabadul — B2B Industrial Symbiosis Platform
 Phase: 3 (Frontend) — Web First
-Branch: feat/sop-302-design
+Branch: feature/sop-303-api-integration
 
 ## Read First
 
 1. `.prompts/AI-SESSION.md` (this file — context cache)
-2. `.sops/phase-3-frontend/SOP-302-ui-ux-design.md` (the procedure)
-3. `docs/design/DESIGN-REFERENCE.md` (approved visual direction)
-4. `docs/design/screenshots/` (19 prototype reference screens)
+2. `.sops/phase-3-frontend/SOP-303-api-integration.md` (the procedure)
+3. `packages/shared/src/services/` (existing service layer from SOP-200)
+4. `docs/frontend/ui-design/` (all 8 design specs from SOP-302)
+5. `docs/architecture/design-patterns.md` (BaaS-Driven Layered Architecture)
 
 ## Execute
 
-Follow the SOP procedure. The v0 prototype provides the approved visual
-direction — skip the "Propose Visual Design" gate (design input is Detailed).
-Document wireframes and page layouts for responsive web.
+Follow the SOP procedure. Create the API client wrapper,
+define loading/error state patterns, and implement caching strategy.
+Integrate with existing Supabase service functions from SOP-200.
+Update tracker after completion.
 ```
 
 ---
