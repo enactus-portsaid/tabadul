@@ -1,6 +1,7 @@
 import { Cairo, Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 
+import { QueryProvider } from '@/components/providers/QueryProvider';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
 import './globals.css';
@@ -69,7 +70,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background font-sans text-text-primary antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

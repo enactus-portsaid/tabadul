@@ -53,3 +53,29 @@ export const matchingKeys = {
   recommendations: (userId: string) =>
     [...matchingKeys.all, 'recommendations', userId] as const,
 };
+
+export const inspectionKeys = {
+  all: ['inspection'] as const,
+  report: (transactionId: string) =>
+    [...inspectionKeys.all, 'report', transactionId] as const,
+};
+
+export const adminKeys = {
+  all: ['admin'] as const,
+  users: (filters?: Record<string, unknown>) =>
+    [...adminKeys.all, 'users', filters ?? {}] as const,
+  pendingPayments: () => [...adminKeys.all, 'pendingPayments'] as const,
+  openDisputes: () => [...adminKeys.all, 'openDisputes'] as const,
+};
+
+export const bookmarkKeys = {
+  all: ['bookmarks'] as const,
+  list: (userId: string) => [...bookmarkKeys.all, 'list', userId] as const,
+};
+
+export const bidKeys = {
+  all: ['bids'] as const,
+  byListing: (listingId: string) =>
+    [...bidKeys.all, 'listing', listingId] as const,
+};
+
