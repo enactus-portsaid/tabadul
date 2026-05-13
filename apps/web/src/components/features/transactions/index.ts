@@ -1,9 +1,11 @@
 // ---------------------------------------------------------------------------
 // Transactions Feature Components
 // ---------------------------------------------------------------------------
-// Expected components (to be implemented in SOP-305):
-//   - TransactionCard     — Compact transaction summary (design ref §3.5)
-//   - TransactionTimeline — Step-by-step status timeline
-//   - TransactionDetail   — Full transaction detail view
-//   - PaymentUpload       — InstaPay receipt upload widget
-// ---------------------------------------------------------------------------
+export { FileDisputeForm } from './FileDisputeForm';
+export type { FileDisputeFormProps, FileDisputeFormInput } from './FileDisputeForm';
+export { SubmitInspectionForm } from './SubmitInspectionForm';
+export type { SubmitInspectionFormProps } from './SubmitInspectionForm';
+export { SubmitReviewForm } from './SubmitReviewForm';
+export type { SubmitReviewFormProps } from './SubmitReviewForm';
+export { UploadReceiptForm } from './UploadReceiptForm';
+export type { UploadReceiptFormProps } from './UploadReceiptForm';

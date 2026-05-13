@@ -1,9 +1,11 @@
 // ---------------------------------------------------------------------------
 // Auth Feature Components
 // ---------------------------------------------------------------------------
-// Expected components (to be implemented in SOP-305):
-//   - LoginForm          — Email/password sign-in form
-//   - RegisterForm       — Registration form with role selection
-//   - ForgotPasswordForm — Password reset request form
-//   - AuthCard           — Branded wrapper for auth pages
-// ---------------------------------------------------------------------------
+export { ResetPasswordForm } from './ResetPasswordForm';
+export type { ResetPasswordFormProps } from './ResetPasswordForm';
+export { SignInForm } from './SignInForm';
+export type { SignInFormProps } from './SignInForm';
+export { SignUpForm } from './SignUpForm';
+export type { SignUpFormProps } from './SignUpForm';
+export { UpdateProfileForm } from './UpdateProfileForm';
+export type { UpdateProfileFormProps } from './UpdateProfileForm';
