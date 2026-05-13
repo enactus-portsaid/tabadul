@@ -18,11 +18,18 @@ export type {
   CardTitleProps,
 } from './Card';
 
+export { ErrorMessage } from './ErrorMessage';
+export type { ErrorMessageProps } from './ErrorMessage';
+
 export { Input, inputVariants } from './Input';
 export type { InputProps } from './Input';
 
 export { Modal } from './Modal';
 export type { ModalProps } from './Modal';
 
+export { Skeleton } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
+
 export { ThemeToggle } from './ThemeToggle';
 export type { ThemeToggleProps } from './ThemeToggle';
+

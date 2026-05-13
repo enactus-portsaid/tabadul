@@ -100,7 +100,7 @@
 | 300 | Component Architecture | ✅     | `apps/web/src/components/`, `/docs/components/README.md`                              | 6 UI + 4 layout + 6 feature skeletons, `cn()` utility, `package.json`, barrel exports, component docs                                                                             |
 | 301 | Styling Standards      | ✅     | `globals.css`, `next.config.ts`, `postcss.config.mjs`, `ThemeProvider`, `ThemeToggle` | Tailwind v4 CSS-first config, design tokens from v0, dark mode via next-themes, Inter+Cairo fonts                                                                                 |
 | 302 | UI/UX Design           | ✅     | `/docs/frontend/ui-analysis.md`, `/docs/frontend/ui-design/*.md`                      | **Input mode: Detailed** — v0 prototype as approved visual direction. All 8 iterations complete: Marketplace, Auth, Dashboard, Chat, Transactions, Quality, Notifications, Admin. |
-| 303 | API Integration        | ⬚      | API client module                                                                     |                                                                                                                                                                                   |
+| 303 | API Integration        | ✅     | `src/lib/queryClient.ts`, `src/hooks/api/`, `src/lib/serverFetch.ts`, `src/components/ui/Skeleton.tsx`, `src/components/ui/ErrorMessage.tsx` | BaaS-adapted: useServices() hook replaces REST client; 7 domain hook files, optimistic updates for chat/bookmarks/notifications                                                    |
 | 304 | Form Handling          | ⬚      | Form components/hooks                                                                 |                                                                                                                                                                                   |
 | 305 | Page Implementation    | ⬚      | `/src/app/` pages                                                                     |                                                                                                                                                                                   |
 | 306 | Progressive Web App    | ⬚      | PWA config, service worker                                                            |                                                                                                                                                                                   |
@@ -334,6 +334,7 @@ These are human-approved and must never be contradicted:
 | Validation      | Zod-based schema registry for listing, transaction, chat, bid, review, and inspection entities; explicit validation.ts utility to enforce standard Error response parsing                                                                                                                                                                                                                                                                                                                                                                                                      | `packages/shared/src/schemas/`                                | SOP-206     |
 | UI Design       | **Approved visual direction from v0 prototype.** Forest green primary (`#1B4332`), orange accent (`#D4760A`), warm cream background (`#F5F1EB`). 12 component patterns (cards, toggles, badges, chat threads, etc.), Buying/Selling mode toggle. 19 reference screenshots. **⚠️ Web First:** prototype uses mobile viewport for demo only — adapt to responsive web (sidebar/top nav, not bottom tabs). Agent executing SOP-301/302 MUST read `docs/design/DESIGN-REFERENCE.md` first — skip visual design proposal gate. Target `apps/web/` only; `apps/mobile/` is deferred. | `docs/design/DESIGN-REFERENCE.md`, `docs/design/screenshots/` | Pre-Phase 3 |
 | Platform Order  | **Web first, mobile deferred.** Phase 3 targets `apps/web/` (Next.js) exclusively. `apps/mobile/` (Expo) deferred to Phase 3b after web MVP is validated. Rationale: faster iteration, admin is web-only, avoids $99/yr Apple overhead, shared components flow to mobile later.                                                                                                                                                                                                                                                                                                | `docs/execution-brief.md` §5                                  | Pre-Phase 3 |
+| API Integration | **BaaS-adapted: `useServices()` hook replaces REST client.** TanStack Query wraps shared Supabase service factories. 7 domain hook files (listings, transactions, chat, notifications, matching, inspection, admin). Optimistic updates for bookmarks, messages, notifications, recommendations. Chat uses 5s polling (Realtime in SOP-305). Server-side helpers use React `cache()`. Error handling via `normalizeError()` + `isRetryableError()` from SOP-205.                                                                                                                   | `apps/web/src/hooks/api/`, `apps/web/src/lib/queryClient.ts`  | SOP-303     |
 
 ### Cached File Locations
 
@@ -368,6 +369,14 @@ These are human-approved and must never be contradicted:
 | Component Docs   | `/docs/components/README.md`                                            | SOP-300                               |
 | Visual Design    | `/docs/design/DESIGN-REFERENCE.md`                                      | Pre-Phase 3 (v0 prototype extraction) |
 | Design Screens   | `docs/design/screenshots/*.png` (19 screens)                            | Pre-Phase 3 (v0 prototype extraction) |
+| Query Client     | `apps/web/src/lib/queryClient.ts`                                       | SOP-303                               |
+| Query Provider   | `apps/web/src/components/providers/QueryProvider.tsx`                    | SOP-303                               |
+| Service Bridge   | `apps/web/src/hooks/useServices.ts`                                     | SOP-303                               |
+| Domain Hooks     | `apps/web/src/hooks/api/*.ts` (7 domain files + barrel)                 | SOP-303                               |
+| Query Keys       | `apps/web/src/lib/queryKeys.ts`                                         | SOP-203 / SOP-303                     |
+| Server Fetch     | `apps/web/src/lib/serverFetch.ts`                                       | SOP-303                               |
+| Skeleton         | `apps/web/src/components/ui/Skeleton.tsx`                               | SOP-303                               |
+| ErrorMessage     | `apps/web/src/components/ui/ErrorMessage.tsx`                           | SOP-303                               |
 | Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305                               |
 
 ---
@@ -376,56 +385,29 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-303
-**Title:** API Integration
+**SOP:** SOP-304
+**Title:** Form Handling
 **Status:** ⬚ Not Started
 
-**Previous SOP:** SOP-302 (UI/UX Design) — ✅ Complete (all 8 iterations)
+**Previous SOP:** SOP-303 (API Integration) — ✅ Complete
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-3-frontend/SOP-302-ui-ux-design.md                     # The procedure
-docs/design/DESIGN-REFERENCE.md                                    # ⭐ APPROVED visual direction
-docs/design/screenshots/                                           # 19 reference screenshots from prototype
-docs/frontend/ui-analysis.md                                       # UI analysis (all user stories)
-docs/frontend/ui-design/marketplace-listings.md                    # Iteration 1 output
-docs/frontend/ui-design/auth-profile.md                             # Iteration 2 output
-docs/frontend/ui-design/dashboard-home.md                            # Iteration 3 output
-docs/frontend/ui-design/chat-communication.md                        # Iteration 4 output
-docs/frontend/ui-design/transactions-payment.md                      # Iteration 5 output
-docs/frontend/ui-design/quality-inspection.md                        # Iteration 6 output
-docs/frontend/ui-design/notifications.md                             # Iteration 7 output
-docs/components/README.md                                          # Component architecture (SOP-300 output)
-apps/web/src/app/globals.css                                       # Design tokens + dark mode (SOP-301 output)
+.sops/phase-3-frontend/SOP-304-form-handling.md                    # The procedure
+apps/web/src/hooks/api/                                            # Domain query hooks (SOP-303 output)
+apps/web/src/hooks/useServices.ts                                  # Service bridge (SOP-303 output)
+packages/shared/src/schemas/                                       # Zod schemas (SOP-206 output)
+docs/frontend/ui-design/                                           # All 8 design specs (SOP-302 output)
+apps/web/src/components/ui/                                        # UI components (SOP-300/303 output)
 ```
-
-### Completed Iterations
-
-- [x] **Iteration 1:** Marketplace & Listings (US-010–014, US-020–023)
-- [x] **Iteration 2:** Authentication & Profile (US-001–005)
-- [x] **Iteration 3:** Dashboard & Home (US-004, US-030–032)
-- [x] **Iteration 4:** Chat & Communication (US-040–043)
-- [x] **Iteration 5:** Transactions & Payment (US-050–055)
-- [x] **Iteration 6:** Quality & Inspection (US-060–063)
-- [x] **Iteration 7:** Notifications (US-090–091)
-- [x] **Iteration 8:** Admin Panel (US-080–084)
-
-### All Iterations Complete ✅
 
 ### Expected Outputs
 
-- [x] `/docs/frontend/ui-analysis.md` — UI analysis of all user stories
-- [x] `/docs/frontend/ui-design/marketplace-listings.md` — Wireframes, flows, components, a11y
-- [x] `/docs/frontend/ui-design/auth-profile.md` — Auth flows, wireframes, profile components, a11y
-- [x] `/docs/frontend/ui-design/dashboard-home.md` — Dashboard wireframes, mode toggle, match carousel, a11y
-- [x] `/docs/frontend/ui-design/chat-communication.md` — Chat 2-panel layout, real-time messaging, moderation UI, a11y
-- [x] `/docs/frontend/ui-design/transactions-payment.md` — Transaction lifecycle, timeline, receipt upload, dispute, a11y
-- [x] `/docs/frontend/ui-design/quality-inspection.md` — Inspection reports, star ratings, reviews, a11y
-- [x] `/docs/frontend/ui-design/notifications.md` — Notification feed, filters, preferences, real-time, a11y
-- [x] `/docs/frontend/ui-design/admin-panel.md` — Admin dashboard, data tables, payment verify, disputes, a11y
-- [x] Visual direction — **Approved** (from `DESIGN-REFERENCE.md`, gate skipped)
+- [ ] Form components (React Hook Form + Zod integration)
+- [ ] Form validation patterns
+- [ ] Form hooks per domain
 
 ---
 
@@ -445,33 +427,71 @@ apps/web/src/app/globals.css                                       # Design toke
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-# Execute SOP-303: API Integration
+# Execute SOP-304: Form Handling
 
 ## Context
 
 Project: Tabadul — B2B Industrial Symbiosis Platform
 Phase: 3 (Frontend) — Web First
-Branch: feature/sop-303-api-integration
+Branch: feat/sop-304-form-handling
 
 ## Read First
 
 1. `.prompts/AI-SESSION.md` (this file — context cache)
-2. `.sops/phase-3-frontend/SOP-303-api-integration.md` (the procedure)
-3. `packages/shared/src/services/` (existing service layer from SOP-200)
-4. `docs/frontend/ui-design/` (all 8 design specs from SOP-302)
-5. `docs/architecture/design-patterns.md` (BaaS-Driven Layered Architecture)
+2. `.sops/phase-3-frontend/SOP-304-form-handling.md` (the procedure)
+3. `packages/shared/src/schemas/` (Zod schemas from SOP-206)
+4. `apps/web/src/hooks/api/` (domain query hooks from SOP-303)
+5. `docs/frontend/ui-design/` (all 8 design specs from SOP-302)
 
 ## Execute
 
-Follow the SOP procedure. Create the API client wrapper,
-define loading/error state patterns, and implement caching strategy.
-Integrate with existing Supabase service functions from SOP-200.
+Follow the SOP procedure. Create form components using React Hook Form
+with Zod resolver, integrate with the mutation hooks from SOP-303.
 Update tracker after completion.
 ```
 
 ---
 
 ## 📓 Session Log
+
+### Session 17 — 2026-05-12
+
+**SOPs Completed:** SOP-303 (API Integration)  
+**Branch:** `feat/sop-303-api-integration`  
+**Files Created:**
+
+- `apps/web/src/lib/queryClient.ts` (TanStack Query client: staleTime 60s, gcTime 300s, SOP-205 retry logic, browser singleton)
+- `apps/web/src/components/providers/QueryProvider.tsx` (QueryClientProvider wrapper, lazy ReactQueryDevtools)
+- `apps/web/src/hooks/useServices.ts` (BaaS service bridge: createClient() → createServices() → memoized)
+- `apps/web/src/hooks/api/useListings.ts` (2 queries, 5 mutations — including optimistic bookmark toggle)
+- `apps/web/src/hooks/api/useTransactions.ts` (2 queries, 6 mutations — full lifecycle)
+- `apps/web/src/hooks/api/useChat.ts` (2 queries, 3 mutations — optimistic message send, 5s polling)
+- `apps/web/src/hooks/api/useNotifications.ts` (3 queries, 2 mutations — optimistic mark-read, 30s unread polling)
+- `apps/web/src/hooks/api/useMatching.ts` (1 query, 1 mutation — optimistic dismiss)
+- `apps/web/src/hooks/api/useInspection.ts` (1 query, 1 mutation — cross-invalidates transaction cache)
+- `apps/web/src/hooks/api/useAdmin.ts` (3 queries, 3 mutations — cross-domain cache invalidation)
+- `apps/web/src/hooks/api/index.ts` (Barrel export for all 7 domain hook files)
+- `apps/web/src/lib/serverFetch.ts` (React cache() SSR helpers: listings, transactions, profile, unread count)
+- `apps/web/src/components/ui/Skeleton.tsx` (Pulse placeholder, forwardRef, design token colors)
+- `apps/web/src/components/ui/ErrorMessage.tsx` (SOP-205 integration: getDisplayMessage, isRetryableError, retry button)
+
+**Files Updated:**
+
+- `apps/web/src/app/layout.tsx` (Added QueryProvider wrapping children inside ThemeProvider)
+- `apps/web/src/lib/queryKeys.ts` (Added inspectionKeys, adminKeys, bookmarkKeys, bidKeys)
+- `apps/web/src/components/ui/index.ts` (Added Skeleton + ErrorMessage exports)
+- `apps/web/package.json` (Added @tanstack/react-query-devtools)
+
+**Notes:**
+
+- SOP-303: **BaaS Adaptation** — SOP references REST API client (`src/lib/api/client.ts` with get/post/patch/delete). Replaced with `useServices()` hook that instantiates shared Supabase service factories, mirroring how `useAuth` works. No REST client needed.
+- SOP-303: **SOP-202 prerequisite skipped** — API surface defined by 8 service modules in `packages/shared/src/services/` instead of `/docs/api/endpoints.md`.
+- SOP-303: **Optimistic updates** applied to 4 UX-critical mutations: bookmark toggle, send message, mark notification as read, dismiss recommendation. Monetary mutations (bids, transaction status) use standard server-confirmed invalidation.
+- SOP-303: **Chat polling** — 5s refetchInterval as Realtime fallback. Supabase Realtime subscription to be wired in SOP-305 (Page Implementation). Stub comments placed in `useChat.ts`.
+- SOP-303: **Notification polling** — 30s refetchInterval for unread count badge.
+- SOP-303: **Error handling** — All queryFn/mutationFn functions normalize errors via `normalizeError()` from SOP-205. Query client retry uses `isRetryableError()` for network/rate-limit/timeout only.
+- SOP-303: **Server-side helpers** — `serverFetch.ts` uses React `cache()` for per-render deduplication. Covers initial page loads for marketplace and transaction pages.
+- TypeScript: 0 errors from SOP-303 files. 10 pre-existing errors from SOP-203 (`supabaseServer.ts`, `middleware.ts` implicit `any`).
 
 ### Session 16 — 2026-05-08
 
