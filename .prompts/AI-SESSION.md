@@ -101,7 +101,7 @@
 | 301 | Styling Standards      | ✅     | `globals.css`, `next.config.ts`, `postcss.config.mjs`, `ThemeProvider`, `ThemeToggle` | Tailwind v4 CSS-first config, design tokens from v0, dark mode via next-themes, Inter+Cairo fonts                                                                                 |
 | 302 | UI/UX Design           | ✅     | `/docs/frontend/ui-analysis.md`, `/docs/frontend/ui-design/*.md`                      | **Input mode: Detailed** — v0 prototype as approved visual direction. All 8 iterations complete: Marketplace, Auth, Dashboard, Chat, Transactions, Quality, Notifications, Admin. |
 | 303 | API Integration        | ✅     | `src/lib/queryClient.ts`, `src/hooks/api/`, `src/lib/serverFetch.ts`, `src/components/ui/Skeleton.tsx`, `src/components/ui/ErrorMessage.tsx` | BaaS-adapted: useServices() hook replaces REST client; 7 domain hook files, optimistic updates for chat/bookmarks/notifications                                                    |
-| 304 | Form Handling          | ⬚      | Form components/hooks                                                                 |                                                                                                                                                                                   |
+| 304 | Form Handling          | ✅     | `src/components/ui/Form.tsx`, `src/hooks/useZodForm.ts`, `src/components/features/*/`, `src/components/ui/Textarea.tsx`, `src/components/ui/Select.tsx` | React Hook Form + Zod resolver, 7 Form primitives, 14 domain forms across auth/listings/transactions/quality/chat/notifications/admin                                              |
 | 305 | Page Implementation    | ⬚      | `/src/app/` pages                                                                     |                                                                                                                                                                                   |
 | 306 | Progressive Web App    | ⬚      | PWA config, service worker                                                            |                                                                                                                                                                                   |
 
@@ -335,6 +335,7 @@ These are human-approved and must never be contradicted:
 | UI Design       | **Approved visual direction from v0 prototype.** Forest green primary (`#1B4332`), orange accent (`#D4760A`), warm cream background (`#F5F1EB`). 12 component patterns (cards, toggles, badges, chat threads, etc.), Buying/Selling mode toggle. 19 reference screenshots. **⚠️ Web First:** prototype uses mobile viewport for demo only — adapt to responsive web (sidebar/top nav, not bottom tabs). Agent executing SOP-301/302 MUST read `docs/design/DESIGN-REFERENCE.md` first — skip visual design proposal gate. Target `apps/web/` only; `apps/mobile/` is deferred. | `docs/design/DESIGN-REFERENCE.md`, `docs/design/screenshots/` | Pre-Phase 3 |
 | Platform Order  | **Web first, mobile deferred.** Phase 3 targets `apps/web/` (Next.js) exclusively. `apps/mobile/` (Expo) deferred to Phase 3b after web MVP is validated. Rationale: faster iteration, admin is web-only, avoids $99/yr Apple overhead, shared components flow to mobile later.                                                                                                                                                                                                                                                                                                | `docs/execution-brief.md` §5                                  | Pre-Phase 3 |
 | API Integration | **BaaS-adapted: `useServices()` hook replaces REST client.** TanStack Query wraps shared Supabase service factories. 7 domain hook files (listings, transactions, chat, notifications, matching, inspection, admin). Optimistic updates for bookmarks, messages, notifications, recommendations. Chat uses 5s polling (Realtime in SOP-305). Server-side helpers use React `cache()`. Error handling via `normalizeError()` + `isRetryableError()` from SOP-205.                                                                                                                   | `apps/web/src/hooks/api/`, `apps/web/src/lib/queryClient.ts`  | SOP-303     |
+| Form Handling   | **React Hook Form + Zod resolver.** `useZodForm` hook pre-configures zodResolver. 7 composable Form UI primitives (Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage). Textarea + Select UI components added. 14 domain form components: 4 auth (SignIn, SignUp, ResetPassword, UpdateProfile), 2 listings (CreateListing, PlaceBid), 4 transactions (UploadReceipt, FileDispute, SubmitReview, SubmitInspection), 1 chat (ChatMessageInput), 1 notifications (NotificationPreferences), 3 admin (ModerateListing, VerifyPayment, ResolveDispute). | `apps/web/src/hooks/useZodForm.ts`, `apps/web/src/components/` | SOP-304     |
 
 ### Cached File Locations
 
@@ -377,6 +378,16 @@ These are human-approved and must never be contradicted:
 | Server Fetch     | `apps/web/src/lib/serverFetch.ts`                                       | SOP-303                               |
 | Skeleton         | `apps/web/src/components/ui/Skeleton.tsx`                               | SOP-303                               |
 | ErrorMessage     | `apps/web/src/components/ui/ErrorMessage.tsx`                           | SOP-303                               |
+| Form Primitives  | `apps/web/src/components/ui/Form.tsx`                                   | SOP-304                               |
+| Textarea         | `apps/web/src/components/ui/Textarea.tsx`                               | SOP-304                               |
+| Select           | `apps/web/src/components/ui/Select.tsx`                                 | SOP-304                               |
+| useZodForm       | `apps/web/src/hooks/useZodForm.ts`                                      | SOP-304                               |
+| Auth Forms       | `apps/web/src/components/features/auth/*.tsx` (4 forms)                 | SOP-304                               |
+| Listing Forms    | `apps/web/src/components/features/listings/*.tsx` (2 forms)             | SOP-304                               |
+| Transaction Forms| `apps/web/src/components/features/transactions/*.tsx` (4 forms)         | SOP-304                               |
+| Chat Form        | `apps/web/src/components/features/chat/ChatMessageInput.tsx`            | SOP-304                               |
+| Notification Form| `apps/web/src/components/features/notifications/NotificationPreferencesForm.tsx` | SOP-304                       |
+| Admin Forms      | `apps/web/src/components/features/admin/*.tsx` (3 forms)                | SOP-304                               |
 | Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305                               |
 
 ---
@@ -385,29 +396,29 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-304
-**Title:** Form Handling
+**SOP:** SOP-305
+**Title:** Page Implementation
 **Status:** ⬚ Not Started
 
-**Previous SOP:** SOP-303 (API Integration) — ✅ Complete
+**Previous SOP:** SOP-304 (Form Handling) — ✅ Complete
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-3-frontend/SOP-304-form-handling.md                    # The procedure
+.sops/phase-3-frontend/SOP-305-page-implementation.md              # The procedure
 apps/web/src/hooks/api/                                            # Domain query hooks (SOP-303 output)
-apps/web/src/hooks/useServices.ts                                  # Service bridge (SOP-303 output)
-packages/shared/src/schemas/                                       # Zod schemas (SOP-206 output)
+apps/web/src/components/features/                                  # Domain form components (SOP-304 output)
+apps/web/src/components/ui/                                        # UI components (SOP-300/303/304 output)
 docs/frontend/ui-design/                                           # All 8 design specs (SOP-302 output)
-apps/web/src/components/ui/                                        # UI components (SOP-300/303 output)
+apps/web/src/app/[locale]/                                         # Existing route structure
 ```
 
 ### Expected Outputs
 
-- [ ] Form components (React Hook Form + Zod integration)
-- [ ] Form validation patterns
-- [ ] Form hooks per domain
+- [ ] Page components in `src/app/[locale]/` routes
+- [ ] Layouts, navigation, and responsive pages
+- [ ] Full feature integration (forms + hooks + UI)
 
 ---
 
@@ -427,32 +438,80 @@ apps/web/src/components/ui/                                        # UI componen
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-# Execute SOP-304: Form Handling
+# Execute SOP-305: Page Implementation
 
 ## Context
 
 Project: Tabadul — B2B Industrial Symbiosis Platform
 Phase: 3 (Frontend) — Web First
-Branch: feat/sop-304-form-handling
+Branch: feat/sop-305-page-implementation
 
 ## Read First
 
 1. `.prompts/AI-SESSION.md` (this file — context cache)
-2. `.sops/phase-3-frontend/SOP-304-form-handling.md` (the procedure)
-3. `packages/shared/src/schemas/` (Zod schemas from SOP-206)
+2. `.sops/phase-3-frontend/SOP-305-page-implementation.md` (the procedure)
+3. `apps/web/src/components/features/` (domain forms from SOP-304)
 4. `apps/web/src/hooks/api/` (domain query hooks from SOP-303)
 5. `docs/frontend/ui-design/` (all 8 design specs from SOP-302)
+6. `apps/web/src/lib/serverFetch.ts` (SSR helpers from SOP-303)
 
 ## Execute
 
-Follow the SOP procedure. Create form components using React Hook Form
-with Zod resolver, integrate with the mutation hooks from SOP-303.
-Update tracker after completion.
+Follow the SOP procedure. Implement pages iteratively, one feature area
+per iteration. Compose pages from SOP-304 forms + SOP-303 hooks +
+SOP-300/301 UI components. Update tracker after completion.
 ```
 
 ---
 
 ## 📓 Session Log
+
+### Session 18 — 2026-05-14
+
+**SOPs Completed:** SOP-304 (Form Handling)  
+**Branch:** `feat/sop-304-form-handling`  
+**Files Created:**
+
+- `apps/web/src/components/ui/Form.tsx` (7 composable Form UI primitives: Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage — all using react-hook-form context)
+- `apps/web/src/components/ui/Textarea.tsx` (Multi-line input with label, error, char count, cva variants — mirrors Input pattern)
+- `apps/web/src/components/ui/Select.tsx` (Native select with label, error, chevron icon, cva variants — mirrors Input pattern)
+- `apps/web/src/hooks/useZodForm.ts` (Thin wrapper: pre-configures zodResolver, accepts any Zod schema)
+- `apps/web/src/components/features/auth/SignInForm.tsx` (Email + password, signInSchema)
+- `apps/web/src/components/features/auth/SignUpForm.tsx` (Full registration: name, company, email, phone, role, password + confirm)
+- `apps/web/src/components/features/auth/ResetPasswordForm.tsx` (Email input, success state display)
+- `apps/web/src/components/features/auth/UpdateProfileForm.tsx` (Partial update, pre-fill from existing data, bio with char count)
+- `apps/web/src/components/features/listings/CreateListingForm.tsx` (Fieldsets: Basic Info, Quantity & Location, Pricing; mode-dependent conditional fields for fixed_price vs auction)
+- `apps/web/src/components/features/listings/PlaceBidForm.tsx` (Compact bid form with hidden listing_id, minimum amount hint)
+- `apps/web/src/components/features/transactions/UploadReceiptForm.tsx` (Receipt type selector, amount, URL input with expected amount hint)
+- `apps/web/src/components/features/transactions/FileDisputeForm.tsx` (Warning banner, reason dropdown, description textarea; local Zod schema)
+- `apps/web/src/components/features/transactions/SubmitReviewForm.tsx` (Interactive star rating with hover/ARIA, optional comment)
+- `apps/web/src/components/features/transactions/SubmitInspectionForm.tsx` (Pass/fail toggle buttons, notes, dynamic photo URL list with add/remove)
+- `apps/web/src/components/features/chat/ChatMessageInput.tsx` (Inline form: auto-grow textarea, Enter to send, Shift+Enter for newline, refocus after send)
+- `apps/web/src/components/features/notifications/NotificationPreferencesForm.tsx` (Toggle switches for channels + event types, accessible switch role)
+- `apps/web/src/components/features/admin/ModerateListingForm.tsx` (Approve/reject with conditional reason textarea)
+- `apps/web/src/components/features/admin/VerifyPaymentForm.tsx` (Verify/reject toggle buttons, payment summary, optional notes)
+- `apps/web/src/components/features/admin/ResolveDisputeForm.tsx` (Resolution outcome selector, mandatory rationale notes)
+
+**Files Updated:**
+
+- `apps/web/package.json` (Added react-hook-form, @hookform/resolvers, zod@3.25.76)
+- `apps/web/src/components/ui/index.ts` (Added Form, Select, Textarea exports)
+- `apps/web/src/components/features/auth/index.ts` (Replaced skeleton → 4 form exports)
+- `apps/web/src/components/features/listings/index.ts` (Replaced skeleton → 2 form exports)
+- `apps/web/src/components/features/transactions/index.ts` (Replaced skeleton → 4 form exports)
+- `apps/web/src/components/features/chat/index.ts` (Replaced skeleton → ChatMessageInput export)
+- `apps/web/src/components/features/notifications/index.ts` (Replaced skeleton → NotificationPreferencesForm export)
+- `apps/web/src/components/features/admin/index.ts` (Replaced skeleton → 3 form exports)
+
+**Notes:**
+
+- SOP-304: **BaaS Adaptation** — SOP references `src/validators/` for schema imports. Adapted to use `@tabadul/shared/schemas` (the actual location from SOP-206). Forms with no shared schema (FileDispute, ModerateListingForm, VerifyPayment, ResolveDispute, NotificationPreferences) define local Zod schemas.
+- SOP-304: **useZodForm generic typing** — Used `z.ZodType<TOutput, any, any>` with `zodResolver(schema as any)` cast to bypass incompatibility between zod v3.25 internals and @hookform/resolvers' expected type shape. Functionally correct — zodResolver handles any v3 schema at runtime.
+- SOP-304: **14 domain forms** cover all user-facing input flows from requirements: auth (4), listings (2), transactions/quality (4), chat (1), notifications (1), admin (3).
+- SOP-304: **Form UX patterns** followed per SOP: inline field errors, disabled submit during isSubmitting, loading spinner on button, serverError prop for API errors, success state where applicable.
+- SOP-304: **Custom UI components** — StarRating (interactive stars with ARIA radiogroup), Toggle (accessible switch with icon + description), Pass/Fail toggle buttons — all defined within their form files since they're form-specific.
+- SOP-304: **Zod version aligned** — Installed `zod@3.25.76` in web to match `packages/shared`'s version. Initial `npm install zod` pulled v4.4.3 which had breaking API changes.
+- TypeScript: 0 errors from SOP-304 files. 10 pre-existing errors from SOP-203 (`supabaseServer.ts`, `middleware.ts` implicit `any`).
 
 ### Session 17 — 2026-05-12
 

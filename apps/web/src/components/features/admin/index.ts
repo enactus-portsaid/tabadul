@@ -1,10 +1,18 @@
 // ---------------------------------------------------------------------------
 // Admin Feature Components
 // ---------------------------------------------------------------------------
-// Expected components (to be implemented in SOP-305):
-//   - AdminTable         — Data table for user/listing/payment management
-//   - ModerationPanel    — Listing approval/rejection interface
-//   - PaymentVerifier    — InstaPay receipt verification widget
-//   - DisputeResolver    — Dispute review and resolution panel
-//   - AdminStatCard      — Dashboard stat card (design ref §3.10)
-// ---------------------------------------------------------------------------
+export { ModerateListingForm } from './ModerateListingForm';
+export type {
+  ModerateListingFormProps,
+  ModerateListingFormInput,
+} from './ModerateListingForm';
+export { ResolveDisputeForm } from './ResolveDisputeForm';
+export type {
+  ResolveDisputeFormProps,
+  ResolveDisputeFormInput,
+} from './ResolveDisputeForm';
+export { VerifyPaymentForm } from './VerifyPaymentForm';
+export type {
+  VerifyPaymentFormProps,
+  VerifyPaymentFormInput,
+} from './VerifyPaymentForm';
