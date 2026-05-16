@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation';
 
 import { createServerSupabaseClient } from '@/lib/supabaseServer';
 
+import { MainShell } from './main-shell';
+
 // ---------------------------------------------------------------------------
 // Protected Main Layout — requires authentication
 // ---------------------------------------------------------------------------
@@ -29,9 +31,8 @@ export default async function MainLayout({
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      {/* TODO(frontend): Add Header and Navigation components in Phase 3 */}
-      <main>{children}</main>
-    </div>
+    <MainShell locale={locale}>
+      {children}
+    </MainShell>
   );
 }
