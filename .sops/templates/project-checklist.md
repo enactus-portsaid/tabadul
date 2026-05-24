@@ -99,18 +99,18 @@
 - [x] Business rules documented
 - [x] Traceability matrix created (via business rules)
 
-### Repository Pattern (SOP-201)
+### Repository Pattern (SOP-201) — ⏭️ _Skipped_
 
-- [ ] Repository interfaces defined
-- [ ] Data access encapsulated
-- [ ] Transaction support implemented
+- [x] ~~Repository interfaces defined~~ — Skipped: Supabase client IS the data access layer (per execution brief)
+- [x] ~~Data access encapsulated~~ — Skipped: Domain service functions wrap Supabase client directly
+- [x] ~~Transaction support implemented~~ — Skipped: Supabase handles transactions natively
 
-### API Design (SOP-202)
+### API Design (SOP-202) — ⏭️ _Skipped_
 
-- [ ] API specification created (OpenAPI/Swagger)
-- [ ] Endpoints follow RESTful conventions
-- [ ] Versioning strategy defined
-- [ ] Rate limiting considered
+- [x] ~~API specification created (OpenAPI/Swagger)~~ — Skipped: Supabase auto-generates API from schema
+- [x] ~~Endpoints follow RESTful conventions~~ — Skipped: Supabase PostgREST handles REST conventions
+- [x] ~~Versioning strategy defined~~ — Skipped: Not applicable for BaaS
+- [x] ~~Rate limiting considered~~ — Skipped: Supabase handles rate limiting
 
 ### Authentication (SOP-203)
 
@@ -165,24 +165,24 @@
 
 ### API Integration (SOP-303)
 
-- [ ] API client/wrapper created
-- [ ] Loading states handled
-- [ ] Error states handled
-- [ ] Caching strategy defined (if needed)
+- [x] API client/wrapper created
+- [x] Loading states handled
+- [x] Error states handled
+- [x] Caching strategy defined (if needed)
 
 ### Form Handling (SOP-304)
 
-- [ ] Form library selected (if any)
-- [ ] Validation feedback patterns
-- [ ] Submission loading states
+- [x] Form library selected (if any)
+- [x] Validation feedback patterns
+- [x] Submission loading states
 
 ### Page Implementation (SOP-305)
 
-- [ ] Page planning documents created
-- [ ] Server/client components structured
-- [ ] Loading skeletons implemented
-- [ ] Error boundaries configured
-- [ ] Navigation wired up
+- [x] Page planning documents created
+- [x] Server/client components structured
+- [x] Loading skeletons implemented
+- [x] Error boundaries configured
+- [x] Navigation wired up
 
 ### Progressive Web App (SOP-306) — _Optional_
 

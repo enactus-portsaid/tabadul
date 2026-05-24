@@ -102,7 +102,7 @@
 | 302 | UI/UX Design           | ✅     | `/docs/frontend/ui-analysis.md`, `/docs/frontend/ui-design/*.md`                      | **Input mode: Detailed** — v0 prototype as approved visual direction. All 8 iterations complete: Marketplace, Auth, Dashboard, Chat, Transactions, Quality, Notifications, Admin. |
 | 303 | API Integration        | ✅     | `src/lib/queryClient.ts`, `src/hooks/api/`, `src/lib/serverFetch.ts`, `src/components/ui/Skeleton.tsx`, `src/components/ui/ErrorMessage.tsx` | BaaS-adapted: useServices() hook replaces REST client; 7 domain hook files, optimistic updates for chat/bookmarks/notifications                                                    |
 | 304 | Form Handling          | ✅     | `src/components/ui/Form.tsx`, `src/hooks/useZodForm.ts`, `src/components/features/*/`, `src/components/ui/Textarea.tsx`, `src/components/ui/Select.tsx` | React Hook Form + Zod resolver, 7 Form primitives, 14 domain forms across auth/listings/transactions/quality/chat/notifications/admin                                              |
-| 305 | Page Implementation    | ⬚      | `/src/app/` pages                                                                     |                                                                                                                                                                                   |
+| 305 | Page Implementation    | ✅     | `src/app/[locale]/`, `docs/frontend/page-manifest.md`                                 | 27 pages (4 auth + 17 main + 6 admin), 5 waves, page.tsx + *-content.tsx + *-skeleton.tsx SSR/CSR pattern, MainShell, error/not-found boundaries                                  |
 | 306 | Progressive Web App    | ⬚      | PWA config, service worker                                                            |                                                                                                                                                                                   |
 
 ### Phase 4: AI Integration (If Applicable)
@@ -272,21 +272,27 @@ These are human-approved and must never be contradicted:
 
 ### Phase 3 Checkpoint — Frontend
 
-| Design Doc (Level 1)   | Location        | Traces to Requirement              |
-| ---------------------- | --------------- | ---------------------------------- |
-| Component Architecture | {location or ⬚} | {e.g., "Component per user story"} |
-| Styling Standards      | {location or ⬚} |                                    |
-| Form Patterns          | {location or ⬚} |                                    |
+| Design Doc (Level 1)   | Location                                         | Traces to Requirement                                    |
+| ---------------------- | ------------------------------------------------ | -------------------------------------------------------- |
+| Component Architecture | `/docs/components/README.md`                     | Component per user story, SOP-300 hierarchy              |
+| Styling Standards      | `apps/web/src/app/globals.css`                   | Design tokens from v0 prototype, Tailwind v4             |
+| UI/UX Design           | `/docs/frontend/ui-design/*.md` (8 docs)         | All 30+ user stories mapped to wireframes + flows        |
+| Form Patterns          | SOP-304 output in `components/features/`         | 14 domain forms covering all input flows                 |
+| Page Manifest          | `/docs/frontend/page-manifest.md`                | 27 pages mapped to user stories + API hooks              |
 
-| Implementation (Level 2) | Location                       | Traces to Design |
-| ------------------------ | ------------------------------ | ---------------- |
-| Components               | {e.g., `src/components/` or ⬚} |                  |
-| Pages/Routes             | {e.g., `src/app/` or ⬚}        |                  |
-| API Client               | {location or ⬚}                |                  |
+| Implementation (Level 2) | Location                                        | Traces to Design                                         |
+| ------------------------ | ----------------------------------------------- | -------------------------------------------------------- |
+| UI Components            | `apps/web/src/components/ui/`                   | 6 UI + Skeleton + ErrorMessage + Form + Select + Textarea |
+| Layout Components        | `apps/web/src/components/layout/`               | Container, Header, Footer, Sidebar                       |
+| Feature Forms            | `apps/web/src/components/features/*/`           | 14 domain forms (auth/listings/transactions/chat/admin)   |
+| API Integration          | `apps/web/src/hooks/api/`                       | 7 domain hook files, useServices bridge                  |
+| Pages/Routes             | `apps/web/src/app/[locale]/`                    | 27 pages: SSR page.tsx + CSR *-content.tsx pattern        |
+| Query Client             | `apps/web/src/lib/queryClient.ts`               | TanStack Query, retry logic from SOP-205                 |
+| Server Fetch             | `apps/web/src/lib/serverFetch.ts`               | React cache() SSR helpers                                |
 
-**Checkpoint Status:** ⬚ Not Run / ✅ Passed / ⚠️ Issues Found  
-**Last Run:** {date}  
-**Issues:** {none or list issues}
+**Checkpoint Status:** ⬚ Not Run  
+**Last Run:** —  
+**Issues:** Checkpoint not yet executed. All 6 SOPs (300–305) are complete. SOP-306 (PWA) not started.
 
 ---
 
@@ -336,6 +342,7 @@ These are human-approved and must never be contradicted:
 | Platform Order  | **Web first, mobile deferred.** Phase 3 targets `apps/web/` (Next.js) exclusively. `apps/mobile/` (Expo) deferred to Phase 3b after web MVP is validated. Rationale: faster iteration, admin is web-only, avoids $99/yr Apple overhead, shared components flow to mobile later.                                                                                                                                                                                                                                                                                                | `docs/execution-brief.md` §5                                  | Pre-Phase 3 |
 | API Integration | **BaaS-adapted: `useServices()` hook replaces REST client.** TanStack Query wraps shared Supabase service factories. 7 domain hook files (listings, transactions, chat, notifications, matching, inspection, admin). Optimistic updates for bookmarks, messages, notifications, recommendations. Chat uses 5s polling (Realtime in SOP-305). Server-side helpers use React `cache()`. Error handling via `normalizeError()` + `isRetryableError()` from SOP-205.                                                                                                                   | `apps/web/src/hooks/api/`, `apps/web/src/lib/queryClient.ts`  | SOP-303     |
 | Form Handling   | **React Hook Form + Zod resolver.** `useZodForm` hook pre-configures zodResolver. 7 composable Form UI primitives (Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage). Textarea + Select UI components added. 14 domain form components: 4 auth (SignIn, SignUp, ResetPassword, UpdateProfile), 2 listings (CreateListing, PlaceBid), 4 transactions (UploadReceipt, FileDispute, SubmitReview, SubmitInspection), 1 chat (ChatMessageInput), 1 notifications (NotificationPreferences), 3 admin (ModerateListing, VerifyPayment, ResolveDispute). | `apps/web/src/hooks/useZodForm.ts`, `apps/web/src/components/` | SOP-304     |
+| Page Impl.      | **27 pages across 5 waves.** SSR/CSR split: `page.tsx` (server component — metadata, Suspense) + `*-content.tsx` (client component — hooks, interactivity) + `*-skeleton.tsx` (loading). 4 auth pages (login, register, forgot-password, verify-email). 17 main pages (dashboard, marketplace browse/detail, listings CRUD, messages split-panel, transactions list/detail, saved, recommendations, notifications + prefs, profile suite). 6 admin pages (dashboard, users/listings/transactions tables, disputes queue/detail). MainShell layout, error/not-found boundaries. | `apps/web/src/app/[locale]/`, `docs/frontend/page-manifest.md` | SOP-305     |
 
 ### Cached File Locations
 
@@ -388,7 +395,13 @@ These are human-approved and must never be contradicted:
 | Chat Form        | `apps/web/src/components/features/chat/ChatMessageInput.tsx`            | SOP-304                               |
 | Notification Form| `apps/web/src/components/features/notifications/NotificationPreferencesForm.tsx` | SOP-304                       |
 | Admin Forms      | `apps/web/src/components/features/admin/*.tsx` (3 forms)                | SOP-304                               |
-| Page Manifest    | {e.g., `/docs/frontend/page-manifest.md`}                               | SOP-305                               |
+| Page Manifest    | `/docs/frontend/page-manifest.md`                                       | SOP-305                               |
+| Main Shell       | `apps/web/src/app/[locale]/(main)/main-shell.tsx`                       | SOP-305                               |
+| Error Boundary   | `apps/web/src/app/[locale]/(main)/error.tsx`                            | SOP-305                               |
+| Not Found        | `apps/web/src/app/[locale]/(main)/not-found.tsx`                        | SOP-305                               |
+| Auth Pages       | `apps/web/src/app/[locale]/(auth)/*.tsx` (4 pages)                      | SOP-305                               |
+| Main Pages       | `apps/web/src/app/[locale]/(main)/**/*.tsx` (17 pages)                  | SOP-305                               |
+| Admin Pages      | `apps/web/src/app/[locale]/(main)/admin/**/*.tsx` (6 pages)             | SOP-305                               |
 
 ---
 
@@ -396,29 +409,27 @@ These are human-approved and must never be contradicted:
 
 ### Active SOP
 
-**SOP:** SOP-305
-**Title:** Page Implementation
+**SOP:** SOP-306
+**Title:** Progressive Web App
 **Status:** ⬚ Not Started
 
-**Previous SOP:** SOP-304 (Form Handling) — ✅ Complete
+**Previous SOP:** SOP-305 (Page Implementation) — ✅ Complete
 
 ### Context Files to Read
 
 ```text
 .prompts/AI-SESSION.md                                             # This file (context)
-.sops/phase-3-frontend/SOP-305-page-implementation.md              # The procedure
-apps/web/src/hooks/api/                                            # Domain query hooks (SOP-303 output)
-apps/web/src/components/features/                                  # Domain form components (SOP-304 output)
-apps/web/src/components/ui/                                        # UI components (SOP-300/303/304 output)
-docs/frontend/ui-design/                                           # All 8 design specs (SOP-302 output)
-apps/web/src/app/[locale]/                                         # Existing route structure
+.sops/phase-3-frontend/SOP-306-progressive-web-app.md              # The procedure (if exists)
+apps/web/src/app/[locale]/                                         # All 27 pages (SOP-305 output)
+apps/web/next.config.ts                                            # Current Next.js config
+apps/web/package.json                                              # Current dependencies
 ```
 
 ### Expected Outputs
 
-- [ ] Page components in `src/app/[locale]/` routes
-- [ ] Layouts, navigation, and responsive pages
-- [ ] Full feature integration (forms + hooks + UI)
+- [ ] PWA configuration (manifest, service worker)
+- [ ] Offline caching strategy
+- [ ] Install prompt handling
 
 ---
 
@@ -438,33 +449,72 @@ apps/web/src/app/[locale]/                                         # Existing ro
 > Copy the matching pattern template from `AI-GUIDE.md`, fill in the project-specific values, and replace the prompt below.
 
 ```markdown
-# Execute SOP-305: Page Implementation
+# Continue From Last Session
 
 ## Context
 
 Project: Tabadul — B2B Industrial Symbiosis Platform
 Phase: 3 (Frontend) — Web First
-Branch: feat/sop-305-page-implementation
+Last completed: SOP-305 (Page Implementation) ✅
+Next: SOP-306 (Progressive Web App) OR Phase 3 Checkpoint
 
 ## Read First
 
 1. `.prompts/AI-SESSION.md` (this file — context cache)
-2. `.sops/phase-3-frontend/SOP-305-page-implementation.md` (the procedure)
-3. `apps/web/src/components/features/` (domain forms from SOP-304)
-4. `apps/web/src/hooks/api/` (domain query hooks from SOP-303)
-5. `docs/frontend/ui-design/` (all 8 design specs from SOP-302)
-6. `apps/web/src/lib/serverFetch.ts` (SSR helpers from SOP-303)
+2. `.prompts/AI-GUIDE.md` (checkpoint procedure)
+3. `apps/web/src/app/[locale]/` (all 27 pages from SOP-305)
+4. `docs/frontend/page-manifest.md` (page manifest from SOP-305)
 
 ## Execute
 
-Follow the SOP procedure. Implement pages iteratively, one feature area
-per iteration. Compose pages from SOP-304 forms + SOP-303 hooks +
-SOP-300/301 UI components. Update tracker after completion.
+All Phase 3 SOPs (300–305) are complete. Next steps:
+1. Run Phase 3 Checkpoint (CP-3) per AI-GUIDE.md § Checkpoint System
+2. Await human approval
+3. Proceed to SOP-306 (PWA) or Phase 4 based on approval
 ```
 
 ---
 
 ## 📓 Session Log
+
+### Session 19 — 2026-05-16
+
+**SOPs Completed:** SOP-305 (Page Implementation)  
+**Branch:** `feat/sop-305-page-implementation`  
+**Files Created:**
+
+- `docs/frontend/page-manifest.md` (27-page manifest with priority levels, dependency map, wave implementation order)
+- `apps/web/src/app/[locale]/(main)/main-shell.tsx` (Responsive shell: sidebar + mobile bottom nav + header + content area)
+- `apps/web/src/app/[locale]/(main)/error.tsx` (Error boundary with reset + back buttons)
+- `apps/web/src/app/[locale]/(main)/not-found.tsx` (404 page with back navigation)
+- Auth pages (4): `login/`, `register/`, `forgot-password/`, `verify-email/` — each with `page.tsx` + `*-content.tsx`
+- Dashboard: `dashboard/page.tsx` + `dashboard-content.tsx` + `dashboard-skeleton.tsx` (buyer/seller mode toggle, stats, recent activity)
+- Marketplace: `marketplace/page.tsx` + `marketplace-content.tsx` + `marketplace-skeleton.tsx` (filter bar, category chips, listing grid, pagination)
+- Listing Detail: `marketplace/[id]/page.tsx` + `listing-detail-content.tsx` + `listing-detail-skeleton.tsx` (image gallery, seller info, bid section, bookmark)
+- Create/Edit Listing: `listings/new/` + `listings/[id]/edit/` (wizard form with category/pricing/photos)
+- My Listings: `listings/my/` (filterable listing table with stats)
+- Messages: `messages/page.tsx` + `messages-content.tsx` (split-panel: thread list + chat detail) + `messages/[threadId]/` (mobile chat detail)
+- Transactions: `transactions/page.tsx` + `transactions-content.tsx` + `transactions/[id]/` (status timeline, action bar, receipt upload, dispute)
+- Saved: `saved/page.tsx` + `saved-content.tsx` (bookmarked listings grid with empty state)
+- Recommendations: `recommendations/page.tsx` + `recommendations-content.tsx` (AI match cards with dismiss)
+- Notifications: `notifications/page.tsx` + `notifications-content.tsx` + `notifications/preferences/` (feed with filters + preference toggles)
+- Profile suite: `profile/page.tsx` + `profile/edit/` + `profile/[userId]/` (own profile, edit form, seller public profile with reviews)
+- Admin panel (6 pages): `admin/` with dashboard, users, listings, transactions tables, disputes queue + detail
+
+**Files Updated:**
+
+- `apps/web/src/app/[locale]/(auth)/layout.tsx` (Updated for auth card centering)
+- `apps/web/src/app/[locale]/(main)/layout.tsx` (Updated to use MainShell wrapper)
+
+**Notes:**
+
+- SOP-305: **Iterative execution** — 5 waves matching page manifest: Wave 1 (shared infra + auth), Wave 2 (core P0 pages), Wave 3 (primary P1 features), Wave 4 (secondary P2 features), Wave 5 (admin P3 panel).
+- SOP-305: **SSR/CSR split pattern** — Every page follows `page.tsx` (server component with metadata + Suspense) → `*-content.tsx` (client component with hooks and interactivity) → `*-skeleton.tsx` (loading placeholder). This enables SSR for SEO + initial load while keeping client interactivity.
+- SOP-305: **MainShell** — Responsive layout: persistent sidebar on desktop (lg+), bottom tab nav on mobile, hamburger menu for tablet. Wraps all `(main)` routes.
+- SOP-305: **Full integration** — Pages compose SOP-304 forms + SOP-303 hooks + SOP-300/301 UI components. No new standalone components needed — all page-level components are inline.
+- SOP-305: **27 pages total** — 4 auth + 17 main + 6 admin. All TypeScript files pass type checking.
+- SOP-305: **Admin layout** — Nested under `(main)/admin/` with separate admin shell (sidebar with admin-specific navigation).
+- SOP-305: **Chat split-panel** — Desktop shows thread list + chat detail side-by-side. Mobile routes to `/messages/[threadId]` for full-screen chat.
 
 ### Session 18 — 2026-05-14
 
