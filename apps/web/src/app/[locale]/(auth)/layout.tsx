@@ -1,8 +1,8 @@
 // ---------------------------------------------------------------------------
 // Auth Route Group Layout — Login, Register, Forgot Password pages
 // ---------------------------------------------------------------------------
-// This layout wraps all (auth) pages. Middleware handles redirecting
-// authenticated users away from these pages.
+// Centered card layout with warm cream background per design spec §2.1.
+// Middleware handles redirecting authenticated users away from these pages.
 // ---------------------------------------------------------------------------
 export default function AuthLayout({
   children,
@@ -10,8 +10,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950">
-      <div className="w-full max-w-md px-4">{children}</div>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-8">
+      <div className="w-full max-w-md">{children}</div>
     </div>
   );
 }
