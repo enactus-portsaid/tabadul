@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { type HTMLAttributes } from 'react';
 
+import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/cn';
 
 // ---------------------------------------------------------------------------
@@ -62,10 +63,15 @@ export function Sidebar({
   ...props
 }: SidebarProps) {
   const pathname = usePathname();
+  const { signOut } = useAuth();
 
   const mainNavItems: NavItem[] = [
     { label: 'Home', href: `/${locale}`, icon: Home },
-    { label: 'Marketplace', href: `/${locale}/marketplace`, icon: LayoutDashboard },
+    {
+      label: 'Marketplace',
+      href: `/${locale}/marketplace`,
+      icon: LayoutDashboard,
+    },
     { label: 'Messages', href: `/${locale}/messages`, icon: MessageCircle },
     { label: 'Notifications', href: `/${locale}/notifications`, icon: Bell },
     { label: 'Profile', href: `/${locale}/profile`, icon: User },
@@ -86,12 +92,9 @@ export function Sidebar({
     <>
       {/* Logo / Brand */}
       <div className="flex h-16 items-center justify-between px-4 lg:px-6">
-        <Link
-          href={`/${locale}`}
-          className="text-lg font-bold text-primary"
-        >
+        <Link href={`/${locale}`} className="text-primary text-lg font-bold">
           تبادل
-          <span className="ml-1 text-sm font-normal text-text-secondary">
+          <span className="text-text-secondary ml-1 text-sm font-normal">
             Tabadul
           </span>
         </Link>
@@ -100,7 +103,7 @@ export function Sidebar({
         <button
           type="button"
           onClick={onClose}
-          className="rounded-lg p-1.5 text-text-secondary transition-colors hover:bg-surface-muted hover:text-text-primary lg:hidden"
+          className="text-text-secondary hover:bg-surface-muted hover:text-text-primary rounded-lg p-1.5 transition-colors lg:hidden"
           aria-label="Close sidebar"
         >
           <X className="h-5 w-5" />
@@ -136,7 +139,7 @@ export function Sidebar({
       {/* Admin Section */}
       {userRole === 'admin' && (
         <div className="border-t border-gray-100 px-3 py-4">
-          <p className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-wider text-text-muted">
+          <p className="text-text-muted mb-2 px-3 text-[11px] font-semibold tracking-wider uppercase">
             Admin
           </p>
           {adminNavItems.map((item) => {
@@ -168,7 +171,8 @@ export function Sidebar({
       <div className="border-t border-gray-100 px-3 py-4">
         <button
           type="button"
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:bg-red-50 hover:text-red-600"
+          onClick={signOut}
+          className="text-text-secondary flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-red-50 hover:text-red-600"
         >
           <LogOut className="h-5 w-5 shrink-0" />
           Sign Out
@@ -192,7 +196,7 @@ export function Sidebar({
       <aside
         className={cn(
           // Base styles
-          'flex h-screen flex-col border-r border-gray-100 bg-surface',
+          'bg-surface flex h-screen flex-col border-r border-gray-100',
           // Desktop: static in layout
           'hidden lg:flex lg:w-64 lg:shrink-0',
           // Mobile: overlay from left

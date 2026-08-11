@@ -26,8 +26,7 @@ export async function generateMetadata({
         locale === 'ar'
           ? 'تبادل — منصة التكافل الصناعي'
           : 'Tabadul — B2B Industrial Symbiosis',
-      template:
-        locale === 'ar' ? '%s | تبادل' : '%s | Tabadul',
+      template: locale === 'ar' ? '%s | تبادل' : '%s | Tabadul',
     },
   };
 }

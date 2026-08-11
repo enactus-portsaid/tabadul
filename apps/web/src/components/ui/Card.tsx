@@ -26,7 +26,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          'rounded-xl border border-gray-100 bg-surface shadow-sm',
+          'bg-surface rounded-xl border border-gray-100 shadow-sm',
           className
         )}
         {...props}
@@ -66,7 +66,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
     return (
       <h3
         ref={ref}
-        className={cn('text-base font-semibold text-text-primary', className)}
+        className={cn('text-text-primary text-base font-semibold', className)}
         {...props}
       />
     );
@@ -82,9 +82,7 @@ export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {}
 
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ className, ...props }, ref) => {
-    return (
-      <div ref={ref} className={cn('p-4', className)} {...props} />
-    );
+    return <div ref={ref} className={cn('p-4', className)} {...props} />;
   }
 );
 

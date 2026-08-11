@@ -1,13 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import type { ResetPasswordInput } from '@tabadul/shared/schemas';
+import { ArrowLeft, Leaf } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { ArrowLeft, Leaf } from 'lucide-react';
-import type { ResetPasswordInput } from '@tabadul/shared/schemas';
+import { useState } from 'react';
 
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/Card';
 import { ResetPasswordForm } from '@/components/features/auth/ResetPasswordForm';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/Card';
 import { useAuth } from '@/hooks/useAuth';
 
 // ---------------------------------------------------------------------------
@@ -23,7 +28,9 @@ export function ForgotPasswordContent() {
     setServerError('');
     const { error } = await resetPassword(data.email);
     if (error) {
-      setServerError(error.message ?? 'Failed to send reset email. Please try again.');
+      setServerError(
+        error.message ?? 'Failed to send reset email. Please try again.'
+      );
     } else {
       setIsSuccess(true);
     }
@@ -33,15 +40,15 @@ export function ForgotPasswordContent() {
     <Card className="shadow-elevated">
       <CardHeader className="space-y-3 text-center">
         {/* Logo */}
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-          <Leaf className="h-6 w-6 text-primary" />
+        <div className="bg-primary/10 mx-auto flex h-12 w-12 items-center justify-center rounded-xl">
+          <Leaf className="text-primary h-6 w-6" />
         </div>
 
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold text-text-primary">
+          <h1 className="text-text-primary text-2xl font-bold">
             Reset your password
           </h1>
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Enter your email and we&apos;ll send you a reset link
           </p>
         </div>
@@ -56,10 +63,10 @@ export function ForgotPasswordContent() {
         />
       </CardContent>
 
-      <CardFooter className="justify-center border-t border-border py-4">
+      <CardFooter className="border-border justify-center border-t py-4">
         <Link
           href={`/${locale}/login`}
-          className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+          className="text-primary hover:text-primary/80 flex items-center gap-1.5 text-sm font-medium transition-colors"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Sign In

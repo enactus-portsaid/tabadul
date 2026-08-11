@@ -34,8 +34,7 @@ const badgeVariants = cva(
 // Badge Props
 // ---------------------------------------------------------------------------
 export interface BadgeProps
-  extends HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {}
+  extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {}
 
 // ---------------------------------------------------------------------------
 // Badge Component

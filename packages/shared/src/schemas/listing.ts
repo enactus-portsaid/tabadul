@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const listingModeSchema = z.enum(['fixed_price', 'auction']);
 
 const baseListingSchema = z.object({
-  category_id: z.string().uuid('listing.validation.invalidCategory'),
+  category_id: z.string().min(1, 'listing.validation.invalidCategory'),
   title: z
     .string()
     .min(5, 'listing.validation.titleMinLength')
@@ -23,7 +23,14 @@ const baseListingSchema = z.object({
     .positive('listing.validation.minimumBidPositive')
     .optional()
     .nullable(),
-  auction_ends_at: z.string().datetime().optional().nullable(),
+  auction_ends_at: z
+    .string()
+    .optional()
+    .nullable()
+    .refine((val) => {
+      if (!val) return true;
+      return !isNaN(Date.parse(val));
+    }, 'Invalid datetime'),
   quantity: z.number().positive('listing.validation.quantityPositive'),
   unit: z.string().min(1, 'listing.validation.unitRequired'),
   city: z.string().min(1, 'listing.validation.cityRequired'),

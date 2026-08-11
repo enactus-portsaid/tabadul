@@ -1,6 +1,9 @@
 'use client';
 
-import { sendMessageSchema, type SendMessageInput } from '@tabadul/shared/schemas';
+import {
+  type SendMessageInput,
+  sendMessageSchema,
+} from '@tabadul/shared/schemas';
 import { Send } from 'lucide-react';
 import { useRef } from 'react';
 
@@ -69,7 +72,7 @@ export function ChatMessageInput({
     <form
       onSubmit={form.handleSubmit(handleSubmit)}
       className={cn(
-        'flex items-end gap-2 border-t border-gray-200 bg-surface p-3 dark:border-gray-700',
+        'bg-surface flex items-end gap-2 border-t border-gray-200 p-3 dark:border-gray-700',
         className
       )}
       noValidate
@@ -82,17 +85,19 @@ export function ChatMessageInput({
           <textarea
             ref={(el) => {
               registerRef(el);
-              (textareaRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = el;
+              (
+                textareaRef as React.MutableRefObject<HTMLTextAreaElement | null>
+              ).current = el;
             }}
             {...registerRest}
             placeholder={placeholder}
             rows={1}
             onKeyDown={handleKeyDown}
             className={cn(
-              'flex-1 resize-none rounded-lg border border-gray-200 bg-background px-3 py-2',
-              'text-sm text-text-primary placeholder:text-text-muted',
+              'bg-background flex-1 resize-none rounded-lg border border-gray-200 px-3 py-2',
+              'text-text-primary placeholder:text-text-muted text-sm',
               'transition-colors',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:border-primary',
+              'focus-visible:ring-primary/20 focus-visible:border-primary focus-visible:ring-2 focus-visible:outline-none',
               'dark:border-gray-700',
               'max-h-32'
             )}

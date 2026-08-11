@@ -11,14 +11,15 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { useAuth } from '@/hooks/useAuth';
 import { useListings } from '@/hooks/api';
 import { useRecommendations } from '@/hooks/api';
+import { useAuth } from '@/hooks/useAuth';
 
 // ---------------------------------------------------------------------------
 // Dashboard Content — Client Component
@@ -26,18 +27,30 @@ import { useRecommendations } from '@/hooks/api';
 export function DashboardContent() {
   const { locale } = useParams<{ locale: string }>();
   const { user } = useAuth();
-  const profileName = user?.profile?.full_name ?? user?.email?.split('@')[0] ?? 'User';
+  const profileName =
+    user?.profile?.full_name ?? user?.email?.split('@')[0] ?? 'User';
   const isSeller = user?.profile?.role === 'seller';
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="space-y-6">
+        <Skeleton className="h-40 w-full rounded-2xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
       {/* Green Welcome Banner */}
-      <div className="rounded-2xl bg-gradient-to-r from-primary to-primary-light px-6 py-8 text-primary-foreground">
+      <div className="from-primary to-primary-light text-primary-foreground rounded-2xl bg-gradient-to-r px-6 py-8">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <p className="text-sm opacity-80">
-              {getGreeting()}, 
-            </p>
+            <p className="text-sm opacity-80">{getGreeting()},</p>
             <h1 className="text-2xl font-bold">{profileName}</h1>
             <p className="text-sm opacity-80">
               {isSeller
@@ -134,36 +147,44 @@ function QuickAction({
   return (
     <Link
       href={href}
-      className="flex items-center gap-3 rounded-xl border border-gray-100 bg-surface p-4 transition-all hover:border-primary/20 hover:shadow-md"
+      className="bg-surface hover:border-primary/20 flex items-center gap-3 rounded-xl border border-gray-100 p-4 transition-all hover:shadow-md"
     >
       <div
         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
-          color === 'primary' ? 'bg-primary/10 text-primary' : 'bg-accent/10 text-accent'
+          color === 'primary'
+            ? 'bg-primary/10 text-primary'
+            : 'bg-accent/10 text-accent'
         }`}
       >
         <Icon className="h-5 w-5" />
       </div>
       <div className="min-w-0">
-        <p className="text-sm font-semibold text-text-primary">{label}</p>
-        <p className="text-xs text-text-secondary">{description}</p>
+        <p className="text-text-primary text-sm font-semibold">{label}</p>
+        <p className="text-text-secondary text-xs">{description}</p>
       </div>
     </Link>
   );
 }
 
-function RecommendationsPreview({ locale, userId }: { locale: string; userId: string }) {
+function RecommendationsPreview({
+  locale,
+  userId,
+}: {
+  locale: string;
+  userId: string;
+}) {
   const { data: recommendations, isLoading } = useRecommendations(userId);
 
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between">
         <CardTitle className="flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-primary" />
+          <TrendingUp className="text-primary h-4 w-4" />
           AI Recommendations
         </CardTitle>
         <Link
           href={`/${locale}/recommendations`}
-          className="text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+          className="text-primary hover:text-primary/80 text-xs font-medium transition-colors"
         >
           View All
           <ArrowRight className="ml-1 inline h-3 w-3" />
@@ -181,31 +202,39 @@ function RecommendationsPreview({ locale, userId }: { locale: string; userId: st
             </div>
           ))
         ) : recommendations && recommendations.length > 0 ? (
-          recommendations.slice(0, 3).map((rec: Record<string, unknown>, i: number) => (
-            <Link
-              key={i}
-              href={`/${locale}/marketplace/${rec.listing_id}`}
-              className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-surface-muted"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-                <span className="text-sm font-bold text-accent">
-                  {typeof rec.match_score === 'number' ? `${rec.match_score}%` : '—'}
-                </span>
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-text-primary">
-                  {typeof rec.listing_title === 'string' ? rec.listing_title : 'Material Match'}
-                </p>
-                <p className="truncate text-xs text-text-secondary">
-                  {typeof rec.seller_name === 'string' ? rec.seller_name : 'Seller'}
-                </p>
-              </div>
-              <ChevronRight className="h-4 w-4 text-text-muted" />
-            </Link>
-          ))
+          recommendations
+            .slice(0, 3)
+            .map((rec: Record<string, unknown>, i: number) => (
+              <Link
+                key={i}
+                href={`/${locale}/marketplace/${rec.listing_id}`}
+                className="hover:bg-surface-muted flex items-center gap-3 rounded-lg p-2 transition-colors"
+              >
+                <div className="bg-accent/10 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <span className="text-accent text-sm font-bold">
+                    {typeof rec.match_score === 'number'
+                      ? `${rec.match_score}%`
+                      : '—'}
+                  </span>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-text-primary truncate text-sm font-medium">
+                    {typeof rec.listing_title === 'string'
+                      ? rec.listing_title
+                      : 'Material Match'}
+                  </p>
+                  <p className="text-text-secondary truncate text-xs">
+                    {typeof rec.seller_name === 'string'
+                      ? rec.seller_name
+                      : 'Seller'}
+                  </p>
+                </div>
+                <ChevronRight className="text-text-muted h-4 w-4" />
+              </Link>
+            ))
         ) : (
           <div className="py-4 text-center">
-            <p className="text-sm text-text-secondary">
+            <p className="text-text-secondary text-sm">
               No recommendations yet. Browse the marketplace to get started.
             </p>
           </div>
@@ -224,7 +253,7 @@ function RecentListings({ locale }: { locale: string }) {
         <CardTitle>Recent Listings</CardTitle>
         <Link
           href={`/${locale}/marketplace`}
-          className="text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+          className="text-primary hover:text-primary/80 text-xs font-medium transition-colors"
         >
           View All
           <ArrowRight className="ml-1 inline h-3 w-3" />
@@ -250,17 +279,18 @@ function RecentListings({ locale }: { locale: string }) {
               <Link
                 key={String(item.id)}
                 href={`/${locale}/marketplace/${item.id}`}
-                className="flex items-center gap-3 py-3 transition-colors hover:bg-surface-muted -mx-4 px-4 first:pt-0 last:pb-0"
+                className="hover:bg-surface-muted -mx-4 flex items-center gap-3 px-4 py-3 transition-colors first:pt-0 last:pb-0"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-muted">
-                  <Package className="h-5 w-5 text-text-muted" />
+                <div className="bg-surface-muted flex h-10 w-10 shrink-0 items-center justify-center rounded-lg">
+                  <Package className="text-text-muted h-5 w-5" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-text-primary">
+                  <p className="text-text-primary truncate text-sm font-medium">
                     {typeof item.title === 'string' ? item.title : 'Listing'}
                   </p>
-                  <p className="truncate text-xs text-text-secondary">
-                    {typeof item.category === 'string' ? item.category : ''} · {typeof item.location === 'string' ? item.location : ''}
+                  <p className="text-text-secondary truncate text-xs">
+                    {typeof item.category === 'string' ? item.category : ''} ·{' '}
+                    {typeof item.location === 'string' ? item.location : ''}
                   </p>
                 </div>
                 <Badge variant="accent">
@@ -271,8 +301,8 @@ function RecentListings({ locale }: { locale: string }) {
           </div>
         ) : (
           <div className="py-8 text-center">
-            <Package className="mx-auto h-8 w-8 text-text-muted" />
-            <p className="mt-2 text-sm text-text-secondary">
+            <Package className="text-text-muted mx-auto h-8 w-8" />
+            <p className="text-text-secondary mt-2 text-sm">
               No listings available yet
             </p>
           </div>

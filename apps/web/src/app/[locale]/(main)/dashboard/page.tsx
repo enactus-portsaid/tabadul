@@ -9,7 +9,8 @@ import { DashboardSkeleton } from './dashboard-skeleton';
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
   title: 'Dashboard',
-  description: 'Your Tabadul dashboard — view your listings, transactions, and AI-powered recommendations.',
+  description:
+    'Your Tabadul dashboard — view your listings, transactions, and AI-powered recommendations.',
 };
 
 // ---------------------------------------------------------------------------

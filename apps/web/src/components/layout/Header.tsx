@@ -4,9 +4,9 @@ import { Bell, Globe, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { type HTMLAttributes } from 'react';
 
-import { cn } from '@/lib/cn';
 import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
+import { cn } from '@/lib/cn';
 
 import { Container } from './Container';
 
@@ -108,13 +108,13 @@ export function Header({
           <Button
             variant="ghost"
             size="sm"
-            className="relative text-primary-foreground hover:bg-primary-light"
+            className="text-primary-foreground hover:bg-primary-light relative"
             onClick={onNotificationClick}
             aria-label={`Notifications${notificationCount > 0 ? ` (${notificationCount} unread)` : ''}`}
           >
             <Bell className="h-5 w-5" />
             {notificationCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
+              <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
                 {notificationCount > 99 ? '99+' : notificationCount}
               </span>
             )}
@@ -126,7 +126,7 @@ export function Header({
               src={userAvatarUrl}
               fallback={userInitials}
               size="sm"
-              className="ml-1 border-2 border-primary-foreground/20"
+              className="border-primary-foreground/20 ml-1 border-2"
             />
           )}
         </div>

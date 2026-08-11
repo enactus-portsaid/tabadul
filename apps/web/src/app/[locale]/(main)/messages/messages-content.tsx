@@ -1,23 +1,19 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowLeft, MessageCircle, Search } from 'lucide-react';
 import { useParams, useSearchParams } from 'next/navigation';
-import {
-  ArrowLeft,
-  MessageCircle,
-  Search,
-} from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
+import { ChatMessageInput } from '@/components/features/chat/ChatMessageInput';
 import { Avatar } from '@/components/ui/Avatar';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { ChatMessageInput } from '@/components/features/chat/ChatMessageInput';
 import {
-  useChatThreads,
   useChatMessages,
-  useSendMessage,
+  useChatThreads,
   useMarkMessagesAsRead,
+  useSendMessage,
 } from '@/hooks/api';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/cn';
@@ -44,7 +40,9 @@ export function MessagesContent() {
       );
       if (match) setActiveThreadId(String(match.id));
     } else if (!activeThreadId && threads && threads.length > 0) {
-      setActiveThreadId(String((threads as Array<Record<string, unknown>>)[0].id));
+      setActiveThreadId(
+        String((threads as Array<Record<string, unknown>>)[0].id)
+      );
     }
   }, [threads, searchParams, activeThreadId]);
 
@@ -55,21 +53,24 @@ export function MessagesContent() {
     return list.filter((t) => {
       const name = String(t.other_user_name ?? '').toLowerCase();
       const lastMsg = String(t.last_message ?? '').toLowerCase();
-      return name.includes(searchQuery.toLowerCase()) || lastMsg.includes(searchQuery.toLowerCase());
+      return (
+        name.includes(searchQuery.toLowerCase()) ||
+        lastMsg.includes(searchQuery.toLowerCase())
+      );
     });
   }, [threads, searchQuery]);
 
   return (
-    <div className="flex h-[calc(100vh-10rem)] gap-0 overflow-hidden rounded-xl border border-border bg-surface lg:gap-0">
+    <div className="border-border bg-surface flex h-[calc(100vh-10rem)] gap-0 overflow-hidden rounded-xl border lg:gap-0">
       {/* Thread List Panel */}
       <div
         className={cn(
-          'flex w-full flex-col border-r border-border lg:w-80 lg:shrink-0',
+          'border-border flex w-full flex-col border-r lg:w-80 lg:shrink-0',
           activeThreadId ? 'hidden lg:flex' : 'flex'
         )}
       >
         {/* Search */}
-        <div className="border-b border-border p-3">
+        <div className="border-border border-b p-3">
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -104,7 +105,7 @@ export function MessagesContent() {
                   className={cn(
                     'flex w-full items-center gap-3 px-4 py-3 text-left transition-colors',
                     isActive
-                      ? 'bg-primary/5 border-l-2 border-primary'
+                      ? 'bg-primary/5 border-primary border-l-2'
                       : 'hover:bg-surface-muted border-l-2 border-transparent'
                   )}
                 >
@@ -114,27 +115,35 @@ export function MessagesContent() {
                   />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
-                      <span className={cn(
-                        'truncate text-sm',
-                        hasUnread ? 'font-bold text-text-primary' : 'font-medium text-text-primary'
-                      )}>
+                      <span
+                        className={cn(
+                          'truncate text-sm',
+                          hasUnread
+                            ? 'text-text-primary font-bold'
+                            : 'text-text-primary font-medium'
+                        )}
+                      >
                         {String(thread.other_user_name ?? 'User')}
                       </span>
-                      <span className="shrink-0 text-[10px] text-text-muted">
+                      <span className="text-text-muted shrink-0 text-[10px]">
                         {thread.updated_at
                           ? formatTimeAgo(String(thread.updated_at))
                           : ''}
                       </span>
                     </div>
-                    <p className={cn(
-                      'truncate text-xs',
-                      hasUnread ? 'font-semibold text-text-primary' : 'text-text-secondary'
-                    )}>
+                    <p
+                      className={cn(
+                        'truncate text-xs',
+                        hasUnread
+                          ? 'text-text-primary font-semibold'
+                          : 'text-text-secondary'
+                      )}
+                    >
                       {String(thread.last_message ?? 'No messages yet')}
                     </p>
                   </div>
                   {hasUnread && (
-                    <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1.5 text-[10px] font-bold text-primary-foreground">
+                    <span className="bg-primary text-primary-foreground flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10px] font-bold">
                       {Number(thread.unread_count)}
                     </span>
                   )}
@@ -142,9 +151,9 @@ export function MessagesContent() {
               );
             })
           ) : (
-            <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-              <MessageCircle className="h-10 w-10 text-text-muted" />
-              <p className="mt-3 text-sm text-text-secondary">
+            <div className="flex flex-col items-center justify-center px-4 py-16 text-center">
+              <MessageCircle className="text-text-muted h-10 w-10" />
+              <p className="text-text-secondary mt-3 text-sm">
                 No conversations yet
               </p>
             </div>
@@ -163,8 +172,8 @@ export function MessagesContent() {
       ) : (
         <div className="hidden flex-1 items-center justify-center lg:flex">
           <div className="text-center">
-            <MessageCircle className="mx-auto h-12 w-12 text-text-muted" />
-            <p className="mt-3 text-sm text-text-secondary">
+            <MessageCircle className="text-text-muted mx-auto h-12 w-12" />
+            <p className="text-text-secondary mt-3 text-sm">
               Select a conversation to start chatting
             </p>
           </div>
@@ -220,21 +229,21 @@ function ChatPanel({
   return (
     <div className="flex flex-1 flex-col">
       {/* Chat Header */}
-      <div className="flex items-center gap-3 border-b border-border px-4 py-3">
+      <div className="border-border flex items-center gap-3 border-b px-4 py-3">
         <button
           type="button"
           onClick={onBack}
-          className="rounded-lg p-1 text-text-secondary hover:bg-surface-muted lg:hidden"
+          className="text-text-secondary hover:bg-surface-muted rounded-lg p-1 lg:hidden"
           aria-label="Back to conversations"
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
         <Avatar fallback={otherUserName.charAt(0)} size="sm" />
         <div>
-          <p className="text-sm font-semibold text-text-primary">
+          <p className="text-text-primary text-sm font-semibold">
             {otherUserName}
           </p>
-          <p className="text-[10px] text-text-muted">Online</p>
+          <p className="text-text-muted text-[10px]">Online</p>
         </div>
       </div>
 
@@ -245,20 +254,27 @@ function ChatPanel({
             {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className={cn('flex', i % 2 === 0 ? 'justify-start' : 'justify-end')}
+                className={cn(
+                  'flex',
+                  i % 2 === 0 ? 'justify-start' : 'justify-end'
+                )}
               >
                 <Skeleton className="h-10 w-48 rounded-2xl" />
               </div>
             ))}
           </div>
-        ) : messages && (messages as Array<Record<string, unknown>>).length > 0 ? (
+        ) : messages &&
+          (messages as Array<Record<string, unknown>>).length > 0 ? (
           <div className="space-y-3">
             {(messages as Array<Record<string, unknown>>).map((msg) => {
               const isMine = msg.sender_id === userId;
               return (
                 <div
                   key={String(msg.id)}
-                  className={cn('flex', isMine ? 'justify-end' : 'justify-start')}
+                  className={cn(
+                    'flex',
+                    isMine ? 'justify-end' : 'justify-start'
+                  )}
                 >
                   <div
                     className={cn(
@@ -268,20 +284,25 @@ function ChatPanel({
                         : 'bg-surface-muted text-text-primary rounded-bl-md'
                     )}
                   >
-                    <p className="whitespace-pre-wrap break-words">
+                    <p className="break-words whitespace-pre-wrap">
                       {String(msg.content ?? '')}
                     </p>
                     <p
                       className={cn(
                         'mt-1 text-[10px]',
-                        isMine ? 'text-primary-foreground/60' : 'text-text-muted'
+                        isMine
+                          ? 'text-primary-foreground/60'
+                          : 'text-text-muted'
                       )}
                     >
                       {msg.created_at
-                        ? new Date(String(msg.created_at)).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })
+                        ? new Date(String(msg.created_at)).toLocaleTimeString(
+                            [],
+                            {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            }
+                          )
                         : ''}
                     </p>
                   </div>
@@ -292,7 +313,7 @@ function ChatPanel({
           </div>
         ) : (
           <div className="flex h-full items-center justify-center">
-            <p className="text-sm text-text-muted">
+            <p className="text-text-muted text-sm">
               No messages yet. Say hello! 👋
             </p>
           </div>

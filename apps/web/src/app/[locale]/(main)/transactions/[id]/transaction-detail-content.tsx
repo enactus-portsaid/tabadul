@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import {
   AlertTriangle,
   ArrowLeft,
@@ -13,6 +11,8 @@ import {
   Truck,
   User,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
@@ -47,13 +47,13 @@ export function TransactionDetailContent() {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
         <Card className="w-full max-w-md text-center">
-          <CardContent className="py-12 space-y-4">
-            <p className="text-lg font-semibold text-text-primary">
+          <CardContent className="space-y-4 py-12">
+            <p className="text-text-primary text-lg font-semibold">
               Transaction not found
             </p>
             <Link
               href={`/${locale}/transactions`}
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground inline-flex items-center gap-2 rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Transactions
@@ -73,7 +73,7 @@ export function TransactionDetailContent() {
       {/* Back Link */}
       <Link
         href={`/${locale}/transactions`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Transactions
@@ -82,10 +82,10 @@ export function TransactionDetailContent() {
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold text-text-primary">
+          <h1 className="text-text-primary text-xl font-bold">
             Transaction #{String(txn.id).slice(0, 8)}
           </h1>
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             {txn.created_at
               ? `Created ${new Date(String(txn.created_at)).toLocaleDateString()}`
               : ''}
@@ -98,7 +98,7 @@ export function TransactionDetailContent() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left Column */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6 lg:col-span-2">
           {/* Status Timeline */}
           <Card>
             <CardHeader>
@@ -127,7 +127,9 @@ export function TransactionDetailContent() {
                 </InfoRow>
                 <InfoRow icon={Clock} label="Expected Delivery">
                   {txn.expected_delivery
-                    ? new Date(String(txn.expected_delivery)).toLocaleDateString()
+                    ? new Date(
+                        String(txn.expected_delivery)
+                      ).toLocaleDateString()
                     : 'TBD'}
                 </InfoRow>
               </div>
@@ -144,7 +146,10 @@ export function TransactionDetailContent() {
                     This transaction is disputed
                   </p>
                   <p className="mt-0.5 text-xs text-red-600 dark:text-red-300">
-                    {String(txn.dispute_reason ?? 'A dispute has been filed for this transaction.')}
+                    {String(
+                      txn.dispute_reason ??
+                        'A dispute has been filed for this transaction.'
+                    )}
                   </p>
                 </div>
               </CardContent>
@@ -162,21 +167,27 @@ export function TransactionDetailContent() {
             <CardContent className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-text-secondary">Unit Price</span>
-                <span className="font-medium text-text-primary">
-                  EGP {Number(txn.unit_price ?? txn.price ?? 0).toLocaleString()}
+                <span className="text-text-primary font-medium">
+                  EGP{' '}
+                  {Number(txn.unit_price ?? txn.price ?? 0).toLocaleString()}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-text-secondary">Quantity</span>
-                <span className="font-medium text-text-primary">
+                <span className="text-text-primary font-medium">
                   {Number(txn.quantity ?? 0)} {String(txn.unit ?? '')}
                 </span>
               </div>
-              <div className="border-t border-border pt-2">
+              <div className="border-border border-t pt-2">
                 <div className="flex justify-between">
-                  <span className="text-sm font-semibold text-text-primary">Total</span>
-                  <span className="text-lg font-bold text-accent">
-                    EGP {Number(txn.total_amount ?? txn.amount ?? 0).toLocaleString()}
+                  <span className="text-text-primary text-sm font-semibold">
+                    Total
+                  </span>
+                  <span className="text-accent text-lg font-bold">
+                    EGP{' '}
+                    {Number(
+                      txn.total_amount ?? txn.amount ?? 0
+                    ).toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -195,10 +206,10 @@ export function TransactionDetailContent() {
                   size="md"
                 />
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-text-primary">
+                  <p className="text-text-primary truncate text-sm font-semibold">
                     {String(txn.counterparty_name ?? 'User')}
                   </p>
-                  <p className="text-xs text-text-secondary">
+                  <p className="text-text-secondary text-xs">
                     {String(txn.counterparty_company ?? '')}
                   </p>
                 </div>
@@ -215,12 +226,11 @@ export function TransactionDetailContent() {
 // Status Timeline Component
 // ---------------------------------------------------------------------------
 function StatusTimeline({ currentStatus }: { currentStatus: string }) {
-  const currentIndex = STATUS_STEPS.findIndex(
-    (s) => s.key === currentStatus
-  );
-  const activeIndex = currentStatus === 'disputed' || currentStatus === 'cancelled'
-    ? -1
-    : currentIndex;
+  const currentIndex = STATUS_STEPS.findIndex((s) => s.key === currentStatus);
+  const activeIndex =
+    currentStatus === 'disputed' || currentStatus === 'cancelled'
+      ? -1
+      : currentIndex;
 
   return (
     <div className="flex items-center justify-between">
@@ -237,15 +247,19 @@ function StatusTimeline({ currentStatus }: { currentStatus: string }) {
                   'flex h-8 w-8 items-center justify-center rounded-full border-2 transition-colors',
                   isCompleted
                     ? 'border-primary bg-primary text-primary-foreground'
-                    : 'border-gray-200 bg-surface text-text-muted'
+                    : 'bg-surface text-text-muted border-gray-200'
                 )}
               >
                 <Icon className="h-4 w-4" />
               </div>
               <span
                 className={cn(
-                  'mt-1.5 text-[10px] font-medium text-center max-w-16',
-                  isCurrent ? 'text-primary' : isCompleted ? 'text-text-primary' : 'text-text-muted'
+                  'mt-1.5 max-w-16 text-center text-[10px] font-medium',
+                  isCurrent
+                    ? 'text-primary'
+                    : isCompleted
+                      ? 'text-text-primary'
+                      : 'text-text-muted'
                 )}
               >
                 {step.label}
@@ -281,10 +295,10 @@ function InfoRow({
 }) {
   return (
     <div className="flex items-start gap-2">
-      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
+      <Icon className="text-text-muted mt-0.5 h-4 w-4 shrink-0" />
       <div>
-        <p className="text-xs text-text-muted">{label}</p>
-        <p className="text-sm font-medium text-text-primary">{children}</p>
+        <p className="text-text-muted text-xs">{label}</p>
+        <p className="text-text-primary text-sm font-medium">{children}</p>
       </div>
     </div>
   );
@@ -302,7 +316,7 @@ function TransactionDetailSkeleton() {
         <Skeleton className="h-6 w-24 rounded-full" />
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6 lg:col-span-2">
           <Card>
             <CardContent className="py-8">
               <div className="flex items-center justify-between">
@@ -316,7 +330,7 @@ function TransactionDetailSkeleton() {
             </CardContent>
           </Card>
           <Card>
-            <CardContent className="py-6 space-y-3">
+            <CardContent className="space-y-3 py-6">
               <Skeleton className="h-5 w-32" />
               <div className="grid gap-3 sm:grid-cols-2">
                 {Array.from({ length: 4 }).map((_, i) => (
@@ -328,7 +342,7 @@ function TransactionDetailSkeleton() {
         </div>
         <div className="space-y-4">
           <Card>
-            <CardContent className="py-6 space-y-3">
+            <CardContent className="space-y-3 py-6">
               <Skeleton className="h-5 w-36" />
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-full" />
@@ -344,7 +358,9 @@ function TransactionDetailSkeleton() {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-function getStatusVariant(status: string): 'default' | 'success' | 'warning' | 'danger' | 'info' {
+function getStatusVariant(
+  status: string
+): 'default' | 'success' | 'warning' | 'danger' | 'info' {
   switch (status) {
     case 'completed':
       return 'success';
@@ -363,7 +379,5 @@ function getStatusVariant(status: string): 'default' | 'success' | 'warning' | '
 }
 
 function formatStatus(status: string): string {
-  return status
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  return status.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }

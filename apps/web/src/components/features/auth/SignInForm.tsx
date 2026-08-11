@@ -1,7 +1,7 @@
 'use client';
 
-import { signInSchema, type SignInInput } from '@tabadul/shared/schemas';
-import { Mail, Lock } from 'lucide-react';
+import { type SignInInput, signInSchema } from '@tabadul/shared/schemas';
+import { Lock, Mail } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
 import {

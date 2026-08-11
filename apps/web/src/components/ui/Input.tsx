@@ -41,7 +41,8 @@ const inputVariants = cva(
 // Input Props
 // ---------------------------------------------------------------------------
 export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  extends
+    Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {
   /** Label displayed above the input */
   label?: string;
@@ -87,17 +88,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label
-            htmlFor={id}
-            className="text-sm font-medium text-text-primary"
-          >
+          <label htmlFor={id} className="text-text-primary text-sm font-medium">
             {label}
           </label>
         )}
 
         <div className="relative">
           {leftAddon && (
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-muted">
+            <div className="text-text-muted pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               {leftAddon}
             </div>
           )}
@@ -119,7 +117,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           />
 
           {rightAddon && (
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-text-muted">
+            <div className="text-text-muted absolute inset-y-0 right-0 flex items-center pr-3">
               {rightAddon}
             </div>
           )}
@@ -137,7 +135,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
 
         {!error && helperText && (
-          <p id={helperId} className="text-xs text-text-secondary">
+          <p id={helperId} className="text-text-secondary text-xs">
             {helperText}
           </p>
         )}

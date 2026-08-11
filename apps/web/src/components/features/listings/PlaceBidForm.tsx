@@ -1,6 +1,6 @@
 'use client';
 
-import { placeBidSchema, type PlaceBidInput } from '@tabadul/shared/schemas';
+import { type PlaceBidInput, placeBidSchema } from '@tabadul/shared/schemas';
 import { DollarSign } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
@@ -87,9 +87,7 @@ export function PlaceBidForm({
                   value={field.value ?? ''}
                   onChange={(e) =>
                     field.onChange(
-                      e.target.value
-                        ? parseFloat(e.target.value)
-                        : undefined
+                      e.target.value ? parseFloat(e.target.value) : undefined
                     )
                   }
                 />

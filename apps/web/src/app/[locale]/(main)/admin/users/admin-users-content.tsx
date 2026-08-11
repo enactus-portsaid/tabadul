@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { CheckCircle, Search, Shield, User, XCircle } from 'lucide-react';
+import { useState } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -14,9 +14,30 @@ import { cn } from '@/lib/cn';
 // Placeholder user data
 // ---------------------------------------------------------------------------
 const MOCK_USERS: Record<string, unknown>[] = [
-  { id: '1', full_name: 'Ahmed Mohamed', email: 'ahmed@example.com', role: 'seller', is_verified: true, status: 'active' },
-  { id: '2', full_name: 'Sara Hassan', email: 'sara@example.com', role: 'buyer', is_verified: true, status: 'active' },
-  { id: '3', full_name: 'Omar Ali', email: 'omar@example.com', role: 'seller', is_verified: false, status: 'pending' },
+  {
+    id: '1',
+    full_name: 'Ahmed Mohamed',
+    email: 'ahmed@example.com',
+    role: 'seller',
+    is_verified: true,
+    status: 'active',
+  },
+  {
+    id: '2',
+    full_name: 'Sara Hassan',
+    email: 'sara@example.com',
+    role: 'buyer',
+    is_verified: true,
+    status: 'active',
+  },
+  {
+    id: '3',
+    full_name: 'Omar Ali',
+    email: 'omar@example.com',
+    role: 'seller',
+    is_verified: false,
+    status: 'pending',
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -25,16 +46,19 @@ const MOCK_USERS: Record<string, unknown>[] = [
 export function AdminUsersContent() {
   const [search, setSearch] = useState('');
 
-  const filtered = MOCK_USERS.filter((u) =>
-    String(u.full_name).toLowerCase().includes(search.toLowerCase()) ||
-    String(u.email).toLowerCase().includes(search.toLowerCase())
+  const filtered = MOCK_USERS.filter(
+    (u) =>
+      String(u.full_name).toLowerCase().includes(search.toLowerCase()) ||
+      String(u.email).toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-text-primary">User Management</h1>
-        <p className="text-sm text-text-secondary">
+        <h1 className="text-text-primary text-2xl font-bold">
+          User Management
+        </h1>
+        <p className="text-text-secondary text-sm">
           View and manage platform users
         </p>
       </div>
@@ -53,30 +77,42 @@ export function AdminUsersContent() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border bg-surface-muted">
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">User</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Role</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Verified</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Status</th>
-                <th className="px-4 py-3 text-right font-medium text-text-secondary">Actions</th>
+              <tr className="border-border bg-surface-muted border-b">
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  User
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Role
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Verified
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Status
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-right font-medium">
+                  Actions
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-border divide-y">
               {filtered.map((user) => (
                 <tr
                   key={String(user.id)}
-                  className="transition-colors hover:bg-surface-muted"
+                  className="hover:bg-surface-muted transition-colors"
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-                        <User className="h-4 w-4 text-primary" />
+                      <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-full">
+                        <User className="text-primary h-4 w-4" />
                       </div>
                       <div>
-                        <p className="font-medium text-text-primary">
+                        <p className="text-text-primary font-medium">
                           {String(user.full_name)}
                         </p>
-                        <p className="text-xs text-text-muted">{String(user.email)}</p>
+                        <p className="text-text-muted text-xs">
+                          {String(user.email)}
+                        </p>
                       </div>
                     </div>
                   </td>
@@ -90,9 +126,9 @@ export function AdminUsersContent() {
                   </td>
                   <td className="px-4 py-3">
                     {user.is_verified ? (
-                      <CheckCircle className="h-4 w-4 text-status-active" />
+                      <CheckCircle className="text-status-active h-4 w-4" />
                     ) : (
-                      <XCircle className="h-4 w-4 text-text-muted" />
+                      <XCircle className="text-text-muted h-4 w-4" />
                     )}
                   </td>
                   <td className="px-4 py-3">

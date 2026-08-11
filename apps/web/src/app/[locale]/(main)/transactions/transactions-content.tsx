@@ -1,14 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { ArrowRight, Calendar, ChevronRight, Package } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import {
-  ArrowRight,
-  Calendar,
-  ChevronRight,
-  Package,
-} from 'lucide-react';
+import { useMemo, useState } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -54,8 +49,8 @@ export function TransactionsContent() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-text-primary">Transactions</h1>
-        <p className="text-sm text-text-secondary">
+        <h1 className="text-text-primary text-2xl font-bold">Transactions</h1>
+        <p className="text-text-secondary text-sm">
           Track your buying and selling activity
         </p>
       </div>
@@ -73,7 +68,7 @@ export function TransactionsContent() {
               'shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
               statusFilter === tab.value
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-surface border border-border text-text-secondary hover:bg-surface-muted'
+                : 'bg-surface border-border text-text-secondary hover:bg-surface-muted border'
             )}
           >
             {tab.label}
@@ -100,50 +95,63 @@ export function TransactionsContent() {
       ) : filtered.length > 0 ? (
         <div className="space-y-3">
           {filtered.map((txn) => (
-            <Link key={String(txn.id)} href={`/${locale}/transactions/${txn.id}`}>
-              <Card className="transition-all hover:shadow-md hover:border-primary/20">
+            <Link
+              key={String(txn.id)}
+              href={`/${locale}/transactions/${txn.id}`}
+            >
+              <Card className="hover:border-primary/20 transition-all hover:shadow-md">
                 <CardContent className="flex items-center gap-4 py-4">
                   {/* Icon */}
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-surface-muted">
-                    <Package className="h-6 w-6 text-text-muted" />
+                  <div className="bg-surface-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-lg">
+                    <Package className="text-text-muted h-6 w-6" />
                   </div>
 
                   {/* Details */}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="truncate text-sm font-semibold text-text-primary">
+                      <h3 className="text-text-primary truncate text-sm font-semibold">
                         {typeof txn.material_name === 'string'
                           ? txn.material_name
                           : `Transaction #${String(txn.id).slice(0, 8)}`}
                       </h3>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-text-secondary">
+                    <div className="text-text-secondary flex items-center gap-2 text-xs">
                       <span>
                         {typeof txn.counterparty_name === 'string'
                           ? txn.counterparty_name
-                          : role === 'buyer' ? 'Seller' : 'Buyer'}
+                          : role === 'buyer'
+                            ? 'Seller'
+                            : 'Buyer'}
                       </span>
                       <span>·</span>
                       <span className="flex items-center gap-0.5">
                         <Calendar className="h-3 w-3" />
                         {txn.created_at
-                          ? new Date(String(txn.created_at)).toLocaleDateString()
+                          ? new Date(
+                              String(txn.created_at)
+                            ).toLocaleDateString()
                           : '—'}
                       </span>
                     </div>
                   </div>
 
                   {/* Amount */}
-                  <div className="text-right shrink-0">
-                    <p className="text-sm font-bold text-text-primary">
-                      EGP {Number(txn.total_amount ?? txn.amount ?? 0).toLocaleString()}
+                  <div className="shrink-0 text-right">
+                    <p className="text-text-primary text-sm font-bold">
+                      EGP{' '}
+                      {Number(
+                        txn.total_amount ?? txn.amount ?? 0
+                      ).toLocaleString()}
                     </p>
-                    <Badge variant={getStatusVariant(String(txn.status ?? ''))} size="sm">
+                    <Badge
+                      variant={getStatusVariant(String(txn.status ?? ''))}
+                      size="sm"
+                    >
                       {formatStatus(String(txn.status ?? ''))}
                     </Badge>
                   </div>
 
-                  <ChevronRight className="h-4 w-4 shrink-0 text-text-muted" />
+                  <ChevronRight className="text-text-muted h-4 w-4 shrink-0" />
                 </CardContent>
               </Card>
             </Link>
@@ -152,11 +160,13 @@ export function TransactionsContent() {
       ) : (
         <Card>
           <CardContent className="py-16 text-center">
-            <Package className="mx-auto h-10 w-10 text-text-muted" />
-            <p className="mt-3 text-sm font-medium text-text-primary">
-              {statusFilter === 'all' ? 'No transactions yet' : `No ${statusFilter.replace('_', ' ')} transactions`}
+            <Package className="text-text-muted mx-auto h-10 w-10" />
+            <p className="text-text-primary mt-3 text-sm font-medium">
+              {statusFilter === 'all'
+                ? 'No transactions yet'
+                : `No ${statusFilter.replace('_', ' ')} transactions`}
             </p>
-            <p className="mt-1 text-xs text-text-secondary">
+            <p className="text-text-secondary mt-1 text-xs">
               Start by browsing the marketplace
             </p>
           </CardContent>
@@ -169,7 +179,9 @@ export function TransactionsContent() {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-function getStatusVariant(status: string): 'default' | 'success' | 'warning' | 'danger' | 'info' {
+function getStatusVariant(
+  status: string
+): 'default' | 'success' | 'warning' | 'danger' | 'info' {
   switch (status.toLowerCase()) {
     case 'completed':
       return 'success';

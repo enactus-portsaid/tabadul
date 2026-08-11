@@ -1,11 +1,14 @@
 // ---------------------------------------------------------------------------
 // Transactions Feature Components
 // ---------------------------------------------------------------------------
+export type {
+  FileDisputeFormInput,
+  FileDisputeFormProps,
+} from './FileDisputeForm';
 export { FileDisputeForm } from './FileDisputeForm';
-export type { FileDisputeFormProps, FileDisputeFormInput } from './FileDisputeForm';
-export { SubmitInspectionForm } from './SubmitInspectionForm';
 export type { SubmitInspectionFormProps } from './SubmitInspectionForm';
-export { SubmitReviewForm } from './SubmitReviewForm';
+export { SubmitInspectionForm } from './SubmitInspectionForm';
 export type { SubmitReviewFormProps } from './SubmitReviewForm';
-export { UploadReceiptForm } from './UploadReceiptForm';
+export { SubmitReviewForm } from './SubmitReviewForm';
 export type { UploadReceiptFormProps } from './UploadReceiptForm';
+export { UploadReceiptForm } from './UploadReceiptForm';

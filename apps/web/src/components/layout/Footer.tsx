@@ -35,7 +35,7 @@ export function Footer({ className, locale = 'en', ...props }: FooterProps) {
   return (
     <footer
       className={cn(
-        'border-t border-gray-200 bg-surface py-6 text-text-secondary',
+        'bg-surface text-text-secondary border-t border-gray-200 py-6',
         className
       )}
       {...props}
@@ -53,7 +53,7 @@ export function Footer({ className, locale = 'en', ...props }: FooterProps) {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-xs transition-colors hover:text-text-primary"
+                  className="hover:text-text-primary text-xs transition-colors"
                 >
                   {link.label}
                 </Link>

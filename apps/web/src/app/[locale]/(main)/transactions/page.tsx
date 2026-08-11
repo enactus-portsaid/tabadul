@@ -10,7 +10,8 @@ import { TransactionsContent } from './transactions-content';
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
   title: 'Transactions',
-  description: 'View and manage your buying and selling transactions on Tabadul.',
+  description:
+    'View and manage your buying and selling transactions on Tabadul.',
 };
 
 // ---------------------------------------------------------------------------

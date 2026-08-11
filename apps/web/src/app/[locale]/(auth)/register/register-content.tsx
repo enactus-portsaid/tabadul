@@ -1,13 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import type { SignUpInput } from '@tabadul/shared/schemas';
+import { Leaf } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { Leaf } from 'lucide-react';
-import type { SignUpInput } from '@tabadul/shared/schemas';
+import { useState } from 'react';
 
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/Card';
 import { SignUpForm } from '@/components/features/auth/SignUpForm';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/Card';
 import { useAuth } from '@/hooks/useAuth';
 
 // ---------------------------------------------------------------------------
@@ -29,24 +34,28 @@ export function RegisterContent() {
     });
 
     if (error) {
-      setServerError(error.message ?? 'Failed to create account. Please try again.');
+      setServerError(
+        error.message ?? 'Failed to create account. Please try again.'
+      );
     } else {
-      router.push(`/${locale}/verify-email?email=${encodeURIComponent(data.email)}`);
+      router.push(
+        `/${locale}/verify-email?email=${encodeURIComponent(data.email)}`
+      );
     }
   };
 
   return (
     <Card className="shadow-elevated">
       <CardHeader className="space-y-3 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-          <Leaf className="h-6 w-6 text-primary" />
+        <div className="bg-primary/10 mx-auto flex h-12 w-12 items-center justify-center rounded-xl">
+          <Leaf className="text-primary h-6 w-6" />
         </div>
 
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold text-text-primary">
+          <h1 className="text-text-primary text-2xl font-bold">
             Create your account
           </h1>
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Join Tabadul to start trading industrial materials
           </p>
         </div>
@@ -60,12 +69,12 @@ export function RegisterContent() {
         />
       </CardContent>
 
-      <CardFooter className="justify-center border-t border-border py-4">
-        <p className="text-sm text-text-secondary">
+      <CardFooter className="border-border justify-center border-t py-4">
+        <p className="text-text-secondary text-sm">
           Already have an account?{' '}
           <Link
             href={`/${locale}/login`}
-            className="font-semibold text-primary hover:text-primary/80 transition-colors"
+            className="text-primary hover:text-primary/80 font-semibold transition-colors"
           >
             Sign In
           </Link>

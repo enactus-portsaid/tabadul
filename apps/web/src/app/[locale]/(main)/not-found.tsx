@@ -12,16 +12,16 @@ export default function MainNotFound() {
       <Card className="w-full max-w-md text-center">
         <CardContent className="space-y-6 py-12">
           {/* Icon */}
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-surface-muted">
-            <SearchX className="h-8 w-8 text-text-muted" />
+          <div className="bg-surface-muted mx-auto flex h-16 w-16 items-center justify-center rounded-full">
+            <SearchX className="text-text-muted h-8 w-8" />
           </div>
 
           {/* Message */}
           <div className="space-y-2">
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="text-text-primary text-xl font-semibold">
               Page not found
             </h2>
-            <p className="text-sm text-text-secondary">
+            <p className="text-text-secondary text-sm">
               The page you&apos;re looking for doesn&apos;t exist or has been
               moved.
             </p>
@@ -30,7 +30,7 @@ export default function MainNotFound() {
           {/* Action */}
           <Link
             href="/en/dashboard"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-light"
+            className="bg-primary text-primary-foreground hover:bg-primary-light inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard

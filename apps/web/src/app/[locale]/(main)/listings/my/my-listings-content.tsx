@@ -1,15 +1,15 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { Edit, Eye, Package, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Edit, Eye, Package, Plus, Trash2 } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { useListings, useDeactivateListing } from '@/hooks/api';
+import { useDeactivateListing, useListings } from '@/hooks/api';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/cn';
 
@@ -54,8 +54,8 @@ export function MyListingsContent() {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary">My Listings</h1>
-          <p className="text-sm text-text-secondary">
+          <h1 className="text-text-primary text-2xl font-bold">My Listings</h1>
+          <p className="text-text-secondary text-sm">
             Manage your waste material listings
           </p>
         </div>
@@ -80,7 +80,7 @@ export function MyListingsContent() {
               'shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
               statusFilter === tab.value
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-surface border border-border text-text-secondary hover:bg-surface-muted'
+                : 'bg-surface border-border text-text-secondary hover:bg-surface-muted border'
             )}
           >
             {tab.label}
@@ -107,10 +107,13 @@ export function MyListingsContent() {
       ) : filteredListings.length > 0 ? (
         <div className="space-y-3">
           {filteredListings.map((item) => (
-            <Card key={String(item.id)} className="transition-all hover:shadow-md">
+            <Card
+              key={String(item.id)}
+              className="transition-all hover:shadow-md"
+            >
               <CardContent className="flex items-center gap-4 py-4">
                 {/* Thumbnail */}
-                <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-surface-muted">
+                <div className="bg-surface-muted h-16 w-16 shrink-0 overflow-hidden rounded-lg">
                   {typeof item.image_url === 'string' ? (
                     <img
                       src={item.image_url}
@@ -119,7 +122,7 @@ export function MyListingsContent() {
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center">
-                      <Package className="h-6 w-6 text-text-muted" />
+                      <Package className="text-text-muted h-6 w-6" />
                     </div>
                   )}
                 </div>
@@ -127,7 +130,7 @@ export function MyListingsContent() {
                 {/* Details */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="truncate text-sm font-semibold text-text-primary">
+                    <h3 className="text-text-primary truncate text-sm font-semibold">
                       {String(item.title ?? 'Untitled')}
                     </h3>
                     <Badge
@@ -137,8 +140,9 @@ export function MyListingsContent() {
                       {String(item.status ?? 'Draft')}
                     </Badge>
                   </div>
-                  <p className="text-xs text-text-secondary">
-                    EGP {Number(item.price ?? 0).toLocaleString()} · {Number(item.quantity ?? 0)} {String(item.unit ?? 'tons')}
+                  <p className="text-text-secondary text-xs">
+                    EGP {Number(item.price ?? 0).toLocaleString()} ·{' '}
+                    {Number(item.quantity ?? 0)} {String(item.unit ?? 'tons')}
                   </p>
                 </div>
 
@@ -171,14 +175,19 @@ export function MyListingsContent() {
       ) : (
         <Card>
           <CardContent className="py-16 text-center">
-            <Package className="mx-auto h-10 w-10 text-text-muted" />
-            <p className="mt-3 text-sm font-medium text-text-primary">
-              {statusFilter === 'all' ? 'No listings yet' : `No ${statusFilter} listings`}
+            <Package className="text-text-muted mx-auto h-10 w-10" />
+            <p className="text-text-primary mt-3 text-sm font-medium">
+              {statusFilter === 'all'
+                ? 'No listings yet'
+                : `No ${statusFilter} listings`}
             </p>
-            <p className="mt-1 text-xs text-text-secondary">
+            <p className="text-text-secondary mt-1 text-xs">
               Create your first listing to start selling
             </p>
-            <Link href={`/${locale}/listings/new`} className="mt-4 inline-block">
+            <Link
+              href={`/${locale}/listings/new`}
+              className="mt-4 inline-block"
+            >
               <Button className="gap-2">
                 <Plus className="h-4 w-4" />
                 Create Listing
@@ -194,7 +203,9 @@ export function MyListingsContent() {
 // ---------------------------------------------------------------------------
 // Status variant helper
 // ---------------------------------------------------------------------------
-function getStatusVariant(status: string): 'default' | 'success' | 'warning' | 'danger' {
+function getStatusVariant(
+  status: string
+): 'default' | 'success' | 'warning' | 'danger' {
   switch (status.toLowerCase()) {
     case 'active':
       return 'success';

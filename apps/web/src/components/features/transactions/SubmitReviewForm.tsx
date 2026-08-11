@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  createReviewSchema,
   type CreateReviewInput,
+  createReviewSchema,
 } from '@tabadul/shared/schemas';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
@@ -17,8 +17,8 @@ import {
   FormMessage,
 } from '@/components/ui/Form';
 import { Textarea } from '@/components/ui/Textarea';
-import { cn } from '@/lib/cn';
 import { useZodForm } from '@/hooks/useZodForm';
+import { cn } from '@/lib/cn';
 
 // ---------------------------------------------------------------------------
 // Props
@@ -54,7 +54,7 @@ function StarRating({
           role="radio"
           aria-checked={value === star}
           aria-label={`${star} star${star !== 1 ? 's' : ''}`}
-          className="rounded-sm p-0.5 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="focus-visible:ring-primary rounded-sm p-0.5 transition-transform hover:scale-110 focus-visible:ring-2 focus-visible:outline-none"
           onMouseEnter={() => setHovered(star)}
           onMouseLeave={() => setHovered(0)}
           onClick={() => onChange(star)}
@@ -118,9 +118,9 @@ export function SubmitReviewForm({
         <input type="hidden" {...form.register('reviewed_user_id')} />
 
         {reviewedUserName && (
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Rate your experience with{' '}
-            <span className="font-medium text-text-primary">
+            <span className="text-text-primary font-medium">
               {reviewedUserName}
             </span>
           </p>
@@ -134,10 +134,7 @@ export function SubmitReviewForm({
             <FormItem>
               <FormLabel>Rating</FormLabel>
               <FormControl>
-                <StarRating
-                  value={field.value}
-                  onChange={field.onChange}
-                />
+                <StarRating value={field.value} onChange={field.onChange} />
               </FormControl>
               <FormMessage />
             </FormItem>

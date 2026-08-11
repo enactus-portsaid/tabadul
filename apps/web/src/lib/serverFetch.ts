@@ -14,10 +14,9 @@
 //   }
 // ---------------------------------------------------------------------------
 
-import { cache } from 'react';
-
 import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 import { createServices } from '@tabadul/shared/services';
+import { cache } from 'react';
 
 import { createServerSupabaseClient } from './supabaseServer';
 

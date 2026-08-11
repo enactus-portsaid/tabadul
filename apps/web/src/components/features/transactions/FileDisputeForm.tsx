@@ -1,7 +1,7 @@
 'use client';
 
-import { z } from 'zod';
 import { AlertTriangle } from 'lucide-react';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/Button';
 import {
@@ -96,11 +96,11 @@ export function FileDisputeForm({
                   options={[
                     {
                       value: 'quality_mismatch',
-                      label: 'Quality doesn\'t match description',
+                      label: "Quality doesn't match description",
                     },
                     {
                       value: 'quantity_mismatch',
-                      label: 'Quantity doesn\'t match',
+                      label: "Quantity doesn't match",
                     },
                     { value: 'delivery_issue', label: 'Delivery problem' },
                     { value: 'payment_issue', label: 'Payment issue' },

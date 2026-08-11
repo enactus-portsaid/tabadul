@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
@@ -38,7 +38,7 @@ export function MainShell({
   };
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="bg-background flex min-h-screen">
       {/* Sidebar Navigation */}
       <Sidebar
         locale={locale}
@@ -58,9 +58,7 @@ export function MainShell({
         />
 
         {/* Page Content */}
-        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
-          {children}
-        </main>
+        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
       </div>
     </div>
   );

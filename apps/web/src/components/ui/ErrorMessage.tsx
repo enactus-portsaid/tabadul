@@ -1,13 +1,13 @@
 'use client';
 
-import { AlertCircle, RefreshCw } from 'lucide-react';
-import { forwardRef, useCallback } from 'react';
-
-import { cn } from '@/lib/cn';
 import {
   getDisplayMessage,
   isRetryableError,
 } from '@tabadul/shared/lib/errorHandler';
+import { AlertCircle, RefreshCw } from 'lucide-react';
+import { forwardRef, useCallback } from 'react';
+
+import { cn } from '@/lib/cn';
 
 import { Button } from './Button';
 
@@ -22,8 +22,7 @@ import { Button } from './Button';
 //   <ErrorMessage error={error} onRetry={refetch} />
 // ---------------------------------------------------------------------------
 
-export interface ErrorMessageProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface ErrorMessageProps extends React.HTMLAttributes<HTMLDivElement> {
   /** The error object from a TanStack Query or service call. */
   error: unknown;
   /** Optional retry callback (e.g., `refetch` from `useQuery`). */
@@ -46,7 +45,7 @@ const ErrorMessage = forwardRef<HTMLDivElement, ErrorMessageProps>(
         <div
           ref={ref}
           role="alert"
-          className={cn('text-sm text-status-pending', className)}
+          className={cn('text-status-pending text-sm', className)}
           {...props}
         >
           <span>{messageKey}</span>
@@ -54,7 +53,7 @@ const ErrorMessage = forwardRef<HTMLDivElement, ErrorMessageProps>(
             <button
               type="button"
               onClick={handleRetry}
-              className="ml-2 text-accent underline hover:text-accent-light"
+              className="text-accent hover:text-accent-light ml-2 underline"
             >
               Retry
             </button>
@@ -68,13 +67,13 @@ const ErrorMessage = forwardRef<HTMLDivElement, ErrorMessageProps>(
         ref={ref}
         role="alert"
         className={cn(
-          'flex flex-col items-center gap-3 rounded-lg border border-status-pending/20 bg-status-pending/5 px-6 py-8 text-center',
+          'border-status-pending/20 bg-status-pending/5 flex flex-col items-center gap-3 rounded-lg border px-6 py-8 text-center',
           className
         )}
         {...props}
       >
-        <AlertCircle className="h-10 w-10 text-status-pending" />
-        <p className="text-sm font-medium text-text-primary">{messageKey}</p>
+        <AlertCircle className="text-status-pending h-10 w-10" />
+        <p className="text-text-primary text-sm font-medium">{messageKey}</p>
         {(canRetry || onRetry) && (
           <Button
             variant="outline"

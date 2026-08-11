@@ -1,6 +1,6 @@
 'use client';
 
-import { signUpSchema, type SignUpInput } from '@tabadul/shared/schemas';
+import { type SignUpInput, signUpSchema } from '@tabadul/shared/schemas';
 import { Building2, Lock, Mail, Phone, User } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
@@ -44,14 +44,14 @@ export function SignUpForm({
   isLoading = false,
   serverError,
 }: SignUpFormProps) {
-  const form = useZodForm(signUpSchema, {
+  const form = useZodForm<SignUpInput>(signUpSchema, {
     defaultValues: {
       email: '',
       password: '',
       confirmPassword: '',
       fullName: '',
       companyName: '',
-      role: undefined,
+      role: 'buyer',
       phone: '',
     },
   });

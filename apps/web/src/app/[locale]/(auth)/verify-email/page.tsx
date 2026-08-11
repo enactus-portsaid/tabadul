@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { VerifyEmailContent } from './verify-email-content';
 
@@ -14,5 +15,11 @@ export const metadata: Metadata = {
 // Verify Email Page — Server Component
 // ---------------------------------------------------------------------------
 export default function VerifyEmailPage() {
-  return <VerifyEmailContent />;
+  return (
+    <Suspense
+      fallback={<div className="flex justify-center p-8">Loading...</div>}
+    >
+      <VerifyEmailContent />
+    </Suspense>
+  );
 }

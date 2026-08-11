@@ -1,7 +1,7 @@
 'use client';
 
-import { z } from 'zod';
 import { CheckCircle, XCircle } from 'lucide-react';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/Button';
 import {
@@ -13,8 +13,8 @@ import {
   FormMessage,
 } from '@/components/ui/Form';
 import { Textarea } from '@/components/ui/Textarea';
-import { cn } from '@/lib/cn';
 import { useZodForm } from '@/hooks/useZodForm';
+import { cn } from '@/lib/cn';
 
 // ---------------------------------------------------------------------------
 // Schema — payment verification
@@ -71,13 +71,13 @@ export function VerifyPaymentForm({
         noValidate
       >
         {(amount || type) && (
-          <div className="rounded-lg border border-gray-200 bg-surface-muted p-3 dark:border-gray-700">
+          <div className="bg-surface-muted rounded-lg border border-gray-200 p-3 dark:border-gray-700">
             <div className="flex items-center justify-between text-sm">
               {type && (
                 <span className="text-text-secondary capitalize">{type}</span>
               )}
               {amount && (
-                <span className="font-semibold text-text-primary">
+                <span className="text-text-primary font-semibold">
                   {amount.toLocaleString()} EGP
                 </span>
               )}
@@ -101,7 +101,7 @@ export function VerifyPaymentForm({
                       'flex flex-1 items-center justify-center gap-2 rounded-lg border-2 px-4 py-3 text-sm font-medium transition-colors',
                       action === 'verify'
                         ? 'border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300'
-                        : 'border-gray-200 text-text-secondary hover:border-green-300 dark:border-gray-700'
+                        : 'text-text-secondary border-gray-200 hover:border-green-300 dark:border-gray-700'
                     )}
                   >
                     <CheckCircle className="h-5 w-5" />
@@ -114,7 +114,7 @@ export function VerifyPaymentForm({
                       'flex flex-1 items-center justify-center gap-2 rounded-lg border-2 px-4 py-3 text-sm font-medium transition-colors',
                       action === 'reject'
                         ? 'border-red-500 bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300'
-                        : 'border-gray-200 text-text-secondary hover:border-red-300 dark:border-gray-700'
+                        : 'text-text-secondary border-gray-200 hover:border-red-300 dark:border-gray-700'
                     )}
                   >
                     <XCircle className="h-5 w-5" />

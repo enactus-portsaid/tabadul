@@ -8,12 +8,12 @@
 
 ## Component Categories
 
-| Category   | Directory            | Purpose                                    | Knows Business Logic? |
-| ---------- | -------------------- | ------------------------------------------ | --------------------- |
-| **UI**     | `components/ui/`     | Base building blocks — fully reusable       | No                    |
-| **Forms**  | `components/forms/`  | Form inputs tied to Zod schemas             | Schema validation     |
-| **Layout** | `components/layout/` | Page structure — header, footer, sidebar    | No                    |
-| **Features** | `components/features/<domain>/` | Domain-specific composites combining UI + hooks | Yes (via hooks) |
+| Category     | Directory                       | Purpose                                         | Knows Business Logic? |
+| ------------ | ------------------------------- | ----------------------------------------------- | --------------------- |
+| **UI**       | `components/ui/`                | Base building blocks — fully reusable           | No                    |
+| **Forms**    | `components/forms/`             | Form inputs tied to Zod schemas                 | Schema validation     |
+| **Layout**   | `components/layout/`            | Page structure — header, footer, sidebar        | No                    |
+| **Features** | `components/features/<domain>/` | Domain-specific composites combining UI + hooks | Yes (via hooks)       |
 
 ### Import Rules
 
@@ -32,34 +32,34 @@ features/ → ui/, hooks/, types/
 
 ### UI Components (`components/ui/`)
 
-| Component    | File          | Client? | Props                                                                 |
-| ------------ | ------------- | ------- | --------------------------------------------------------------------- |
-| **Button**   | `Button.tsx`  | Yes     | `variant`, `size`, `isLoading`, `leftIcon`, `rightIcon`               |
-| **Input**    | `Input.tsx`   | Yes     | `label`, `error`, `helperText`, `leftAddon`, `rightAddon`             |
-| **Card**     | `Card.tsx`    | No      | Compound: `Card`, `CardHeader`, `CardTitle`, `CardContent`, `CardFooter` |
-| **Modal**    | `Modal.tsx`   | Yes     | `isOpen`, `onClose`, `title`, `size`                                  |
-| **Badge**    | `Badge.tsx`   | No      | `variant` (default/success/warning/danger/info/accent), `size`        |
-| **Avatar**   | `Avatar.tsx`  | No      | `src`, `alt`, `fallback`, `size`, `showOnline`                        |
+| Component  | File         | Client? | Props                                                                    |
+| ---------- | ------------ | ------- | ------------------------------------------------------------------------ |
+| **Button** | `Button.tsx` | Yes     | `variant`, `size`, `isLoading`, `leftIcon`, `rightIcon`                  |
+| **Input**  | `Input.tsx`  | Yes     | `label`, `error`, `helperText`, `leftAddon`, `rightAddon`                |
+| **Card**   | `Card.tsx`   | No      | Compound: `Card`, `CardHeader`, `CardTitle`, `CardContent`, `CardFooter` |
+| **Modal**  | `Modal.tsx`  | Yes     | `isOpen`, `onClose`, `title`, `size`                                     |
+| **Badge**  | `Badge.tsx`  | No      | `variant` (default/success/warning/danger/info/accent), `size`           |
+| **Avatar** | `Avatar.tsx` | No      | `src`, `alt`, `fallback`, `size`, `showOnline`                           |
 
 ### Layout Components (`components/layout/`)
 
-| Component     | File            | Client? | Description                                               |
-| ------------- | --------------- | ------- | --------------------------------------------------------- |
-| **Container** | `Container.tsx` | No      | Responsive max-width wrapper (`max-w-7xl`, responsive px) |
-| **Header**    | `Header.tsx`    | Yes     | Primary green header bar with nav actions                  |
-| **Footer**    | `Footer.tsx`    | No      | Minimal footer with copyright and links                   |
-| **Sidebar**   | `Sidebar.tsx`   | Yes     | Responsive sidebar nav (desktop persistent, mobile overlay)|
+| Component     | File            | Client? | Description                                                 |
+| ------------- | --------------- | ------- | ----------------------------------------------------------- |
+| **Container** | `Container.tsx` | No      | Responsive max-width wrapper (`max-w-7xl`, responsive px)   |
+| **Header**    | `Header.tsx`    | Yes     | Primary green header bar with nav actions                   |
+| **Footer**    | `Footer.tsx`    | No      | Minimal footer with copyright and links                     |
+| **Sidebar**   | `Sidebar.tsx`   | Yes     | Responsive sidebar nav (desktop persistent, mobile overlay) |
 
 ### Feature Skeletons (`components/features/`)
 
-| Domain          | Expected Components                                                 |
-| --------------- | ------------------------------------------------------------------- |
-| `listings/`     | ListingCard, ListingCardList, ListingGrid, ListingDetail, MatchCard  |
-| `transactions/` | TransactionCard, TransactionTimeline, TransactionDetail              |
-| `chat/`         | ChatThreadItem, ChatThreadList, ChatMessage, ChatDetail              |
-| `notifications/`| NotificationItem, NotificationList, NotificationFilter               |
-| `auth/`         | LoginForm, RegisterForm, ForgotPasswordForm, AuthCard                |
-| `admin/`        | AdminTable, ModerationPanel, PaymentVerifier, DisputeResolver        |
+| Domain           | Expected Components                                                 |
+| ---------------- | ------------------------------------------------------------------- |
+| `listings/`      | ListingCard, ListingCardList, ListingGrid, ListingDetail, MatchCard |
+| `transactions/`  | TransactionCard, TransactionTimeline, TransactionDetail             |
+| `chat/`          | ChatThreadItem, ChatThreadList, ChatMessage, ChatDetail             |
+| `notifications/` | NotificationItem, NotificationList, NotificationFilter              |
+| `auth/`          | LoginForm, RegisterForm, ForgotPasswordForm, AuthCard               |
+| `admin/`         | AdminTable, ModerationPanel, PaymentVerifier, DisputeResolver       |
 
 ---
 
@@ -146,14 +146,14 @@ Next.js App Router defaults to Server Components. Only add `'use client'` when t
 
 ### Guidelines
 
-| Scenario | Server or Client? |
-| -------- | ----------------- |
-| Static display (Card, Badge) | **Server** |
-| Interactive button with onClick | **Client** |
-| Form with state | **Client** |
-| Data-fetching wrapper | **Server** (use async Server Component) |
-| Layout/Container | **Server** |
-| Navigation with `usePathname` | **Client** |
+| Scenario                        | Server or Client?                       |
+| ------------------------------- | --------------------------------------- |
+| Static display (Card, Badge)    | **Server**                              |
+| Interactive button with onClick | **Client**                              |
+| Form with state                 | **Client**                              |
+| Data-fetching wrapper           | **Server** (use async Server Component) |
+| Layout/Container                | **Server**                              |
+| Navigation with `usePathname`   | **Client**                              |
 
 **Best practice:** Keep Client Components small. Extract the interactive "island" out of a Server Component rather than making the entire page a Client Component.
 

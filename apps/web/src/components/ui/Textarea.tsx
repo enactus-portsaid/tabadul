@@ -41,7 +41,8 @@ const textareaVariants = cva(
 // Textarea Props
 // ---------------------------------------------------------------------------
 export interface TextareaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement>,
+  extends
+    TextareaHTMLAttributes<HTMLTextAreaElement>,
     VariantProps<typeof textareaVariants> {
   /** Label displayed above the textarea */
   label?: string;
@@ -91,7 +92,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <label
               htmlFor={id}
               className={cn(
-                'text-sm font-medium text-text-primary',
+                'text-text-primary text-sm font-medium',
                 error && 'text-red-600 dark:text-red-400'
               )}
             >
@@ -100,7 +101,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             {maxLength != null && charCount != null && (
               <span
                 className={cn(
-                  'text-xs text-text-muted',
+                  'text-text-muted text-xs',
                   charCount > maxLength && 'text-red-600 dark:text-red-400'
                 )}
               >
@@ -115,9 +116,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={id}
           className={cn(textareaVariants({ state }), className)}
           aria-invalid={!!error}
-          aria-describedby={
-            error ? errorId : helperText ? helperId : undefined
-          }
+          aria-describedby={error ? errorId : helperText ? helperId : undefined}
           maxLength={maxLength}
           {...props}
         />
@@ -134,7 +133,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
 
         {!error && helperText && (
-          <p id={helperId} className="text-xs text-text-secondary">
+          <p id={helperId} className="text-text-secondary text-xs">
             {helperText}
           </p>
         )}

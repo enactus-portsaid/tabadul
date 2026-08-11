@@ -10,9 +10,30 @@ import { Input } from '@/components/ui/Input';
 // Placeholder data
 // ---------------------------------------------------------------------------
 const MOCK_TXNS = [
-  { id: 'tx-001', buyer: 'Sara Hassan', seller: 'Ahmed Mohamed', amount: 15000, status: 'completed', date: '2026-05-14' },
-  { id: 'tx-002', buyer: 'Omar Ali', seller: 'Fatima Nour', amount: 8500, status: 'in_transit', date: '2026-05-15' },
-  { id: 'tx-003', buyer: 'Nadia Khalil', seller: 'Ahmed Mohamed', amount: 23000, status: 'disputed', date: '2026-05-16' },
+  {
+    id: 'tx-001',
+    buyer: 'Sara Hassan',
+    seller: 'Ahmed Mohamed',
+    amount: 15000,
+    status: 'completed',
+    date: '2026-05-14',
+  },
+  {
+    id: 'tx-002',
+    buyer: 'Omar Ali',
+    seller: 'Fatima Nour',
+    amount: 8500,
+    status: 'in_transit',
+    date: '2026-05-15',
+  },
+  {
+    id: 'tx-003',
+    buyer: 'Nadia Khalil',
+    seller: 'Ahmed Mohamed',
+    amount: 23000,
+    status: 'disputed',
+    date: '2026-05-16',
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -22,8 +43,10 @@ export function AdminTransactionsContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-text-primary">Transaction Monitor</h1>
-        <p className="text-sm text-text-secondary">
+        <h1 className="text-text-primary text-2xl font-bold">
+          Transaction Monitor
+        </h1>
+        <p className="text-text-secondary text-sm">
           Track and manage all platform transactions
         </p>
       </div>
@@ -38,38 +61,56 @@ export function AdminTransactionsContent() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border bg-surface-muted">
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">ID</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Buyer</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Seller</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Amount</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Status</th>
-                <th className="px-4 py-3 text-left font-medium text-text-secondary">Date</th>
+              <tr className="border-border bg-surface-muted border-b">
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  ID
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Buyer
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Seller
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Amount
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Status
+                </th>
+                <th className="text-text-secondary px-4 py-3 text-left font-medium">
+                  Date
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-border divide-y">
               {MOCK_TXNS.map((txn) => (
-                <tr key={txn.id} className="transition-colors hover:bg-surface-muted">
-                  <td className="px-4 py-3 font-mono text-xs text-text-muted">
+                <tr
+                  key={txn.id}
+                  className="hover:bg-surface-muted transition-colors"
+                >
+                  <td className="text-text-muted px-4 py-3 font-mono text-xs">
                     {txn.id}
                   </td>
-                  <td className="px-4 py-3 text-text-primary">{txn.buyer}</td>
-                  <td className="px-4 py-3 text-text-primary">{txn.seller}</td>
-                  <td className="px-4 py-3 font-medium text-text-primary">
+                  <td className="text-text-primary px-4 py-3">{txn.buyer}</td>
+                  <td className="text-text-primary px-4 py-3">{txn.seller}</td>
+                  <td className="text-text-primary px-4 py-3 font-medium">
                     EGP {txn.amount.toLocaleString()}
                   </td>
                   <td className="px-4 py-3">
                     <Badge
                       variant={
-                        txn.status === 'completed' ? 'success' :
-                        txn.status === 'disputed' ? 'danger' : 'info'
+                        txn.status === 'completed'
+                          ? 'success'
+                          : txn.status === 'disputed'
+                            ? 'danger'
+                            : 'info'
                       }
                       size="sm"
                     >
                       {txn.status.replace('_', ' ')}
                     </Badge>
                   </td>
-                  <td className="px-4 py-3 text-text-muted">{txn.date}</td>
+                  <td className="text-text-muted px-4 py-3">{txn.date}</td>
                 </tr>
               ))}
             </tbody>

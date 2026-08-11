@@ -1,11 +1,11 @@
 // ---------------------------------------------------------------------------
 // Auth Feature Components
 // ---------------------------------------------------------------------------
-export { ResetPasswordForm } from './ResetPasswordForm';
 export type { ResetPasswordFormProps } from './ResetPasswordForm';
-export { SignInForm } from './SignInForm';
+export { ResetPasswordForm } from './ResetPasswordForm';
 export type { SignInFormProps } from './SignInForm';
-export { SignUpForm } from './SignUpForm';
+export { SignInForm } from './SignInForm';
 export type { SignUpFormProps } from './SignUpForm';
-export { UpdateProfileForm } from './UpdateProfileForm';
+export { SignUpForm } from './SignUpForm';
 export type { UpdateProfileFormProps } from './UpdateProfileForm';
+export { UpdateProfileForm } from './UpdateProfileForm';

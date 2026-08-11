@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { ArrowLeft, Bell } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { ArrowLeft, Bell } from 'lucide-react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -18,11 +18,31 @@ import { useAuth } from '@/hooks/useAuth';
 // Preference categories
 // ---------------------------------------------------------------------------
 const PREF_ITEMS = [
-  { key: 'messages', label: 'Messages', description: 'When you receive a new chat message' },
-  { key: 'transactions', label: 'Transactions', description: 'Status updates on your transactions' },
-  { key: 'listings', label: 'Listings', description: 'When someone bids on or bookmarks your listing' },
-  { key: 'recommendations', label: 'AI Recommendations', description: 'New AI-matched materials for you' },
-  { key: 'system', label: 'System Updates', description: 'Platform announcements and updates' },
+  {
+    key: 'messages',
+    label: 'Messages',
+    description: 'When you receive a new chat message',
+  },
+  {
+    key: 'transactions',
+    label: 'Transactions',
+    description: 'Status updates on your transactions',
+  },
+  {
+    key: 'listings',
+    label: 'Listings',
+    description: 'When someone bids on or bookmarks your listing',
+  },
+  {
+    key: 'recommendations',
+    label: 'AI Recommendations',
+    description: 'New AI-matched materials for you',
+  },
+  {
+    key: 'system',
+    label: 'System Updates',
+    description: 'Platform announcements and updates',
+  },
 ] as const;
 
 // ---------------------------------------------------------------------------
@@ -59,15 +79,17 @@ export function PreferencesContent() {
     <div className="mx-auto max-w-2xl space-y-6">
       <Link
         href={`/${locale}/notifications`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Notifications
       </Link>
 
       <div>
-        <h1 className="text-2xl font-bold text-text-primary">Notification Preferences</h1>
-        <p className="text-sm text-text-secondary">
+        <h1 className="text-text-primary text-2xl font-bold">
+          Notification Preferences
+        </h1>
+        <p className="text-text-secondary text-sm">
           Choose which notifications you want to receive
         </p>
       </div>
@@ -79,7 +101,7 @@ export function PreferencesContent() {
             Notifications
           </CardTitle>
         </CardHeader>
-        <CardContent className="divide-y divide-border">
+        <CardContent className="divide-border divide-y">
           {isLoading
             ? Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="flex items-center justify-between py-4">
@@ -96,10 +118,10 @@ export function PreferencesContent() {
                   className="flex items-center justify-between py-4"
                 >
                   <div>
-                    <p className="text-sm font-medium text-text-primary">
+                    <p className="text-text-primary text-sm font-medium">
                       {item.label}
                     </p>
-                    <p className="text-xs text-text-secondary">
+                    <p className="text-text-secondary text-xs">
                       {item.description}
                     </p>
                   </div>
@@ -117,7 +139,9 @@ export function PreferencesContent() {
                   >
                     <span
                       className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-                        getChecked(item.key) ? 'translate-x-5' : 'translate-x-0'
+                        getChecked(item.key)
+                          ? 'translate-x-5 rtl:-translate-x-5'
+                          : 'translate-x-0'
                       }`}
                     />
                   </button>

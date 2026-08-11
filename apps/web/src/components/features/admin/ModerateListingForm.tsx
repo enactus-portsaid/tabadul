@@ -25,7 +25,9 @@ const moderateListingFormSchema = z.object({
   reason: z.string().max(500).optional(),
 });
 
-export type ModerateListingFormInput = z.infer<typeof moderateListingFormSchema>;
+export type ModerateListingFormInput = z.infer<
+  typeof moderateListingFormSchema
+>;
 
 // ---------------------------------------------------------------------------
 // Props
@@ -67,9 +69,9 @@ export function ModerateListingForm({
         noValidate
       >
         {listingTitle && (
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Moderating:{' '}
-            <span className="font-medium text-text-primary">
+            <span className="text-text-primary font-medium">
               {listingTitle}
             </span>
           </p>

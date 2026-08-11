@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import type { UpdateProfileInput } from '@tabadul/shared/schemas';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import type { UpdateProfileInput } from '@tabadul/shared/schemas';
+import { useState } from 'react';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { UpdateProfileForm } from '@/components/features/auth/UpdateProfileForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { useAuth } from '@/hooks/useAuth';
 
 // ---------------------------------------------------------------------------
@@ -40,7 +40,7 @@ export function EditProfileContent() {
     <div className="mx-auto max-w-2xl space-y-6">
       <Link
         href={`/${locale}/profile`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Profile
@@ -49,7 +49,7 @@ export function EditProfileContent() {
       <Card>
         <CardHeader>
           <CardTitle className="text-xl">Edit Profile</CardTitle>
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Update your personal and company information
           </p>
         </CardHeader>
