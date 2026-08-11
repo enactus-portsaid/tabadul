@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  updateProfileSchema,
   type UpdateProfileInput,
+  updateProfileSchema,
 } from '@tabadul/shared/schemas';
 import { Building2, MapPin, Phone, User } from 'lucide-react';
 

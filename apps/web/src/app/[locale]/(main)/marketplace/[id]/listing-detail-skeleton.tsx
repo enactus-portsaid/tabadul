@@ -10,7 +10,7 @@ export function ListingDetailSkeleton() {
       <Skeleton className="h-5 w-40" />
       <div className="grid gap-6 lg:grid-cols-5">
         {/* Left: Image */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="space-y-4 lg:col-span-3">
           <Skeleton className="aspect-[16/10] w-full rounded-xl" />
           <div className="flex gap-2">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -27,7 +27,7 @@ export function ListingDetailSkeleton() {
           </Card>
         </div>
         {/* Right: Info */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-4 lg:col-span-2">
           <Card>
             <CardContent className="space-y-4 pt-4">
               <Skeleton className="h-6 w-3/4" />
@@ -53,7 +53,7 @@ export function ListingDetailSkeleton() {
           </Card>
           <Card>
             <CardContent className="p-4">
-              <Skeleton className="h-5 w-16 mb-3" />
+              <Skeleton className="mb-3 h-5 w-16" />
               <div className="flex items-center gap-3">
                 <Skeleton className="h-10 w-10 rounded-full" />
                 <div className="space-y-1">

@@ -1,8 +1,8 @@
 'use client';
 
+import { AlertTriangle, ChevronRight, Clock, User } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { AlertTriangle, ChevronRight, Clock, User } from 'lucide-react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -49,8 +49,10 @@ export function AdminDisputesContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-text-primary">Dispute Resolution</h1>
-        <p className="text-sm text-text-secondary">
+        <h1 className="text-text-primary text-2xl font-bold">
+          Dispute Resolution
+        </h1>
+        <p className="text-text-secondary text-sm">
           Review and resolve open disputes between users
         </p>
       </div>
@@ -65,8 +67,11 @@ export function AdminDisputesContent() {
       {/* Dispute List */}
       <div className="space-y-3">
         {MOCK_DISPUTES.map((dispute) => (
-          <Link key={dispute.id} href={`/${locale}/admin/disputes/${dispute.id}`}>
-            <Card className="transition-all hover:shadow-md hover:border-primary/20">
+          <Link
+            key={dispute.id}
+            href={`/${locale}/admin/disputes/${dispute.id}`}
+          >
+            <Card className="hover:border-primary/20 transition-all hover:shadow-md">
               <CardContent className="flex items-center gap-4 py-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50">
                   <AlertTriangle className="h-5 w-5 text-red-500" />
@@ -74,23 +79,26 @@ export function AdminDisputesContent() {
 
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-text-primary">
+                    <p className="text-text-primary text-sm font-semibold">
                       Dispute #{dispute.id}
                     </p>
                     <Badge
                       variant={
-                        dispute.status === 'open' ? 'danger' :
-                        dispute.status === 'under_review' ? 'warning' : 'success'
+                        dispute.status === 'open'
+                          ? 'danger'
+                          : dispute.status === 'under_review'
+                            ? 'warning'
+                            : 'success'
                       }
                       size="sm"
                     >
                       {dispute.status.replace('_', ' ')}
                     </Badge>
                   </div>
-                  <p className="mt-0.5 text-xs text-text-secondary line-clamp-1">
+                  <p className="text-text-secondary mt-0.5 line-clamp-1 text-xs">
                     {dispute.reason}
                   </p>
-                  <div className="mt-1 flex items-center gap-3 text-[10px] text-text-muted">
+                  <div className="text-text-muted mt-1 flex items-center gap-3 text-[10px]">
                     <span className="flex items-center gap-1">
                       <User className="h-3 w-3" />
                       {dispute.filed_by} vs {dispute.against}
@@ -102,7 +110,7 @@ export function AdminDisputesContent() {
                   </div>
                 </div>
 
-                <ChevronRight className="h-4 w-4 shrink-0 text-text-muted" />
+                <ChevronRight className="text-text-muted h-4 w-4 shrink-0" />
               </CardContent>
             </Card>
           </Link>
@@ -133,10 +141,12 @@ function StatCard({
   return (
     <Card>
       <CardContent className="flex items-center gap-3 py-4">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${colors[variant]}`}>
+        <div
+          className={`flex h-10 w-10 items-center justify-center rounded-xl ${colors[variant]}`}
+        >
           <span className="text-lg font-bold">{count}</span>
         </div>
-        <span className="text-sm font-medium text-text-primary">{label}</span>
+        <span className="text-text-primary text-sm font-medium">{label}</span>
       </CardContent>
     </Card>
   );

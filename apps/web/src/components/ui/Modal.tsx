@@ -99,7 +99,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           aria-modal="true"
           aria-label={title}
           className={cn(
-            'w-full rounded-xl bg-surface shadow-xl',
+            'bg-surface w-full rounded-xl shadow-xl',
             'animate-in fade-in-0 zoom-in-95',
             sizeClasses[size],
             className
@@ -109,13 +109,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           {/* Header */}
           {title && (
             <div className="flex items-center justify-between border-b border-gray-100 p-4">
-              <h2 className="text-lg font-semibold text-text-primary">
+              <h2 className="text-text-primary text-lg font-semibold">
                 {title}
               </h2>
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg p-1.5 text-text-secondary transition-colors hover:bg-surface-muted hover:text-text-primary"
+                className="text-text-secondary hover:bg-surface-muted hover:text-text-primary rounded-lg p-1.5 transition-colors"
                 aria-label="Close"
               >
                 <X className="h-5 w-5" />

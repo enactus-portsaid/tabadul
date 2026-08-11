@@ -7,11 +7,11 @@
 // and notification preferences.
 // ---------------------------------------------------------------------------
 
+import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useServices } from '@/hooks/useServices';
 import { notificationKeys } from '@/lib/queryKeys';
-import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 
 // ---------------------------------------------------------------------------
 // Queries

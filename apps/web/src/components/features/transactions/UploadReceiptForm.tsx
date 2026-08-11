@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  uploadReceiptSchema,
   type UploadReceiptInput,
+  uploadReceiptSchema,
 } from '@tabadul/shared/schemas';
 import { DollarSign, Upload } from 'lucide-react';
 
@@ -101,9 +101,7 @@ export function UploadReceiptForm({
                   value={field.value ?? ''}
                   onChange={(e) =>
                     field.onChange(
-                      e.target.value
-                        ? parseFloat(e.target.value)
-                        : undefined
+                      e.target.value ? parseFloat(e.target.value) : undefined
                     )
                   }
                 />

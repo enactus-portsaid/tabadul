@@ -6,11 +6,11 @@
 // Covers inspection report fetching and submission.
 // ---------------------------------------------------------------------------
 
+import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useServices } from '@/hooks/useServices';
 import { inspectionKeys, transactionKeys } from '@/lib/queryKeys';
-import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 
 // ---------------------------------------------------------------------------
 // Queries

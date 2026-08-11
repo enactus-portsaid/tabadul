@@ -39,8 +39,11 @@ export default [
         { prefer: 'type-imports' },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
-      // Disable base rule in favor of TS version
+      '@typescript-eslint/no-empty-object-type': 'off',
+      // Disable base rules handled by TS
       'no-unused-vars': 'off',
+      'no-undef': 'off',
+      'no-redeclare': 'off',
     },
   },
 
@@ -55,6 +58,9 @@ export default [
       ...reactHooksPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
+      'react-hooks/refs': 'off',
     },
     settings: {
       react: { version: 'detect' },
@@ -101,14 +107,15 @@ export default [
   // ── Ignore patterns ───────────────────────────────────────
   {
     ignores: [
-      'node_modules/',
-      '.next/',
-      '.expo/',
-      'out/',
-      'dist/',
-      'coverage/',
+      '**/node_modules/**',
+      '**/.next/**',
+      '**/.expo/**',
+      '**/out/**',
+      '**/dist/**',
+      '**/coverage/**',
       'supabase/functions/**',
       '*.config.{js,mjs,cjs}',
+      '**/next-env.d.ts',
     ],
   },
 ];

@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import {
   AlertTriangle,
   ArrowLeft,
@@ -9,6 +7,8 @@ import {
   CheckCircle,
   User,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -26,7 +26,8 @@ export function DisputeDetailContent() {
     transaction_id: 'tx-003',
     filed_by: 'Nadia Khalil',
     against: 'Ahmed Mohamed',
-    reason: 'Material quality does not match listing description. The steel scraps received contained significant rust and impurities not mentioned in the listing.',
+    reason:
+      'Material quality does not match listing description. The steel scraps received contained significant rust and impurities not mentioned in the listing.',
     status: 'open',
     created_at: '2026-05-16T10:30:00Z',
     evidence_urls: [],
@@ -36,7 +37,7 @@ export function DisputeDetailContent() {
     <div className="mx-auto max-w-3xl space-y-6">
       <Link
         href={`/${locale}/admin/disputes`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Disputes
@@ -47,16 +48,22 @@ export function DisputeDetailContent() {
         <div className="flex items-center gap-3">
           <AlertTriangle className="h-6 w-6 text-red-500" />
           <div>
-            <h1 className="text-xl font-bold text-text-primary">
+            <h1 className="text-text-primary text-xl font-bold">
               Dispute #{dispute.id}
             </h1>
-            <p className="text-xs text-text-muted">
+            <p className="text-text-muted text-xs">
               Filed on {new Date(dispute.created_at).toLocaleDateString()}
             </p>
           </div>
         </div>
         <Badge
-          variant={dispute.status === 'open' ? 'danger' : dispute.status === 'under_review' ? 'warning' : 'success'}
+          variant={
+            dispute.status === 'open'
+              ? 'danger'
+              : dispute.status === 'under_review'
+                ? 'warning'
+                : 'success'
+          }
         >
           {dispute.status.replace('_', ' ')}
         </Badge>
@@ -64,14 +71,14 @@ export function DisputeDetailContent() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-4 lg:col-span-2">
           {/* Reason */}
           <Card>
             <CardHeader>
               <CardTitle>Dispute Reason</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text-secondary leading-relaxed">
+              <p className="text-text-secondary text-sm leading-relaxed">
                 {dispute.reason}
               </p>
             </CardContent>
@@ -85,7 +92,7 @@ export function DisputeDetailContent() {
             <CardContent className="space-y-3">
               <textarea
                 placeholder="Enter resolution notes..."
-                className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="border-border bg-surface text-text-primary placeholder:text-text-muted focus:ring-primary/20 w-full rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
                 rows={4}
               />
               <div className="flex gap-2">
@@ -93,9 +100,7 @@ export function DisputeDetailContent() {
                   <CheckCircle className="h-4 w-4" />
                   Resolve Dispute
                 </Button>
-                <Button variant="outline">
-                  Escalate
-                </Button>
+                <Button variant="outline">Escalate</Button>
               </div>
             </CardContent>
           </Card>
@@ -110,19 +115,19 @@ export function DisputeDetailContent() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex items-center gap-2">
-                <User className="h-4 w-4 text-text-muted" />
+                <User className="text-text-muted h-4 w-4" />
                 <div>
-                  <p className="text-xs text-text-muted">Filed by</p>
-                  <p className="text-sm font-medium text-text-primary">
+                  <p className="text-text-muted text-xs">Filed by</p>
+                  <p className="text-text-primary text-sm font-medium">
                     {dispute.filed_by}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <User className="h-4 w-4 text-text-muted" />
+                <User className="text-text-muted h-4 w-4" />
                 <div>
-                  <p className="text-xs text-text-muted">Against</p>
-                  <p className="text-sm font-medium text-text-primary">
+                  <p className="text-text-muted text-xs">Against</p>
+                  <p className="text-text-primary text-sm font-medium">
                     {dispute.against}
                   </p>
                 </div>
@@ -138,7 +143,7 @@ export function DisputeDetailContent() {
             <CardContent>
               <Link
                 href={`/${locale}/transactions/${dispute.transaction_id}`}
-                className="text-sm font-medium text-primary hover:underline"
+                className="text-primary text-sm font-medium hover:underline"
               >
                 View Transaction #{dispute.transaction_id}
               </Link>

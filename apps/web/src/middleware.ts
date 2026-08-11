@@ -97,7 +97,7 @@ export async function middleware(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: { name: string; value: string; options: any }[]) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
@@ -127,8 +127,15 @@ export async function middleware(request: NextRequest) {
   const isAuthOnlyPath = AUTH_ONLY_PATHS.some((p) => localePath.startsWith(p));
   const isAdminPath = localePath.startsWith('/admin');
 
+  // Locale root (e.g., /ar or /en) — redirect to appropriate landing page
+  if (localePath === '/') {
+    const url = request.nextUrl.clone();
+    url.pathname = user ? `/${locale}/dashboard` : `/${locale}/login`;
+    return NextResponse.redirect(url);
+  }
+
   // Not authenticated and trying to access a protected route
-  if (!user && !isPublicPath && localePath !== '/') {
+  if (!user && !isPublicPath) {
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     url.searchParams.set('redirectTo', pathname);
@@ -138,7 +145,7 @@ export async function middleware(request: NextRequest) {
   // Authenticated but trying to access auth-only routes (login/register)
   if (user && isAuthOnlyPath) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${locale}/marketplace`;
+    url.pathname = `/${locale}/dashboard`;
     return NextResponse.redirect(url);
   }
 
@@ -147,7 +154,7 @@ export async function middleware(request: NextRequest) {
     const role = user.user_metadata?.role;
     if (role !== 'admin') {
       const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/marketplace`;
+      url.pathname = `/${locale}/dashboard`;
       return NextResponse.redirect(url);
     }
   }

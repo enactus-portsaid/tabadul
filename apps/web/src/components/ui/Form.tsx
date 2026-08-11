@@ -3,11 +3,11 @@
 import * as React from 'react';
 import {
   Controller,
-  FormProvider,
-  useFormContext,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
+  FormProvider,
+  useFormContext,
 } from 'react-hook-form';
 
 import { cn } from '@/lib/cn';
@@ -113,7 +113,7 @@ const FormLabel = React.forwardRef<
       ref={ref}
       htmlFor={formItemId}
       className={cn(
-        'text-sm font-medium text-text-primary',
+        'text-text-primary text-sm font-medium',
         error && 'text-red-600 dark:text-red-400',
         className
       )}
@@ -138,9 +138,7 @@ const FormControl = React.forwardRef<
       ref={ref}
       id={formItemId}
       aria-describedby={
-        !error
-          ? formDescriptionId
-          : `${formDescriptionId} ${formMessageId}`
+        !error ? formDescriptionId : `${formDescriptionId} ${formMessageId}`
       }
       aria-invalid={!!error}
       {...props}
@@ -162,7 +160,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn('text-xs text-text-secondary', className)}
+      className={cn('text-text-secondary text-xs', className)}
       {...props}
     />
   );

@@ -1,8 +1,5 @@
 'use client';
 
-import { useCallback, useState } from 'react';
-import Link from 'next/link';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,6 +9,9 @@ import {
   Search,
   SlidersHorizontal,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -80,7 +80,10 @@ export function MarketplaceContent() {
         if (!search) return true;
         const title = String(item.title ?? '').toLowerCase();
         const cat = String(item.category ?? '').toLowerCase();
-        return title.includes(search.toLowerCase()) || cat.includes(search.toLowerCase());
+        return (
+          title.includes(search.toLowerCase()) ||
+          cat.includes(search.toLowerCase())
+        );
       })
     : [];
 
@@ -91,8 +94,8 @@ export function MarketplaceContent() {
       {/* Page Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary">Marketplace</h1>
-          <p className="text-sm text-text-secondary">
+          <h1 className="text-text-primary text-2xl font-bold">Marketplace</h1>
+          <p className="text-text-secondary text-sm">
             Browse available industrial waste materials
           </p>
         </div>
@@ -120,7 +123,10 @@ export function MarketplaceContent() {
         </form>
 
         {/* Category Chips */}
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none" role="tablist">
+        <div
+          className="scrollbar-none flex gap-2 overflow-x-auto pb-1"
+          role="tablist"
+        >
           {CATEGORIES.map((cat) => (
             <button
               key={cat.value}
@@ -132,7 +138,7 @@ export function MarketplaceContent() {
                 'shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
                 category === cat.value
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-surface border border-border text-text-secondary hover:bg-surface-muted'
+                  : 'bg-surface border-border text-text-secondary hover:bg-surface-muted border'
               )}
             >
               {cat.label}
@@ -142,9 +148,7 @@ export function MarketplaceContent() {
 
         {/* Sort + View Toggle */}
         <div className="flex items-center justify-between">
-          <span className="text-xs text-text-muted">
-            {resultCount} results
-          </span>
+          <span className="text-text-muted text-xs">{resultCount} results</span>
           <div className="hidden gap-1 sm:flex">
             <Button
               variant={viewMode === 'grid' ? 'primary' : 'ghost'}
@@ -168,19 +172,27 @@ export function MarketplaceContent() {
 
       {/* Listings Grid / List */}
       {isLoading ? (
-        <div className={cn(
-          'grid gap-4',
-          viewMode === 'grid' ? 'sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'
-        )}>
+        <div
+          className={cn(
+            'grid gap-4',
+            viewMode === 'grid'
+              ? 'sm:grid-cols-2 lg:grid-cols-3'
+              : 'grid-cols-1'
+          )}
+        >
           {Array.from({ length: 6 }).map((_, i) => (
             <ListingCardSkeleton key={i} viewMode={viewMode} />
           ))}
         </div>
       ) : filteredListings.length > 0 ? (
-        <div className={cn(
-          'grid gap-4',
-          viewMode === 'grid' ? 'sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'
-        )}>
+        <div
+          className={cn(
+            'grid gap-4',
+            viewMode === 'grid'
+              ? 'sm:grid-cols-2 lg:grid-cols-3'
+              : 'grid-cols-1'
+          )}
+        >
           {filteredListings.map((listing) => (
             <ListingCard
               key={String(listing.id)}
@@ -193,11 +205,11 @@ export function MarketplaceContent() {
       ) : (
         <Card>
           <CardContent className="py-16 text-center">
-            <Search className="mx-auto h-10 w-10 text-text-muted" />
-            <p className="mt-3 text-sm font-medium text-text-primary">
+            <Search className="text-text-muted mx-auto h-10 w-10" />
+            <p className="text-text-primary mt-3 text-sm font-medium">
               No listings found
             </p>
-            <p className="mt-1 text-xs text-text-secondary">
+            <p className="text-text-secondary mt-1 text-xs">
               Try adjusting your filters or search terms
             </p>
           </CardContent>
@@ -223,15 +235,19 @@ function ListingCard({
 
   return (
     <Link href={`/${locale}/marketplace/${listing.id}`}>
-      <Card className={cn(
-        'group overflow-hidden transition-all hover:shadow-md hover:border-primary/20',
-        !isGrid && 'flex'
-      )}>
+      <Card
+        className={cn(
+          'group hover:border-primary/20 overflow-hidden transition-all hover:shadow-md',
+          !isGrid && 'flex'
+        )}
+      >
         {/* Image */}
-        <div className={cn(
-          'bg-surface-muted',
-          isGrid ? 'aspect-[4/3]' : 'h-28 w-28 shrink-0 sm:h-32 sm:w-32'
-        )}>
+        <div
+          className={cn(
+            'bg-surface-muted',
+            isGrid ? 'aspect-[4/3]' : 'h-28 w-28 shrink-0 sm:h-32 sm:w-32'
+          )}
+        >
           {typeof listing.image_url === 'string' ? (
             <img
               src={listing.image_url}
@@ -240,7 +256,7 @@ function ListingCard({
             />
           ) : (
             <div className="flex h-full items-center justify-center">
-              <Search className="h-8 w-8 text-text-muted" />
+              <Search className="text-text-muted h-8 w-8" />
             </div>
           )}
         </div>
@@ -248,21 +264,21 @@ function ListingCard({
         {/* Details */}
         <CardContent className={cn('flex-1', isGrid ? 'p-4' : 'py-3')}>
           <div className="flex items-start justify-between gap-2">
-            <h3 className="text-sm font-semibold text-text-primary line-clamp-1 group-hover:text-primary transition-colors">
+            <h3 className="text-text-primary group-hover:text-primary line-clamp-1 text-sm font-semibold transition-colors">
               {String(listing.title ?? 'Untitled')}
             </h3>
             <Badge variant="default" className="shrink-0 text-xs">
               {String(listing.listing_type ?? 'Fixed')}
             </Badge>
           </div>
-          <p className="mt-1 text-xs text-text-secondary line-clamp-1">
+          <p className="text-text-secondary mt-1 line-clamp-1 text-xs">
             {String(listing.category ?? '')} · {String(listing.location ?? '')}
           </p>
           <div className="mt-2 flex items-center justify-between">
-            <span className="text-sm font-bold text-accent">
+            <span className="text-accent text-sm font-bold">
               EGP {Number(listing.price ?? 0).toLocaleString()}
             </span>
-            <span className="text-xs text-text-muted">
+            <span className="text-text-muted text-xs">
               {Number(listing.quantity ?? 0)} {String(listing.unit ?? 'tons')}
             </span>
           </div>
@@ -280,9 +296,11 @@ function ListingCardSkeleton({ viewMode }: { viewMode: 'grid' | 'list' }) {
 
   return (
     <Card className={cn(!isGrid && 'flex')}>
-      <Skeleton className={cn(
-        isGrid ? 'aspect-[4/3] w-full' : 'h-28 w-28 sm:h-32 sm:w-32'
-      )} />
+      <Skeleton
+        className={cn(
+          isGrid ? 'aspect-[4/3] w-full' : 'h-28 w-28 sm:h-32 sm:w-32'
+        )}
+      />
       <CardContent className={cn('flex-1 space-y-2', isGrid ? 'p-4' : 'py-3')}>
         <Skeleton className="h-4 w-3/4" />
         <Skeleton className="h-3 w-1/2" />

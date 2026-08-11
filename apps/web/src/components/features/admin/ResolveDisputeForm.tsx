@@ -72,8 +72,8 @@ export function ResolveDisputeForm({
         noValidate
       >
         {disputeSummary && (
-          <div className="rounded-lg border border-gray-200 bg-surface-muted p-3 dark:border-gray-700">
-            <p className="text-sm text-text-secondary">{disputeSummary}</p>
+          <div className="bg-surface-muted rounded-lg border border-gray-200 p-3 dark:border-gray-700">
+            <p className="text-text-secondary text-sm">{disputeSummary}</p>
           </div>
         )}
 

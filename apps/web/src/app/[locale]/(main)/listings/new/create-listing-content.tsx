@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import type { CreateListingInput } from '@tabadul/shared/schemas';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import type { CreateListingInput } from '@tabadul/shared/schemas';
+import { useState } from 'react';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { CreateListingForm } from '@/components/features/listings/CreateListingForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { useCreateListing } from '@/hooks/api';
 
 // ---------------------------------------------------------------------------
@@ -38,7 +38,9 @@ export function CreateListingContent() {
   const handleSubmit = async (data: CreateListingInput) => {
     setServerError('');
     try {
-      const result = await createListing.mutateAsync(data as unknown as Record<string, unknown>);
+      const result = await createListing.mutateAsync(
+        data as unknown as Record<string, unknown>
+      );
       const resultData = result as Record<string, unknown> | null;
       if (resultData?.id) {
         router.push(`/${locale}/marketplace/${resultData.id}`);
@@ -47,7 +49,9 @@ export function CreateListingContent() {
       }
     } catch (err) {
       setServerError(
-        err instanceof Error ? err.message : 'Failed to create listing. Please try again.'
+        err instanceof Error
+          ? err.message
+          : 'Failed to create listing. Please try again.'
       );
     }
   };
@@ -57,7 +61,7 @@ export function CreateListingContent() {
       {/* Back Link */}
       <Link
         href={`/${locale}/marketplace`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Marketplace
@@ -66,7 +70,7 @@ export function CreateListingContent() {
       <Card>
         <CardHeader>
           <CardTitle className="text-xl">Create New Listing</CardTitle>
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Fill in the details below to list your waste material for sale
           </p>
         </CardHeader>

@@ -1,8 +1,21 @@
 // UI component barrel — re-export shared UI primitives
 
-export { Avatar, avatarVariants } from './Avatar';
 export type { AvatarProps } from './Avatar';
-
+export { Avatar, avatarVariants } from './Avatar';
+export type { BadgeProps } from './Badge';
+export { Badge, badgeVariants } from './Badge';
+export type { ButtonProps } from './Button';
+export { Button, buttonVariants } from './Button';
+export type {
+  CardContentProps,
+  CardFooterProps,
+  CardHeaderProps,
+  CardProps,
+  CardTitleProps,
+} from './Card';
+export { Card, CardContent, CardFooter, CardHeader, CardTitle } from './Card';
+export type { ErrorMessageProps } from './ErrorMessage';
+export { ErrorMessage } from './ErrorMessage';
 export {
   Form,
   FormControl,
@@ -13,40 +26,15 @@ export {
   FormMessage,
   useFormField,
 } from './Form';
-
-export { Badge, badgeVariants } from './Badge';
-export type { BadgeProps } from './Badge';
-
-export { Button, buttonVariants } from './Button';
-export type { ButtonProps } from './Button';
-
-export { Card, CardContent, CardFooter, CardHeader, CardTitle } from './Card';
-export type {
-  CardContentProps,
-  CardFooterProps,
-  CardHeaderProps,
-  CardProps,
-  CardTitleProps,
-} from './Card';
-
-export { ErrorMessage } from './ErrorMessage';
-export type { ErrorMessageProps } from './ErrorMessage';
-
-export { Input, inputVariants } from './Input';
 export type { InputProps } from './Input';
-
-export { Modal } from './Modal';
+export { Input, inputVariants } from './Input';
 export type { ModalProps } from './Modal';
-
-export { Select, selectVariants } from './Select';
+export { Modal } from './Modal';
 export type { SelectProps } from './Select';
-
-export { Skeleton } from './Skeleton';
+export { Select, selectVariants } from './Select';
 export type { SkeletonProps } from './Skeleton';
-
-export { Textarea, textareaVariants } from './Textarea';
+export { Skeleton } from './Skeleton';
 export type { TextareaProps } from './Textarea';
-
-export { ThemeToggle } from './ThemeToggle';
+export { Textarea, textareaVariants } from './Textarea';
 export type { ThemeToggleProps } from './ThemeToggle';
-
+export { ThemeToggle } from './ThemeToggle';

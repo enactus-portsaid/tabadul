@@ -1,18 +1,18 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
+import { ChatMessageInput } from '@/components/features/chat/ChatMessageInput';
 import { Avatar } from '@/components/ui/Avatar';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { ChatMessageInput } from '@/components/features/chat/ChatMessageInput';
 import {
   useChatMessages,
   useChatThreads,
-  useSendMessage,
   useMarkMessagesAsRead,
+  useSendMessage,
 } from '@/hooks/api';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/cn';
@@ -21,7 +21,10 @@ import { cn } from '@/lib/cn';
 // Chat Detail Content (Mobile) — Full screen chat view
 // ---------------------------------------------------------------------------
 export function ChatDetailContent() {
-  const { locale, threadId } = useParams<{ locale: string; threadId: string }>();
+  const { locale, threadId } = useParams<{
+    locale: string;
+    threadId: string;
+  }>();
   const { user } = useAuth();
   const userId = user?.id ?? '';
 
@@ -59,22 +62,22 @@ export function ChatDetailContent() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-10rem)] flex-col overflow-hidden rounded-xl border border-border bg-surface">
+    <div className="border-border bg-surface flex h-[calc(100vh-10rem)] flex-col overflow-hidden rounded-xl border">
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-border px-4 py-3">
+      <div className="border-border flex items-center gap-3 border-b px-4 py-3">
         <Link
           href={`/${locale}/messages`}
-          className="rounded-lg p-1 text-text-secondary hover:bg-surface-muted"
+          className="text-text-secondary hover:bg-surface-muted rounded-lg p-1"
           aria-label="Back to messages"
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <Avatar fallback={otherUserName.charAt(0)} size="sm" />
         <div>
-          <p className="text-sm font-semibold text-text-primary">
+          <p className="text-text-primary text-sm font-semibold">
             {otherUserName}
           </p>
-          <p className="text-[10px] text-text-muted">Online</p>
+          <p className="text-text-muted text-[10px]">Online</p>
         </div>
       </div>
 
@@ -85,20 +88,27 @@ export function ChatDetailContent() {
             {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className={cn('flex', i % 2 === 0 ? 'justify-start' : 'justify-end')}
+                className={cn(
+                  'flex',
+                  i % 2 === 0 ? 'justify-start' : 'justify-end'
+                )}
               >
                 <Skeleton className="h-10 w-48 rounded-2xl" />
               </div>
             ))}
           </div>
-        ) : messages && (messages as Array<Record<string, unknown>>).length > 0 ? (
+        ) : messages &&
+          (messages as Array<Record<string, unknown>>).length > 0 ? (
           <div className="space-y-3">
             {(messages as Array<Record<string, unknown>>).map((msg) => {
               const isMine = msg.sender_id === userId;
               return (
                 <div
                   key={String(msg.id)}
-                  className={cn('flex', isMine ? 'justify-end' : 'justify-start')}
+                  className={cn(
+                    'flex',
+                    isMine ? 'justify-end' : 'justify-start'
+                  )}
                 >
                   <div
                     className={cn(
@@ -108,20 +118,25 @@ export function ChatDetailContent() {
                         : 'bg-surface-muted text-text-primary rounded-bl-md'
                     )}
                   >
-                    <p className="whitespace-pre-wrap break-words">
+                    <p className="break-words whitespace-pre-wrap">
                       {String(msg.content ?? '')}
                     </p>
                     <p
                       className={cn(
                         'mt-1 text-[10px]',
-                        isMine ? 'text-primary-foreground/60' : 'text-text-muted'
+                        isMine
+                          ? 'text-primary-foreground/60'
+                          : 'text-text-muted'
                       )}
                     >
                       {msg.created_at
-                        ? new Date(String(msg.created_at)).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })
+                        ? new Date(String(msg.created_at)).toLocaleTimeString(
+                            [],
+                            {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            }
+                          )
                         : ''}
                     </p>
                   </div>
@@ -132,7 +147,9 @@ export function ChatDetailContent() {
           </div>
         ) : (
           <div className="flex h-full items-center justify-center">
-            <p className="text-sm text-text-muted">No messages yet. Say hello! 👋</p>
+            <p className="text-text-muted text-sm">
+              No messages yet. Say hello! 👋
+            </p>
           </div>
         )}
       </div>

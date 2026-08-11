@@ -2,11 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import { AlertCircle, ChevronDown } from 'lucide-react';
-import {
-  forwardRef,
-  type SelectHTMLAttributes,
-  useId,
-} from 'react';
+import { forwardRef, type SelectHTMLAttributes, useId } from 'react';
 
 import { cn } from '@/lib/cn';
 
@@ -40,7 +36,8 @@ const selectVariants = cva(
 // Select Props
 // ---------------------------------------------------------------------------
 export interface SelectProps
-  extends SelectHTMLAttributes<HTMLSelectElement>,
+  extends
+    SelectHTMLAttributes<HTMLSelectElement>,
     VariantProps<typeof selectVariants> {
   /** Label displayed above the select */
   label?: string;
@@ -93,7 +90,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <label
             htmlFor={id}
             className={cn(
-              'text-sm font-medium text-text-primary',
+              'text-text-primary text-sm font-medium',
               error && 'text-red-600 dark:text-red-400'
             )}
           >
@@ -124,7 +121,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ))}
           </select>
           <ChevronDown
-            className="pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
+            className="text-text-muted pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2"
             aria-hidden="true"
           />
         </div>
@@ -141,7 +138,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         )}
 
         {!error && helperText && (
-          <p id={helperId} className="text-xs text-text-secondary">
+          <p id={helperId} className="text-text-secondary text-xs">
             {helperText}
           </p>
         )}

@@ -11,11 +11,11 @@
 // that updates the TanStack Query cache directly via queryClient.setQueryData.
 // ---------------------------------------------------------------------------
 
+import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useServices } from '@/hooks/useServices';
 import { chatKeys, notificationKeys } from '@/lib/queryKeys';
-import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 
 // ---------------------------------------------------------------------------
 // Queries

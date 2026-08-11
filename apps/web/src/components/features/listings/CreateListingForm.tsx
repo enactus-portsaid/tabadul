@@ -1,16 +1,10 @@
 'use client';
 
 import {
-  createListingSchema,
   type CreateListingInput,
+  createListingSchema,
 } from '@tabadul/shared/schemas';
-import {
-  MapPin,
-  Package,
-  Ruler,
-  Tag,
-  Type,
-} from 'lucide-react';
+import { MapPin, Package, Ruler, Tag, Type } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
 import {
@@ -86,7 +80,7 @@ export function CreateListingForm({
       >
         {/* ── Basic Info ─────────────────────────────────────── */}
         <fieldset className="space-y-4">
-          <legend className="text-base font-semibold text-text-primary">
+          <legend className="text-text-primary text-base font-semibold">
             Basic Information
           </legend>
 
@@ -156,7 +150,7 @@ export function CreateListingForm({
 
         {/* ── Quantity & Location ─────────────────────────────── */}
         <fieldset className="space-y-4">
-          <legend className="text-base font-semibold text-text-primary">
+          <legend className="text-text-primary text-base font-semibold">
             Quantity & Location
           </legend>
 
@@ -258,7 +252,7 @@ export function CreateListingForm({
 
         {/* ── Pricing ─────────────────────────────────────────── */}
         <fieldset className="space-y-4">
-          <legend className="text-base font-semibold text-text-primary">
+          <legend className="text-text-primary text-base font-semibold">
             Pricing
           </legend>
 

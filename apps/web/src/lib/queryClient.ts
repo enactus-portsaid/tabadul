@@ -10,9 +10,8 @@
 //   const queryClient = getQueryClient();
 // ---------------------------------------------------------------------------
 
-import { QueryClient, type QueryClientConfig } from '@tanstack/react-query';
-
 import { isRetryableError } from '@tabadul/shared/lib/errorHandler';
+import { QueryClient, type QueryClientConfig } from '@tanstack/react-query';
 
 // ---------------------------------------------------------------------------
 // Default Configuration

@@ -1,8 +1,8 @@
 'use client';
 
-import { z } from 'zod';
 import { Bell, Mail, MessageSquare, Package, Truck } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/Button';
 import {
@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/Form';
-import { cn } from '@/lib/cn';
 import { useZodForm } from '@/hooks/useZodForm';
+import { cn } from '@/lib/cn';
 
 // ---------------------------------------------------------------------------
 // Schema — notification preference toggles
@@ -60,14 +60,12 @@ function Toggle({
   icon?: ReactNode;
 }) {
   return (
-    <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-3 transition-colors hover:bg-surface-muted dark:border-gray-700">
-      {icon && (
-        <span className="mt-0.5 text-text-muted">{icon}</span>
-      )}
+    <label className="hover:bg-surface-muted flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-3 transition-colors dark:border-gray-700">
+      {icon && <span className="text-text-muted mt-0.5">{icon}</span>}
       <div className="flex-1">
-        <span className="text-sm font-medium text-text-primary">{label}</span>
+        <span className="text-text-primary text-sm font-medium">{label}</span>
         {description && (
-          <p className="text-xs text-text-secondary">{description}</p>
+          <p className="text-text-secondary text-xs">{description}</p>
         )}
       </div>
       <button
@@ -77,7 +75,7 @@ function Toggle({
         onClick={() => onChange(!checked)}
         className={cn(
           'relative inline-flex h-6 w-11 shrink-0 rounded-full border-2 border-transparent transition-colors',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+          'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
           checked ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
         )}
       >
@@ -131,7 +129,7 @@ export function NotificationPreferencesForm({
       >
         {/* Channels */}
         <fieldset className="space-y-3">
-          <legend className="text-base font-semibold text-text-primary">
+          <legend className="text-text-primary text-base font-semibold">
             Notification Channels
           </legend>
 
@@ -174,7 +172,7 @@ export function NotificationPreferencesForm({
 
         {/* Event Types */}
         <fieldset className="space-y-3">
-          <legend className="text-base font-semibold text-text-primary">
+          <legend className="text-text-primary text-base font-semibold">
             Event Types
           </legend>
 

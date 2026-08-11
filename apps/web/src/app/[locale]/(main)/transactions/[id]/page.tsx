@@ -16,7 +16,8 @@ export async function generateMetadata({
   const { id } = await params;
   return {
     title: `Transaction #${id.slice(0, 8)}`,
-    description: 'View transaction details, upload receipts, and manage delivery status.',
+    description:
+      'View transaction details, upload receipts, and manage delivery status.',
   };
 }
 

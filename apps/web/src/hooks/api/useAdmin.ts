@@ -7,21 +7,18 @@
 // and dispute resolution. All hooks assume the current user has 'admin' role.
 // ---------------------------------------------------------------------------
 
+import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useServices } from '@/hooks/useServices';
 import { adminKeys, listingKeys, transactionKeys } from '@/lib/queryKeys';
-import { normalizeError } from '@tabadul/shared/lib/errorHandler';
 
 // ---------------------------------------------------------------------------
 // Queries
 // ---------------------------------------------------------------------------
 
 /** Fetch all users (admin view), with optional role/status filters. */
-export function useAdminUsers(filters?: {
-  role?: string;
-  isActive?: boolean;
-}) {
+export function useAdminUsers(filters?: { role?: string; isActive?: boolean }) {
   const { admin } = useServices();
 
   return useQuery({

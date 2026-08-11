@@ -21,10 +21,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          'animate-pulse rounded-md bg-surface-muted',
-          className
-        )}
+        className={cn('bg-surface-muted animate-pulse rounded-md', className)}
         aria-hidden="true"
         {...props}
       />

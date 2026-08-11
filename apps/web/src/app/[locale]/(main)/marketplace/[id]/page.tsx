@@ -15,7 +15,8 @@ export async function generateMetadata({
   const { id } = await params;
   return {
     title: `Listing #${id.slice(0, 8)}`,
-    description: 'View listing details, place bids, and contact the seller on Tabadul.',
+    description:
+      'View listing details, place bids, and contact the seller on Tabadul.',
   };
 }
 

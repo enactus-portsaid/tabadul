@@ -26,8 +26,7 @@ const avatarVariants = cva(
 // Avatar Props
 // ---------------------------------------------------------------------------
 export interface AvatarProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof avatarVariants> {
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof avatarVariants> {
   /** Image URL for the avatar photo */
   src?: string | null;
   /** Alt text for the avatar image */
@@ -69,7 +68,7 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
 
         {showOnline && (
           <span
-            className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full border-2 border-surface bg-status-success"
+            className="border-surface bg-status-success absolute right-0 bottom-0 block h-2.5 w-2.5 rounded-full border-2"
             aria-label="Online"
           />
         )}

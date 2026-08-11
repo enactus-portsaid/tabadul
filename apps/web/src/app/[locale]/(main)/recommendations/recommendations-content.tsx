@@ -1,14 +1,14 @@
 'use client';
 
+import { ChevronRight, Sparkles, TrendingUp, X } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { ChevronRight, Sparkles, TrendingUp, X } from 'lucide-react';
 
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { useRecommendations, useDismissRecommendation } from '@/hooks/api';
+import { useDismissRecommendation, useRecommendations } from '@/hooks/api';
 import { useAuth } from '@/hooks/useAuth';
 
 // ---------------------------------------------------------------------------
@@ -24,12 +24,14 @@ export function RecommendationsContent() {
   return (
     <div className="space-y-6">
       <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-          <Sparkles className="h-5 w-5 text-accent" />
+        <div className="bg-accent/10 flex h-10 w-10 items-center justify-center rounded-lg">
+          <Sparkles className="text-accent h-5 w-5" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-text-primary">AI Recommendations</h1>
-          <p className="text-sm text-text-secondary">
+          <h1 className="text-text-primary text-2xl font-bold">
+            AI Recommendations
+          </h1>
+          <p className="text-text-secondary text-sm">
             Personalized material matches based on your activity and preferences
           </p>
         </div>
@@ -56,13 +58,13 @@ export function RecommendationsContent() {
           {(recommendations as Array<Record<string, unknown>>).map((rec) => (
             <Card
               key={String(rec.id)}
-              className="group relative transition-all hover:shadow-md hover:border-primary/20"
+              className="group hover:border-primary/20 relative transition-all hover:shadow-md"
             >
               {/* Dismiss button */}
               <button
                 type="button"
                 onClick={() => dismissRecommendation.mutate(String(rec.id))}
-                className="absolute right-2 top-2 rounded-lg p-1 text-text-muted opacity-0 transition-all hover:bg-surface-muted hover:text-text-primary group-hover:opacity-100"
+                className="text-text-muted hover:bg-surface-muted hover:text-text-primary absolute top-2 right-2 rounded-lg p-1 opacity-0 transition-all group-hover:opacity-100"
                 aria-label="Dismiss recommendation"
               >
                 <X className="h-4 w-4" />
@@ -74,23 +76,29 @@ export function RecommendationsContent() {
                   <div className="flex items-center gap-2">
                     <Badge variant="accent" className="gap-1">
                       <TrendingUp className="h-3 w-3" />
-                      {typeof rec.match_score === 'number' ? `${rec.match_score}% Match` : 'Match'}
+                      {typeof rec.match_score === 'number'
+                        ? `${rec.match_score}% Match`
+                        : 'Match'}
                     </Badge>
                   </div>
 
                   {/* Listing Info */}
-                  <h3 className="text-sm font-semibold text-text-primary group-hover:text-primary transition-colors">
-                    {typeof rec.listing_title === 'string' ? rec.listing_title : 'Material'}
+                  <h3 className="text-text-primary group-hover:text-primary text-sm font-semibold transition-colors">
+                    {typeof rec.listing_title === 'string'
+                      ? rec.listing_title
+                      : 'Material'}
                   </h3>
-                  <p className="text-xs text-text-secondary">
-                    {typeof rec.seller_name === 'string' ? rec.seller_name : 'Seller'} ·{' '}
-                    {typeof rec.location === 'string' ? rec.location : ''}
+                  <p className="text-text-secondary text-xs">
+                    {typeof rec.seller_name === 'string'
+                      ? rec.seller_name
+                      : 'Seller'}{' '}
+                    · {typeof rec.location === 'string' ? rec.location : ''}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-accent">
+                    <span className="text-accent text-sm font-bold">
                       EGP {Number(rec.price ?? 0).toLocaleString()}
                     </span>
-                    <ChevronRight className="h-4 w-4 text-text-muted" />
+                    <ChevronRight className="text-text-muted h-4 w-4" />
                   </div>
                 </CardContent>
               </Link>
@@ -100,11 +108,11 @@ export function RecommendationsContent() {
       ) : (
         <Card>
           <CardContent className="py-16 text-center">
-            <Sparkles className="mx-auto h-10 w-10 text-text-muted" />
-            <p className="mt-3 text-sm font-medium text-text-primary">
+            <Sparkles className="text-text-muted mx-auto h-10 w-10" />
+            <p className="text-text-primary mt-3 text-sm font-medium">
               No recommendations yet
             </p>
-            <p className="mt-1 text-xs text-text-secondary">
+            <p className="text-text-secondary mt-1 text-xs">
               Browse the marketplace and we&apos;ll learn your preferences
             </p>
           </CardContent>

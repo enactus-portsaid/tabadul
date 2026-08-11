@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  resetPasswordSchema,
   type ResetPasswordInput,
+  resetPasswordSchema,
 } from '@tabadul/shared/schemas';
 import { Mail } from 'lucide-react';
 

@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  submitInspectionReportSchema,
   type SubmitInspectionReportInput,
+  submitInspectionReportSchema,
 } from '@tabadul/shared/schemas';
 import { Camera, CheckCircle, XCircle } from 'lucide-react';
 
@@ -18,8 +18,8 @@ import {
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
-import { cn } from '@/lib/cn';
 import { useZodForm } from '@/hooks/useZodForm';
+import { cn } from '@/lib/cn';
 
 // ---------------------------------------------------------------------------
 // Props
@@ -97,7 +97,7 @@ export function SubmitInspectionForm({
                       'flex flex-1 items-center justify-center gap-2 rounded-lg border-2 px-4 py-3 text-sm font-medium transition-colors',
                       result === 'pass'
                         ? 'border-green-500 bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300'
-                        : 'border-gray-200 text-text-secondary hover:border-green-300 dark:border-gray-700'
+                        : 'text-text-secondary border-gray-200 hover:border-green-300 dark:border-gray-700'
                     )}
                   >
                     <CheckCircle className="h-5 w-5" />
@@ -110,7 +110,7 @@ export function SubmitInspectionForm({
                       'flex flex-1 items-center justify-center gap-2 rounded-lg border-2 px-4 py-3 text-sm font-medium transition-colors',
                       result === 'fail'
                         ? 'border-red-500 bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300'
-                        : 'border-gray-200 text-text-secondary hover:border-red-300 dark:border-gray-700'
+                        : 'text-text-secondary border-gray-200 hover:border-red-300 dark:border-gray-700'
                     )}
                   >
                     <XCircle className="h-5 w-5" />
@@ -160,10 +160,10 @@ export function SubmitInspectionForm({
                     (url: string, index: number) => (
                       <div
                         key={index}
-                        className="flex items-center gap-2 rounded-md border border-gray-200 bg-surface px-3 py-2 text-sm dark:border-gray-700"
+                        className="bg-surface flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 text-sm dark:border-gray-700"
                       >
-                        <Camera className="h-4 w-4 text-text-muted" />
-                        <span className="flex-1 truncate text-text-secondary">
+                        <Camera className="text-text-muted h-4 w-4" />
+                        <span className="text-text-secondary flex-1 truncate">
                           {url}
                         </span>
                         <button

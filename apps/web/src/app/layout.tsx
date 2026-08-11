@@ -1,10 +1,10 @@
-import { Cairo, Inter } from 'next/font/google';
+import './globals.css';
+
 import type { Metadata } from 'next';
+import { Cairo, Inter } from 'next/font/google';
 
 import { QueryProvider } from '@/components/providers/QueryProvider';
 import { ThemeProvider } from '@/components/ThemeProvider';
-
-import './globals.css';
 
 // ---------------------------------------------------------------------------
 // Font Configuration
@@ -69,7 +69,7 @@ export default function RootLayout({
       className={`${inter.variable} ${cairo.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-background font-sans text-text-primary antialiased">
+      <body className="bg-background text-text-primary min-h-screen font-sans antialiased">
         <ThemeProvider>
           <QueryProvider>{children}</QueryProvider>
         </ThemeProvider>

@@ -1,14 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import type { CreateListingInput } from '@tabadul/shared/schemas';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import type { CreateListingInput } from '@tabadul/shared/schemas';
+import { useState } from 'react';
 
+import { CreateListingForm } from '@/components/features/listings/CreateListingForm';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { CreateListingForm } from '@/components/features/listings/CreateListingForm';
 import { useListing, useUpdateListing } from '@/hooks/api';
 
 // ---------------------------------------------------------------------------
@@ -79,7 +79,7 @@ export function EditListingContent() {
     <div className="mx-auto max-w-2xl space-y-6">
       <Link
         href={`/${locale}/marketplace/${id}`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Listing
@@ -88,7 +88,7 @@ export function EditListingContent() {
       <Card>
         <CardHeader>
           <CardTitle className="text-xl">Edit Listing</CardTitle>
-          <p className="text-sm text-text-secondary">
+          <p className="text-text-secondary text-sm">
             Update your listing details below
           </p>
         </CardHeader>

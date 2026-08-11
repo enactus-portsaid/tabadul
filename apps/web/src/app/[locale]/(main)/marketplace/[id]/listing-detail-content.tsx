@@ -1,8 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
 import {
   ArrowLeft,
   Bookmark,
@@ -16,13 +13,20 @@ import {
   Tag,
   Weight,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { useListing, useToggleBookmark, useCreateTransaction } from '@/hooks/api';
+import {
+  useCreateTransaction,
+  useListing,
+  useToggleBookmark,
+} from '@/hooks/api';
 import { useAuth } from '@/hooks/useAuth';
 
 // ---------------------------------------------------------------------------
@@ -44,13 +48,13 @@ export function ListingDetailContent() {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
         <Card className="w-full max-w-md text-center">
-          <CardContent className="py-12 space-y-4">
-            <p className="text-lg font-semibold text-text-primary">
+          <CardContent className="space-y-4 py-12">
+            <p className="text-text-primary text-lg font-semibold">
               Listing not found
             </p>
             <Link
               href={`/${locale}/marketplace`}
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground inline-flex items-center gap-2 rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Marketplace
@@ -92,7 +96,7 @@ export function ListingDetailContent() {
       {/* Back Link */}
       <Link
         href={`/${locale}/marketplace`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+        className="text-text-secondary hover:text-text-primary inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Marketplace
@@ -100,10 +104,10 @@ export function ListingDetailContent() {
 
       <div className="grid gap-6 lg:grid-cols-5">
         {/* Left Column: Image Gallery */}
-        <div className="lg:col-span-3 space-y-4">
+        <div className="space-y-4 lg:col-span-3">
           {/* Main Image */}
           <Card className="overflow-hidden">
-            <div className="aspect-[16/10] bg-surface-muted">
+            <div className="bg-surface-muted aspect-[16/10]">
               {images.length > 0 ? (
                 <img
                   src={String(images[selectedImage])}
@@ -112,7 +116,7 @@ export function ListingDetailContent() {
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">
-                  <Tag className="h-12 w-12 text-text-muted" />
+                  <Tag className="text-text-muted h-12 w-12" />
                 </div>
               )}
             </div>
@@ -148,7 +152,7 @@ export function ListingDetailContent() {
               <CardTitle>Description</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">
+              <p className="text-text-secondary text-sm leading-relaxed whitespace-pre-line">
                 {String(listingData.description ?? 'No description provided.')}
               </p>
             </CardContent>
@@ -156,21 +160,23 @@ export function ListingDetailContent() {
         </div>
 
         {/* Right Column: Listing Info + Actions */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-4 lg:col-span-2">
           {/* Listing Info Card */}
           <Card>
             <CardContent className="space-y-4 pt-4">
               {/* Title + Category */}
               <div>
                 <div className="flex items-start justify-between gap-2">
-                  <h1 className="text-xl font-bold text-text-primary">
+                  <h1 className="text-text-primary text-xl font-bold">
                     {String(listingData.title ?? 'Untitled Listing')}
                   </h1>
                   <button
                     type="button"
                     onClick={handleBookmark}
-                    className="shrink-0 rounded-lg p-1.5 text-text-muted transition-colors hover:text-accent"
-                    aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark listing'}
+                    className="text-text-muted hover:text-accent shrink-0 rounded-lg p-1.5 transition-colors"
+                    aria-label={
+                      isBookmarked ? 'Remove bookmark' : 'Bookmark listing'
+                    }
                   >
                     <Bookmark
                       className={`h-5 w-5 ${isBookmarked ? 'fill-accent text-accent' : ''}`}
@@ -186,12 +192,12 @@ export function ListingDetailContent() {
               </div>
 
               {/* Price */}
-              <div className="rounded-xl bg-accent/10 p-4 text-center">
-                <p className="text-sm text-text-secondary">Price</p>
-                <p className="text-3xl font-bold text-accent">
+              <div className="bg-accent/10 rounded-xl p-4 text-center">
+                <p className="text-text-secondary text-sm">Price</p>
+                <p className="text-accent text-3xl font-bold">
                   EGP {Number(listingData.price ?? 0).toLocaleString()}
                 </p>
-                <p className="text-xs text-text-muted">
+                <p className="text-text-muted text-xs">
                   per {String(listingData.unit ?? 'ton')}
                 </p>
               </div>
@@ -199,14 +205,17 @@ export function ListingDetailContent() {
               {/* Key Details */}
               <div className="divide-y divide-gray-100">
                 <DetailRow icon={Weight} label="Quantity">
-                  {Number(listingData.quantity ?? 0)} {String(listingData.unit ?? 'tons')}
+                  {Number(listingData.quantity ?? 0)}{' '}
+                  {String(listingData.unit ?? 'tons')}
                 </DetailRow>
                 <DetailRow icon={MapPin} label="Location">
                   {String(listingData.location ?? 'Egypt')}
                 </DetailRow>
                 <DetailRow icon={Calendar} label="Listed">
                   {listingData.created_at
-                    ? new Date(String(listingData.created_at)).toLocaleDateString()
+                    ? new Date(
+                        String(listingData.created_at)
+                      ).toLocaleDateString()
                     : '—'}
                 </DetailRow>
                 <DetailRow icon={Clock} label="Availability">
@@ -235,7 +244,11 @@ export function ListingDetailContent() {
                       <MessageCircle className="h-4 w-4" />
                       Contact Seller
                     </Button>
-                    <Button variant="outline" size="sm" aria-label="Share listing">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      aria-label="Share listing"
+                    >
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -252,25 +265,25 @@ export function ListingDetailContent() {
             <CardContent>
               <Link
                 href={`/${locale}/profile/${listingData.seller_id}`}
-                className="flex items-center gap-3 transition-colors hover:bg-surface-muted -m-2 p-2 rounded-lg"
+                className="hover:bg-surface-muted -m-2 flex items-center gap-3 rounded-lg p-2 transition-colors"
               >
                 <Avatar
                   fallback={String(listingData.seller_name ?? 'S').charAt(0)}
                   size="md"
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-text-primary truncate">
+                  <p className="text-text-primary truncate text-sm font-semibold">
                     {String(listingData.seller_name ?? 'Seller')}
                   </p>
-                  <p className="text-xs text-text-secondary truncate">
+                  <p className="text-text-secondary truncate text-xs">
                     {String(listingData.seller_location ?? '')}
                   </p>
-                  <div className="flex items-center gap-1 mt-0.5">
+                  <div className="mt-0.5 flex items-center gap-1">
                     <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                    <span className="text-xs font-medium text-text-primary">
+                    <span className="text-text-primary text-xs font-medium">
                       {Number(listingData.seller_rating ?? 0).toFixed(1)}
                     </span>
-                    <span className="text-xs text-text-muted">
+                    <span className="text-text-muted text-xs">
                       ({Number(listingData.seller_reviews ?? 0)} reviews)
                     </span>
                   </div>
@@ -298,11 +311,11 @@ function DetailRow({
 }) {
   return (
     <div className="flex items-center justify-between py-2.5">
-      <div className="flex items-center gap-2 text-text-secondary">
+      <div className="text-text-secondary flex items-center gap-2">
         <Icon className="h-4 w-4" />
         <span className="text-sm">{label}</span>
       </div>
-      <span className="text-sm font-medium text-text-primary">{children}</span>
+      <span className="text-text-primary text-sm font-medium">{children}</span>
     </div>
   );
 }
@@ -315,7 +328,7 @@ function ListingDetailLoadingState() {
     <div className="space-y-6">
       <Skeleton className="h-5 w-40" />
       <div className="grid gap-6 lg:grid-cols-5">
-        <div className="lg:col-span-3 space-y-4">
+        <div className="space-y-4 lg:col-span-3">
           <Skeleton className="aspect-[16/10] w-full rounded-xl" />
           <Card>
             <CardContent className="space-y-2 p-4">
@@ -325,7 +338,7 @@ function ListingDetailLoadingState() {
             </CardContent>
           </Card>
         </div>
-        <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-4 lg:col-span-2">
           <Card>
             <CardContent className="space-y-4 pt-4">
               <Skeleton className="h-6 w-3/4" />

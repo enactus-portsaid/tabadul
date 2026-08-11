@@ -1,4 +1,4 @@
-import { forwardRef, type ElementType, type HTMLAttributes } from 'react';
+import { type ElementType, forwardRef, type HTMLAttributes } from 'react';
 
 import { cn } from '@/lib/cn';
 
@@ -32,7 +32,10 @@ const Container = forwardRef<HTMLElement, ContainerProps>(
     return (
       <Tag
         ref={ref}
-        className={cn('mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8', className)}
+        className={cn(
+          'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8',
+          className
+        )}
         {...props}
       />
     );

@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
 import {
   Bell,
   ChevronRight,
@@ -14,6 +12,8 @@ import {
   Star,
   User,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 
 import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
@@ -70,7 +70,7 @@ export function ProfileContent() {
       {/* Profile Card */}
       <Card>
         <CardContent className="py-6">
-          <div className="flex flex-col items-center text-center sm:flex-row sm:text-left sm:gap-6">
+          <div className="flex flex-col items-center text-center sm:flex-row sm:gap-6 sm:text-left">
             <Avatar
               src={profile?.avatar_url}
               fallback={profile?.full_name?.charAt(0) ?? 'U'}
@@ -78,10 +78,10 @@ export function ProfileContent() {
               className="h-20 w-20"
             />
             <div className="mt-4 sm:mt-0">
-              <h1 className="text-xl font-bold text-text-primary">
+              <h1 className="text-text-primary text-xl font-bold">
                 {profile?.full_name ?? user?.email ?? 'User'}
               </h1>
-              <p className="text-sm text-text-secondary">
+              <p className="text-text-secondary text-sm">
                 {profile?.company_name ?? ''}
               </p>
               <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
@@ -91,7 +91,7 @@ export function ProfileContent() {
                 {profile?.is_verified && (
                   <Badge variant="success">Verified</Badge>
                 )}
-                <div className="flex items-center gap-1 text-xs text-text-secondary">
+                <div className="text-text-secondary flex items-center gap-1 text-xs">
                   <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
                   {(profile?.avg_rating ?? 0).toFixed(1)}
                   <span className="text-text-muted">
@@ -100,7 +100,7 @@ export function ProfileContent() {
                 </div>
               </div>
             </div>
-            <div className="mt-4 sm:ml-auto sm:mt-0">
+            <div className="mt-4 sm:mt-0 sm:ml-auto">
               <Link href={`/${locale}/profile/edit`}>
                 <Button variant="outline" className="gap-2">
                   <Edit className="h-4 w-4" />
@@ -119,7 +119,7 @@ export function ProfileContent() {
             <CardTitle>About</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-text-secondary">{profile.bio}</p>
+            <p className="text-text-secondary text-sm">{profile.bio}</p>
           </CardContent>
         </Card>
       )}
@@ -129,23 +129,25 @@ export function ProfileContent() {
         <CardHeader>
           <CardTitle>Settings</CardTitle>
         </CardHeader>
-        <CardContent className="divide-y divide-border -mt-2">
+        <CardContent className="divide-border -mt-2 divide-y">
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
               <Link
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-3 py-3 transition-colors hover:bg-surface-muted -mx-4 px-4"
+                className="hover:bg-surface-muted -mx-4 flex items-center gap-3 px-4 py-3 transition-colors"
               >
-                <Icon className="h-5 w-5 text-text-muted" />
-                <span className="flex-1 text-sm font-medium text-text-primary">
+                <Icon className="text-text-muted h-5 w-5" />
+                <span className="text-text-primary flex-1 text-sm font-medium">
                   {item.label}
                 </span>
                 {item.trailing && (
-                  <span className="text-xs text-text-muted">{item.trailing}</span>
+                  <span className="text-text-muted text-xs">
+                    {item.trailing}
+                  </span>
                 )}
-                <ChevronRight className="h-4 w-4 text-text-muted" />
+                <ChevronRight className="text-text-muted h-4 w-4" />
               </Link>
             );
           })}

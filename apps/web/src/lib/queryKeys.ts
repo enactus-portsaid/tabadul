@@ -78,4 +78,3 @@ export const bidKeys = {
   byListing: (listingId: string) =>
     [...bidKeys.all, 'listing', listingId] as const,
 };
-

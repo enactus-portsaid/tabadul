@@ -1,8 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
 import {
   AlertTriangle,
   BarChart3,
@@ -13,6 +10,9 @@ import {
   Shield,
   Users,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 import { cn } from '@/lib/cn';
 
@@ -40,15 +40,15 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       {/* Admin Sidebar */}
       <aside
         className={cn(
-          'flex flex-col border-r border-border bg-surface transition-[width] duration-200',
+          'border-border bg-surface flex flex-col border-r transition-[width] duration-200',
           collapsed ? 'w-16' : 'w-56'
         )}
       >
         {/* Logo */}
-        <div className="flex h-14 items-center border-b border-border px-4">
-          <Shield className="h-6 w-6 shrink-0 text-primary" />
+        <div className="border-border flex h-14 items-center border-b px-4">
+          <Shield className="text-primary h-6 w-6 shrink-0" />
           {!collapsed && (
-            <span className="ml-2 text-sm font-bold text-text-primary">
+            <span className="text-text-primary ml-2 text-sm font-bold">
               Admin Panel
             </span>
           )}
@@ -86,7 +86,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         <button
           type="button"
           onClick={() => setCollapsed(!collapsed)}
-          className="flex h-10 items-center justify-center border-t border-border text-text-muted hover:text-text-primary transition-colors"
+          className="border-border text-text-muted hover:text-text-primary flex h-10 items-center justify-center border-t transition-colors"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {collapsed ? (
@@ -98,9 +98,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto p-6 lg:p-8">
-        {children}
-      </main>
+      <main className="flex-1 overflow-y-auto p-6 lg:p-8">{children}</main>
     </div>
   );
 }

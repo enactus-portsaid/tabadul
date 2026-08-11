@@ -7,7 +7,8 @@ import { LoginContent } from './login-content';
 // ---------------------------------------------------------------------------
 export const metadata: Metadata = {
   title: 'Log In',
-  description: 'Sign in to your Tabadul account to access the B2B industrial waste marketplace.',
+  description:
+    'Sign in to your Tabadul account to access the B2B industrial waste marketplace.',
 };
 
 // ---------------------------------------------------------------------------

@@ -30,9 +30,5 @@ export default async function MainLayout({
     redirect(`/${locale}/login`);
   }
 
-  return (
-    <MainShell locale={locale}>
-      {children}
-    </MainShell>
-  );
+  return <MainShell locale={locale}>{children}</MainShell>;
 }

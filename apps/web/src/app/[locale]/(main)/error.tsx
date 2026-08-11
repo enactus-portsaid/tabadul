@@ -35,15 +35,15 @@ export default function MainError({
 
           {/* Error Message */}
           <div className="space-y-2">
-            <h2 className="text-xl font-semibold text-text-primary">
+            <h2 className="text-text-primary text-xl font-semibold">
               Something went wrong
             </h2>
-            <p className="text-sm text-text-secondary">
+            <p className="text-text-secondary text-sm">
               An unexpected error occurred. Please try again or go back to the
               previous page.
             </p>
             {error.digest && (
-              <p className="text-xs text-text-muted">
+              <p className="text-text-muted text-xs">
                 Error ID: {error.digest}
               </p>
             )}

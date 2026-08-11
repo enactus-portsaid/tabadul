@@ -1,8 +1,5 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
 import {
   Bell,
   Check,
@@ -12,11 +9,14 @@ import {
   Settings,
   ShoppingCart,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { useNotifications, useMarkNotificationAsRead } from '@/hooks/api';
+import { useMarkNotificationAsRead, useNotifications } from '@/hooks/api';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/cn';
 
@@ -71,8 +71,10 @@ export function NotificationsContent() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary">Notifications</h1>
-          <p className="text-sm text-text-secondary">
+          <h1 className="text-text-primary text-2xl font-bold">
+            Notifications
+          </h1>
+          <p className="text-text-secondary text-sm">
             Stay updated with your activity
           </p>
         </div>
@@ -97,7 +99,7 @@ export function NotificationsContent() {
               'shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
               filter === tab.value
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-surface border border-border text-text-secondary hover:bg-surface-muted'
+                : 'bg-surface border-border text-text-secondary hover:bg-surface-muted border'
             )}
           >
             {tab.label}
@@ -135,25 +137,33 @@ export function NotificationsContent() {
                 )}
               >
                 <CardContent className="flex items-start gap-3 py-3">
-                  <div className={cn(
-                    'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
-                    isRead ? 'bg-surface-muted text-text-muted' : 'bg-primary/10 text-primary'
-                  )}>
+                  <div
+                    className={cn(
+                      'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg',
+                      isRead
+                        ? 'bg-surface-muted text-text-muted'
+                        : 'bg-primary/10 text-primary'
+                    )}
+                  >
                     <Icon className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className={cn(
-                      'text-sm',
-                      isRead ? 'text-text-secondary' : 'font-medium text-text-primary'
-                    )}>
+                    <p
+                      className={cn(
+                        'text-sm',
+                        isRead
+                          ? 'text-text-secondary'
+                          : 'text-text-primary font-medium'
+                      )}
+                    >
                       {String(notif.title ?? notif.message ?? '')}
                     </p>
                     {typeof notif.body === 'string' && notif.body && (
-                      <p className="mt-0.5 text-xs text-text-muted line-clamp-2">
+                      <p className="text-text-muted mt-0.5 line-clamp-2 text-xs">
                         {notif.body}
                       </p>
                     )}
-                    <p className="mt-1 text-[10px] text-text-muted">
+                    <p className="text-text-muted mt-1 text-[10px]">
                       {notif.created_at
                         ? formatTimeAgo(String(notif.created_at))
                         : ''}
@@ -178,8 +188,8 @@ export function NotificationsContent() {
           {/* Caught-up banner */}
           {filter === 'unread' && filtered.length === 0 && (
             <div className="py-8 text-center">
-              <CheckCheck className="mx-auto h-8 w-8 text-primary" />
-              <p className="mt-2 text-sm font-medium text-text-primary">
+              <CheckCheck className="text-primary mx-auto h-8 w-8" />
+              <p className="text-text-primary mt-2 text-sm font-medium">
                 You&apos;re all caught up!
               </p>
             </div>
@@ -188,11 +198,11 @@ export function NotificationsContent() {
       ) : (
         <Card>
           <CardContent className="py-16 text-center">
-            <Bell className="mx-auto h-10 w-10 text-text-muted" />
-            <p className="mt-3 text-sm font-medium text-text-primary">
+            <Bell className="text-text-muted mx-auto h-10 w-10" />
+            <p className="text-text-primary mt-3 text-sm font-medium">
               No notifications
             </p>
-            <p className="mt-1 text-xs text-text-secondary">
+            <p className="text-text-secondary mt-1 text-xs">
               We&apos;ll notify you about important updates
             </p>
           </CardContent>
